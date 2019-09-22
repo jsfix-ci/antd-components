@@ -1,0 +1,10 @@
+.idea/
+__tests__/
+coverage/
+example/
+.babelrc
+.editorconfig
+.gitignore
+jest-setup.js
+jest.config.js
+webpack.config.js

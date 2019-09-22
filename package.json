@@ -1,0 +1,38 @@
+{
+  "name": "@anh4n/antd-components",
+  "version": "0.0.1",
+  "author": "Andre Hanel",
+  "license": "MIT",
+  "description": "",
+  "keywords": [
+    "react"
+  ],
+  "main": "lib/index.js",
+  "jsnext:main": "src/index.jsx",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "babel --delete-dir-on-start src --out-dir lib --copy-files",
+    "test": "jest"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.9.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.8",
+    "webpack-dev-server": "^3.8.0"
+  }
+}
