@@ -37,6 +37,8 @@
     "enzyme-adapter-react-16": "^1.14.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
+    "prismjs": "^1.17.1",
+    "react-prism": "^4.3.2",
     "style-loader": "^1.0.0",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.8",

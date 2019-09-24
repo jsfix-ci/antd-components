@@ -1,10 +1,10 @@
 const path = require('path');
 
-const EXAMPLE_DIR = path.resolve(__dirname, 'example');
+const DOCS_DIR = path.resolve(__dirname, 'docs');
 
 module.exports = {
     entry: [
-        EXAMPLE_DIR + '/index.jsx'
+        DOCS_DIR + '/index.jsx'
     ],
     resolve: {
         extensions: ['.js', '.jsx']
@@ -28,6 +28,6 @@ module.exports = {
     devServer: {
         host: '0.0.0.0',
         hot: true,
-        contentBase: EXAMPLE_DIR
+        contentBase: DOCS_DIR
     }
 };

@@ -1,7 +1,7 @@
 .idea/
 __tests__/
 coverage/
-example/
+docs/
 .babelrc
 .editorconfig
 .gitignore
