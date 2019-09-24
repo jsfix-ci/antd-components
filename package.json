@@ -4,6 +4,7 @@
   "author": "Andre Hanel",
   "license": "MIT",
   "description": "",
+  "homepage": "https://anh4n.github.io/antd-components/",
   "keywords": [
     "react",
     "antd"
@@ -14,6 +15,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "babel --delete-dir-on-start src --out-dir lib --copy-files",
+    "bundle": "webpack --mode=production --colors",
     "test": "jest"
   },
   "dependencies": {
