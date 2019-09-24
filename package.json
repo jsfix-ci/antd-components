@@ -1,23 +1,28 @@
 {
-  "name": "@anh4n/antd-components",
+  "name": "@react-hangar/antd-components",
   "version": "0.0.1",
   "author": "Andre Hanel",
   "license": "MIT",
   "description": "",
   "keywords": [
-    "react"
+    "react",
+    "antd"
   ],
   "main": "lib/index.js",
   "jsnext:main": "src/index.jsx",
+  "repository": "anh4n/antd-components",
   "scripts": {
     "start": "webpack-dev-server",
     "build": "babel --delete-dir-on-start src --out-dir lib --copy-files",
     "test": "jest"
   },
   "dependencies": {
+    "antd": "^3.23.4",
+    "nanoid": "^2.1.1",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "react-dom": "^16.9.0",
+    "styled-components": "^4.4.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.0",
