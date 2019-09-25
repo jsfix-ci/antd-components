@@ -16,7 +16,6 @@ export const CustomCol = (props) => (
         xs={24}
         md={{ span: 18, offset: 3 }}
         lg={{ span: 12, offset: 6 }}
-        xl={{ span: 8, offset: 8 }}
         {...props}
     />
 );

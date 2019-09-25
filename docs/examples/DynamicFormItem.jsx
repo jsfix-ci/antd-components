@@ -24,6 +24,7 @@ const props = [
 
 const Page = () => (
     <Fragment>
+        <h2>DynamicFormItem</h2>
         <ExampleForm />
         <Code>
             {`

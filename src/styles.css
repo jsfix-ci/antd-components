@@ -1,3 +1,7 @@
 .text-monospace {
-    font-family: 'SFMono-Regular',Consolas,'Liberation Mono',Menlo,Courier,monospace;
+    font-family: monospace,monospace;
+}
+
+.text-center {
+    text-align: center;
 }
