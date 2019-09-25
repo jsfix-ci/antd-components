@@ -3,3 +3,4 @@ import './styles.css';
 
 export * from './Button';
 export * from './Form/DynamicFormItem';
+export * from './Form/Display';
