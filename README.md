@@ -2,6 +2,10 @@
 
 Collection of Components build with Ant Design.
 
+## Install
+
+    npm install @react-hangar/antd-components
+
 ## Library bauen
 
 Mit folgendem Befehl wird die Library in CommonJS transpiliert.
