@@ -9,7 +9,7 @@ import { Sider } from './Menu';
 import { Display1 } from '../src';
 
 ReactDOM.render(
-    <Router basename={'/antd-components'}>
+    <Router>
         <Row>
             <Col><Display1 className={'text-center'}>Ant Design Components</Display1></Col>
         </Row>
