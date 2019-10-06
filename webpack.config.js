@@ -29,7 +29,7 @@ module.exports = {
         host: '0.0.0.0',
         hot: true,
         contentBase: DOCS_DIR,
-        publicPath: '/dist/',
+        publicPath: '/antd-components/dist/',
         historyApiFallback: true
     }
 };
