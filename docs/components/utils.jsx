@@ -1,6 +1,6 @@
 import React from 'react';
-import './prism';
-import './prism.css';
+import '../dist/prism';
+import '../dist/prism.css';
 import styled from 'styled-components';
 import { Col } from 'antd';
 import { PrismCode } from 'react-prism';
@@ -14,8 +14,8 @@ export const Wrapper = styled.div`
 export const CustomCol = (props) => (
     <Col
         xs={24}
-        md={{ span: 18, offset: 3 }}
-        lg={{ span: 12, offset: 6 }}
+        md={{ span: 18 }}
+        lg={{ span: 12}}
         {...props}
     />
 );

@@ -10,7 +10,7 @@ module.exports = {
         extensions: ['.js', '.jsx']
     },
     output: {
-        path: __dirname + '/docs',
+        path: __dirname + '/docs/dist',
     },
     module: {
         rules: [
@@ -28,6 +28,8 @@ module.exports = {
     devServer: {
         host: '0.0.0.0',
         hot: true,
-        contentBase: DOCS_DIR
+        contentBase: DOCS_DIR,
+        publicPath: '/dist/',
+        historyApiFallback: true
     }
 };
