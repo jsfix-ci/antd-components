@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import { Row, Col } from 'antd';
 import { CustomCol, Wrapper } from './components/utils';
