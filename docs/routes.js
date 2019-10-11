@@ -1,6 +1,7 @@
-import { NotFound } from './pages/NotFound';
-import { Home } from './pages/Home';
-import { Form } from './pages/Form';
+import {NotFound} from './pages/NotFound';
+import {Home} from './pages/Home';
+import {Form} from './pages/Form';
+import {Grid} from './pages/Grid';
 
 export const routes = [
     {
@@ -15,6 +16,12 @@ export const routes = [
         label: 'Form',
         path: '/Form',
         component: Form
+    },
+    {
+        key: 'grid',
+        label: 'Grid',
+        path: '/Grid',
+        component: Grid
     },
     {
         key: 'notfound',

@@ -1,15 +1,15 @@
 import React, { Fragment } from 'react';
 import { Display2 } from '../../src';
-import DynamicFormItem from '../examples/Form/DynamicFormItem';
+import DataGrid from '../examples/Grid/DataGrid';
 
 /**
  * @return {React.Component}
  */
-export const Form = () => {
+export const Grid = () => {
     return (
         <Fragment>
-            <Display2>Form</Display2>
-            <DynamicFormItem/>
+            <Display2>Grid</Display2>
+            <DataGrid />
         </Fragment>
     );
 };

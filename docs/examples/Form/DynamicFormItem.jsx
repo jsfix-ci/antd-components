@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form } from 'antd';
-import { DynamicFormItem } from '../../src';
-import { ComponentDisplay } from '../components/ComponentDisplay';
+import { ComponentDisplay } from '../../components/ComponentDisplay';
+import { DynamicFormItem } from '../../../src';
 
 // Example implementation
 const Example = Form.create({name: 'example-form'})
