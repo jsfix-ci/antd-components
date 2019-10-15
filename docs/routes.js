@@ -1,8 +1,9 @@
-import {NotFound} from './pages/NotFound';
-import {Home} from './pages/Home';
-import {Form} from './pages/Form';
-import {Grid} from './pages/Grid';
-import {Navigation} from './pages/Navigation';
+import { NotFound } from './pages/NotFound';
+import { Home } from './pages/Home';
+import { Typography } from './pages/Typography';
+import { Form } from './pages/Form';
+import { Grid } from './pages/Grid';
+import { Navigation } from './pages/Navigation';
 
 export const routes = [
     {
@@ -11,6 +12,12 @@ export const routes = [
         exact: true,
         path: '/',
         component: Home
+    },
+    {
+        key: 'typography',
+        label: 'Typography',
+        path: '/Typography',
+        component: Typography
     },
     {
         key: 'form',
