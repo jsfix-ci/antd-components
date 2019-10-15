@@ -13,12 +13,15 @@ const StyledMenu = styled(Menu)`
 `;
 
 export const Flyout = withRouter((props) => {
-    const {routes, location} = props;
+    const {routes, openSelected, location} = props;
+
+    const activeRoutes = getActiveRoutes(routes, location);
 
     return (
         <StyledMenu
             mode="horizontal"
-            selectedKeys={getActiveRoutes(routes, location)}
+            selectedKeys={activeRoutes}
+            defaultOpenKeys={openSelected ? activeRoutes : []}
         >
             {renderMenu(routes)}
         </StyledMenu>
@@ -26,9 +29,11 @@ export const Flyout = withRouter((props) => {
 });
 
 Flyout.defaultProps = {
-    routes: []
+    routes: [],
+    openSelected: false
 };
 
 Flyout.propTypes = {
-    routes: PropTypes.arrayOf(PropTypes.object)
+    routes: PropTypes.arrayOf(PropTypes.object),
+    openSelected: PropTypes.bool
 };

@@ -75,7 +75,7 @@ const Example = () => {
     ];
 
     return (
-        <Flyout routes={routes}/>
+        <Flyout routes={routes} openSelected/>
     );
 };
 
@@ -157,7 +157,7 @@ const code = `
         ];
 
         return (
-            <Flyout routes={routes}/>
+            <Flyout routes={routes} openSelected/>
         );
     };
 
@@ -167,7 +167,8 @@ const code = `
 
 // Component props
 const properties = [
-    {property: 'routes', description: 'routes config', type: 'object[]', default: '[]'}
+    {property: 'routes', description: 'routes config', type: 'object[]', default: '[]'},
+    {property: 'openSelected', description: 'open selected menu items after page reload', type: 'boolean', default: 'false'}
 ];
 
 export default () => (
