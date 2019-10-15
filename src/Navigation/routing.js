@@ -14,10 +14,12 @@ export const getActiveRoutes = (routes, location) => {
             activeRoutes.push(route.key);
         }
 
-        if (route.submenu) {
+        const subitem = route.submenu || route.group;
+
+        if (subitem) {
             activeRoutes = [
                 ...activeRoutes,
-                ...getActiveRoutes(route.submenu, location)
+                ...getActiveRoutes(subitem, location)
             ];
         }
     });
