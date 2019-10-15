@@ -19,8 +19,9 @@ const StyledPrismCode = styled(PrismCode)`
 export const CustomCol = (props) => (
     <Col
         xs={24}
-        md={{span: 18}}
-        lg={{span: 12}}
+        md={18}
+        xl={16}
+        xxl={12}
         {...props}
     />
 );
