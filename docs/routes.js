@@ -64,7 +64,7 @@ export const routes = [
             },
             {
                 key: 'side',
-                label: 'Side',
+                label: 'Side Navi',
                 path: '/Navigation/Side',
                 component: SideNavigationComponent
             }
