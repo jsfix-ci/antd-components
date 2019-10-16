@@ -13,7 +13,7 @@ const StyledMenu = styled(Menu)`
 `;
 
 export const Navigation = withRouter((props) => {
-    const {routes, defaultOpenKeys, location, mode} = props;
+    const {routes, openSelected, location, mode} = props;
 
     const activeRoutes = getActiveRoutes(routes, location);
 
@@ -21,7 +21,7 @@ export const Navigation = withRouter((props) => {
         <StyledMenu
             mode={mode}
             selectedKeys={activeRoutes}
-            defaultOpenKeys={defaultOpenKeys}
+            defaultOpenKeys={openSelected ? activeRoutes : []}
         >
             {renderMenu(routes)}
         </StyledMenu>

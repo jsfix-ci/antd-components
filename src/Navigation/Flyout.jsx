@@ -1,26 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-import { renderMenu } from './menu';
-import {Navigation} from "./Navigation";
+import { Navigation } from './Navigation';
 
 export const Flyout = withRouter((props) => {
-    const {routes} = props;
+    const {...restProps} = props;
 
     return (
         <Navigation
             mode="horizontal"
-            routes={routes}
-        >
-            {renderMenu(routes)}
-        </Navigation>
+            {...restProps}
+        />
     );
 });
 
-Flyout.defaultProps = {
-    routes: [],
-};
+Flyout.defaultProps = {};
 
 Flyout.propTypes = {
     routes: PropTypes.arrayOf(PropTypes.object),
+    openSelected: PropTypes.bool
 };
