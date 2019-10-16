@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
 import {AddButton, DeleteButton, EditButton} from '../../../src/Buttons/ButtonTypes';
 import {message} from "antd";
-import {Button} from "../../../src/Buttons/Button";
+import {Button} from '../../../src/Buttons/Button';
 
 const onAddBtnClick = () => {
     message.info('add button clicked!');
