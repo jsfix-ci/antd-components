@@ -4,6 +4,8 @@ import { Typography } from './pages/Typography';
 import { Form } from './pages/Form';
 import { Grid } from './pages/Grid';
 import { Navigation } from './pages/Navigation';
+import { Grid2 } from './pages/FormGrid';
+import { Buttons } from './pages/Buttons';
 
 export const routes = [
     {
@@ -12,6 +14,12 @@ export const routes = [
         exact: true,
         path: '/',
         component: Home
+    },
+    {
+        key: 'buttons',
+        label: 'Buttons',
+        path: '/Buttons',
+        component: Buttons
     },
     {
         key: 'typography',
@@ -30,6 +38,11 @@ export const routes = [
         label: 'Grid',
         path: '/Grid',
         component: Grid
+    },{
+        key: 'formgrid',
+        label: 'FormGrid',
+        path: '/FormGrid',
+        component: Grid2
     },
     {
         key: 'navigation',
