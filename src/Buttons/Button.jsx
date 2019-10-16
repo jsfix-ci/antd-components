@@ -4,7 +4,7 @@ import {GreenButton, RedButton, BlueButton, PurpleButton} from './styles/Styles'
 
 export const Button = (props) => {
 
-    const {onClick, size = 'small', icon = 'edit', color = 'red', type = 'default', text = '', restProps} = props;
+    const {onClick, size = 'default', icon = 'edit', color = 'red', type = 'default', text = '', restProps} = props;
 
     switch (color) {
         case 'green':
