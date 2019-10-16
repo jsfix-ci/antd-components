@@ -16,8 +16,7 @@ ReactDOM.render(
         <Row>
             <Col
                 xs={24}
-                md={{span: 6}}
-                lg={{span: 6}}>
+                md={6}>
                 <Sider/>
             </Col>
             <CustomCol>

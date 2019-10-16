@@ -1,8 +1,9 @@
 import { NotFound } from './pages/NotFound';
 import { Home } from './pages/Home';
+import { Typography } from './pages/Typography';
 import { Form } from './pages/Form';
 import { Grid } from './pages/Grid';
-import { Typography } from './pages/Typography';
+import { Navigation } from './pages/Navigation';
 
 export const routes = [
     {
@@ -29,6 +30,12 @@ export const routes = [
         label: 'Grid',
         path: '/Grid',
         component: Grid
+    },
+    {
+        key: 'navigation',
+        label: 'Navigation',
+        path: '/Navigation',
+        component: Navigation
     },
     {
         key: 'notfound',
