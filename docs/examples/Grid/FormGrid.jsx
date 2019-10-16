@@ -6,34 +6,41 @@ import {message} from "antd";
 
 const data = [
     {
-        bannerType: 'Image',
-        html: 'test',
+        text: 'You can adjust types',
+        html: '<div style="background-color: #eee; color: #D20000">this is renderd html</div>',
         image: {
-            name: 'imagename',
-            url: 'imageurl'
-        },
-        settings: {},
-        active: true
-    },
-    {
-        bannerType: 'Image2',
-        html: 'test2',
-        image: {
-            name: 'imagename2',
-            url: 'imageurl2'
-        },
-        settings: {},
-        active: true
-    },
-    {
-        bannerType: 'Image3',
-        html: 'test3',
-        image: {
-            name: 'imagename3',
-            url: 'imageurl3'
+            name: 'write.jpg',
+            url: 'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593357_960_720.jpg'
         },
         settings: {
-            test: 'jo'
+            lame: false,
+            nasty: 'yes'
+        },
+        active: true
+    },
+    {
+        text: 'for example string',
+        html: '<div style="background-color: #000; color: #fff">this is renderd html</div>',
+        image: {
+            name: 'note.jpg',
+            url: 'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593358_960_720.jpg'
+        },
+        settings: {
+            dope: true,
+            crazy: 'yes'
+        },
+        active: true
+    },
+    {
+        text: 'it will be shortened if its to long',
+        html: '<div style="background-color: #fff; color: #000">this is renderd html</div>',
+        image: {
+            name: 'working.jpg',
+            url: 'https://cdn.pixabay.com/photo/2015/07/17/22/42/startup-849805_960_720.jpg'
+        },
+        settings: {
+            amazing: true,
+            fancy: 'yes'
         },
         active: false
     }
@@ -61,11 +68,11 @@ const Example = () => (
         onDeleteRowClick={onDelete}
         toolbar={true}
     >
-        <Column title={'Banner Type'} dataIndex={'bannerType'} inputType={'string'}/>
-        <Column title={'Content'} dataIndex={'html'} inputType={'string'}/>
-        <Column title={'Image'} dataIndex={'image'} inputType={'object'}/>
-        <Column title={'Settings'} dataIndex={'settings'} inputType={'object'}/>
-        <Column title={'Active'} dataIndex={'active'} inputType={'boolean'}/>
+        <Column title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30}/>
+        <Column title={'Content'} dataIndex={'html'} fieldType={'html'}/>
+        <Column title={'Image'} dataIndex={'image'} fieldType={'image'}/>
+        <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'}/>
+        <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
     </FormGrid>
 );
 
@@ -97,11 +104,11 @@ const code = `
                     onDeleteRowClick={onDelete}
                     toolbar={true}
                 >
-                    <Column title={'Banner Type'} dataIndex={'bannerType'} inputType={'string'}/>
-                    <Column title={'Content'} dataIndex={'html'} inputType={'string'}/>
-                    <Column title={'Image'} dataIndex={'image'} inputType={'object'}/>
-                    <Column title={'Settings'} dataIndex={'settings'} inputType={'object'}/>
-                    <Column title={'Active'} dataIndex={'active'} inputType={'boolean'}/>
+                    <Column title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30}/>
+                    <Column title={'Content'} dataIndex={'html'} fieldType={'html'}/>
+                    <Column title={'Image'} dataIndex={'image'} fieldType={'image'}/>
+                    <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'}/>
+                    <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
             </FormGrid>
         );
     };

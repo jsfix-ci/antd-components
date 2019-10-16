@@ -13,32 +13,69 @@ export const Column = (props) => {
 
         const {
             dataIndex,
-            inputType,
+            fieldType,
             children,
+            maxLength,
             ...restProps
         } = props;
 
         const getDisplay = () => {
-            if (inputType === 'boolean') {
-                return <Switch disabled={true} checked={props.record[dataIndex]}/>
+
+
+
+            if (fieldType === 'boolean') {
+                const record = props.record[dataIndex];
+                return <Switch disabled={true} checked={record}/>
             }
 
-            if (inputType === 'object') {
-                const string = JSON.stringify(props.record[dataIndex]);
-                if (string.length > 5) {
-                    const content =
-                        <pre className="language-bash">
-                            {JSON.stringify(props.record[dataIndex], null, 2)}
-                        </pre>;
+            if (fieldType === 'object') {
+                const record = props.record[dataIndex];
+                const content = (
+                    <pre className="language-bash">
+                        {JSON.stringify(record, null, 2)}
+                    </pre>
+                );
 
-                    return (
-                        <Popover content={content} title={dataIndex}>
+                return (
+                    <Popover content={content} title={dataIndex}>
                             <span style={{cursor: 'pointer', textDecoration: 'underline'}}>
                                 object
                             </span>
-                        </Popover> );
-                } else {
-                    return JSON.stringify(props.record[dataIndex])
+                    </Popover> );
+            }
+
+            if (fieldType === 'html') {
+                const record = props.record[dataIndex];
+                const content = (
+                    <pre className="language-bash">
+                        <div dangerouslySetInnerHTML={{ __html: record }} />
+                    </pre>
+                );
+
+                return (
+                    <Popover content={content} title={dataIndex}>
+                            <span style={{cursor: 'pointer', textDecoration: 'underline'}}>
+                                html
+                            </span>
+                    </Popover> );
+            }
+
+            if (fieldType === 'image') {
+                const record = props.record[dataIndex];
+                return (
+                    <Popover content={<img height={150} src={record.url} />} title={record.name}>
+                        <span style={{cursor: 'pointer'}}>
+                            <img height={40} src={record.url} />
+                        </span>
+                    </Popover>
+                );
+            }
+
+            if (fieldType === 'string') {
+                const record = props.record[dataIndex];
+                if (record.length > maxLength) {
+                    console.log(record, '  <------------------------------');
+                    return record.substring(0, maxLength) + '...';
                 }
             }
 
@@ -58,11 +95,11 @@ export const Column = (props) => {
 };
 
 Column.defaultProps = {
-    inputType: 'text'
+    type: 'text'
 };
 
 Column.propTypes = {
     dataIndex: PropTypes.string,
-    inputType: PropTypes.oneOf(['string', 'object', 'switch']),
+    fieldType: PropTypes.oneOf(['string', 'object', 'switch', 'image', 'html']),
 };
 
