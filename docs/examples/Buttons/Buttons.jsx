@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
 import {AddButton, DeleteButton, EditButton} from '../../../src/Buttons/ButtonTypes';
 import {message} from "antd";
+import {Button} from "../../../src/Buttons/Button";
 
 const onAddBtnClick = () => {
     message.info('add button clicked!');
@@ -27,6 +28,8 @@ const Example = (props) => (
         <DeleteButton onClick={onDeleteBtnClick} size='small' />
 
         <AddButton onClick={onAddBtnClick} color='purple' />
+
+        <Button onClick={onAddBtnClick} color='green' text='custom' icon='bulb'/>
     </Fragment>
 );
 
@@ -60,6 +63,8 @@ const code = `
                 <DeleteButton onClick={onDeleteBtnClick} size='small' />
                 
                 <AddButton onClick={onAddBtnClick} color='purple' />
+                
+                <Button onClick={onAddBtnClick} color='green' text='custom' icon='bulb'/>
             </Fragment>
         );
     };
@@ -72,6 +77,7 @@ const properties = [
     {property: 'onClick', description: 'Function is called on button click', type: 'function'},
     {property: 'color', description: 'optional color of the button', type: 'string'},
     {property: 'size', description: 'optional size (small, default, large)', type: 'string', default: 'default'},
+    {property: 'text', description: 'optional text', type: 'string'},
 ];
 
 export default () => (
