@@ -1,11 +1,11 @@
 import React from 'react';
-import { Display2 } from '../../src';
+import { Display3 } from '../../src';
 
 /**
  * @return {React.Component}
  */
 export const Home = () => {
     return (
-        <Display2>Welcome</Display2>
+        <Display3>Welcome</Display3>
     );
 };

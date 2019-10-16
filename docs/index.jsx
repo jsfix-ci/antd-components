@@ -6,27 +6,35 @@ import { Row, Col } from 'antd';
 import { CustomCol, Wrapper } from './components/utils';
 import { routes } from './routes';
 import { Sider } from './Menu';
-import { Display1 } from '../src';
+import { Display2 } from '../src';
+
+export const renderRoutes = (routesArr) => (
+    routesArr.map(route => {
+        const {submenu} = route;
+
+        if (submenu) {
+            return renderRoutes(submenu);
+        }
+
+        return <Route {...route} />;
+    })
+);
 
 ReactDOM.render(
     <Router>
         <Row>
-            <Col><Display1 className={'text-center'}>Ant Design Components</Display1></Col>
+            <Col><Display2 className={'text-center'}>Ant Design Components</Display2></Col>
         </Row>
         <Row>
             <Col
                 xs={24}
-                md={6}>
+                md={5}>
                 <Sider/>
             </Col>
             <CustomCol>
                 <Wrapper className={'markdown-body'}>
                     <Switch>
-                        {
-                            routes.map(route => (
-                                <Route {...route} />
-                            ))
-                        }
+                        {renderRoutes(routes)}
                     </Switch>
                 </Wrapper>
             </CustomCol>

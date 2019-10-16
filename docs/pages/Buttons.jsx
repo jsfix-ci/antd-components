@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Display2 } from '../../src';
+import { Display3 } from '../../src';
 import ButtonsTypes from '../examples/Buttons/Buttons';
 
 /**
@@ -8,7 +8,7 @@ import ButtonsTypes from '../examples/Buttons/Buttons';
 export const Buttons = () => {
     return (
         <Fragment>
-            <Display2>Buttons</Display2>
+            <Display3>Buttons</Display3>
             <ButtonsTypes />
         </Fragment>
     );

@@ -1,15 +1,28 @@
 import React, { Fragment } from 'react';
-import { Display2 } from '../../src';
+import { Display3 } from '../../src';
 import DataGrid from '../examples/Grid/DataGrid';
+import FormGrid from '../examples/Grid/FormGrid';
 
 /**
  * @return {React.Component}
  */
-export const Grid = () => {
+export const DataGridComponent = () => {
     return (
         <Fragment>
-            <Display2>Grid</Display2>
+            <Display3>Data Grid</Display3>
             <DataGrid />
+        </Fragment>
+    );
+};
+
+/**
+ * @return {React.Component}
+ */
+export const FormGridComponent = () => {
+    return (
+        <Fragment>
+            <Display3>Form Grid</Display3>
+            <FormGrid />
         </Fragment>
     );
 };

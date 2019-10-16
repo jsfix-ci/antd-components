@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Display2 } from '../../src';
+import { Display3 } from '../../src';
 import DynamicFormItem from '../examples/Form/DynamicFormItem';
 
 /**
@@ -8,7 +8,7 @@ import DynamicFormItem from '../examples/Form/DynamicFormItem';
 export const Form = () => {
     return (
         <Fragment>
-            <Display2>Form</Display2>
+            <Display3>Form</Display3>
             <DynamicFormItem/>
         </Fragment>
     );
