@@ -1,6 +1,6 @@
 import React from 'react';
 import { routes } from './routes';
-import { Side } from '../src/Navigation/Side';
+import { SideNavi } from '../src/Navigation/SideNavi';
 
 export class Sider extends React.Component {
 
@@ -12,6 +12,6 @@ export class Sider extends React.Component {
             ]
         };
 
-        return <Side routes={routes} {...config} openSelected/>
+        return <SideNavi routes={routes} {...config} openSelected/>
     }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
-import { Side } from '../../../src';
+import { SideNavi } from '../../../src';
 
 // Example implementation
 const Example = () => {
@@ -75,7 +75,7 @@ const Example = () => {
     ];
 
     return (
-        <Side routes={routes} openSelected/>
+        <SideNavi routes={routes} openSelected/>
     );
 };
 
@@ -83,7 +83,7 @@ const Example = () => {
 // language=JS
 const code = `
     import React from 'react';
-    import { Side } from '@react-hangar/antd-components';
+    import { SideNavi } from '@react-hangar/antd-components';
 
     const Example = () => {
         const routes = [
@@ -157,7 +157,7 @@ const code = `
         ];
 
         return (
-            <Side routes={routes} openSelected/>
+            <SideNavi routes={routes} openSelected/>
         );
     };
 

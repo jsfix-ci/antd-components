@@ -12,7 +12,7 @@ const StyledMenu = styled(Menu)`
     display: inline-block;
 `;
 
-export const Side = withRouter((props) => {
+export const SideNavi = withRouter((props) => {
     const {routes, location, defaultOpenKeys} = props;
 
     const activeRoutes = getActiveRoutes(routes, location);
@@ -28,12 +28,12 @@ export const Side = withRouter((props) => {
     );
 });
 
-Side.defaultProps = {
+SideNavi.defaultProps = {
     routes: [],
     defaultOpenKeys: []
 };
 
-Side.propTypes = {
+SideNavi.propTypes = {
     routes: PropTypes.arrayOf(PropTypes.object),
     defaultOpenKeys: PropTypes.arrayOf(PropTypes.string)
 };

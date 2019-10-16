@@ -1,2 +1,2 @@
 export * from './Flyout';
-export * from './Side';
+export * from './SideNavi';
