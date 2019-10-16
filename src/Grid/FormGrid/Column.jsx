@@ -74,7 +74,6 @@ export const Column = (props) => {
             if (fieldType === 'string') {
                 const record = props.record[dataIndex];
                 if (record.length > maxLength) {
-                    console.log(record, '  <------------------------------');
                     return record.substring(0, maxLength) + '...';
                 }
             }

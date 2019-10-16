@@ -3,6 +3,7 @@ import {FormGrid} from '../../../src';
 import {Column} from "../../../src/Grid/FormGrid";
 import {ComponentDisplay} from "../../components/ComponentDisplay";
 import {message} from "antd";
+import Form from "antd/lib/form";
 
 const data = [
     {
@@ -46,7 +47,6 @@ const data = [
     }
 ];
 
-
 const onAdd = () => {
     message.info('add button clicked!');
 };
@@ -81,6 +81,48 @@ const Example = () => (
 const code = `
     import React from 'react';
     import { AddButton, DeleteButton, EditButton } from '@react-hangar/antd-components';
+    
+    const data = [
+        {
+            text: 'You can adjust types',
+            html: '<div style="background-color: #eee; color: #D20000">this is renderd html</div>',
+            image: {
+                name: 'write.jpg',
+                url: 'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593357_960_720.jpg'
+            },
+            settings: {
+                lame: false,
+                nasty: 'yes'
+            },
+            active: true
+        },
+        {
+            text: 'for example string',
+            html: '<div style="background-color: #000; color: #fff">this is renderd html</div>',
+            image: {
+                name: 'note.jpg',
+                url: 'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593358_960_720.jpg'
+            },
+            settings: {
+                dope: true,
+                crazy: 'yes'
+            },
+            active: true
+        },
+        {
+            text: 'it will be shortened if its to long',
+            html: '<div style="background-color: #fff; color: #000">this is renderd html</div>',
+            image: {
+                name: 'working.jpg',
+                url: 'https://cdn.pixabay.com/photo/2015/07/17/22/42/startup-849805_960_720.jpg'
+            },
+            settings: {
+                amazing: true,
+                fancy: 'yes'
+            },
+            active: false
+        }
+    ];
 
     const onAdd = () => {
         message.info('add button clicked!');

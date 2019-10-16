@@ -5,6 +5,9 @@ import Form from 'antd/lib/form';
 import { Column } from './Column';
 import {message} from "antd";
 import {AddButton, DeleteButton, EditButton} from "../../Buttons/ButtonTypes";
+import Switch from "antd/lib/switch";
+import InputNumber from "antd/lib/input-number";
+import Input from "antd/lib/input";
 
 /**
  * @return {React.Component}
@@ -14,6 +17,20 @@ import {AddButton, DeleteButton, EditButton} from "../../Buttons/ButtonTypes";
 export const FormGrid = Form.create()((props) => {
     const {idProperty, dataSource, onAddRowClick, onDeleteRowClick, onEditRowClick, toolbar, children, ...restProps} = props;
     const [data, setData] = useState(dataSource);
+
+
+    /*let formData = props.children.map((column) => {
+        switch (column.props.fieldType) {
+            case 'string':
+                return (
+                    <Input />
+                );
+            case 'boolean':
+                return <Switch />;
+            default:
+                return <Input />
+        }
+    });*/
 
     let selected = [];
 
@@ -74,6 +91,7 @@ export const FormGrid = Form.create()((props) => {
 
     return (
         <Fragment>
+           {/* <Form>{formData.map((rec) => { return rec})} </Form>*/}
             <Table
                 rowKey={idProperty}
                 title={getToolbar()}
@@ -81,7 +99,9 @@ export const FormGrid = Form.create()((props) => {
                 components={components}
                 dataSource={data}
                 columns={columns}
-                rowSelection={{onChange: onRowSelection}}
+                rowSelection={{
+                    onChange: onRowSelection,
+                }}
             />
         </Fragment>
     );
