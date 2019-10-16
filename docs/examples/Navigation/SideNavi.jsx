@@ -172,7 +172,7 @@ const properties = [
 ];
 
 export default () => (
-    <ComponentDisplay title={'Side'} code={code} properties={properties}>
+    <ComponentDisplay title={'SideNavi'} code={code} properties={properties}>
         <Example/>
     </ComponentDisplay>
 );
