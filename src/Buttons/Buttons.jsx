@@ -4,19 +4,17 @@ import AntdButton from 'antd/lib/button/button';
 import './Buttons.scss';
 
 export const Button = (props) => {
-    const { color = 'default' } = props;
+    const { color = 'default', ...restProps } = props;
     return (
         <AntdButton
             className={'hangar-btn hangar-btn-color-' + color}
-            {...props}
-        >
-            {props.children}
-        </AntdButton>
+            {...restProps}
+        />
     );
 };
 
 export const AddButton = (props) => {
-    const { icon = 'plus', children = 'Add'} = props;
+    const { icon = 'plus', children = 'Add' } = props;
     return <Button icon={icon} {...props} >{children}</Button>
 };
 

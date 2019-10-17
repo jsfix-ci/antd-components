@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
-import {Button, AddButton, DeleteButton, EditButton, ReloadButton, SearchButton} from '../../../src/Buttons/Buttons';
+import {Button, AddButton, DeleteButton, EditButton, ReloadButton, SearchButton} from '../../../src';
 import {message} from "antd";
 
 const onAddBtnClick = () => {
