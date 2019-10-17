@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
-import {Button, AddButton, DeleteButton, EditButton} from '../../../src/Buttons/Buttons';
+import {Button, AddButton, DeleteButton, EditButton, ReloadButton, SearchButton} from '../../../src/Buttons/Buttons';
 import {message} from "antd";
 
 const onAddBtnClick = () => {
@@ -19,6 +19,14 @@ const onCustomBtnClick = () => {
     message.info('custom button clicked!');
 };
 
+const onReloadBtnClick = () => {
+    message.info('reload button clicked!');
+};
+
+const onSearchBtnClick = () => {
+    message.info('search button clicked!');
+};
+
 // Example implementation
 const Example = (props) => (
     <Fragment>
@@ -26,11 +34,13 @@ const Example = (props) => (
         <EditButton onClick={onEditBtnClick} />
         <DeleteButton onClick={onDeleteBtnClick} />
 
-        <AddButton onClick={onAddBtnClick} size='large' color='pink' />
-        <EditButton onClick={onEditBtnClick} size='default' color='orange'/>
-        <DeleteButton onClick={onDeleteBtnClick} size='small' color='purple' />
+        <AddButton onClick={onEditBtnClick} size='default' color='black'>Hinzufügen</AddButton>
+        <EditButton onClick={onEditBtnClick} size='default' color='orange'>Bearbeiten</EditButton>
+        <DeleteButton onClick={onDeleteBtnClick} size='small' color='purple'>Löschen</DeleteButton>
 
-        <AddButton onClick={onAddBtnClick} color='purple' />
+        <ReloadButton onClick={onReloadBtnClick} size='large' color='pink' />
+
+        <SearchButton onClick={onSearchBtnClick} />
 
         <Button onClick={onCustomBtnClick} color='green' text='custom' icon='bulb'>Custom</Button>
     </Fragment>
@@ -54,9 +64,16 @@ const code = `
         message.info('delete button clicked!');
     }
 
-
     const onCustomBtnClick = () => {
         message.info('custom button clicked!');
+    };
+    
+    const onReloadBtnClick = () => {
+        message.info('reload button clicked!');
+    };
+    
+    const onSearchBtnClick = () => {
+        message.info('search button clicked!');
     };
     
     const Example = () => {
@@ -65,13 +82,15 @@ const code = `
                 <AddButton onClick={onAddBtnClick} />
                 <EditButton onClick={onEditBtnClick} />
                 <DeleteButton onClick={onDeleteBtnClick} />
-        
-                <AddButton onClick={onAddBtnClick} size='large' color='pink' />
-                <EditButton onClick={onEditBtnClick} size='default' color='orange'/>
-                <DeleteButton onClick={onDeleteBtnClick} size='small' color='purple' />
-        
-                <AddButton onClick={onAddBtnClick} color='purple' />
-        
+                
+                <AddButton onClick={onEditBtnClick} size='default' color='black'>Hinzufügen</AddButton>
+                <EditButton onClick={onEditBtnClick} size='default' color='orange'>Bearbeiten</EditButton>
+                <DeleteButton onClick={onDeleteBtnClick} size='small' color='purple'>Löschen</DeleteButton>
+                
+                <ReloadButton onClick={onReloadBtnClick} size='large' color='pink' />
+                
+                <SearchButton onClick={onSearchBtnClick} />
+                
                 <Button onClick={onCustomBtnClick} color='green' text='custom' icon='bulb'>Custom</Button>
             </Fragment>
         );
