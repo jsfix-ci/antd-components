@@ -1,48 +1,71 @@
 import React, {Fragment} from 'react';
-import { ComponentDisplay } from '../../components/ComponentDisplay';
+import {ComponentDisplay} from '../../components/ComponentDisplay';
 import {Button, AddButton, DeleteButton, EditButton, ReloadButton, SearchButton} from '../../../src';
 import {message} from "antd";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import Text from "antd/es/typography/Text";
 
-const onAddBtnClick = () => {
-    message.info('add button clicked!');
-};
-
-const onEditBtnClick = () => {
-    message.info('edit button clicked!');
-};
-
-const onDeleteBtnClick = () => {
-    message.info('delete button clicked!');
-};
-
-const onCustomBtnClick = () => {
-    message.info('custom button clicked!');
-};
-
-const onReloadBtnClick = () => {
-    message.info('reload button clicked!');
-};
-
-const onSearchBtnClick = () => {
-    message.info('search button clicked!');
+const onCopy = (e) => {
+    message.info(<span><Text code>{e}</Text> copied!</span>);
 };
 
 // Example implementation
 const Example = (props) => (
     <Fragment>
-        <AddButton onClick={onAddBtnClick} />
-        <EditButton onClick={onEditBtnClick} />
-        <DeleteButton onClick={onDeleteBtnClick} />
+        <CopyToClipboard
+            text={'<AddButton onClick={onClick}/>'}
+            onCopy={() => onCopy('<AddButton onClick={onClick}/>')}>
+            <AddButton />
+        </CopyToClipboard>
 
-        <AddButton onClick={onEditBtnClick} size='default' color='black'>Hinzufügen</AddButton>
-        <EditButton onClick={onEditBtnClick} size='default' color='orange'>Bearbeiten</EditButton>
-        <DeleteButton onClick={onDeleteBtnClick} size='small' color='purple'>Löschen</DeleteButton>
+        <CopyToClipboard
+            text={'<EditButton onClick={onClick} />'}
+            onCopy={() => onCopy('<EditButton onClick={onClick} />')}>
+            <EditButton  />
+        </CopyToClipboard>
 
-        <ReloadButton onClick={onReloadBtnClick} size='large' color='pink' />
+        <CopyToClipboard
+            text={'<DeleteButton onClick={onClick} />'}
+            onCopy={() => onCopy('<DeleteButton onClick={onClick} />')}>
+            <DeleteButton />
+        </CopyToClipboard>
 
-        <SearchButton onClick={onSearchBtnClick} />
+        <CopyToClipboard
+            text={'<AddButton onClick={onClick} size=\'default\' color=\'black\'>Hinzufügen</AddButton>'}
+            onCopy={() => onCopy('<AddButton onClick={onClick} size=\'default\' color=\'black\'>Hinzufügen</AddButton>')}>
+            <AddButton size='default' color='black'>Hinzufügen</AddButton>
+        </CopyToClipboard>
 
-        <Button onClick={onCustomBtnClick} color='green' text='custom' icon='bulb'>Custom</Button>
+        <CopyToClipboard
+            text={'<EditButton onClick={onClick} size=\'default\' color=\'orange\'>Bearbeiten</EditButton>'}
+            onCopy={() => onCopy('<EditButton onClick={onClick} size=\'default\' color=\'orange\'>Bearbeiten</EditButton>')}>
+            <EditButton size='default' color='orange'>Bearbeiten</EditButton>
+        </CopyToClipboard>
+
+        <CopyToClipboard
+            text={'<DeleteButton onClick={onClick} size=\'small\' color=\'purple\'>Löschen</DeleteButton>'}
+            onCopy={() => onCopy('<DeleteButton onClick={onClick} size=\'small\' color=\'purple\'>Löschen</DeleteButton>')}>
+            <DeleteButton size='small' color='purple'>Löschen</DeleteButton>
+        </CopyToClipboard>
+
+        <CopyToClipboard
+            text={'<ReloadButton onClick={onClick} size=\'large\' color=\'pink\'/>'}
+            onCopy={() => onCopy('<ReloadButton onClick={onClick} size=\'large\' color=\'pink\'/>')}>
+            <ReloadButton size='large' color='pink'/>
+        </CopyToClipboard>
+
+        <CopyToClipboard
+            text={'<SearchButton onClick={onClick}/>'}
+            onCopy={() => onCopy('<SearchButton onClick={onClick}/>')}>
+            <SearchButton />
+        </CopyToClipboard>
+
+        <CopyToClipboard
+            text={'<Button onClick={onClick} color=\'green\' text=\'custom\' icon=\'bulb\'>Custom</Button>'}
+            onCopy={() => onCopy('<Button onClick={onClick} color=\'green\' text=\'custom\' icon=\'bulb\'>Custom</Button>')}>
+            <Button color='green' text='custom' icon='bulb'>Custom</Button>
+        </CopyToClipboard>
+
     </Fragment>
 );
 
@@ -52,46 +75,26 @@ const code = `
     import React from 'react';
     import { AddButton, DeleteButton, EditButton } from '@react-hangar/antd-components';
 
-    const onAddBtnClick = () => {
-        message.info('add button clicked!');
-    };
-    
-    const onEditBtnClick = () => {
-        message.info('edit button clicked!');
-    };
-
-    const onDeleteBtnClick = () => {
-        message.info('delete button clicked!');
-    }
-
-    const onCustomBtnClick = () => {
-        message.info('custom button clicked!');
-    };
-    
-    const onReloadBtnClick = () => {
-        message.info('reload button clicked!');
-    };
-    
-    const onSearchBtnClick = () => {
-        message.info('search button clicked!');
+    const onClick = () => {
+        console.log('do fancy stuff!');
     };
     
     const Example = () => {
         return (
             <Fragment>
-                <AddButton onClick={onAddBtnClick} />
-                <EditButton onClick={onEditBtnClick} />
-                <DeleteButton onClick={onDeleteBtnClick} />
+                <AddButton onClick={onClick} />
+                <EditButton onClick={onClick} />
+                <DeleteButton onClick={onClick} />
                 
-                <AddButton onClick={onEditBtnClick} size='default' color='black'>Hinzufügen</AddButton>
-                <EditButton onClick={onEditBtnClick} size='default' color='orange'>Bearbeiten</EditButton>
-                <DeleteButton onClick={onDeleteBtnClick} size='small' color='purple'>Löschen</DeleteButton>
+                <AddButton onClick={onClick} size='default' color='black'>Hinzufügen</AddButton>
+                <EditButton onClick={onClick} size='default' color='orange'>Bearbeiten</EditButton>
+                <DeleteButton onClick={onClick} size='small' color='purple'>Löschen</DeleteButton>
                 
-                <ReloadButton onClick={onReloadBtnClick} size='large' color='pink' />
+                <ReloadButton onClick={onClick} size='large' color='pink' />
                 
-                <SearchButton onClick={onSearchBtnClick} />
+                <SearchButton onClick={onClick} />
                 
-                <Button onClick={onCustomBtnClick} color='green' text='custom' icon='bulb'>Custom</Button>
+                <Button onClick={onClick} color='green' text='custom' icon='bulb'>Custom</Button>
             </Fragment>
         );
     };
