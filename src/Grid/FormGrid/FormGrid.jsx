@@ -4,7 +4,7 @@ import Table from 'antd/lib/table';
 import Form from 'antd/lib/form';
 import { Column } from './Column';
 import {message} from "antd";
-import {AddButton, DeleteButton, EditButton} from "../../Buttons/ButtonTypes";
+import {AddButton, DeleteButton, EditButton} from "../../Buttons/Buttons";
 import Switch from "antd/lib/switch";
 import InputNumber from "antd/lib/input-number";
 import Input from "antd/lib/input";

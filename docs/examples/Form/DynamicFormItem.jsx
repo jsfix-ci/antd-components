@@ -42,7 +42,7 @@ const code = `
 // Component props
 const properties = [
     {property: 'form', description: 'form', type: 'object'},
-    {property: 'addText', description: 'Button text', type: 'string', default: 'Add field'}
+    {property: 'addText', description: 'Buttons text', type: 'string', default: 'Add field'}
 ];
 
 export default () => (

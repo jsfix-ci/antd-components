@@ -1,8 +1,7 @@
 import React, {Fragment} from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
-import {AddButton, DeleteButton, EditButton} from '../../../src/Buttons/ButtonTypes';
+import {Button, AddButton, DeleteButton, EditButton} from '../../../src/Buttons/Buttons';
 import {message} from "antd";
-import {Button} from '../../../src/Buttons/Button';
 
 const onAddBtnClick = () => {
     message.info('add button clicked!');
@@ -16,6 +15,10 @@ const onDeleteBtnClick = () => {
     message.info('delete button clicked!');
 };
 
+const onCustomBtnClick = () => {
+    message.info('custom button clicked!');
+};
+
 // Example implementation
 const Example = (props) => (
     <Fragment>
@@ -23,13 +26,13 @@ const Example = (props) => (
         <EditButton onClick={onEditBtnClick} />
         <DeleteButton onClick={onDeleteBtnClick} />
 
-        <AddButton onClick={onAddBtnClick} size='large' />
-        <EditButton onClick={onEditBtnClick} size='default' />
-        <DeleteButton onClick={onDeleteBtnClick} size='small' />
+        <AddButton onClick={onAddBtnClick} size='large' color='pink' />
+        <EditButton onClick={onEditBtnClick} size='default' color='orange'/>
+        <DeleteButton onClick={onDeleteBtnClick} size='small' color='purple' />
 
         <AddButton onClick={onAddBtnClick} color='purple' />
 
-        <Button onClick={onAddBtnClick} color='green' text='custom' icon='bulb'/>
+        <Button onClick={onCustomBtnClick} color='green' text='custom' icon='bulb'>Custom</Button>
     </Fragment>
 );
 
@@ -51,20 +54,25 @@ const code = `
         message.info('delete button clicked!');
     }
 
+
+    const onCustomBtnClick = () => {
+        message.info('custom button clicked!');
+    };
+    
     const Example = () => {
         return (
             <Fragment>
                 <AddButton onClick={onAddBtnClick} />
                 <EditButton onClick={onEditBtnClick} />
                 <DeleteButton onClick={onDeleteBtnClick} />
-                
-                <AddButton onClick={onAddBtnClick} size='large' />
-                <EditButton onClick={onEditBtnClick} size='default' />
-                <DeleteButton onClick={onDeleteBtnClick} size='small' />
-                
+        
+                <AddButton onClick={onAddBtnClick} size='large' color='pink' />
+                <EditButton onClick={onEditBtnClick} size='default' color='orange'/>
+                <DeleteButton onClick={onDeleteBtnClick} size='small' color='purple' />
+        
                 <AddButton onClick={onAddBtnClick} color='purple' />
-                
-                <Button onClick={onAddBtnClick} color='green' text='custom' icon='bulb'/>
+        
+                <Button onClick={onCustomBtnClick} color='green' text='custom' icon='bulb'>Custom</Button>
             </Fragment>
         );
     };
@@ -77,7 +85,6 @@ const properties = [
     {property: 'onClick', description: 'Function is called on button click', type: 'function'},
     {property: 'color', description: 'optional color of the button', type: 'string'},
     {property: 'size', description: 'optional size (small, default, large)', type: 'string', default: 'default'},
-    {property: 'text', description: 'optional text', type: 'string'},
 ];
 
 export default () => (
