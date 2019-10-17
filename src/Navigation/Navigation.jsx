@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Menu } from 'antd';
 import { withRouter } from 'react-router';
-import { getActiveRoutes } from './routing';
+import { getActiveRoutes, getAllSubmenuRoutes } from './routing';
 import { renderMenu } from './menu';
 
 const StyledMenu = styled(Menu)`
@@ -13,15 +13,24 @@ const StyledMenu = styled(Menu)`
 `;
 
 export const Navigation = withRouter((props) => {
-    const {routes, openSelected, location, mode} = props;
-
+    const {routes, openSubmenus, location, mode} = props;
     const activeRoutes = getActiveRoutes(routes, location);
+    let defaultOpenKeys = [];
+
+    switch (openSubmenus) {
+        case 'selected':
+            defaultOpenKeys = activeRoutes;
+            break;
+        case 'all':
+            defaultOpenKeys = getAllSubmenuRoutes(routes);
+            break;
+    }
 
     return (
         <StyledMenu
             mode={mode}
             selectedKeys={activeRoutes}
-            defaultOpenKeys={openSelected ? activeRoutes : []}
+            defaultOpenKeys={defaultOpenKeys}
         >
             {renderMenu(routes)}
         </StyledMenu>
@@ -29,11 +38,10 @@ export const Navigation = withRouter((props) => {
 });
 
 Navigation.defaultProps = {
-    routes: [],
-    openSelected: false
+    routes: []
 };
 
 Navigation.propTypes = {
     routes: PropTypes.arrayOf(PropTypes.object),
-    openSelected: PropTypes.bool
+    openSubmenus: PropTypes.oneOf(['selected', 'all'])
 };

@@ -18,5 +18,5 @@ Flyout.defaultProps = {};
 
 Flyout.propTypes = {
     routes: PropTypes.arrayOf(PropTypes.object),
-    openSelected: PropTypes.bool
+    openSubmenus: PropTypes.oneOf(['selected', 'all'])
 };

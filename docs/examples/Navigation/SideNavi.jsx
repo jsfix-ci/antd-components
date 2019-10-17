@@ -60,6 +60,19 @@ const Example = () => {
             label: 'Contact',
             icon: 'contacts',
             path: '/Navigation/Side/Contact',
+            submenu: [
+                {
+                    key: '21',
+                    label: 'Person 1',
+                    path: '/Navigation/Side/Contact/Person1',
+
+                },
+                {
+                    key: '22',
+                    label: 'Person 2',
+                    path: '/Navigation/Side/Contact/Person2',
+                }
+            ]
         },
         {
             key: 'side-about',
@@ -75,7 +88,7 @@ const Example = () => {
     ];
 
     return (
-        <SideNavi routes={routes} openSelected/>
+        <SideNavi routes={routes} openSubmenus='all'/>
     );
 };
 
@@ -157,7 +170,7 @@ const code = `
         ];
 
         return (
-            <SideNavi routes={routes} openSelected/>
+            <SideNavi routes={routes} openSubmenus='all'/>
         );
     };
 
@@ -167,8 +180,12 @@ const code = `
 
 // Component props
 const properties = [
-    {property: 'routes', description: 'routes config', type: 'object[]', default: '[]'},
-    {property: 'openSelected', description: 'open selected menu items after page reload', type: 'boolean', default: 'false'}
+    { property: 'routes', description: 'routes config', type: 'object[]', default: '[]' },
+    {
+        property: 'openSubmenus',
+        description: 'open submenu items; "all" and "selected" are supported',
+        type: 'string'
+    }
 ];
 
 export default () => (

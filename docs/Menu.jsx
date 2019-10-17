@@ -12,6 +12,6 @@ export class Sider extends React.Component {
             ]
         };
 
-        return <SideNavi routes={routes} {...config} openSelected/>
+        return <SideNavi routes={routes} {...config} openSubmenus='all'/>
     }
 }

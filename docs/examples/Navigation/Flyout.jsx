@@ -75,7 +75,7 @@ const Example = () => {
     ];
 
     return (
-        <Flyout routes={routes} openSelected/>
+        <Flyout routes={routes} openSubmenus='selected'/>
     );
 };
 
@@ -157,7 +157,7 @@ const code = `
         ];
 
         return (
-            <Flyout routes={routes} openSelected/>
+            <Flyout routes={routes} openSubmenus='selected'/>
         );
     };
 
@@ -167,8 +167,12 @@ const code = `
 
 // Component props
 const properties = [
-    {property: 'routes', description: 'routes config', type: 'object[]', default: '[]'},
-    {property: 'openSelected', description: 'open selected menu items after page reload', type: 'boolean', default: 'false'}
+    { property: 'routes', description: 'routes config', type: 'object[]', default: '[]' },
+    {
+        property: 'openSubmenus',
+        description: 'open submenu items; "all" and "selected" are supported',
+        type: 'string'
+    }
 ];
 
 export default () => (
