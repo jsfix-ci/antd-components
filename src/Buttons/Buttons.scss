@@ -1,8 +1,8 @@
-.btn {
+.hangar-btn {
     margin: 3px;
 }
 
-.btn-color-default {
+.hangar-btn-color-default {
     background-color: transparent;
     color: #3c3c3c;
     &:hover {
@@ -17,7 +17,7 @@
     }
 }
 
-.btn-color-red {
+.hangar-btn-color-red {
     background-color: #ea0000;
     color: #fff;
     &:hover {
@@ -32,7 +32,7 @@
     }
 }
 
-.btn-color-green {
+.hangar-btn-color-green {
     background-color: green;
     color: #fff;
     &:hover {
@@ -47,7 +47,7 @@
     }
 }
 
-.btn-color-blue {
+.hangar-btn-color-blue {
     background-color: #0042b9;
     color: #fff;
     &:hover {
@@ -62,7 +62,7 @@
     }
 }
 
-.btn-color-yellow {
+.hangar-btn-color-yellow {
     background-color: #d4b500;
     color: #fff;
     &:hover {
@@ -77,7 +77,7 @@
     }
 }
 
-.btn-color-purple {
+.hangar-btn-color-purple {
     background-color: #ae008f;
     color: #fff;
     &:hover {
@@ -92,7 +92,7 @@
     }
 }
 
-.btn-color-pink {
+.hangar-btn-color-pink {
     background-color: #e56dba;
     color: #fff;
     &:hover {
@@ -107,7 +107,7 @@
     }
 }
 
-.btn-color-deeppink {
+.hangar-btn-color-deeppink {
     background-color: #e820a1;
     color: #fff;
     &:hover {
@@ -122,7 +122,7 @@
     }
 }
 
-.btn-color-orange {
+.hangar-btn-color-orange {
     background-color: #e97900;
     color: #fff;
     &:hover {
@@ -137,7 +137,7 @@
     }
 }
 
-.btn-color-grey {
+.hangar-btn-color-grey {
     background-color: #888181;
     color: #fff;
     &:hover {
@@ -152,7 +152,7 @@
     }
 }
 
-.btn-color-black {
+.hangar-btn-color-black {
     background-color: #111111;
     color: #fff;
     &:hover {

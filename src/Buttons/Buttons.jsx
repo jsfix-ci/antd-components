@@ -7,7 +7,7 @@ export const Button = (props) => {
     const { color = 'default' } = props;
     return (
         <AntdButton
-            className={'btn btn-color-' + color}
+            className={'hangar-btn hangar-btn-color-' + color}
             {...props}
         >
             {props.children}
