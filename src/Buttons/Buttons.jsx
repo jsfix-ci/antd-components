@@ -22,7 +22,7 @@ export const AddButton = (props) => {
 
 export const EditButton = (props) => {
     const { color = 'blue', icon = 'edit' } = props;
-    return <Button icon={icon} color={color}  {...props} >Edit</Button>
+    return <Button icon={icon} color={color} {...props} >Edit</Button>
 };
 
 export const DeleteButton = (props) => {
