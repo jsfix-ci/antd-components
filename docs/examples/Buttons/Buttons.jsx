@@ -96,7 +96,6 @@ const Example1 = () => (
             onCopy={() => onCopy('<Button onClick={onClick} icon=\'bulb\'>Custom</Button>')}>
             <Button icon='bulb'>Custom</Button>
         </CopyToClipboard>
-
     </Fragment>
 );
 
@@ -138,8 +137,6 @@ const properties = [
     {property: 'color', description: 'optional color of the button', type: 'string'},
     {property: '(Inherited)', description: 'Ant design properties are inherited (see: https://ant.design/components/button/)'},
 ];
-
-
 
 // Example implementation
 const Example2 = () => (
@@ -197,11 +194,8 @@ const Example2 = () => (
             onCopy={() => onCopy('<Button color=\'#671089\' onClick={onClick} >Custom2</Button>')}>
             <Button color='#671089'>Custom2</Button>
         </CopyToClipboard>
-
     </Fragment>
 );
-
-
 
 // Code example
 // language=JS
