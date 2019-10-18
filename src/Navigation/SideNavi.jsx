@@ -2,20 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Navigation } from './Navigation';
 
-export const Flyout = (props) => {
+export const SideNavi = (props) => {
     const {...restProps} = props;
 
     return (
         <Navigation
-            mode="horizontal"
+            mode="inline"
             {...restProps}
         />
     );
 };
 
-Flyout.defaultProps = {};
+SideNavi.defaultProps = {};
 
-Flyout.propTypes = {
+SideNavi.propTypes = {
     routes: PropTypes.arrayOf(PropTypes.object),
     openSubmenus: PropTypes.oneOf(['selected', 'all'])
 };
+

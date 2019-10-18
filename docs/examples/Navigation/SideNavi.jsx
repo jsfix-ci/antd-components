@@ -1,31 +1,31 @@
 import React from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
-import { Flyout } from '../../../src';
+import { SideNavi } from '../../../src';
 
 // Example implementation
 const Example = () => {
     const routes = [
         {
-            key: 'flyout-home',
+            key: 'side-home',
             label: 'Home',
             icon: 'home',
-            path: '/Navigation/Flyout/Home',
+            path: '/Navigation/Side/Home',
             submenu: [
                 {
                     key: '11',
                     label: 'Submenu',
                     icon: 'usb',
-                    path: '/Navigation/Flyout/Home/Submenu',
+                    path: '/Navigation/Side/Home/Submenu',
                     submenu: [
                         {
                             key: '111',
                             label: 'Sub-Submenu',
-                            path: '/Navigation/Flyout/Home/Submenu/1',
+                            path: '/Navigation/Side/Home/Submenu/1',
                             submenu: [
                                 {
                                     key: '1111',
                                     label: 'Sub-Sub-Submenu',
-                                    path: '/Navigation/Flyout/Home/Submenu/1/1',
+                                    path: '/Navigation/Side/Home/Submenu/1/1',
                                 }
                             ]
                         }
@@ -35,7 +35,7 @@ const Example = () => {
                     key: '12',
                     label: 'Highlights',
                     icon: 'highlight',
-                    path: '/Navigation/Flyout/Home/Highlights',
+                    path: '/Navigation/Side/Home/Highlights',
                 },
                 {
                     key: '13',
@@ -44,38 +44,51 @@ const Example = () => {
                         {
                             key: '131',
                             label: 'Product 1',
-                            path: '/Navigation/Flyout/Home/Product1',
+                            path: '/Navigation/Side/Home/Product1',
                         },
                         {
                             key: '132',
                             label: 'Product 2',
-                            path: '/Navigation/Flyout/Home/Product2',
+                            path: '/Navigation/Side/Home/Product2',
                         }
                     ]
                 }
             ]
         },
         {
-            key: 'flyout-contact',
+            key: 'side-contact',
             label: 'Contact',
             icon: 'contacts',
-            path: '/Navigation/Flyout/Contact',
+            path: '/Navigation/Side/Contact',
+            submenu: [
+                {
+                    key: '21',
+                    label: 'Person 1',
+                    path: '/Navigation/Side/Contact/Person1',
+
+                },
+                {
+                    key: '22',
+                    label: 'Person 2',
+                    path: '/Navigation/Side/Contact/Person2',
+                }
+            ]
         },
         {
-            key: 'flyout-about',
+            key: 'side-about',
             label: 'About Us',
-            path: '/Navigation/Flyout/About-Us',
+            path: '/Navigation/Side/About-Us',
         },
         {
-            key: 'flyout-hidden',
+            key: 'side-hidden',
             label: 'I am hidden',
-            path: '/Navigation/Flyout/Hidden',
+            path: '/Navigation/Side/Hidden',
             hideInMenu: true
         }
     ];
 
     return (
-        <Flyout routes={routes} openSubmenus='selected'/>
+        <SideNavi routes={routes} openSubmenus='all'/>
     );
 };
 
@@ -83,31 +96,31 @@ const Example = () => {
 // language=JS
 const code = `
     import React from 'react';
-    import { Flyout } from '@react-hangar/antd-components';
+    import { SideNavi } from '@react-hangar/antd-components';
 
     const Example = () => {
         const routes = [
             {
-                key: 'flyout-home',
+                key: 'side-home',
                 label: 'Home',
                 icon: 'home',
-                path: '/Navigation/Flyout/Home',
+                path: '/Navigation/Side/Home',
                 submenu: [
                     {
                         key: '11',
                         label: 'Submenu',
                         icon: 'usb',
-                        path: '/Navigation/Flyout/Home/Submenu',
+                        path: '/Navigation/Side/Home/Submenu',
                         submenu: [
                             {
                                 key: '111',
                                 label: 'Sub-Submenu',
-                                path: '/Navigation/Flyout/Home/Submenu/1',
+                                path: '/Navigation/Side/Home/Submenu/1',
                                 submenu: [
                                     {
                                         key: '1111',
                                         label: 'Sub-Sub-Submenu',
-                                        path: '/Navigation/Flyout/Home/Submenu/1/1',
+                                        path: '/Navigation/Side/Home/Submenu/1/1',
                                     }
                                 ]
                             }
@@ -117,7 +130,7 @@ const code = `
                         key: '12',
                         label: 'Highlights',
                         icon: 'highlight',
-                        path: '/Navigation/Flyout/Home/Highlights',
+                        path: '/Navigation/Side/Home/Highlights',
                     },
                     {
                         key: '13',
@@ -126,38 +139,38 @@ const code = `
                             {
                                 key: '131',
                                 label: 'Product 1',
-                                path: '/Navigation/Flyout/Home/Product1',
+                                path: '/Navigation/Side/Home/Product1',
                             },
                             {
                                 key: '132',
                                 label: 'Product 2',
-                                path: '/Navigation/Flyout/Home/Product2',
+                                path: '/Navigation/Side/Home/Product2',
                             }
                         ]
                     }
                 ]
             },
             {
-                key: 'flyout-contact',
+                key: 'side-contact',
                 label: 'Contact',
                 icon: 'contacts',
-                path: '/Navigation/Flyout/Contact',
+                path: '/Navigation/Side/Contact',
             },
             {
-                key: 'flyout-about',
+                key: 'side-about',
                 label: 'About Us',
-                path: '/Navigation/Flyout/About-Us',
+                path: '/Navigation/Side/About-Us',
             },
             {
-                key: 'flyout-hidden',
+                key: 'side-hidden',
                 label: 'I am hidden',
-                path: '/Navigation/Flyout/Hidden',
+                path: '/Navigation/Side/Hidden',
                 hideInMenu: true
             }
         ];
 
         return (
-            <Flyout routes={routes} openSubmenus='selected'/>
+            <SideNavi routes={routes} openSubmenus='all'/>
         );
     };
 
@@ -176,7 +189,7 @@ const properties = [
 ];
 
 export default () => (
-    <ComponentDisplay title={'Flyout'} code={code} properties={properties}>
+    <ComponentDisplay title={'Side Navi'} code={code} properties={properties}>
         <Example/>
     </ComponentDisplay>
 );

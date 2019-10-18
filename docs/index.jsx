@@ -5,8 +5,20 @@ import 'antd/dist/antd.css';
 import { Row, Col } from 'antd';
 import { CustomCol, Wrapper } from './components/utils';
 import { routes } from './routes';
-import { Sider } from './Menu';
+import { Menu } from './Menu';
 import { Display1 } from '../src';
+
+export const renderRoutes = (routesArr) => (
+    routesArr.map(route => {
+        const {submenu} = route;
+
+        if (submenu) {
+            return renderRoutes(submenu);
+        }
+
+        return <Route {...route} />;
+    })
+);
 
 ReactDOM.render(
     <Router>
@@ -16,17 +28,13 @@ ReactDOM.render(
         <Row>
             <Col
                 xs={24}
-                md={6}>
-                <Sider/>
+                md={5}>
+                <Menu/>
             </Col>
             <CustomCol>
                 <Wrapper className={'markdown-body'}>
                     <Switch>
-                        {
-                            routes.map(route => (
-                                <Route {...route} />
-                            ))
-                        }
+                        {renderRoutes(routes)}
                     </Switch>
                 </Wrapper>
             </CustomCol>

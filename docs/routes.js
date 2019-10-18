@@ -2,8 +2,9 @@ import { NotFound } from './pages/NotFound';
 import { Home } from './pages/Home';
 import { Typography } from './pages/Typography';
 import { Form } from './pages/Form';
-import { Grid } from './pages/Grid';
-import { Navigation } from './pages/Navigation';
+import {FlyoutNavigationComponent, SideNavigationComponent} from './pages/Navigation';
+import {DataGridComponent, FormGridComponent} from './pages/Grid';
+import { Buttons } from './pages/Buttons';
 
 export const routes = [
     {
@@ -12,6 +13,12 @@ export const routes = [
         exact: true,
         path: '/',
         component: Home
+    },
+    {
+        key: 'buttons',
+        label: 'Buttons',
+        path: '/Buttons',
+        component: Buttons
     },
     {
         key: 'typography',
@@ -29,13 +36,39 @@ export const routes = [
         key: 'grid',
         label: 'Grid',
         path: '/Grid',
-        component: Grid
+        submenu: [
+            {
+                key: 'dataGrid',
+                label: 'Data Grid',
+                path: '/Navigation/DataGrid',
+                component: DataGridComponent
+            },
+            {
+                key: 'formGrid',
+                label: 'Form Grid',
+                path: '/Navigation/FormGrid',
+                component: FormGridComponent
+            }
+        ],
     },
     {
         key: 'navigation',
         label: 'Navigation',
         path: '/Navigation',
-        component: Navigation
+        submenu: [
+            {
+                key: 'flyout',
+                label: 'Flyout',
+                path: '/Navigation/Flyout',
+                component: FlyoutNavigationComponent
+            },
+            {
+                key: 'side',
+                label: 'Side Navi',
+                path: '/Navigation/Side',
+                component: SideNavigationComponent
+            }
+        ],
     },
     {
         key: 'notfound',

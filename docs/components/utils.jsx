@@ -9,7 +9,7 @@ import Normalizer from 'prismjs/plugins/normalize-whitespace/prism-normalize-whi
 export * from './PropertyTable';
 
 export const Wrapper = styled.div`
-    margin: 0 15px;
+    margin: 0 30px;
 `;
 
 const StyledPrismCode = styled(PrismCode)`
@@ -21,7 +21,7 @@ export const CustomCol = (props) => (
         xs={24}
         md={18}
         xl={16}
-        xxl={12}
+        xxl={17}
         {...props}
     />
 );

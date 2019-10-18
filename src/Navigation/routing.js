@@ -26,3 +26,24 @@ export const getActiveRoutes = (routes, location) => {
 
     return activeRoutes;
 };
+
+export const getAllSubmenuRoutes = (routes) => {
+    let activeRoutes = [];
+
+    routes.forEach(route => {
+        const subitem = route.submenu || route.group;
+
+        if (subitem) {
+            if (route.submenu) {
+                activeRoutes.push(route.key);
+            }
+
+            activeRoutes = [
+                ...activeRoutes,
+                ...getAllSubmenuRoutes(subitem)
+            ];
+        }
+    });
+
+    return activeRoutes;
+};
