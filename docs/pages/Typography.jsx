@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
-import { Display3 } from '../../src';
+import { Display2 } from '../../src';
 import Display from '../examples/Typography/Display';
 
 export const Typography = (props) => {
     return (
         <Fragment>
-            <Display3>Typography</Display3>
+            <Display2>Typography</Display2>
             <Display />
         </Fragment>
     );

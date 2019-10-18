@@ -6,7 +6,7 @@ import { Row, Col } from 'antd';
 import { CustomCol, Wrapper } from './components/utils';
 import { routes } from './routes';
 import { Menu } from './Menu';
-import { Display2 } from '../src';
+import { Display1 } from '../src';
 
 export const renderRoutes = (routesArr) => (
     routesArr.map(route => {
@@ -23,7 +23,7 @@ export const renderRoutes = (routesArr) => (
 ReactDOM.render(
     <Router>
         <Row>
-            <Col><Display2 className={'text-center'}>Ant Design Components</Display2></Col>
+            <Col><Display1 className={'text-center'}>Ant Design Components</Display1></Col>
         </Row>
         <Row>
             <Col

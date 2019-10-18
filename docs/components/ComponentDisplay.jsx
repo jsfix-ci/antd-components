@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Code, normalizeWhitespace, PropertyTable } from './utils';
+import { Code, PropertyTable } from './utils';
 import { Display3 } from '../../src';
 
 const ExampleContent = styled.div`

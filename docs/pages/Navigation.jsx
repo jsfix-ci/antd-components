@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Display3 } from '../../src';
+import { Display2 } from '../../src';
 import Flyout from '../examples/Navigation/Flyout';
 import SideNavi from '../examples/Navigation/SideNavi';
 
@@ -9,7 +9,7 @@ import SideNavi from '../examples/Navigation/SideNavi';
 export const FlyoutNavigationComponent = () => {
     return (
         <Fragment>
-            <Display3>Flyout Navigation</Display3>
+            <Display2>Navigation / Flyout</Display2>
             <Flyout/>
         </Fragment>
     );
@@ -21,7 +21,7 @@ export const FlyoutNavigationComponent = () => {
 export const SideNavigationComponent = () => {
     return (
         <Fragment>
-            <Display3>Side Navigation</Display3>
+            <Display2>Navigation / Side Navi</Display2>
             <SideNavi/>
         </Fragment>
     );

@@ -168,7 +168,7 @@ const properties = [
 ];
 
 export default () => (
-    <ComponentDisplay title={'Types'} code={code} properties={properties}>
+    <ComponentDisplay title={'Form Grid'} code={code} properties={properties}>
         <Example/>
     </ComponentDisplay>
 );

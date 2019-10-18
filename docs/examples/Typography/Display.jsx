@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
-import { Display1, Display2, Display3, Display4 } from '../../../src';
+import { Display1, Display2, Display3 } from '../../../src';
 
 // Example implementation
 const Example = () => (
@@ -8,7 +8,6 @@ const Example = () => (
         <Display1>Display 1</Display1>
         <Display2>Display 2</Display2>
         <Display3>Display 3</Display3>
-        <Display4>Display 4</Display4>
     </Fragment>
 );
 
@@ -24,7 +23,6 @@ const code = `
                 <Display1>Display 1</Display1>
                 <Display2>Display 2</Display2>
                 <Display3>Display 3</Display3>
-                <Display4>Display 4</Display4>
             </Fragment>
         );
     };

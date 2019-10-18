@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Display3 } from '../../src';
+import { Display2 } from '../../src';
 import DataGrid from '../examples/Grid/DataGrid';
 import FormGrid from '../examples/Grid/FormGrid';
 
@@ -9,7 +9,7 @@ import FormGrid from '../examples/Grid/FormGrid';
 export const DataGridComponent = () => {
     return (
         <Fragment>
-            <Display3>Data Grid</Display3>
+            <Display2>Grid / Data Grid</Display2>
             <DataGrid />
         </Fragment>
     );
@@ -21,7 +21,7 @@ export const DataGridComponent = () => {
 export const FormGridComponent = () => {
     return (
         <Fragment>
-            <Display3>Form Grid</Display3>
+            <Display2>Grid / Form Grid</Display2>
             <FormGrid />
         </Fragment>
     );
