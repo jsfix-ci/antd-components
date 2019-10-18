@@ -28,7 +28,7 @@ const ExampleContent = styled.div`
  */
 export const ComponentDisplay = ({title, code, properties, children}) => {
     return (
-        <Fragment>
+        <div style={{marginBottom: 80}}>
             <Display3>{title}</Display3>
             <ExampleContent>{children}</ExampleContent>
             {
@@ -37,7 +37,7 @@ export const ComponentDisplay = ({title, code, properties, children}) => {
             {
                 properties ? <PropertyTable dataSource={properties}/> : null
             }
-        </Fragment>
+        </div>
     );
 };
 
