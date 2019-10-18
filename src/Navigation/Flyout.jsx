@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
 import { Navigation } from './Navigation';
 
-export const Flyout = withRouter((props) => {
+export const Flyout = (props) => {
     const {...restProps} = props;
 
     return (
@@ -12,7 +11,7 @@ export const Flyout = withRouter((props) => {
             {...restProps}
         />
     );
-});
+};
 
 Flyout.defaultProps = {};
 
