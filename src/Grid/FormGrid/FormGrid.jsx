@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Table from 'antd/lib/table';
 import { Column } from './Column';
 import { message, Form } from 'antd';
-import { Button, AddButton, DeleteButton, EditButton } from '../..';
+import { AddButton, DeleteButton, EditButton, BackButton, SaveButton } from '../..';
 import { renderForm } from '../renderer';
 
 /**
@@ -17,7 +17,6 @@ export const FormGrid = Form.create()((props) => {
     const [isEditing, setEditing] = useState(false);
     const [record, setRecord] = useState({});
     const [data, setData] = useState(dataSource);
-
 
     let selected = [];
 
@@ -91,16 +90,29 @@ export const FormGrid = Form.create()((props) => {
                 return data;
             }
         })
-        (props =>
-            (
-                <Fragment>
-                    <Button onClick={() => setEditing(false)} icon={'left'}>Back</Button>
-                <Form>
-                    {renderForm(props, children)}
-                    <Button icon={'save'}>Save</Button>
-                </Form>
-                </Fragment>
-            )
+        (props => {
+                const { form } = props;
+
+                const onSaveClick = () => {
+                    form.validateFields((error, data) => {
+                        if (error) {
+                            return message.error('form validation failed');
+                        }
+
+                        console.log(data);
+                    });
+                };
+
+                return (
+                    <Fragment>
+                        <BackButton onClick={() => setEditing(false)}/>
+                        <Form>
+                            {renderForm(props, children)}
+                            <SaveButton onClick={onSaveClick}/>
+                        </Form>
+                    </Fragment>
+                );
+            }
         );
 
         return <FormWrapper {...record}/>;
