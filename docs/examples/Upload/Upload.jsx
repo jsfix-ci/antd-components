@@ -100,7 +100,7 @@ const code = `
 const properties = [
     {property: 'type', description: 'file[file/txt,file/exe,...], image[image/jpeg,image/png,...]', type: 'string'},
     {property: 'data', description: 'sets default values', type: 'array'},
-    {property: 'customRequestData', description: 'passes custom data to request', type: 'object'},
+    {property: 'customRequestData', description: '(optional) passes custom data to request', type: 'object'},
     {property: 'action', description: 'api url e.g. /path/upload', type: 'string'},
     {property: 'multiple', description: 'for uploading multiple files or images', type: 'string'},
     {property: 'onUploaded', description: 'function that returns response after upload', type: 'function'},
