@@ -108,7 +108,7 @@ const properties = [
 
 export default () => (
     <Fragment>
-        <ComponentDisplay title={'Colors'} code={code} properties={properties}>
+        <ComponentDisplay title={'Files / Images'} code={code} properties={properties}>
             <Example/>
         </ComponentDisplay>
     </Fragment>

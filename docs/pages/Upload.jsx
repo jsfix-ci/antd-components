@@ -8,7 +8,7 @@ import ImageUploadComponent from "../examples/Upload/Upload";
 export const Upload = () => {
     return (
         <Fragment>
-            <Display2>Buttons</Display2>
+            <Display2>Upload</Display2>
             <ImageUploadComponent />
         </Fragment>
     );
