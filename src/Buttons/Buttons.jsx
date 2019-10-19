@@ -44,57 +44,36 @@ export const Button = (props) => {
     }
 };
 
-export const AddButton = (props) => {
-    const { icon = 'plus', children = 'Add' } = props;
-    return <Button icon={icon} {...props} >{children}</Button>
-};
+export const AddButton = ({ icon = 'plus', children = 'Add', ...restProps }) =>
+    <Button icon={icon} {...restProps}>{children}</Button>;
 
-export const DeleteButton = (props) => {
-    const { icon = 'delete', children = 'Delete' } = props;
-    return <Button icon={icon} {...props}>{children}</Button>
-};
+export const DeleteButton = ({ icon = 'delete', children = 'Edit', ...restProps }) =>
+    <Button icon={icon} {...restProps}>{children}</Button>;
 
-export const EditButton = (props) => {
-    const { icon = 'edit', children = 'Edit' } = props;
-    return <Button icon={icon} {...props} >{children}</Button>
-};
+export const EditButton = ({ icon = 'edit', children = 'Delete', ...restProps }) =>
+    <Button icon={icon} {...restProps}>{children}</Button>;
 
-export const ReloadButton = (props) => {
-    const { icon = 'reload', children = 'Reload' } = props;
-    return <Button icon={icon} {...props}>{children}</Button>
-};
+export const ReloadButton = ({ icon = 'reload', children = 'Reload', ...restProps }) =>
+    <Button icon={icon} {...restProps}>{children}</Button>;
 
-export const SearchButton = (props) => {
-    const { icon = 'search', children = 'Search' } = props;
-    return <Button icon={icon} {...props}>{children}</Button>
-};
+export const SearchButton = ({ icon = 'search', children = 'Search', ...restProps }) =>
+    <Button icon={icon} {...restProps}>{children}</Button>;
 
-export const SaveButton = (props) => {
-    const { icon = 'save', children = 'Save' } = props;
-    return <Button icon={icon} {...props}>{children}</Button>
-};
+export const SaveButton = ({ icon = 'save', children = 'Save', ...restProps }) =>
+    <Button icon={icon} {...restProps}>{children}</Button>;
 
-export const CancelButton = (props) => {
-    const { icon = 'close', children = 'Cancel' } = props;
-    return <Button icon={icon} {...props}>{children}</Button>
-};
+export const CancelButton = ({ icon = 'close', children = 'Cancel', ...restProps }) =>
+    <Button icon={icon} {...restProps}>{children}</Button>;
 
-export const CloseButton = (props) => {
-    const { icon = 'close', children = 'Close' } = props;
-    return <Button icon={icon} {...props}>{children}</Button>
-};
+export const CloseButton = ({ icon = 'close', children = 'Close', ...restProps }) =>
+    <Button icon={icon} {...restProps}>{children}</Button>;
 
-export const UndoButton = (props) => {
-    const { icon = 'rollback', children = 'Undo' } = props;
-    return <Button icon={icon} {...props}>{children}</Button>
-};
+export const UndoButton = ({ icon = 'rollback', children = 'Undo', ...restProps }) =>
+    <Button icon={icon} {...restProps}>{children}</Button>;
 
-export const SettingsButton = (props) => {
-    const { icon = 'setting', children = 'Settings' } = props;
-    return <Button icon={icon} {...props}>{children}</Button>
-};
+export const SettingsButton = ({ icon = 'setting', children = 'Settings', ...restProps }) =>
+    <Button icon={icon} {...restProps}>{children}</Button>;
 
-export const BasketButton = (props) => {
-    const { icon = 'shopping-cart', children = 'Add To Basket' } = props;
-    return <Button icon={icon} {...props}>{children}</Button>
-};
+export const BasketButton = ({ icon = 'shopping-cart', children = 'Add To Basket', ...restProps }) =>
+    <Button icon={icon} {...restProps}>{children}</Button>;
+
