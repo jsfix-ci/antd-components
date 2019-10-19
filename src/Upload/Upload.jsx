@@ -61,14 +61,15 @@ export const Upload = (props) => {
     }
 
     const onChangeData = info => {
+
+        onChange(info);
+
         if (info.file.status === 'uploading') {
             return;
         }
         if (info.file.status === 'done') {
             onUploaded(info.file.response);
         }
-
-        onChange(info);
     };
 
     return (
