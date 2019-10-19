@@ -50,6 +50,9 @@ export const EditButton = ({ icon = 'edit', children = 'Edit', ...restProps }) =
 export const ReloadButton = ({ icon = 'reload', children = 'Reload', ...restProps }) =>
     <Button icon={icon} {...restProps}>{children}</Button>;
 
+export const BackButton = ({ icon = 'left', children = 'Back', ...restProps }) =>
+    <Button icon={icon} {...restProps}>{children}</Button>;
+
 export const SearchButton = ({ icon = 'search', children = 'Search', ...restProps }) =>
     <Button icon={icon} {...restProps}>{children}</Button>;
 
