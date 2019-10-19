@@ -77,21 +77,6 @@
     }
 }
 
-.hangar-btn-color-purple {
-    background-color: #ae008f;
-    color: #fff;
-    &:hover {
-        color: #fff;
-        background-color: #86006c;
-        border: 1px solid #86006c;
-    }
-    &:focus {
-        color: #fff;
-        background-color: #86006c;
-        border: 1px solid #86006c;
-    }
-}
-
 .hangar-btn-color-pink {
     background-color: #e56dba;
     color: #fff;
@@ -104,21 +89,6 @@
         color: #fff;
         background-color: #be5b9a;
         border: 1px solid #be5b9a;
-    }
-}
-
-.hangar-btn-color-deeppink {
-    background-color: #e820a1;
-    color: #fff;
-    &:hover {
-        color: #fff;
-        background-color: #ba1980;
-        border: 1px solid #ba1980;
-    }
-    &:focus {
-        color: #fff;
-        background-color: #ba1980;
-        border: 1px solid #ba1980;
     }
 }
 
@@ -137,21 +107,6 @@
     }
 }
 
-.hangar-btn-color-grey {
-    background-color: #888181;
-    color: #fff;
-    &:hover {
-        color: #fff;
-        background-color: #696464;
-        border: 1px solid #696464;
-    }
-    &:focus {
-        color: #fff;
-        background-color: #696464;
-        border: 1px solid #696464;
-    }
-}
-
 .hangar-btn-color-black {
     background-color: #111111;
     color: #fff;
@@ -166,7 +121,3 @@
         border: 1px solid #080808;
     }
 }
-
-
-
-
