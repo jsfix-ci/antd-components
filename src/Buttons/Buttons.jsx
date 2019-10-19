@@ -14,13 +14,7 @@ export const Button = (props) => {
                 background-color: ${color};
                 color: ${invert(color, true)};
                 margin: 3px;
-                &:hover {
-                    background-color: ${color};
-                    color: ${invert(color, true)};
-                    filter: brightness(90%);
-                    border: 1px solid ${color}
-                }
-                &:focus {
+                &:hover, &:focus {
                     background-color: ${color};
                     color: ${invert(color, true)};
                     filter: brightness(90%);
