@@ -4,6 +4,7 @@ import { Typography } from './pages/Typography';
 import { Form } from './pages/Form';
 import {FlyoutNavigationComponent, SideNavigationComponent} from './pages/Navigation';
 import {DataGridComponent, FormGridComponent} from './pages/Grid';
+import {Upload} from './pages/Upload';
 import { Buttons } from './pages/Buttons';
 
 export const routes = [
@@ -31,6 +32,12 @@ export const routes = [
         label: 'Form',
         path: '/Form',
         component: Form
+    },
+    {
+        key: 'upload',
+        label: 'Upload',
+        path: '/Upload',
+        component: Upload
     },
     {
         key: 'grid',

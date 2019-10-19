@@ -12,7 +12,8 @@ import {
     UndoButton,
     SettingsButton,
     BasketButton,
-    SaveButton
+    SaveButton,
+    UploadButton
 } from '../../../src';
 import {message} from "antd";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
@@ -92,6 +93,12 @@ const Example = () => (
         </CopyToClipboard>
 
         <CopyToClipboard
+            text={'<UploadButton onClick={onClick}/>'}
+            onCopy={() => onCopy('<UploadButton onClick={onClick}/>')}>
+            <UploadButton />
+        </CopyToClipboard>
+
+        <CopyToClipboard
             text={'<Button onClick={onClick} icon=\'bulb\'>Custom</Button>'}
             onCopy={() => onCopy('<Button onClick={onClick} icon=\'bulb\'>Custom</Button>')}>
             <Button icon='bulb'>Custom</Button>
@@ -123,6 +130,7 @@ const code = `
                 <UndoButton onClick={onClick} />
                 <SettingsButton onClick={onClick} />
                 <BasketButton onClick={onClick} />
+                <UploadButton onClick={onClick} />
                 <Button onClick={onClick} icon='bulb'>Custom</Button>
             </Fragment>
         );
