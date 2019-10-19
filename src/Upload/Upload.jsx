@@ -31,7 +31,17 @@ const validate = (type) => {
 };
 
 export const Upload = (props) => {
-    let {onUploaded = () => {}, data = [], customRequestData, listType = '', action = '', type = 'file', children = 'Upload', ...restProps} = props;
+    let {
+        onUploaded = () => {},
+        onChange = () => {},
+        data = [],
+        customRequestData,
+        listType = '',
+        action = '',
+        type = 'file',
+        children = 'Upload',
+        ...restProps
+    } = props;
 
     let StyledUpload = AntdUpload;
 
@@ -50,13 +60,15 @@ export const Upload = (props) => {
         `;
     }
 
-    const onChange = info => {
+    const onChangeData = info => {
         if (info.file.status === 'uploading') {
             return;
         }
         if (info.file.status === 'done') {
             onUploaded(info.file.response);
         }
+
+        onChange(info);
     };
 
     return (
@@ -65,7 +77,7 @@ export const Upload = (props) => {
             action={action}
             listType={listType}
             beforeUpload={validate(type)}
-            onChange={onChange}
+            onChange={onChangeData}
             data={customRequestData}
             {...restProps}
         >
