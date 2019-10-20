@@ -48,7 +48,7 @@ export const Upload = (props) => {
     let {
         onUploaded = () => {},
         onChange = () => {},
-        defaults = [],
+        defaultFileList = [],
         customRequestData,
         listType = '',
         action = '',
@@ -57,11 +57,11 @@ export const Upload = (props) => {
         ...restProps
     } = props;
 
-    defaults.map((rec, idx) => {
+    defaultFileList.map((rec, idx) => {
         return rec.uid = idx;
     });
 
-    listType = getListType(type, listType);
+    listType = getListType(type);
 
     const onChangeData = info => {
 
@@ -78,7 +78,7 @@ export const Upload = (props) => {
     return (
         <AntdUpload
             className='hangar-upload'
-            defaultFileList={[...defaults]}
+            defaultFileList={[...defaultFileList]}
             action={action}
             listType={listType}
             beforeUpload={validate(type)}

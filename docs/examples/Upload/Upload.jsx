@@ -3,7 +3,7 @@ import { ComponentDisplay } from '../../components/ComponentDisplay';
 import { Upload } from '../../../src';
 import {Divider} from 'antd';
 
-const defaults = [
+const defaultFileList = [
     {
         name: 'xxx.png',
         url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
@@ -37,7 +37,7 @@ const Example = () => (
         <label>Whitelisted file types with default data</label><br />
         <Upload
             type={{image: ['jpeg', 'png']}}
-            defaults={defaults}
+            defaultFileList={defaultFileList}
             multiple
             action={action}
             onUploaded={onUploaded}
@@ -56,7 +56,7 @@ const code = `
     import React, {Fragment} from 'react';
     import { Upload } from '@react-hangar/antd-components';
 
-    const defaults = [
+    const defaultFileList = [
         {
             name: 'xxx.png',
             url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
@@ -83,8 +83,8 @@ const code = `
                 <Upload type='file' action={action} />                        
                 <Upload type='image' action={action} multiple>Upload Images</Upload>
                 <Upload 
-                    type={image: ['jpeg', 'png']} 
-                    defaults={defaults}
+                    type={{image: ['jpeg', 'png']}} 
+                    defaultFileList={defaultFileList}
                     action={action}
                     onUploaded={onUploaded}
                     multiple
