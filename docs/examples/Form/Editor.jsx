@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
 import { Editor } from '../../../src';
 
@@ -38,14 +38,12 @@ const description = `You have to include this line of code in the <head> of your
                 <script src="dist/tinymce/tinymce.min.js"></script>`;
 
 export default () => (
-    <Fragment>
-        <ComponentDisplay
-            title={'Editor'}
-            description={description}
-            code={code}
-            properties={properties}
-        >
-            <Example/>
-        </ComponentDisplay>
-    </Fragment>
+    <ComponentDisplay
+        title={'Editor'}
+        description={description}
+        code={code}
+        properties={properties}
+    >
+        <Example/>
+    </ComponentDisplay>
 );
