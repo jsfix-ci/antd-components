@@ -42,6 +42,8 @@ const validate = (type) => {
             }
         };
     }
+
+    return true;
 };
 
 export const Upload = (props) => {
