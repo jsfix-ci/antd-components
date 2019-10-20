@@ -83,7 +83,7 @@ const code = `
                 <Upload type='file' action={action} />                        
                 <Upload type='image' action={action} multiple>Upload Images</Upload>
                 <Upload 
-                    type='image[image/jpeg,image/png]' 
+                    type={image: ['jpeg', 'png']} 
                     defaults={defaults}
                     action={action}
                     onUploaded={onUploaded}
