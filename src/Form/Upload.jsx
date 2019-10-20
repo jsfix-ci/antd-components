@@ -2,6 +2,7 @@ import React from 'react';
 import {UploadButton} from '../index';
 import AntdUpload from 'antd/lib/upload/Upload';
 import message from 'antd/lib/message';
+import PropTypes from "prop-types";
 
 import './Upload.scss';
 
@@ -38,25 +39,27 @@ const validate = (type) => {
         };
     }
 
-    return true;
+    return  () => {return true};
 };
 
 export const Upload = (props) => {
     let {
-        onUploaded = () => {},
-        onChange = () => {},
-        defaultFileList = [],
+        onUploaded,
+        onChange,
+        defaultFileList,
         customRequestData,
-        listType = '',
-        action = '',
-        type = '',
-        children = 'Upload',
+        listType,
+        action,
+        type,
+        children,
         ...restProps
     } = props;
 
-    defaultFileList.map((rec, idx) => {
-        return rec.uid = idx;
-    });
+    if (defaultFileList) {
+        defaultFileList.map((rec, idx) => {
+            return rec.uid = idx;
+        });
+    }
 
     listType = getListType(type);
 
@@ -86,4 +89,22 @@ export const Upload = (props) => {
             <UploadButton> {children} </UploadButton>
         </AntdUpload>
     );
+};
+
+Upload.defaultProps = {
+    children: 'Upload',
+    defaultFileList: [],
+    onChange: () => {},
+    onUploaded: () => {}
+};
+
+Upload.propTypes = {
+    listType: PropTypes.string,
+    children: PropTypes.string,
+    type: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    action: PropTypes.string,
+    customRequestData: PropTypes.object,
+    defaultFileList: PropTypes.arrayOf(PropTypes.object),
+    onUploaded: PropTypes.func,
+    onChange: PropTypes.func
 };

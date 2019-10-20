@@ -104,7 +104,7 @@ const code = `
 // Component props
 const properties = [
     {property: 'type', description: "'file', 'image' | {image: ['jpeg', 'png']}, {file: ['txt', 'dll']}", type: 'string | array[object]'},
-    {property: 'data', description: 'sets default values', type: 'array'},
+    {property: 'defaultFileList', description: 'sets default values', type: 'array'},
     {property: 'customRequestData', description: '(optional) passes custom data to request', type: 'object'},
     {property: 'action', description: 'api url e.g. /path/upload', type: 'string'},
     {property: 'multiple', description: 'for uploading multiple files or images', type: 'string'},
