@@ -36,6 +36,8 @@ const validate = (type) => {
                 message.error('You can only upload "' + fileTypes + '" files!', 8);
                 return false;
             }
+
+            return true;
         };
     }
 
