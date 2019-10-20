@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Display2 } from '../../src';
 import DynamicFormItem from '../examples/Form/DynamicFormItem';
 import Editor from '../examples/Form/Editor';
-import Upload from "../examples/Upload/Upload";
+import Upload from "../examples/Form/Upload";
 
 /**
  * @return {React.Component}

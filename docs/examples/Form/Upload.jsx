@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
-import { Upload } from '../../../src';
+import { Upload } from '../../../src/index';
 import {Divider} from 'antd';
 
 const defaultFileList = [
