@@ -66,6 +66,8 @@ const Example = () => {
         setData(data.filter( rec => !rows.includes(rec)));
     };
 
+    const imageConfig = {action: '/path/upload', type: {image: ['jpg', 'png']}};
+
     return (
         <FormGrid
             dataSource={data}
@@ -77,7 +79,7 @@ const Example = () => {
         >
             <Column title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30}/>
             <Column title={'Content'} dataIndex={'html'} fieldType={'html'}/>
-            <Column title={'Image'} dataIndex={'image'} fieldType={'image'} config={{action: '/path/upload'}}/>
+            <Column title={'Image'} dataIndex={'image'} fieldType={'image'} config={imageConfig}/>
             <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'}/>
             <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
         </FormGrid>
@@ -155,6 +157,8 @@ const code = `
             })
         };
         
+        const imageConfig = {action: '/path/upload', type: {image: ['jpg', 'png']}};
+        
         return (
                <FormGrid
                     dataSource={data}
@@ -166,7 +170,7 @@ const code = `
                 >
                     <Column title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30}/>
                     <Column title={'Content'} dataIndex={'html'} fieldType={'html'}/>
-                    <Column title={'Image'} dataIndex={'image'} fieldType={'image'} config={{action: '/path/upload'}}/>
+                    <Column title={'Image'} dataIndex={'image'} fieldType={'image'} config={imageConfig}/>
                     <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'}/>
                     <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
             </FormGrid>
