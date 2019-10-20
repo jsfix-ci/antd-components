@@ -1,29 +1,43 @@
 import React from 'react';
 import {UploadButton} from '..';
-import styled from 'styled-components';
 import AntdUpload from 'antd/lib/upload/Upload';
 import message from 'antd/lib/message';
 
-const hasFileTypes = (type) => {
-    return type.indexOf('[') !== -1;
+import './Upload.scss';
+
+const getListType = (type) => {
+    if (typeof type === 'object') {
+        if (type.image) {
+            return 'picture';
+        }
+
+    } else if (typeof type === 'string') {
+        if (type === 'image') {
+            return 'picture';
+        }
+    }
 };
 
 const getFileTypes = (type) => {
-    return type.substring(type.indexOf('[') + 1, type.length - 1).split(',');
+    if (typeof type === 'object') {
+        if (type.image) {
+            return type.image;
+        } else if (type.file) {
+            return type.file;
+        } else {
+            message.error('invalid type. see property description in docs. ');
+        }
+    }
 };
 
 const validate = (type) => {
+    let fileTypes = getFileTypes(type);
 
-    let fileTypes = '';
-
-    if (hasFileTypes(type)) {
-        fileTypes = getFileTypes(type);
-    }
-
-    if (fileTypes.length > 0) {
+    if (fileTypes && fileTypes.length > 0) {
         return (file) => {
-            if (!fileTypes.includes(file.type)) {
-                message.error('You can only upload ' + fileTypes + ' file!', 8);
+            let needle = file.type.replace('image/', '').replace('file/', '');
+            if (!fileTypes.includes(needle)) {
+                message.error('You can only upload "' + fileTypes + '" files!', 8);
                 return false;
             }
         };
@@ -34,31 +48,20 @@ export const Upload = (props) => {
     let {
         onUploaded = () => {},
         onChange = () => {},
-        data = [],
+        defaults = [],
         customRequestData,
         listType = '',
         action = '',
-        type = 'file',
+        type = '',
         children = 'Upload',
         ...restProps
     } = props;
 
-    let StyledUpload = AntdUpload;
-
-    data.map((rec, idx) => {
+    defaults.map((rec, idx) => {
         return rec.uid = idx;
     });
 
-    if (type.indexOf('image') !== -1) {
-        listType = 'picture';
-        StyledUpload = styled(AntdUpload)`                     
-            .ant-upload-list-item {
-                float: left;
-                width: 200px;
-                margin-right: 8px;
-            }
-        `;
-    }
+    listType = getListType(type, listType);
 
     const onChangeData = info => {
 
@@ -73,8 +76,9 @@ export const Upload = (props) => {
     };
 
     return (
-        <StyledUpload
-            defaultFileList={[...data]}
+        <AntdUpload
+            className='hangar-upload'
+            defaultFileList={[...defaults]}
             action={action}
             listType={listType}
             beforeUpload={validate(type)}
@@ -83,6 +87,6 @@ export const Upload = (props) => {
             {...restProps}
         >
             <UploadButton> {children} </UploadButton>
-        </StyledUpload>
+        </AntdUpload>
     );
 };

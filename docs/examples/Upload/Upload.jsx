@@ -3,7 +3,7 @@ import { ComponentDisplay } from '../../components/ComponentDisplay';
 import {Upload} from '../../../src/Upload/Upload';
 import {Divider, message} from 'antd';
 
-const data = [
+const defaults = [
     {
         name: 'xxx.png',
         url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
@@ -17,27 +17,29 @@ const data = [
 ];
 
 const onUploaded = (response) => {
-    message.info(response);
+    console.log(response);
 };
+
+const action = 'https://garic.docker.local/upload/create';
 
 // Example implementation
 const Example = () => (
     <Fragment>
         <label>Image Upload</label><br />
-        <Upload type='image' />
+        <Upload action={action} type='image' />
         <Divider dashed />
         <label>File Upload</label><br />
-        <Upload />
+        <Upload action={action} />
         <Divider dashed />
         <label>Upload Multiple Images</label><br />
-        <Upload type='image' multiple>Upload Images</Upload>
+        <Upload type='image' action={action} multiple>Upload Images</Upload>
         <Divider dashed />
         <label>Whitelisted file types with default data</label><br />
         <Upload
-            type='image[image/jpeg,image/png]'
-            data={data}
+            type={{image: ['jpeg', 'png']}}
+            defaults={defaults}
             multiple
-            action='https://garic.docker.local/upload/create'
+            action={action}
             onUploaded={onUploaded}
             customRequestData={{
                 whatever: 'extra data you want to pass'
@@ -54,7 +56,7 @@ const code = `
     import React, {Fragment} from 'react';
     import { Upload } from '@react-hangar/antd-components';
 
-    const data = [
+    const defaults = [
         {
             name: 'xxx.png',
             url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
@@ -72,15 +74,18 @@ const code = `
     };
 
     const Example = () => {
+    
+        const action = '/path/upload';
+    
         return (
            <Fragment>
-                <Upload type='image' />
-                <Upload type='file' />                        
-                <Upload type='image' multiple>Upload Images</Upload>
+                <Upload type='image' action={action} />
+                <Upload type='file' action={action} />                        
+                <Upload type='image' action={action} multiple>Upload Images</Upload>
                 <Upload 
                     type='image[image/jpeg,image/png]' 
-                    data={data}
-                    action='https://garic.docker.local/upload/create'
+                    defaults={defaults}
+                    action={action}
                     onUploaded={onUploaded}
                     multiple
                     customRequestData={{
@@ -98,7 +103,7 @@ const code = `
 
 // Component props
 const properties = [
-    {property: 'type', description: 'file[file/txt,file/exe,...], image[image/jpeg,image/png,...]', type: 'string'},
+    {property: 'type', description: "'file', 'image' | {image: ['jpeg', 'png']}, {file: ['txt', 'dll']}", type: 'string | array[object]'},
     {property: 'data', description: 'sets default values', type: 'array'},
     {property: 'customRequestData', description: '(optional) passes custom data to request', type: 'object'},
     {property: 'action', description: 'api url e.g. /path/upload', type: 'string'},
