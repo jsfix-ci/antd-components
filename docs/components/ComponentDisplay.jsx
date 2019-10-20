@@ -1,40 +1,16 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Button } from 'antd';
+import {Button, Descriptions, Icon} from 'antd';
 import { Code, PropertyTable } from './utils';
 import { Display3 } from '../../src';
-
-const ExampleContent = styled.div`
-    position: relative;
-    padding: 3em 1em 1em;
-    border: 1px solid #d8d8d8;
-    margin: 1.5rem 0 0;
-    
-    &:before {
-        position: absolute;
-        left: 0;
-        top: 0;
-        padding: 1em;
-        color: #aaa;
-        font-weight: 500;
-        content: 'EXAMPLE';
-    }
-`;
-
-const Footer = styled.div`
-  border: 1px solid #d8d8d8;
-  border-top: 0;
-  padding: 10px;
-  text-align: center;
-`;
+import './ComponentDisplay.scss';
 
 /**
  * @return {React.Component}
  *
  * @constructor
  */
-export const ComponentDisplay = ({ title, code, properties, children }) => {
+export const ComponentDisplay = ({title, code, properties, description, children}) => {
     const [collapsed, setCollapsed] = useState(true);
 
     const renderCodeButton = () => {
@@ -46,11 +22,25 @@ export const ComponentDisplay = ({ title, code, properties, children }) => {
     };
 
     return (
-        <div style={{marginBottom: 80}}>
+        <div className='hangar-component-display'>
+
             <Display3>{title}</Display3>
-            <ExampleContent>{children}</ExampleContent>
+
+            <div className='content'>
+                {
+                    description ?
+                    <Descriptions size='small' style={{marginBottom: 10}} bordered>
+                        <Descriptions.Item label={'Description'}>
+                            {description}
+                        </Descriptions.Item>
+                    </Descriptions>
+                    : null
+                }
+                {children}
+            </div>
+
             {
-                code ? <Footer>{renderCodeButton()}</Footer> : null
+                code ? <div className='footer'>{renderCodeButton()}</div> : null
             }
             {
                 code && !collapsed ? <Code>{code}</Code> : null

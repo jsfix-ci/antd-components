@@ -1,0 +1,33 @@
+.hangar-component-display {
+
+    margin-bottom: 80px;
+
+    .content {
+        position: relative;
+        padding: 3em 1em 1em;
+        border: 1px solid #d8d8d8;
+        margin: 1.5rem 0 0;
+
+        &:before {
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 1em;
+            color: #aaa;
+            font-weight: 500;
+            content: 'EXAMPLE';
+        }
+
+        .description {
+            margin-bottom: 10px;
+        }
+
+    }
+
+    .footer {
+        border: 1px solid #d8d8d8;
+        border-top: 0;
+        padding: 10px;
+        text-align: center;
+    }
+}
