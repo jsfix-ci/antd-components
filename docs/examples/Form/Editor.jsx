@@ -34,13 +34,13 @@ const properties = [
     {property: 'toolbar', description: 'https://www.tiny.cloud/docs/configure/editor-appearance/#toolbar', type: 'string', default: ''}
 ];
 
-const info = `You have to include this line of code in the <head> of your HTML page:
+const description = `You have to include this line of code in the <head> of your HTML page:
                 <script src="dist/tinymce/tinymce.min.js"></script>`;
 
 export default () => (
     <ComponentDisplay
         title={'Editor'}
-        info={info}
+        description={description}
         code={code}
         properties={properties}
     >

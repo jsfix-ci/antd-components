@@ -10,7 +10,7 @@ import './ComponentDisplay.scss';
  *
  * @constructor
  */
-export const ComponentDisplay = ({title, code, properties, info, children}) => {
+export const ComponentDisplay = ({title, code, properties, description, children}) => {
     const [collapsed, setCollapsed] = useState(true);
 
     const renderCodeButton = () => {
@@ -28,10 +28,10 @@ export const ComponentDisplay = ({title, code, properties, info, children}) => {
 
             <div className='content'>
                 {
-                    info ?
+                    description ?
                     <Descriptions size='small' style={{marginBottom: 10}} bordered>
                         <Descriptions.Item label={'Description'}>
-                            {info}
+                            {description}
                         </Descriptions.Item>
                     </Descriptions>
                     : null
