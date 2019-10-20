@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {FormGrid} from '../../../src';
 import {Column} from "../../../src/Grid/FormGrid";
 import {ComponentDisplay} from "../../components/ComponentDisplay";
 import {message} from "antd";
 
-const data = [
+const defaultData = [
     {
         text: 'You can adjust types',
         html: '<div style="background-color: #eee; color: #D20000">this is renderd html</div>',
@@ -51,42 +51,47 @@ const data = [
     }
 ];
 
-const onAdd = () => {
-    message.info('add button clicked!');
-};
+const Example = () => {
+    const [data, setData] = useState(defaultData);
 
-const onEdit = (row) => {
-    message.info('edit button clicked!');
-};
+    const onAdd = () => {
+        message.info('add button clicked!');
+    };
 
-const onDelete = (row) => {
-    message.info('delete button clicked!');
-};
+    const onEdit = (row) => {
+        message.info('edit button clicked!');
+    };
 
-const Example = () => (
-    <FormGrid
-        dataSource={data}
-        pagination={true}
-        onAddRowClick={onAdd}
-        onEditRowClick={onEdit}
-        onDeleteRowClick={onDelete}
-        toolbar={true}
-    >
-        <Column title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30}/>
-        <Column title={'Content'} dataIndex={'html'} fieldType={'html'}/>
-        <Column title={'Image'} dataIndex={'image'} fieldType={'image'} config={{action: '/path/upload'}}/>
-        <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'}/>
-        <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
-    </FormGrid>
-);
+    const onDelete = (rows) => {
+        setData(data.filter( rec => !rows.includes(rec)));
+    };
+
+    return (
+        <FormGrid
+            dataSource={data}
+            pagination={true}
+            onAddRowClick={onAdd}
+            onEditRowClick={onEdit}
+            onDeleteRowClick={onDelete}
+            toolbar={true}
+        >
+            <Column title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30}/>
+            <Column title={'Content'} dataIndex={'html'} fieldType={'html'}/>
+            <Column title={'Image'} dataIndex={'image'} fieldType={'image'} config={{action: '/path/upload'}}/>
+            <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'}/>
+            <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
+        </FormGrid>
+    )
+};
 
 // Code example
 // language=JS
 const code = `
     import React from 'react';
     import { AddButton, DeleteButton, EditButton } from '@react-hangar/antd-components';
+    import axios from 'axios';
     
-    const data = [
+    const defaultData = [
         {
             text: 'You can adjust types',
             html: '<div style="background-color: #eee; color: #D20000">this is renderd html</div>',
@@ -127,20 +132,30 @@ const code = `
             active: false
         }
     ];
-
-    const onAdd = () => {
-        message.info('add button clicked!');
-    };
-
-    const onEdit = (row) => {
-        message.info('edit button clicked!');
-    };
-
-    const onDelete = (row) => {
-        message.info('delete button clicked!');
-    };
-
+   
     const Example = () => {
+    
+        const [data, setData] = useState(defaultData);
+        
+        const onAdd = () => {
+            message.info('add button clicked!');
+        };
+        
+        const onEdit = (row) => {
+            message.info('edit button clicked!');
+        };
+        
+        const onDelete = (rows) => {           
+            return axios({
+                method: 'post',
+                url: '/path/delete',
+                data: rows,
+            }).then(() => {     
+                setData(data.filter( rec => !row.includes(rec)));
+                message.success("deleted!");
+            })
+        };
+        
         return (
                <FormGrid
                     dataSource={data}

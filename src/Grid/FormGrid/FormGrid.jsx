@@ -60,7 +60,7 @@ export const FormGrid = Form.create()((props) => {
 
     const onDeleteClick = () => {
         if (selected.length > 0) {
-            onDeleteRowClick(selected)
+            onDeleteRowClick(selected);
         } else {
             message.error('You have to select one row at least');
         }
