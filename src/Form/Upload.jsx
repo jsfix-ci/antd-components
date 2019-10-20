@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import {UploadButton} from '../index';
 import AntdUpload from 'antd/lib/upload/Upload';
 import message from 'antd/lib/message';
@@ -44,11 +44,11 @@ const validate = (type) => {
     return  () => {return true};
 };
 
-export const Upload = (props) => {
+export const Upload = forwardRef((props, ref) => {
     let {
         onUploaded,
         onChange,
-        defaultFileList,
+        fileList,
         customRequestData,
         listType,
         action,
@@ -57,13 +57,13 @@ export const Upload = (props) => {
         ...restProps
     } = props;
 
-    if (defaultFileList && defaultFileList.length > 0) {
-        defaultFileList.map((rec, idx) => {
+    if (fileList && fileList.length > 0) {
+        fileList.map((rec, idx) => {
             return rec.uid = idx;
         });
-    } else if (defaultFileList && typeof defaultFileList === 'object') {
-        defaultFileList.uid = 0;
-        defaultFileList = [defaultFileList]
+    } else if (fileList && typeof fileList === 'object') {
+        fileList.uid = 0;
+        fileList = [fileList]
     }
 
     listType = getListType(type);
@@ -82,8 +82,9 @@ export const Upload = (props) => {
 
     return (
         <AntdUpload
+            ref={ref}
             className='hangar-upload'
-            defaultFileList={[...defaultFileList]}
+            fileList={fileList ? [...fileList] : []}
             action={action}
             listType={listType}
             beforeUpload={validate(type)}
@@ -94,11 +95,10 @@ export const Upload = (props) => {
             <UploadButton> {children} </UploadButton>
         </AntdUpload>
     );
-};
+});
 
 Upload.defaultProps = {
     children: 'Upload',
-    defaultFileList: [],
     onChange: () => {},
     onUploaded: () => {}
 };
@@ -109,7 +109,7 @@ Upload.propTypes = {
     type: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     action: PropTypes.string,
     customRequestData: PropTypes.object,
-    defaultFileList: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.object]),
+    fileList: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.object]),
     onUploaded: PropTypes.func,
     onChange: PropTypes.func
 };

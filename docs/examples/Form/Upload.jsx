@@ -3,7 +3,7 @@ import { ComponentDisplay } from '../../components/ComponentDisplay';
 import { Upload } from '../../../src/index';
 import {Divider} from 'antd';
 
-const defaultFileList = [
+const fileList = [
     {
         name: 'xxx.png',
         url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
@@ -37,7 +37,7 @@ const Example = () => (
         <label>Whitelisted file types with default data</label><br />
         <Upload
             type={{image: ['jpeg', 'png']}}
-            defaultFileList={defaultFileList}
+            fileList={fileList}
             multiple
             action={action}
             onUploaded={onUploaded}
@@ -56,7 +56,7 @@ const code = `
     import React, {Fragment} from 'react';
     import { Upload } from '@react-hangar/antd-components';
 
-    const defaultFileList = [
+    const fileList = [
         {
             name: 'xxx.png',
             url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
@@ -84,7 +84,7 @@ const code = `
                 <Upload type='image' action={action} multiple>Upload Images</Upload>
                 <Upload 
                     type={{image: ['jpeg', 'png']}} 
-                    defaultFileList={defaultFileList}
+                    fileList={fileList}
                     action={action}
                     onUploaded={onUploaded}
                     multiple
@@ -104,7 +104,7 @@ const code = `
 // Component props
 const properties = [
     {property: 'type', description: "'file', 'image' | {image: ['jpeg', 'png']}, {file: ['txt', 'dll']}", type: 'string | array[object]'},
-    {property: 'defaultFileList', description: 'sets default values', type: 'array'},
+    {property: 'fileList', description: 'sets default values', type: 'array'},
     {property: 'customRequestData', description: '(optional) passes custom data to request', type: 'object'},
     {property: 'action', description: 'api url e.g. /path/upload', type: 'string'},
     {property: 'multiple', description: 'for uploading multiple files or images', type: 'string'},

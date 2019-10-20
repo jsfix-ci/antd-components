@@ -98,7 +98,7 @@ export const renderForm = (props, columns) => {
             case 'image':
                 return (
                     <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex,{ valuePropName: 'defaultFileList' })(<Upload {...config} />)}
+                        {getFieldDecorator(dataIndex,{ valuePropName: 'fileList' })(<Upload {...config} />)}
                     </Form.Item>
                 );
             case 'html':
