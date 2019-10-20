@@ -151,8 +151,7 @@ const code = `
                 url: '/path/delete',
                 data: rows,
             }).then(() => {     
-                setData(data.filter( rec => !row.includes(rec)));
-                message.success("deleted!");
+                setData(data.filter( rec => !row.includes(rec)));                
             })
         };
         
