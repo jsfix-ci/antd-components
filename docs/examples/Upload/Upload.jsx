@@ -109,6 +109,7 @@ const properties = [
     {property: 'action', description: 'api url e.g. /path/upload', type: 'string'},
     {property: 'multiple', description: 'for uploading multiple files or images', type: 'string'},
     {property: 'onUploaded', description: 'function that returns response after upload', type: 'function'},
+    {property: '(Inherited)', description: 'Ant design properties are inherited (see: https://ant.design/components/upload/)'},
 ];
 
 export default () => (
