@@ -6,15 +6,8 @@ import message from 'antd/lib/message';
 import './Upload.scss';
 
 const getListType = (type) => {
-    if (typeof type === 'object') {
-        if (type.image) {
-            return 'picture';
-        }
-
-    } else if (typeof type === 'string') {
-        if (type === 'image') {
-            return 'picture';
-        }
+    if (typeof type === 'object' && type.image || typeof type === 'string' && type === 'image') {
+        return 'picture';
     }
 };
 
@@ -28,6 +21,8 @@ const getFileTypes = (type) => {
             message.error('invalid type. see property description in docs. ');
         }
     }
+
+    return false;
 };
 
 const validate = (type) => {
