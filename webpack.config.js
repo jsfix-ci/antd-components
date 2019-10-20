@@ -28,7 +28,7 @@ module.exports = {
     },
     plugins: [
         new CopyPlugin([
-            { from: 'node_modules/tinymce', to: 'tinymce' }
+            { from: 'node_modules/tinymce/skins', to: 'skins' }
         ])
     ],
     devServer: {
