@@ -1,5 +1,5 @@
 import React from 'react';
-import {UploadButton} from '..';
+import {UploadButton} from '../index';
 import AntdUpload from 'antd/lib/upload/Upload';
 import message from 'antd/lib/message';
 

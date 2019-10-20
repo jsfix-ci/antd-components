@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
-import {Upload} from '../../../src/Upload/Upload';
-import {Divider, message} from 'antd';
+import { Upload } from '../../../src';
+import {Divider} from 'antd';
 
 const defaults = [
     {

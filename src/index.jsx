@@ -6,4 +6,3 @@ export * from './Grid/FormGrid/index';
 export * from './Navigation';
 export * from './Display';
 export * from './Buttons/Buttons';
-export * from './Upload/Upload';
