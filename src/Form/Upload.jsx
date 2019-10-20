@@ -57,10 +57,13 @@ export const Upload = (props) => {
         ...restProps
     } = props;
 
-    if (defaultFileList) {
+    if (defaultFileList && defaultFileList.length > 0) {
         defaultFileList.map((rec, idx) => {
             return rec.uid = idx;
         });
+    } else if (defaultFileList && typeof defaultFileList === 'object') {
+        defaultFileList.uid = 0;
+        defaultFileList = [defaultFileList]
     }
 
     listType = getListType(type);
@@ -106,7 +109,7 @@ Upload.propTypes = {
     type: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     action: PropTypes.string,
     customRequestData: PropTypes.object,
-    defaultFileList: PropTypes.arrayOf(PropTypes.object),
+    defaultFileList: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.object]),
     onUploaded: PropTypes.func,
     onChange: PropTypes.func
 };

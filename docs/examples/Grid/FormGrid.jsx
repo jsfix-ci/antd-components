@@ -3,16 +3,20 @@ import {FormGrid} from '../../../src';
 import {Column} from "../../../src/Grid/FormGrid";
 import {ComponentDisplay} from "../../components/ComponentDisplay";
 import {message} from "antd";
-import Form from "antd/lib/form";
 
 const data = [
     {
         text: 'You can adjust types',
         html: '<div style="background-color: #eee; color: #D20000">this is renderd html</div>',
-        image: {
-            name: 'write.jpg',
-            url: 'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593357_960_720.jpg'
-        },
+        image: [
+            {
+                name: 'write.jpg',
+                url: 'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593357_960_720.jpg'
+            },
+            {
+                name: 'note.jpg',
+                url: 'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593358_960_720.jpg'
+            }],
         settings: {
             lame: false,
             nasty: 'yes'
@@ -70,7 +74,7 @@ const Example = () => (
     >
         <Column title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30}/>
         <Column title={'Content'} dataIndex={'html'} fieldType={'html'}/>
-        <Column title={'Image'} dataIndex={'image'} fieldType={'image'}/>
+        <Column title={'Image'} dataIndex={'image'} fieldType={'image'} config={{action: '/path/upload'}}/>
         <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'}/>
         <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
     </FormGrid>
@@ -148,7 +152,7 @@ const code = `
                 >
                     <Column title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30}/>
                     <Column title={'Content'} dataIndex={'html'} fieldType={'html'}/>
-                    <Column title={'Image'} dataIndex={'image'} fieldType={'image'}/>
+                    <Column title={'Image'} dataIndex={'image'} fieldType={'image'} config={{action: '/path/upload'}}/>
                     <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'}/>
                     <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
             </FormGrid>

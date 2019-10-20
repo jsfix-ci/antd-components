@@ -32,6 +32,7 @@ export const FormGrid = Form.create()((props) => {
         return {
             title: child.props.title,
             dataIndex: child.props.dataIndex,
+            config: child.props.config,
             onCell: record => ({
                 record,
                 ...child.props
