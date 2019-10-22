@@ -21,6 +21,11 @@ const defaultData = [
             lame: false,
             nasty: 'yes'
         },
+        list: [
+            'foo',
+            'bar',
+            'test'
+        ],
         active: true
     },
     {
@@ -34,6 +39,11 @@ const defaultData = [
             dope: true,
             crazy: 'yes'
         },
+        list: [
+            'foo 2',
+            'bar 2',
+            'test 2'
+        ],
         active: true
     },
     {
@@ -47,6 +57,11 @@ const defaultData = [
             amazing: true,
             fancy: 'yes'
         },
+        list: [
+            'foo 3',
+            'bar 3',
+            'test 3'
+        ],
         active: false
     }
 ];
@@ -81,6 +96,7 @@ const Example = () => {
             <Column title={'Content'} dataIndex={'html'} fieldType={'html'}/>
             <Column title={'Image'} dataIndex={'image'} fieldType={'image'} config={imageConfig}/>
             <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'}/>
+            <Column title={'List'} dataIndex={'list'} fieldType={'list'}/>
             <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
         </FormGrid>
     )
