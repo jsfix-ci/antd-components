@@ -60,7 +60,7 @@ export const Upload = forwardRef((props, ref) => {
     } = props;
 
     if (fileList && fileList.length > 0) {
-        fileList.map((rec, idx) => {
+        fileList.forEach((rec, idx) => {
             return rec.uid = idx;
         });
     } else if (fileList && typeof fileList === 'object') {
@@ -86,7 +86,7 @@ export const Upload = forwardRef((props, ref) => {
         <AntdUpload
             ref={ref}
             className='hangar-upload'
-            fileList={fileList ? [...fileList] : []}
+            defaultFileList={fileList ? [...fileList] : []}
             action={action}
             listType={listType}
             beforeUpload={validate(type)}
