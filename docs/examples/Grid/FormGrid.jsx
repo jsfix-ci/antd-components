@@ -78,7 +78,7 @@ const Example = () => {
     };
 
     const onDelete = (rows) => {
-        setData(data.filter( rec => !rows.includes(rec)));
+        setData(data.filter( rec => !rows.includes(rec)))
     };
 
     const imageConfig = {action: 'http://www.mocky.io/v2/5daf53d53200006d00d961e1', type: {image: ['jpg', 'png']}};
@@ -182,6 +182,7 @@ const code = `
                     onAddRowClick={onAdd}
                     onEditRowClick={onEdit}
                     onDeleteRowClick={onDelete}
+                    selectedRowKeys={[]}
                     toolbar={true}
                 >
                     <Column title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30}/>

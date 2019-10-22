@@ -17,15 +17,16 @@ export const FormGrid = Form.create()((props) => {
     const [isEditing, setEditing] = useState(false);
     const [record, setRecord] = useState({});
     const [data, setData] = useState(dataSource);
-
-    let selected = [];
+    const [selected, setSelected] = useState([]);
+    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
     useEffect(() => {
         setData(dataSource);
     }, [dataSource]);
 
     const onRowSelection = (selectedRowKeys, selectedRows) => {
-        selected = selectedRows;
+        setSelectedRowKeys(selectedRowKeys);
+        setSelected(selectedRows);
     };
 
     const columns = React.Children.map(children, child => {
@@ -61,6 +62,7 @@ export const FormGrid = Form.create()((props) => {
     const onDeleteClick = () => {
         if (selected.length > 0) {
             onDeleteRowClick(selected);
+            setSelectedRowKeys([]);
         } else {
             message.error('You have to select one row at least');
         }
@@ -128,7 +130,8 @@ export const FormGrid = Form.create()((props) => {
             dataSource={data}
             columns={columns}
             rowSelection={{
-                onChange: onRowSelection,
+                selectedRowKeys,
+                onChange: onRowSelection
             }}
         />
     );
