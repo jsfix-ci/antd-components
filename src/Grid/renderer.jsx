@@ -103,6 +103,10 @@ export const renderForm = (props, columns) => {
                     <Form.Item label={title}>
                         {getFieldDecorator(dataIndex, {
                             initialValue: '',
+                            rules: [{
+                                required: true,
+                                message: title + ' field is required'
+                            }]
                         })(<Input/>)}
                     </Form.Item>
                 );
@@ -111,7 +115,11 @@ export const renderForm = (props, columns) => {
                     <Form.Item label={title}>
                         {getFieldDecorator(dataIndex, {
                             valuePropName: 'checked',
-                            initialValue: 'false',
+                            initialValue: false,
+                            rules: [{
+                                required: true,
+                                message: title + ' field is required'
+                            }]
                         })(<Switch/>)}
                     </Form.Item>
                 );
@@ -121,6 +129,10 @@ export const renderForm = (props, columns) => {
                         {getFieldDecorator(dataIndex, {
                             valuePropName: 'fileList',
                             initialValue: '',
+                            rules: [{
+                                required: true,
+                                message: title + ' field is required'
+                            }]
                         })(<Upload {...config} />)}
                     </Form.Item>
                 );
@@ -129,6 +141,10 @@ export const renderForm = (props, columns) => {
                     <Form.Item label={title}>
                         {getFieldDecorator(dataIndex, {
                             initialValue: '',
+                            rules: [{
+                                required: true,
+                                message: title + ' field is required'
+                            }]
                         })(<Editor/>)}
                     </Form.Item>
                 );
@@ -137,6 +153,10 @@ export const renderForm = (props, columns) => {
                     <Form.Item label={title}>
                         {getFieldDecorator(dataIndex, {
                             initialValue: '',
+                            rules: [{
+                                required: true,
+                                message: title + ' field is required'
+                            }]
                         })(<CodeMirror/>)}
                     </Form.Item>
                 );
@@ -145,6 +165,10 @@ export const renderForm = (props, columns) => {
                     <Form.Item label={title}>
                         {getFieldDecorator(dataIndex, {
                             initialValue: [],
+                            rules: [{
+                                required: true,
+                                message: title + ' field is required'
+                            }]
                         })(<ListField/>)}
                     </Form.Item>
                 );
@@ -153,6 +177,10 @@ export const renderForm = (props, columns) => {
                     <Form.Item label={title}>
                         {getFieldDecorator(dataIndex, {
                             initialValue: '',
+                            rules: [{
+                                required: true,
+                                message: title + ' field is required'
+                            }]
                         })(<Input/>)}
                     </Form.Item>
                 );

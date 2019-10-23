@@ -99,23 +99,36 @@ export const FormGrid = Form.create()((props) => {
             }
         })
         (props => {
-                const { form } = props;
 
-                const onSaveClick = () => {
-                    form.validateFields((error, data) => {
+            useEffect(() => {
+                props.form.validateFields()
+            }, []);
+
+            const { getFieldsError } = props.form;
+
+                const onBackButtonClick = () => {
+                    //props.form.resetFields();
+                    setRecord({});
+                    setEditing(false)
+                };
+
+                const hasErrors = (fieldsError) => {
+                    return Object.keys(fieldsError).some(field => fieldsError[field]);
+                };
+
+                const handleSubmit = () => {
+                    props.form.validateFields((error, data) => {
                         if (error) {
                             return message.error('form validation failed');
                         }
-
-                        console.log(data);
                     });
                 };
                 return (
                     <Fragment>
-                        <BackButton onClick={() => setEditing(false)}/>
-                        <Form>
+                        <BackButton onClick={onBackButtonClick}/>
+                        <Form onSubmit={handleSubmit}>
                             {renderForm(props, children)}
-                            <SaveButton onClick={onSaveClick}/>
+                            <SaveButton disabled={hasErrors(getFieldsError())} htmlType="submit" />
                         </Form>
                     </Fragment>
                 );
