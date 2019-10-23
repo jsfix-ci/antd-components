@@ -20,8 +20,8 @@ export const CustomCol = (props) => (
     <Col
         xs={24}
         md={18}
-        xl={16}
-        xxl={17}
+        xl={18}
+        xxl={19}
         {...props}
     />
 );

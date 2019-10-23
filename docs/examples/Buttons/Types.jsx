@@ -49,81 +49,81 @@ const Example = () => {
             <Divider />
 
             <CopyToClipboard
-                text={'<AddButton onClick={onClick}/>'}
-                onCopy={() => onCopy('<AddButton onClick={onClick}/>')}>
+                text={`<AddButton locale='${locale}' onClick={onClick}/>`}
+                onCopy={() => onCopy(`<AddButton locale='${locale}' onClick={onClick}/>`)}>
                 <AddButton locale={locale}/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={'<DeleteButton onClick={onClick} />'}
-                onCopy={() => onCopy('<DeleteButton onClick={onClick} />')}>
-                <DeleteButton/>
+                text={`<DeleteButton locale='${locale}' onClick={onClick}/>`}
+                onCopy={() => onCopy(`<DeleteButton locale='${locale}' onClick={onClick}/>`)}>
+                <DeleteButton locale={locale}/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={'<EditButton onClick={onClick} />'}
-                onCopy={() => onCopy('<EditButton onClick={onClick} />')}>
-                <EditButton/>
+                text={`<EditButton locale='${locale}' onClick={onClick}/>`}
+                onCopy={() => onCopy(`<EditButton locale='${locale}' onClick={onClick}/>`)}>
+                <EditButton locale={locale}/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={'<ReloadButton onClick={onClick}/>'}
-                onCopy={() => onCopy('<ReloadButton onClick={onClick} />')}>
-                <ReloadButton/>
+                text={`<ReloadButton locale='${locale}' onClick={onClick}/>`}
+                onCopy={() => onCopy(`<ReloadButton locale='${locale}' onClick={onClick}/>`)}>
+                <ReloadButton locale={locale}/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={'<BackButton onClick={onClick}/>'}
-                onCopy={() => onCopy('<BackButton onClick={onClick} />')}>
-                <BackButton/>
+                text={`<BackButton locale='${locale}' onClick={onClick}/>`}
+                onCopy={() => onCopy(`<BackButton locale='${locale}' onClick={onClick}/>`)}>
+                <BackButton locale={locale}/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={'<SearchButton onClick={onClick}/>'}
-                onCopy={() => onCopy('<SearchButton onClick={onClick}/>')}>
-                <SearchButton/>
+                text={`<SearchButton locale='${locale}' onClick={onClick}/>`}
+                onCopy={() => onCopy(`<SearchButton locale='${locale}' onClick={onClick}/>`)}>
+                <SearchButton locale={locale}/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={'<SaveButton onClick={onClick}/>'}
-                onCopy={() => onCopy('<SaveButton onClick={onClick}/>')}>
-                <SaveButton/>
+                text={`<SaveButton locale='${locale}' onClick={onClick}/>`}
+                onCopy={() => onCopy(`<SaveButton locale='${locale}' onClick={onClick}/>`)}>
+                <SaveButton locale={locale}/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={'<CancelButton onClick={onClick}/>'}
-                onCopy={() => onCopy('<CancelButton onClick={onClick}/>')}>
-                <CancelButton/>
+                text={`<AddButton locale='${locale}' onClick={onClick}/>`}
+                onCopy={() => onCopy(`<AddButton locale='${locale}' onClick={onClick}/>`)}>
+                <CancelButton locale={locale}/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={'<CloseButton onClick={onClick}/>'}
-                onCopy={() => onCopy('<CloseButton onClick={onClick}/>')}>
-                <CloseButton/>
+                text={`<CloseButton locale='${locale}' onClick={onClick}/>`}
+                onCopy={() => onCopy(`<CloseButton locale='${locale}' onClick={onClick}/>`)}>
+                <CloseButton locale={locale}/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={'<UndoButton onClick={onClick}/>'}
-                onCopy={() => onCopy('<UndoButton onClick={onClick}/>')}>
-                <UndoButton/>
+                text={`<UndoButton locale='${locale}' onClick={onClick}/>`}
+                onCopy={() => onCopy(`<UndoButton locale='${locale}' onClick={onClick}/>`)}>
+                <UndoButton locale={locale}/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={'<SettingsButton onClick={onClick}/>'}
-                onCopy={() => onCopy('<SettingsButton onClick={onClick}/>')}>
-                <SettingsButton/>
+                text={`<SettingsButton locale='${locale}' onClick={onClick}/>`}
+                onCopy={() => onCopy(`<SettingsButton locale='${locale}' onClick={onClick}/>`)}>
+                <SettingsButton locale={locale}/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={'<BasketButton onClick={onClick}/>'}
-                onCopy={() => onCopy('<BasketButton onClick={onClick}/>')}>
-                <BasketButton/>
+                text={`<BasketButton locale='${locale}' onClick={onClick}/>`}
+                onCopy={() => onCopy(`<BasketButton locale='${locale}' onClick={onClick}/>`)}>
+                <BasketButton  locale={locale}/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={'<UploadButton onClick={onClick}/>'}
-                onCopy={() => onCopy('<UploadButton onClick={onClick}/>')}>
-                <UploadButton/>
+                text={`<UploadButton locale='${locale}' onClick={onClick}/>`}
+                onCopy={() => onCopy(`<UploadButton locale='${locale}' onClick={onClick}/>`)}>
+                <UploadButton locale={locale}/>
             </CopyToClipboard>
 
             <CopyToClipboard
