@@ -20,7 +20,7 @@ const onUploaded = (response) => {
     console.log(response);
 };
 
-const action = 'https://garic.docker.local/upload/create';
+const action = 'http://www.mocky.io/v2/5daf53d53200006d00d961e1';
 
 // Example implementation
 const Example = () => (
