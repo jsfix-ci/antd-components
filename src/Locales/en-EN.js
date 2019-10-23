@@ -1,4 +1,4 @@
-export const enEN = {
+module.exports = {
     Buttons: {
         addButton: 'Add',
         editButton: 'Edit',

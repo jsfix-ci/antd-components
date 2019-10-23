@@ -1,4 +1,4 @@
-export const deDE = {
+module.exports = {
     Buttons: {
         addButton: 'Hinzufügen',
         editButton: 'Bearbeiten',

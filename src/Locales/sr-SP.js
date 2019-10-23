@@ -1,4 +1,4 @@
-export const srSP = {
+module.exports = {
     Buttons: {
         addButton: 'додати',
         editButton: 'уреди',
