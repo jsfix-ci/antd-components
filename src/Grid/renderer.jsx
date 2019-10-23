@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import Switch from 'antd/lib/switch';
 import Popover from 'antd/lib/popover';
 import Input from 'antd/lib/input';
 import Form from 'antd/lib/form';
-import { Editor, CodeMirror, ListField } from '../../src';
+import { Editor, CodeMirror, ListField, Upload} from '../../src';
 import { truncateText } from '../helper';
 
 export const getDisplay = (fieldType, record, dataIndex, children, maxLength) => {
@@ -43,6 +43,22 @@ export const getDisplay = (fieldType, record, dataIndex, children, maxLength) =>
     }
 
     if (fieldType === 'image') {
+        if (record.length > 0) {
+
+            return (
+                <Fragment>
+                    <Popover content={<img height={150} src={record[0].url}/>} title={record[0].name}>
+                        <span style={{ cursor: 'pointer', padding: 2 }}>
+                            <img height={40} src={record[0].url}/>
+                        </span>
+                    </Popover>
+
+                    ({record.length -1} more)
+
+                </Fragment>
+            );
+
+        }
         return (
             <Popover content={<img height={150} src={record.url}/>} title={record.name}>
                 <span style={{ cursor: 'pointer' }}>
@@ -79,7 +95,7 @@ export const renderForm = (props, columns) => {
     const { getFieldDecorator } = props.form;
 
     return React.Children.map(columns, child => {
-        const { title, dataIndex, fieldType } = child.props;
+        const { title, dataIndex, fieldType, config} = child.props;
 
         switch (fieldType) {
             case 'string':
@@ -92,6 +108,12 @@ export const renderForm = (props, columns) => {
                 return (
                     <Form.Item label={title}>
                         {getFieldDecorator(dataIndex, { valuePropName: 'checked' })(<Switch/>)}
+                    </Form.Item>
+                );
+            case 'image':
+                return (
+                    <Form.Item label={title}>
+                        {getFieldDecorator(dataIndex,{ valuePropName: 'fileList' })(<Upload {...config} />)}
                     </Form.Item>
                 );
             case 'html':

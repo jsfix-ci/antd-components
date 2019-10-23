@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Table from 'antd/lib/table';
 import { Column } from './Column';
-import {message, Form} from 'antd';
+import { message, Form } from 'antd';
 import { AddButton, DeleteButton, EditButton, BackButton, SaveButton } from '../..';
 import { renderForm } from '../renderer';
 
@@ -122,19 +122,18 @@ export const FormGrid = Form.create()((props) => {
     }
 
     return (
-            <Table
-                rowKey={idProperty}
-                title={getToolbar()}
-                {...restProps}
-                components={components}
-                dataSource={data}
-                columns={columns}
-                rowSelection={{
-                    selectedRowKeys,
-                    onChange: onRowSelection
-                }}
-            />
-
+        <Table
+            rowKey={idProperty}
+            title={getToolbar()}
+            {...restProps}
+            components={components}
+            dataSource={data}
+            columns={columns}
+            rowSelection={{
+                selectedRowKeys,
+                onChange: onRowSelection
+            }}
+        />
     );
 });
 
