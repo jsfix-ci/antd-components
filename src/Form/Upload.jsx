@@ -32,9 +32,8 @@ const validate = (type) => {
     if (fileTypes && fileTypes.length > 0) {
         return (file) => {
             let needle = file.type.replace('image/', '').replace('file/', '');
-            let jpg = (needle === 'jpeg') ? 'jpg': null;
 
-            if (!fileTypes.includes(needle) && !fileTypes.includes(jpg)) {
+            if (!fileTypes.includes(needle)) {
                 message.error('You can only upload "' + fileTypes + '" files!', 8);
                 return false;
             }
