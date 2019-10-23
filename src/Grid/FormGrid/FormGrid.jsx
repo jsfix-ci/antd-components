@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Table from 'antd/lib/table';
 import { Column } from './Column';
-import { message, Form } from 'antd';
+import {message, Form} from 'antd';
 import { AddButton, DeleteButton, EditButton, BackButton, SaveButton } from '../..';
 import { renderForm } from '../renderer';
 
@@ -12,26 +12,28 @@ import { renderForm } from '../renderer';
  * @constructor
  */
 export const FormGrid = Form.create()((props) => {
-    const { idProperty, dataSource, onAddRowClick, onDeleteRowClick, onEditRowClick, toolbar, children, ...restProps } = props;
+    const { idProperty, dataSource, onAddRowClick, onDeleteRowClick, onEditRowClick, toolbar, children, locale, ...restProps } = props;
 
     const [isEditing, setEditing] = useState(false);
     const [record, setRecord] = useState({});
     const [data, setData] = useState(dataSource);
-
-    let selected = [];
+    const [selected, setSelected] = useState([]);
+    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
     useEffect(() => {
         setData(dataSource);
     }, [dataSource]);
 
     const onRowSelection = (selectedRowKeys, selectedRows) => {
-        selected = selectedRows;
+        setSelectedRowKeys(selectedRowKeys);
+        setSelected(selectedRows);
     };
 
     const columns = React.Children.map(children, child => {
         return {
             title: child.props.title,
             dataIndex: child.props.dataIndex,
+            config: child.props.config,
             onCell: record => ({
                 record,
                 ...child.props
@@ -59,7 +61,8 @@ export const FormGrid = Form.create()((props) => {
 
     const onDeleteClick = () => {
         if (selected.length > 0) {
-            onDeleteRowClick(selected)
+            onDeleteRowClick(selected);
+            setSelectedRowKeys([]);
         } else {
             message.error('You have to select one row at least');
         }
@@ -69,9 +72,9 @@ export const FormGrid = Form.create()((props) => {
         if (toolbar) {
             return () => (
                 <Fragment>
-                    <AddButton onClick={onAddRowClick}/>
-                    <EditButton onClick={onEditClick}/>
-                    <DeleteButton onClick={onDeleteClick}/>
+                    <AddButton onClick={onAddRowClick} locale={locale} />
+                    <EditButton onClick={onEditClick} locale={locale} />
+                    <DeleteButton onClick={onDeleteClick} locale={locale} />
                 </Fragment>
             );
         }
@@ -105,10 +108,10 @@ export const FormGrid = Form.create()((props) => {
 
                 return (
                     <Fragment>
-                        <BackButton onClick={() => setEditing(false)}/>
+                        <BackButton locale={locale} onClick={() => setEditing(false)}/>
                         <Form>
                             {renderForm(props, children)}
-                            <SaveButton onClick={onSaveClick}/>
+                            <SaveButton locale={locale} onClick={onSaveClick}/>
                         </Form>
                     </Fragment>
                 );
@@ -119,17 +122,19 @@ export const FormGrid = Form.create()((props) => {
     }
 
     return (
-        <Table
-            rowKey={idProperty}
-            title={getToolbar()}
-            {...restProps}
-            components={components}
-            dataSource={data}
-            columns={columns}
-            rowSelection={{
-                onChange: onRowSelection,
-            }}
-        />
+            <Table
+                rowKey={idProperty}
+                title={getToolbar()}
+                {...restProps}
+                components={components}
+                dataSource={data}
+                columns={columns}
+                rowSelection={{
+                    selectedRowKeys,
+                    onChange: onRowSelection
+                }}
+            />
+
     );
 });
 
@@ -141,5 +146,6 @@ FormGrid.defaultProps = {
 FormGrid.propTypes = {
     idProperty: PropTypes.string,
     onRecordCreate: PropTypes.func,
-    dataSource: PropTypes.array
+    dataSource: PropTypes.array,
+    locale: PropTypes.string
 };
