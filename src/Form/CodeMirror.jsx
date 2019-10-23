@@ -16,7 +16,7 @@ const isJsonString = (value) => {
     }
 };
 
-const prettifyJson = (json) => JSON.stringify(json, undefined, 4);
+const prettifyJson = (json) => (typeof json === 'object') ? JSON.stringify(json, undefined, 4) : json;
 
 export const CodeMirror = forwardRef((props, ref) => {
     const { onChange, lineNumbers, indentUnit, lineSeparator, value} = props;
@@ -25,7 +25,7 @@ export const CodeMirror = forwardRef((props, ref) => {
         <Controlled
             ref={ref}
             onBeforeChange={(editor, data, v) => {
-                onChange(isJsonString(v) ? JSON.parse(v) : v);
+                onChange(v);
             }}
             options={{
                 mode: { name: 'javascript', json: true },
