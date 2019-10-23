@@ -47,6 +47,11 @@ export const FormGrid = Form.create()((props) => {
         },
     };
 
+    const onAddClick = () => {
+        setEditing(true);
+        onAddRowClick();
+    };
+
     const onEditClick = () => {
         if (selected.length === 1) {
             setEditing(true);
@@ -72,7 +77,7 @@ export const FormGrid = Form.create()((props) => {
         if (toolbar) {
             return () => (
                 <Fragment>
-                    <AddButton onClick={onAddRowClick}/>
+                    <AddButton onClick={onAddClick}/>
                     <EditButton onClick={onEditClick}/>
                     <DeleteButton onClick={onDeleteClick}/>
                 </Fragment>
@@ -105,7 +110,6 @@ export const FormGrid = Form.create()((props) => {
                         console.log(data);
                     });
                 };
-
                 return (
                     <Fragment>
                         <BackButton onClick={() => setEditing(false)}/>

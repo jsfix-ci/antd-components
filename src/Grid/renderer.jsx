@@ -1,9 +1,9 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import Switch from 'antd/lib/switch';
 import Popover from 'antd/lib/popover';
 import Input from 'antd/lib/input';
 import Form from 'antd/lib/form';
-import { Editor, CodeMirror, ListField, Upload} from '../../src';
+import { Editor, CodeMirror, ListField, Upload } from '../../src';
 import { truncateText } from '../helper';
 
 export const getDisplay = (fieldType, record, dataIndex, children, maxLength) => {
@@ -101,43 +101,59 @@ export const renderForm = (props, columns) => {
             case 'string':
                 return (
                     <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex)(<Input/>)}
+                        {getFieldDecorator(dataIndex, {
+                            initialValue: '',
+                        })(<Input/>)}
                     </Form.Item>
                 );
             case 'boolean':
                 return (
                     <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex, { valuePropName: 'checked' })(<Switch/>)}
+                        {getFieldDecorator(dataIndex, {
+                            valuePropName: 'checked',
+                            initialValue: 'false',
+                        })(<Switch/>)}
                     </Form.Item>
                 );
             case 'image':
                 return (
                     <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex,{ valuePropName: 'fileList' })(<Upload {...config} />)}
+                        {getFieldDecorator(dataIndex, {
+                            valuePropName: 'fileList',
+                            initialValue: '',
+                        })(<Upload {...config} />)}
                     </Form.Item>
                 );
             case 'html':
                 return (
                     <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex)(<Editor/>)}
+                        {getFieldDecorator(dataIndex, {
+                            initialValue: '',
+                        })(<Editor/>)}
                     </Form.Item>
                 );
             case 'object':
                 return (
                     <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex)(<CodeMirror/>)}
+                        {getFieldDecorator(dataIndex, {
+                            initialValue: '',
+                        })(<CodeMirror/>)}
                     </Form.Item>
                 );
             case 'list':
                 return (
                     <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex)(<ListField/>)}
+                        {getFieldDecorator(dataIndex, {
+                            initialValue: [],
+                        })(<ListField/>)}
                     </Form.Item>
                 );
             default:
                 return (
                     <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex)(<Input/>)}
+                        {getFieldDecorator(dataIndex, {
+                            initialValue: '',
+                        })(<Input/>)}
                     </Form.Item>
                 );
         }
