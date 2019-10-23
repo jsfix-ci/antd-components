@@ -1,17 +1,21 @@
-import React from 'react';
-import {FormGrid} from '../../../src';
-import {Column} from "../../../src/Grid/FormGrid";
+import React, {useState} from 'react';
+import {FormGrid, Column} from '../../../src';
 import {ComponentDisplay} from "../../components/ComponentDisplay";
 import {message} from "antd";
 
-const data = [
+const defaultData = [
     {
         text: 'You can adjust types',
         html: '<div style="background-color: #eee; color: #D20000">this is renderd html</div>',
-        image: {
-            name: 'write.jpg',
-            url: 'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593357_960_720.jpg'
-        },
+        image: [
+            {
+                name: 'write.jpg',
+                url: 'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593357_960_720.jpg'
+            },
+            {
+                name: 'note.jpg',
+                url: 'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593358_960_720.jpg'
+            }],
         settings: {
             lame: false,
             nasty: 'yes'
@@ -61,54 +65,71 @@ const data = [
     }
 ];
 
-const onAdd = () => {
-    message.info('add button clicked!');
-};
+const Example = () => {
+    const [data, setData] = useState(defaultData);
 
-const onEdit = (row) => {
-    message.info('edit button clicked!');
-};
+    const onAdd = () => {
+        message.info('add button clicked!');
+    };
 
-const onDelete = (row) => {
-    message.info('delete button clicked!');
-};
+    const onEdit = (row) => {
+        message.info('edit button clicked!');
+    };
 
-const Example = () => (
-    <FormGrid
-        dataSource={data}
-        pagination={true}
-        onAddRowClick={onAdd}
-        onEditRowClick={onEdit}
-        onDeleteRowClick={onDelete}
-        toolbar={true}
-    >
-        <Column title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30}/>
-        <Column title={'Content'} dataIndex={'html'} fieldType={'html'}/>
-        <Column title={'Image'} dataIndex={'image'} fieldType={'image'}/>
-        <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'}/>
-        <Column title={'List'} dataIndex={'list'} fieldType={'list'}/>
-        <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
-    </FormGrid>
-);
+    const onDelete = (rows) => {
+        setData(data.filter( rec => !rows.includes(rec)))
+    };
+
+    const imageConfig = {action: 'http://www.mocky.io/v2/5daf53d53200006d00d961e1', type: {image: ['jpeg', 'png']}};
+
+    return (
+        <FormGrid
+            dataSource={data}
+            pagination={true}
+            onAddRowClick={onAdd}
+            onEditRowClick={onEdit}
+            onDeleteRowClick={onDelete}
+            toolbar={true}
+        >
+            <Column title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30}/>
+            <Column title={'Content'} dataIndex={'html'} fieldType={'html'}/>
+            <Column title={'Image'} dataIndex={'image'} fieldType={'image'} config={imageConfig}/>
+            <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'}/>
+            <Column title={'List'} dataIndex={'list'} fieldType={'list'}/>
+            <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
+        </FormGrid>
+    )
+};
 
 // Code example
 // language=JS
 const code = `
     import React from 'react';
-    import { AddButton, DeleteButton, EditButton } from '@react-hangar/antd-components';
+    import {FormGrid, Column} from '@react-hangar/antd-components'
+    import axios from 'axios';
     
-    const data = [
+    const defaultData = [
         {
             text: 'You can adjust types',
             html: '<div style="background-color: #eee; color: #D20000">this is renderd html</div>',
-            image: {
-                name: 'write.jpg',
-                url: 'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593357_960_720.jpg'
-            },
+            image: [
+                {
+                    name: 'write.jpg',
+                    url: 'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593357_960_720.jpg'
+                },
+                {
+                    name: 'note.jpg',
+                    url: 'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593358_960_720.jpg'
+                }],
             settings: {
                 lame: false,
                 nasty: 'yes'
             },
+            list: [
+                'foo',
+                'bar',
+                'test'
+            ],
             active: true
         },
         {
@@ -122,6 +143,11 @@ const code = `
                 dope: true,
                 crazy: 'yes'
             },
+            list: [
+                'foo 2',
+                'bar 2',
+                'test 2'
+            ],
             active: true
         },
         {
@@ -135,23 +161,39 @@ const code = `
                 amazing: true,
                 fancy: 'yes'
             },
+            list: [
+                'foo 3',
+                'bar 3',
+                'test 3'
+            ],
             active: false
         }
     ];
-
-    const onAdd = () => {
-        message.info('add button clicked!');
-    };
-
-    const onEdit = (row) => {
-        message.info('edit button clicked!');
-    };
-
-    const onDelete = (row) => {
-        message.info('delete button clicked!');
-    };
-
+   
     const Example = () => {
+    
+        const [data, setData] = useState(defaultData);
+        
+        const onAdd = () => {
+            message.info('add button clicked!');
+        };
+        
+        const onEdit = (row) => {
+            message.info('edit button clicked!');
+        };
+        
+        const onDelete = (rows) => {           
+            return axios({
+                method: 'post',
+                url: '/path/delete',
+                data: rows,
+            }).then(() => {     
+                setData(data.filter( rec => !rows.includes(rec)));                
+            })
+        };
+        
+        const imageConfig = {action: '/path/upload', type: {image: ['jpg', 'png']}};
+        
         return (
                <FormGrid
                     dataSource={data}
@@ -159,11 +201,12 @@ const code = `
                     onAddRowClick={onAdd}
                     onEditRowClick={onEdit}
                     onDeleteRowClick={onDelete}
+                    selectedRowKeys={[]}
                     toolbar={true}
                 >
                     <Column title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30}/>
                     <Column title={'Content'} dataIndex={'html'} fieldType={'html'}/>
-                    <Column title={'Image'} dataIndex={'image'} fieldType={'image'}/>
+                    <Column title={'Image'} dataIndex={'image'} fieldType={'image'} config={imageConfig}/>
                     <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'}/>
                     <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
             </FormGrid>
