@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import {FormGrid} from '../../../src';
-import {Column} from "../../../src/Grid/FormGrid";
+import {FormGrid, Column} from '../../../src';
 import {ComponentDisplay} from "../../components/ComponentDisplay";
 import {message} from "antd";
 
@@ -106,21 +105,31 @@ const Example = () => {
 // language=JS
 const code = `
     import React from 'react';
-    import { AddButton, DeleteButton, EditButton } from '@react-hangar/antd-components';
+    import {FormGrid, Column} from '@react-hangar/antd-components'
     import axios from 'axios';
     
     const defaultData = [
         {
             text: 'You can adjust types',
             html: '<div style="background-color: #eee; color: #D20000">this is renderd html</div>',
-            image: {
-                name: 'write.jpg',
-                url: 'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593357_960_720.jpg'
-            },
+            image: [
+                {
+                    name: 'write.jpg',
+                    url: 'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593357_960_720.jpg'
+                },
+                {
+                    name: 'note.jpg',
+                    url: 'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593358_960_720.jpg'
+                }],
             settings: {
                 lame: false,
                 nasty: 'yes'
             },
+            list: [
+                'foo',
+                'bar',
+                'test'
+            ],
             active: true
         },
         {
@@ -134,6 +143,11 @@ const code = `
                 dope: true,
                 crazy: 'yes'
             },
+            list: [
+                'foo 2',
+                'bar 2',
+                'test 2'
+            ],
             active: true
         },
         {
@@ -147,6 +161,11 @@ const code = `
                 amazing: true,
                 fancy: 'yes'
             },
+            list: [
+                'foo 3',
+                'bar 3',
+                'test 3'
+            ],
             active: false
         }
     ];
