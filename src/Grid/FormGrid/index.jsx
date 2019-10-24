@@ -1,2 +1,2 @@
-export * from './Column';
+export * from './FormGridColumn';
 export * from './FormGrid';

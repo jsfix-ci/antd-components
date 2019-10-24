@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {FormGrid, Column} from '../../../src';
+import {FormGrid, FormGridColumn} from '../../../src';
 import {ComponentDisplay} from "../../components/ComponentDisplay";
 import {message} from "antd";
 
@@ -99,12 +99,12 @@ const Example = () => {
             toolbar={true}
             locale={'en-EN'}
         >
-            <Column title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30} config={{required: true}}/>
-            <Column title={'Content'} dataIndex={'html'} fieldType={'html'} config={{required: true}}/>
-            <Column title={'Image'} dataIndex={'image'} fieldType={'image'} config={imageConfig}/>
-            <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'} config={{required: true}} />
-            <Column title={'List'} dataIndex={'list'} fieldType={'list'} config={{required: false}} />
-            <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'} config={{required: true}} />
+            <FormGridColumn title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30} config={{required: true}}/>
+            <FormGridColumn title={'Content'} dataIndex={'html'} fieldType={'html'} config={{required: true}}/>
+            <FormGridColumn title={'Image'} dataIndex={'image'} fieldType={'image'} config={imageConfig}/>
+            <FormGridColumn title={'Settings'} dataIndex={'settings'} fieldType={'object'} config={{required: true}} />
+            <FormGridColumn title={'List'} dataIndex={'list'} fieldType={'list'} config={{required: false}} />
+            <FormGridColumn title={'Active'} dataIndex={'active'} fieldType={'boolean'} config={{required: true}} />
         </FormGrid>
     )
 };

@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Table from 'antd/lib/table';
-import { Column } from './Column';
+import { FormGridColumn } from './FormGridColumn';
 import { message, Form } from 'antd';
 import { AddButton, DeleteButton, EditButton, BackButton, SaveButton } from '../..';
 import { renderForm } from '../renderer';
@@ -43,7 +43,7 @@ export const FormGrid = Form.create()((props) => {
 
     const components = {
         body: {
-            cell: Column,
+            cell: FormGridColumn,
         },
     };
 
