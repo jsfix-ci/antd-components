@@ -12,7 +12,7 @@ import { renderForm } from '../renderer';
  * @constructor
  */
 export const FormGrid = Form.create()((props) => {
-    const { idProperty, dataSource, onAddRowClick, onDeleteRowClick, onEditRowClick, toolbar, children, ...restProps } = props;
+    const { idProperty, dataSource, onAddRowClick, onDeleteRowClick, onEditRowClick, toolbar, children, locale, ...restProps } = props;
 
     const [isEditing, setEditing] = useState(false);
     const [record, setRecord] = useState({});
@@ -72,9 +72,9 @@ export const FormGrid = Form.create()((props) => {
         if (toolbar) {
             return () => (
                 <Fragment>
-                    <AddButton onClick={onAddRowClick}/>
-                    <EditButton onClick={onEditClick}/>
-                    <DeleteButton onClick={onDeleteClick}/>
+                    <AddButton onClick={onAddRowClick} locale={locale} />
+                    <EditButton onClick={onEditClick} locale={locale} />
+                    <DeleteButton onClick={onDeleteClick} locale={locale} />
                 </Fragment>
             );
         }
@@ -108,10 +108,10 @@ export const FormGrid = Form.create()((props) => {
 
                 return (
                     <Fragment>
-                        <BackButton onClick={() => setEditing(false)}/>
+                        <BackButton locale={locale} onClick={() => setEditing(false)}/>
                         <Form>
                             {renderForm(props, children)}
-                            <SaveButton onClick={onSaveClick}/>
+                            <SaveButton locale={locale} onClick={onSaveClick}/>
                         </Form>
                     </Fragment>
                 );
@@ -145,5 +145,6 @@ FormGrid.defaultProps = {
 FormGrid.propTypes = {
     idProperty: PropTypes.string,
     onRecordCreate: PropTypes.func,
-    dataSource: PropTypes.array
+    dataSource: PropTypes.array,
+    locale: PropTypes.string
 };

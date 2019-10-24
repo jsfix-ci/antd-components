@@ -90,6 +90,7 @@ const Example = () => {
             onEditRowClick={onEdit}
             onDeleteRowClick={onDelete}
             toolbar={true}
+            locale={'en-EN'}
         >
             <Column title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30}/>
             <Column title={'Content'} dataIndex={'html'} fieldType={'html'}/>
@@ -202,7 +203,8 @@ const code = `
                     onEditRowClick={onEdit}
                     onDeleteRowClick={onDelete}
                     selectedRowKeys={[]}
-                    toolbar={true}
+                    toolbar={true}                    
+                    locale={'en-EN'}
                 >
                     <Column title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30}/>
                     <Column title={'Content'} dataIndex={'html'} fieldType={'html'}/>
@@ -223,6 +225,7 @@ const properties = [
     {property: 'onEditBtnClick', description: 'Function is called on edit button click', type: 'function'},
     {property: 'onDeleteBtnClick', description: 'Function is called on delete button click', type: 'function'},
     {property: 'dataSource', description: 'data source', type: 'object[]'},
+    {property: 'locale', description: 'available locales: "en-EN", "de-DE", "sr-SP"', type: 'string', default: 'en-EN'}
 ];
 
 export default () => (
