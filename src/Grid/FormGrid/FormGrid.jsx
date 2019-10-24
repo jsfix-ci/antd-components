@@ -77,7 +77,7 @@ export const FormGrid = Form.create()((props) => {
         if (toolbar) {
             return () => (
                 <Fragment>
-                    <AddButton onClick={onAddRowClick} locale={locale} />
+                    <AddButton onClick={onAddClick} locale={locale} />
                     <EditButton onClick={onEditClick} locale={locale} />
                     <DeleteButton onClick={onDeleteClick} locale={locale} />
                 </Fragment>
@@ -123,7 +123,7 @@ export const FormGrid = Form.create()((props) => {
                         <BackButton locale={locale} onClick={onBackButtonClick}/>
                         <Form onSubmit={handleSubmit}>
                             {renderForm(props, children)}
-                            <SaveButtonlocale={locale} disabled={hasErrors(getFieldsError())} htmlType="submit" />
+                            <SaveButton locale={locale} disabled={hasErrors(getFieldsError())} htmlType="submit" />
                         </Form>
                     </Fragment>
                 );

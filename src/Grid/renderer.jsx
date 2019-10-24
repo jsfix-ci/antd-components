@@ -104,7 +104,7 @@ export const renderForm = (props, columns) => {
                         {getFieldDecorator(dataIndex, {
                             initialValue: '',
                             rules: [{
-                                required: true,
+                                required: config.required,
                                 message: title + ' field is required'
                             }]
                         })(<Input/>)}
@@ -117,7 +117,7 @@ export const renderForm = (props, columns) => {
                             valuePropName: 'checked',
                             initialValue: false,
                             rules: [{
-                                required: true,
+                                required: config.required,
                                 message: title + ' field is required'
                             }]
                         })(<Switch/>)}
@@ -142,7 +142,7 @@ export const renderForm = (props, columns) => {
                         {getFieldDecorator(dataIndex, {
                             initialValue: '',
                             rules: [{
-                                required: true,
+                                required: config.required,
                                 message: title + ' field is required'
                             }]
                         })(<Editor/>)}
@@ -154,7 +154,7 @@ export const renderForm = (props, columns) => {
                         {getFieldDecorator(dataIndex, {
                             initialValue: '',
                             rules: [{
-                                required: true,
+                                required: config.required,
                                 message: title + ' field is required'
                             }]
                         })(<CodeMirror/>)}
@@ -166,7 +166,7 @@ export const renderForm = (props, columns) => {
                         {getFieldDecorator(dataIndex, {
                             initialValue: [],
                             rules: [{
-                                required: true,
+                                required: config.required,
                                 message: title + ' field is required'
                             }]
                         })(<ListField/>)}
@@ -178,7 +178,7 @@ export const renderForm = (props, columns) => {
                         {getFieldDecorator(dataIndex, {
                             initialValue: '',
                             rules: [{
-                                required: true,
+                                required: config.required,
                                 message: title + ' field is required'
                             }]
                         })(<Input/>)}
