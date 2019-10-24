@@ -130,7 +130,7 @@ export const renderForm = (props, columns) => {
                             valuePropName: 'fileList',
                             initialValue: '',
                             rules: [{
-                                required: true,
+                                required: config.required,
                                 message: title + ' field is required'
                             }]
                         })(<Upload {...config} />)}

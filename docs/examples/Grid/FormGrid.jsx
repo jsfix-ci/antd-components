@@ -80,7 +80,11 @@ const Example = () => {
         setData(data.filter( rec => !rows.includes(rec)))
     };
 
-    const imageConfig = {action: 'http://www.mocky.io/v2/5daf53d53200006d00d961e1', type: {image: ['jpeg', 'png']}};
+    const imageConfig = {
+        action: 'http://www.mocky.io/v2/5daf53d53200006d00d961e1',
+        type: {image: ['jpeg', 'png']},
+        required: true
+    };
 
     return (
         <FormGrid

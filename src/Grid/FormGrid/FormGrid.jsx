@@ -100,14 +100,9 @@ export const FormGrid = Form.create()((props) => {
         })
         (props => {
 
-            useEffect(() => {
-                props.form.validateFields()
-            }, []);
-
             const { getFieldsError } = props.form;
 
                 const onBackButtonClick = () => {
-                    //props.form.resetFields();
                     setRecord({});
                     setEditing(false)
                 };
@@ -117,7 +112,7 @@ export const FormGrid = Form.create()((props) => {
                 };
 
                 const handleSubmit = () => {
-                    props.form.validateFields((error, data) => {
+                    props.form.validateFields((error) => {
                         if (error) {
                             return message.error('form validation failed');
                         }
