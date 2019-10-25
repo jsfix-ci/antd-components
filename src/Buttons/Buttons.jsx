@@ -3,7 +3,6 @@ import AntdButton from 'antd/lib/button/button';
 import AntIcon from 'antd/lib/icon';
 import invert from 'invert-color';
 import styled from 'styled-components';
-import './Buttons.scss';
 import * as localeProvider from '../Locales';
 
 export const Button = (props) => {

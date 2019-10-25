@@ -1,4 +1,4 @@
-import './styles.css';
+import './index.scss';
 
 export * from './Form';
 export * from './Grid/DataGrid/index';

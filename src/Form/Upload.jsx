@@ -4,8 +4,6 @@ import AntdUpload from 'antd/lib/upload/Upload';
 import message from 'antd/lib/message';
 import PropTypes from "prop-types";
 
-import './Upload.scss';
-
 const getListType = (type) => {
     if (typeof type === 'object' && type.image || typeof type === 'string' && type === 'image') {
         return 'picture';
