@@ -1,11 +1,6 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/idea.css';
-import 'codemirror/mode/javascript/javascript';
 import { Controlled } from 'react-codemirror2'
-
-import './CodeMirror.scss';
 
 const isJsonString = (value) => {
     try {
