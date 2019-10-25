@@ -1,3 +1,4 @@
+import './index.scss';
 import './styles.css';
 
 export * from './Form';

@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
+import 'codemirror/mode/javascript/javascript';
 import { Controlled } from 'react-codemirror2'
 
 const isJsonString = (value) => {
