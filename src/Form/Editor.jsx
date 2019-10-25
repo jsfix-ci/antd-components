@@ -39,6 +39,7 @@ Editor.defaultProps = {
         'undo redo | formatselect | bold italic backcolor | \
         link alignleft aligncenter alignright alignjustify | \
         bullist numlist outdent indent | removeformat | code help',
+    statusbar: false,
     onChange: () => {}
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
 import { Editor } from '../../../src';
 
@@ -28,14 +28,43 @@ const code = `
 
 // Component props
 const properties = [
-    {property: 'height', description: 'https://www.tiny.cloud/docs/configure/editor-appearance/#height', type: 'number/string', default: '500'},
-    {property: 'menubar', description: 'https://www.tiny.cloud/docs/configure/editor-appearance/#menubar', type: 'string/boolean', default: 'false'},
-    {property: 'plugins', description: 'https://www.tiny.cloud/docs/configure/integration-and-setup/#plugins', type: 'string/string[]', default: ''},
-    {property: 'toolbar', description: 'https://www.tiny.cloud/docs/configure/editor-appearance/#toolbar', type: 'string', default: ''}
+    {
+        property: 'height',
+        description: 'https://www.tiny.cloud/docs/configure/editor-appearance/#height',
+        type: 'number/string',
+        default: '500'
+    },
+    {
+        property: 'menubar',
+        description: 'https://www.tiny.cloud/docs/configure/editor-appearance/#menubar',
+        type: 'string/boolean',
+        default: 'false'
+    },
+    {
+        property: 'plugins',
+        description: 'https://www.tiny.cloud/docs/configure/integration-and-setup/#plugins',
+        type: 'string/string[]',
+        default: ''
+    },
+    {
+        property: 'toolbar',
+        description: 'https://www.tiny.cloud/docs/configure/editor-appearance/#toolbar',
+        type: 'string',
+        default: ''
+    }
 ];
+// const description = `You have to include this line of code in the <head> of your HTML page:
+//                 cp -r node_modules/tinymce/skins skins`;
 
-const description = `You have to include this line of code in the <head> of your HTML page:
-                <script src="dist/tinymce/tinymce.min.js"></script>`;
+
+const description = (
+    <Fragment>
+        <div>You have to copy the skin that comes packaged with TinyMCE:</div>
+        <a href='https://www.tiny.cloud/docs/advanced/usage-with-module-loaders/#gettingtheskin'>
+            https://www.tiny.cloud/docs/advanced/usage-with-module-loaders/#gettingtheskin
+        </a>
+    </Fragment>
+);
 
 export default () => (
     <ComponentDisplay

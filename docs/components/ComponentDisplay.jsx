@@ -33,7 +33,7 @@ export const ComponentDisplay = ({title, code, properties, description, children
             { description ?
                 <div className='description'>
                     <Divider orientation="left">Description</Divider>
-                    <p>{description}</p>
+                    {description}
                 </div> : null
             }
             {
@@ -52,7 +52,7 @@ export const ComponentDisplay = ({title, code, properties, description, children
 
 ComponentDisplay.propTypes = {
     title: PropTypes.string,
-    description: PropTypes.string,
+    description: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     code: PropTypes.string,
     properties: PropTypes.arrayOf(PropTypes.object)
 };
