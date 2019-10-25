@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Table from 'antd/lib/table';
-import { Column } from './Column';
+import { FormGridColumn } from './FormGridColumn';
 import { message, Form } from 'antd';
 import { AddButton, DeleteButton, EditButton, BackButton, SaveButton } from '../..';
 import { renderForm } from '../renderer';
@@ -43,8 +43,14 @@ export const FormGrid = Form.create()((props) => {
 
     const components = {
         body: {
-            cell: Column,
+            cell: FormGridColumn,
         },
+    };
+
+    const onAddClick = () => {
+        setRecord({});
+        setEditing(true);
+        onAddRowClick();
     };
 
     const onEditClick = () => {
@@ -72,7 +78,7 @@ export const FormGrid = Form.create()((props) => {
         if (toolbar) {
             return () => (
                 <Fragment>
-                    <AddButton onClick={onAddRowClick} locale={locale} />
+                    <AddButton onClick={onAddClick} locale={locale} />
                     <EditButton onClick={onEditClick} locale={locale} />
                     <DeleteButton onClick={onDeleteClick} locale={locale} />
                 </Fragment>
@@ -94,24 +100,30 @@ export const FormGrid = Form.create()((props) => {
             }
         })
         (props => {
-                const { form } = props;
 
-                const onSaveClick = () => {
-                    form.validateFields((error, data) => {
+            const { getFieldsError } = props.form;
+
+                const onBackButtonClick = () => {
+                    setEditing(false)
+                };
+
+                const hasErrors = (fieldsError) => {
+                    return Object.keys(fieldsError).some(field => fieldsError[field]);
+                };
+
+                const handleSubmit = () => {
+                    props.form.validateFields((error) => {
                         if (error) {
                             return message.error('form validation failed');
                         }
-
-                        console.log(data);
                     });
                 };
-
                 return (
                     <Fragment>
-                        <BackButton locale={locale} onClick={() => setEditing(false)}/>
-                        <Form>
+                        <BackButton locale={locale} onClick={onBackButtonClick}/>
+                        <Form onSubmit={handleSubmit}>
                             {renderForm(props, children)}
-                            <SaveButton locale={locale} onClick={onSaveClick}/>
+                            <SaveButton locale={locale} disabled={hasErrors(getFieldsError())} htmlType="submit" />
                         </Form>
                     </Fragment>
                 );
