@@ -7,7 +7,7 @@ import { getDisplay } from '../renderer';
  *
  * @constructor
  */
-export const Column = (props) => {
+export const FormGridColumn = (props) => {
     const {
         dataIndex,
         fieldType,
@@ -33,11 +33,11 @@ export const Column = (props) => {
     );
 };
 
-Column.defaultProps = {
+FormGridColumn.defaultProps = {
     type: 'text'
 };
 
-Column.propTypes = {
+FormGridColumn.propTypes = {
     dataIndex: PropTypes.string,
     fieldType: PropTypes.oneOf(['string', 'object', 'boolean', 'image', 'html', 'list']),
 };

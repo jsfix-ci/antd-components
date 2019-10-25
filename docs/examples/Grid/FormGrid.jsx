@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {FormGrid, Column} from '../../../src';
+import {FormGrid, FormGridColumn} from '../../../src';
 import {ComponentDisplay} from "../../components/ComponentDisplay";
 import {message} from "antd";
 
@@ -83,7 +83,11 @@ const Example = () => {
         setData(data.filter( rec => !rows.includes(rec)))
     };
 
-    const imageConfig = {action: 'http://www.mocky.io/v2/5daf53d53200006d00d961e1', type: {image: ['jpeg', 'png']}};
+    const imageConfig = {
+        action: 'http://www.mocky.io/v2/5daf53d53200006d00d961e1',
+        type: {image: ['jpeg', 'png']},
+        required: false
+    };
 
     return (
         <FormGrid
@@ -95,12 +99,12 @@ const Example = () => {
             toolbar={true}
             locale={'en-EN'}
         >
-            <Column title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30}/>
-            <Column title={'Content'} dataIndex={'html'} fieldType={'html'}/>
-            <Column title={'Image'} dataIndex={'image'} fieldType={'image'} config={imageConfig}/>
-            <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'}/>
-            <Column title={'List'} dataIndex={'list'} fieldType={'list'}/>
-            <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
+            <FormGridColumn title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30} config={{required: true}}/>
+            <FormGridColumn title={'Content'} dataIndex={'html'} fieldType={'html'} config={{required: true}}/>
+            <FormGridColumn title={'Image'} dataIndex={'image'} fieldType={'image'} config={imageConfig}/>
+            <FormGridColumn title={'Settings'} dataIndex={'settings'} fieldType={'object'} config={{required: true}} />
+            <FormGridColumn title={'List'} dataIndex={'list'} fieldType={'list'} config={{required: false}} />
+            <FormGridColumn title={'Active'} dataIndex={'active'} fieldType={'boolean'} config={{required: true}} />
         </FormGrid>
     )
 };
@@ -196,7 +200,11 @@ const code = `
             })
         };
         
-        const imageConfig = {action: '/path/upload', type: {image: ['jpg', 'png']}};
+       const imageConfig = {
+            action: 'http://www.mocky.io/v2/5daf53d53200006d00d961e1',
+            type: {image: ['jpeg', 'png']},
+            required: false
+        };
         
         return (
                <FormGrid
@@ -209,11 +217,12 @@ const code = `
                     toolbar={true}                    
                     locale={'en-EN'}
                 >
-                    <Column title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30}/>
-                    <Column title={'Content'} dataIndex={'html'} fieldType={'html'}/>
+                    <Column title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30} config={{required: true}}/>
+                    <Column title={'Content'} dataIndex={'html'} fieldType={'html'} config={{required: true}}/>
                     <Column title={'Image'} dataIndex={'image'} fieldType={'image'} config={imageConfig}/>
-                    <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'}/>
-                    <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
+                    <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'} config={{required: true}} />
+                    <Column title={'List'} dataIndex={'list'} fieldType={'list'} config={{required: false}} />
+                    <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'} config={{required: true}} />
             </FormGrid>
         );
     };

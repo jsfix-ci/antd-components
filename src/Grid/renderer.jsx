@@ -1,9 +1,9 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import Switch from 'antd/lib/switch';
 import Popover from 'antd/lib/popover';
 import Input from 'antd/lib/input';
 import Form from 'antd/lib/form';
-import { Editor, CodeMirror, ListField, Upload} from '../../src';
+import { Editor, CodeMirror, ListField, Upload } from '../../src';
 import { truncateText } from '../helper';
 
 export const getDisplay = (fieldType, record, dataIndex, children, maxLength) => {
@@ -101,43 +101,86 @@ export const renderForm = (props, columns) => {
             case 'string':
                 return (
                     <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex)(<Input/>)}
+                        {getFieldDecorator(dataIndex, {
+                            initialValue: '',
+                            rules: [{
+                                required: config.required,
+                                message: title + ' field is required'
+                            }]
+                        })(<Input/>)}
                     </Form.Item>
                 );
             case 'boolean':
                 return (
                     <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex, { valuePropName: 'checked' })(<Switch/>)}
+                        {getFieldDecorator(dataIndex, {
+                            valuePropName: 'checked',
+                            initialValue: false,
+                            rules: [{
+                                required: config.required,
+                                message: title + ' field is required'
+                            }]
+                        })(<Switch/>)}
                     </Form.Item>
                 );
             case 'image':
                 return (
                     <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex,{ valuePropName: 'fileList' })(<Upload {...config} />)}
+                        {getFieldDecorator(dataIndex, {
+                            valuePropName: 'fileList',
+                            rules: [{
+                                required: config.required,
+                                message: title + ' field is required'
+                            }]
+                        })(<Upload {...config} />)}
                     </Form.Item>
                 );
             case 'html':
                 return (
                     <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex)(<Editor/>)}
+                        {getFieldDecorator(dataIndex, {
+                            initialValue: '',
+                            rules: [{
+                                required: config.required,
+                                message: title + ' field is required'
+                            }]
+                        })(<Editor/>)}
                     </Form.Item>
                 );
             case 'object':
                 return (
                     <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex)(<CodeMirror/>)}
+                        {getFieldDecorator(dataIndex, {
+                            initialValue: '',
+                            rules: [{
+                                required: config.required,
+                                message: title + ' field is required'
+                            }]
+                        })(<CodeMirror/>)}
                     </Form.Item>
                 );
             case 'list':
                 return (
                     <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex)(<ListField/>)}
+                        {getFieldDecorator(dataIndex, {
+                            initialValue: [],
+                            rules: [{
+                                required: config.required,
+                                message: title + ' field is required'
+                            }]
+                        })(<ListField/>)}
                     </Form.Item>
                 );
             default:
                 return (
                     <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex)(<Input/>)}
+                        {getFieldDecorator(dataIndex, {
+                            initialValue: '',
+                            rules: [{
+                                required: config.required,
+                                message: title + ' field is required'
+                            }]
+                        })(<Input/>)}
                     </Form.Item>
                 );
         }
