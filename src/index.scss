@@ -1,7 +1,8 @@
-@import './Buttons/Buttons.scss';
+@import './styles';
+@import './Buttons/Buttons';
 
 @import '~codemirror/lib/codemirror.css';
 @import '~codemirror/theme/idea.css';
 
-@import './Form/CodeMirror.scss';
-@import './Form/Upload.scss';
+@import './Form/CodeMirror';
+@import './Form/Upload';

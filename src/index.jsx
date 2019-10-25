@@ -1,5 +1,5 @@
 import './index.scss';
-import './styles.css';
+import './styles.scss';
 
 export * from './Form';
 export * from './Grid/DataGrid/index';
