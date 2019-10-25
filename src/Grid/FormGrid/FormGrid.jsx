@@ -48,6 +48,7 @@ export const FormGrid = Form.create()((props) => {
     };
 
     const onAddClick = () => {
+        setRecord({});
         setEditing(true);
         onAddRowClick();
     };
@@ -103,7 +104,6 @@ export const FormGrid = Form.create()((props) => {
             const { getFieldsError } = props.form;
 
                 const onBackButtonClick = () => {
-                    setRecord({});
                     setEditing(false)
                 };
 

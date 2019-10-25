@@ -152,7 +152,7 @@ export const renderForm = (props, columns) => {
                 return (
                     <Form.Item label={title}>
                         {getFieldDecorator(dataIndex, {
-                            initialValue: '',
+                            initialValue: {},
                             rules: [{
                                 required: config.required,
                                 message: title + ' field is required'
