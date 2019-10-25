@@ -3,7 +3,7 @@ import Switch from 'antd/lib/switch';
 import Popover from 'antd/lib/popover';
 import Input from 'antd/lib/input';
 import Form from 'antd/lib/form';
-import { Editor, CodeMirror, ListField, Upload } from '../../src';
+import { Editor, CodeMirror, ListField, Upload } from '..';
 import { truncateText } from '../helper';
 
 export const getDisplay = (fieldType, record, dataIndex, children, maxLength) => {

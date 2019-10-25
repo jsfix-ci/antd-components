@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input } from 'antd';
 import nanoid from 'nanoid';
-import { emptyFn, IconButton, AddButton } from '../../src';
+import { emptyFn, IconButton, AddButton } from '..';
 
 export const ListField = forwardRef((props, ref) => {
     const { addText, label, onChange, value = [] } = props;
