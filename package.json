@@ -14,7 +14,7 @@
   "repository": "anh4n/antd-components",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "babel --delete-dir-on-start src --out-dir lib --copy-files",
+    "build": "babel --delete-dir-on-start src --out-dir lib && node-sass src -o lib",
     "bundle": "webpack --mode=production --colors",
     "test": "jest"
   },
