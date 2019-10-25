@@ -2,10 +2,12 @@ const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 
 const DOCS_DIR = path.resolve(__dirname, 'docs');
+const SRC_DIR = path.resolve(__dirname, 'src');
 
 module.exports = {
     entry: [
-        DOCS_DIR + '/index.jsx'
+        DOCS_DIR + '/index.jsx',
+        SRC_DIR + '/index.scss'
     ],
     resolve: {
         extensions: ['.js', '.jsx']
