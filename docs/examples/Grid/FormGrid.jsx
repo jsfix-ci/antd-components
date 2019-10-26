@@ -118,6 +118,7 @@ const code = `
     
     const defaultData = [
         {
+             id: 1,
             text: 'You can adjust types',
             html: '<div style="background-color: #eee; color: #D20000">this is renderd html</div>',
             image: [
@@ -141,6 +142,7 @@ const code = `
             active: true
         },
         {
+            id: 2,
             text: 'for example string',
             html: '<div style="background-color: #000; color: #fff">this is renderd html</div>',
             image: {
@@ -159,6 +161,7 @@ const code = `
             active: true
         },
         {
+            id: 3,
             text: 'it will be shortened if its to long',
             html: '<div style="background-color: #fff; color: #000">this is renderd html</div>',
             image: {
