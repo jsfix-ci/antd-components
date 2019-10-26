@@ -122,6 +122,7 @@ export const FormGrid = Form.create()((props) => {
                         if (error) {
                             return message.error('form validation failed');
                         }
+                        data[idProperty] = props[idProperty];
                         onSaveClick(data);
                     });
                 };
