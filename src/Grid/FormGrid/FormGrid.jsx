@@ -12,7 +12,7 @@ import { renderForm } from '../renderer';
  * @constructor
  */
 export const FormGrid = Form.create()((props) => {
-    const { idProperty, dataSource, onAddRowClick, onDeleteRowClick, onEditRowClick, toolbar, children, locale, ...restProps } = props;
+    const { idProperty, dataSource, onAddRowClick, onDeleteRowClick, onEditRowClick, onSaveRowClick, toolbar, children, locale, ...restProps } = props;
 
     const [isEditing, setEditing] = useState(false);
     const [record, setRecord] = useState({});
@@ -45,6 +45,11 @@ export const FormGrid = Form.create()((props) => {
         body: {
             cell: FormGridColumn,
         },
+    };
+
+    const onSaveClick = (data) => {
+        setEditing(false);
+        onSaveRowClick(data);
     };
 
     const onAddClick = () => {
@@ -111,11 +116,13 @@ export const FormGrid = Form.create()((props) => {
                     return Object.keys(fieldsError).some(field => fieldsError[field]);
                 };
 
-                const handleSubmit = () => {
-                    props.form.validateFields((error) => {
+                const handleSubmit = (e) => {
+                    e.preventDefault();
+                    props.form.validateFields((error, data) => {
                         if (error) {
                             return message.error('form validation failed');
                         }
+                        onSaveClick(data);
                     });
                 };
                 return (

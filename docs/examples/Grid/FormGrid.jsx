@@ -83,6 +83,10 @@ const Example = () => {
         setData(data.filter( rec => !rows.includes(rec)))
     };
 
+    const onSave = (row) => {
+        console.log(row, ' row <------------------------------');
+    };
+
     const imageConfig = {
         action: 'http://www.mocky.io/v2/5daf53d53200006d00d961e1',
         type: {image: ['jpeg', 'png']},
@@ -96,6 +100,7 @@ const Example = () => {
             onAddRowClick={onAdd}
             onEditRowClick={onEdit}
             onDeleteRowClick={onDelete}
+            onSaveRowClick={onSave}
             toolbar={true}
             locale={'en-EN'}
         >
