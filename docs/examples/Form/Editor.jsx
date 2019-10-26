@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
+import { Code } from '../../components/utils';
 import { Editor } from '../../../src';
 
 // Example implementation
@@ -53,9 +54,6 @@ const properties = [
         default: ''
     }
 ];
-// const description = `You have to include this line of code in the <head> of your HTML page:
-//                 cp -r node_modules/tinymce/skins skins`;
-
 
 const description = (
     <Fragment>
@@ -63,6 +61,24 @@ const description = (
         <a href='https://www.tiny.cloud/docs/advanced/usage-with-module-loaders/#gettingtheskin'>
             https://www.tiny.cloud/docs/advanced/usage-with-module-loaders/#gettingtheskin
         </a>
+        <br/>
+        <br/>
+        <div>Or add this to webpack.config:</div>
+        <Code>
+            {`
+                const CopyPlugin = require('copy-webpack-plugin');
+                
+                module.exports = {
+                    // ...
+                    plugins: [
+                        new CopyPlugin([
+                            { from: 'node_modules/tinymce/skins', to: 'skins' }
+                        ])
+                    ],
+                    // ...
+                };
+            `}
+        </Code>
     </Fragment>
 );
 
