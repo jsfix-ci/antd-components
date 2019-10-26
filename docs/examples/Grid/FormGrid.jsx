@@ -113,7 +113,7 @@ const Example = () => {
 // language=JS
 const code = `
     import React from 'react';
-    import {FormGrid, Column} from '@react-hangar/antd-components'
+    import {FormGrid, FormGridColumn} from '@react-hangar/antd-components'
     import axios from 'axios';
     
     const defaultData = [
@@ -220,12 +220,12 @@ const code = `
                     toolbar={true}                    
                     locale={'en-EN'}
                 >
-                    <Column title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30} config={{required: true}}/>
-                    <Column title={'Content'} dataIndex={'html'} fieldType={'html'} config={{required: true}}/>
-                    <Column title={'Image'} dataIndex={'image'} fieldType={'image'} config={imageConfig}/>
-                    <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'} config={{required: true}} />
-                    <Column title={'List'} dataIndex={'list'} fieldType={'list'} config={{required: false}} />
-                    <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'} config={{required: true}} />
+                    <FormGridColumn title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30} config={{required: true}}/>
+                    <FormGridColumn title={'Content'} dataIndex={'html'} fieldType={'html'} config={{required: true}}/>
+                    <FormGridColumn title={'Image'} dataIndex={'image'} fieldType={'image'} config={imageConfig}/>
+                    <FormGridColumn title={'Settings'} dataIndex={'settings'} fieldType={'object'} config={{required: true}} />
+                    <FormGridColumn title={'List'} dataIndex={'list'} fieldType={'list'} config={{required: false}} />
+                    <FormGridColumn title={'Active'} dataIndex={'active'} fieldType={'boolean'} config={{required: true}} />
             </FormGrid>
         );
     };
