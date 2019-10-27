@@ -5,6 +5,7 @@ import { FormGridColumn } from './FormGridColumn';
 import { message, Form } from 'antd';
 import { AddButton, DeleteButton, EditButton, BackButton, SaveButton } from '../..';
 import { renderForm } from '../renderer';
+import {emptyFn} from "../../../lib/helper";
 
 /**
  * @return {React.Component}
@@ -162,12 +163,22 @@ export const FormGrid = Form.create()((props) => {
 
 FormGrid.defaultProps = {
     idProperty: 'id',
-    onRecordCreate: (record) => (record),
+    onAddRowClick: emptyFn,
+    onEditRowClick: emptyFn,
+    onDeleteRowClick: emptyFn,
+    onSaveRowClick: emptyFn,
+    toolbar: false,
+    locale: 'en-EN',
+    dataSource: [],
 };
 
 FormGrid.propTypes = {
     idProperty: PropTypes.string,
-    onRecordCreate: PropTypes.func,
+    onAddRowClick: PropTypes.func,
+    onEditRowClick: PropTypes.func,
+    onDeleteRowClick: PropTypes.func,
+    onSaveRowClick: PropTypes.func,
     dataSource: PropTypes.array,
+    toolbar: PropTypes.bool,
     locale: PropTypes.string
 };
