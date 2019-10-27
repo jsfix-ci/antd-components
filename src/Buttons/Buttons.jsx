@@ -3,13 +3,15 @@ import AntdButton from 'antd/lib/button/button';
 import AntIcon from 'antd/lib/icon';
 import invert from 'invert-color';
 import styled from 'styled-components';
-import * as localeProvider from '../Locales';
+import { l10n } from '../Locales';
+import PropTypes from 'prop-types';
+
+const isHexCode = (color) => (/^#([0-9A-F]{3}){1,2}$/i.test(color));
 
 export const Button = (props) => {
-    const { color = 'default', ...restProps } = props;
-    //toDo validate hex color code
-    if (color.indexOf('#') !== -1) {
+    const { color, ...restProps } = props;
 
+    if (isHexCode(color)) {
         const StyledButton = styled(AntdButton)`
                 background-color: ${color};
                 color: ${invert(color, true)};
@@ -31,11 +33,19 @@ export const Button = (props) => {
     } else {
         return (
             <AntdButton
-                className={'hangar-btn hangar-btn-color-' + color}
+                className={`hangar-btn hangar-btn-color-${color}`}
                 {...restProps}
             />
         );
     }
+};
+
+Button.defaultProps = {
+    color: 'default',
+};
+
+Button.propTypes = {
+    color: PropTypes.string
 };
 
 export const IconButton = styled(AntIcon)`
@@ -52,41 +62,41 @@ export const IconButton = styled(AntIcon)`
 `;
 
 export const AddButton = ({ icon = 'plus', children, locale, ...restProps }) =>
-    <Button icon={icon} {...restProps}>{children || localeProvider.get(locale).Buttons.addButton}</Button>;
+    <Button icon={icon} {...restProps}>{children || l10n(locale, 'Buttons', 'addButton')}</Button>;
 
 export const DeleteButton = ({ icon = 'delete', children, locale, ...restProps }) =>
-    <Button icon={icon} {...restProps}>{children || localeProvider.get(locale).Buttons.deleteButton}</Button>;
+    <Button icon={icon} {...restProps}>{children || l10n(locale, 'Buttons', 'deleteButton')}</Button>;
 
 export const EditButton = ({ icon = 'edit', children, locale, ...restProps }) =>
-    <Button icon={icon} {...restProps}>{children || localeProvider.get(locale).Buttons.editButton}</Button>;
+    <Button icon={icon} {...restProps}>{children || l10n(locale, 'Buttons', 'editButton')}</Button>;
 
 export const ReloadButton = ({ icon = 'reload', children, locale, ...restProps }) =>
-    <Button icon={icon} {...restProps}>{children || localeProvider.get(locale).Buttons.reloadButton}</Button>;
+    <Button icon={icon} {...restProps}>{children || l10n(locale, 'Buttons', 'reloadButton')}</Button>;
 
 export const BackButton = ({ icon = 'left', children, locale, ...restProps }) =>
-    <Button icon={icon} {...restProps}>{children || localeProvider.get(locale).Buttons.backButton}</Button>;
+    <Button icon={icon} {...restProps}>{children || l10n(locale, 'Buttons', 'backButton')}</Button>;
 
 export const SearchButton = ({ icon = 'search', children, locale, ...restProps }) =>
-    <Button icon={icon} {...restProps}>{children || localeProvider.get(locale).Buttons.searchButton}</Button>;
+    <Button icon={icon} {...restProps}>{children || l10n(locale, 'Buttons', 'searchButton')}</Button>;
 
 export const SaveButton = ({ icon = 'save', children, locale, ...restProps }) =>
-    <Button icon={icon} {...restProps}>{children || localeProvider.get(locale).Buttons.saveButton}</Button>;
+    <Button icon={icon} {...restProps}>{children || l10n(locale, 'Buttons', 'saveButton')}</Button>;
 
 export const CancelButton = ({ icon = 'close', children, locale, ...restProps }) =>
-    <Button icon={icon} {...restProps}>{children || localeProvider.get(locale).Buttons.cancelButton}</Button>;
+    <Button icon={icon} {...restProps}>{children || l10n(locale, 'Buttons', 'cancelButton')}</Button>;
 
 export const CloseButton = ({ icon = 'close', children, locale, ...restProps }) =>
-    <Button icon={icon} {...restProps}>{children || localeProvider.get(locale).Buttons.closeButton}</Button>;
+    <Button icon={icon} {...restProps}>{children || l10n(locale, 'Buttons', 'closeButton')}</Button>;
 
 export const UndoButton = ({ icon = 'rollback', children, locale, ...restProps }) =>
-    <Button icon={icon} {...restProps}>{children || localeProvider.get(locale).Buttons.undoButton}</Button>;
+    <Button icon={icon} {...restProps}>{children || l10n(locale, 'Buttons', 'undoButton')}</Button>;
 
 export const SettingsButton = ({ icon = 'setting', children, locale, ...restProps }) =>
-    <Button icon={icon} {...restProps}>{children || localeProvider.get(locale).Buttons.settingsButton}</Button>;
+    <Button icon={icon} {...restProps}>{children || l10n(locale, 'Buttons', 'settingsButton')}</Button>;
 
 export const BasketButton = ({ icon = 'shopping-cart', children, locale, ...restProps }) =>
-    <Button icon={icon} {...restProps}>{children || localeProvider.get(locale).Buttons.basketButton}</Button>;
+    <Button icon={icon} {...restProps}>{children || l10n(locale, 'Buttons', 'basketButton')}</Button>;
 
 export const UploadButton = ({ icon = 'upload', children, locale, ...restProps }) =>
-    <Button icon={icon} {...restProps}>{children || localeProvider.get(locale).Buttons.uploadButton}</Button>;
+    <Button icon={icon} {...restProps}>{children || l10n(locale, 'Buttons', 'uploadButton')}</Button>;
 

@@ -1,12 +1,27 @@
-export const get = (locale) => {
-    let l10n;
+export const l10n = (locale = 'en-EN', ...params) => {
+    let translations;
 
     try {
-        l10n = require(`./${locale}`)
-    } catch(e) {
-        console.error(`Locale "${locale}" not exist. fallback to "en-EN"`);
-        l10n = require(`./en-EN`);
+        translations = require(`./${locale}`)
+    } catch (e) {
+        console.error(`locale "${locale}" not exist. fallback to "en-EN"`);
+        translations = require(`./en-EN`);
     }
 
-    return l10n;
+    let text = translations;
+
+    try {
+        params.forEach(t => {
+            text = text[t];
+
+            if (!text) {
+                text = t;
+                throw `translation ${t} not found`;
+            }
+        });
+    } catch (err) {
+        console.error(err);
+    }
+
+    return text;
 };
