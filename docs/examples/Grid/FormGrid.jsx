@@ -83,8 +83,8 @@ const Example = () => {
         setData(data.filter( rec => !rows.includes(rec)))
     };
 
-    const onSave = (row) => {
-        console.log(row, ' row <------------------------------');
+    const onSave = (row, actionType) => {
+        console.log(row, actionType);
     };
 
     const imageConfig = {
@@ -208,6 +208,16 @@ const code = `
             })
         };
         
+        const onSave = (row, actionType) => {
+            if (actionType === 'create') {
+                // create action
+                console.log('create');
+            } else {
+                // update action
+                console.log('update');
+            }
+        };
+        
        const imageConfig = {
             action: 'http://www.mocky.io/v2/5daf53d53200006d00d961e1',
             type: {image: ['jpeg', 'png']},
@@ -224,6 +234,7 @@ const code = `
                     selectedRowKeys={[]}
                     toolbar={true}                    
                     locale={'en-EN'}
+                    onSaveRowClick={onSave}
                 >
                     <FormGridColumn title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30} config={{required: true}}/>
                     <FormGridColumn title={'Content'} dataIndex={'html'} fieldType={'html'} config={{required: true}}/>

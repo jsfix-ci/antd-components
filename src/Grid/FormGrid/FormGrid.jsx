@@ -18,6 +18,7 @@ export const FormGrid = Form.create()((props) => {
     const [record, setRecord] = useState({});
     const [data, setData] = useState(dataSource);
     const [selected, setSelected] = useState([]);
+    const [actionType, setActionType] = useState('');
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
     useEffect(() => {
@@ -49,12 +50,13 @@ export const FormGrid = Form.create()((props) => {
 
     const onSaveClick = (data) => {
         setEditing(false);
-        onSaveRowClick(data);
+        onSaveRowClick(data, actionType);
     };
 
     const onAddClick = () => {
         setRecord({});
         setEditing(true);
+        setActionType('create');
         onAddRowClick();
     };
 
@@ -63,6 +65,7 @@ export const FormGrid = Form.create()((props) => {
             setEditing(true);
             setRecord(selected[0]);
             onEditRowClick(selected[0])
+            setActionType('update');
         } else if (selected.length === 0) {
             message.error('You have to select one row at least');
         } else {
