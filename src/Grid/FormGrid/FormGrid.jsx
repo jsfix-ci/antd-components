@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import Table from 'antd/lib/table';
 import { FormGridColumn } from './FormGridColumn';
 import { message, Form } from 'antd';
-import { AddButton, DeleteButton, EditButton, BackButton, SaveButton } from '../..';
+import { AddButton, DeleteButton, EditButton, BackButton, SaveButton, emptyFn } from '../..';
 import { renderForm } from '../renderer';
-import {emptyFn} from "../../../lib/helper";
 
 /**
  * @return {React.Component}
@@ -13,7 +12,7 @@ import {emptyFn} from "../../../lib/helper";
  * @constructor
  */
 export const FormGrid = Form.create()((props) => {
-    const { idProperty, dataSource, onAddRowClick, onDeleteRowClick, onEditRowClick, onSaveRowClick, toolbar, children, locale, ...restProps } = props;
+    const { idProperty, dataSource, onAddRowClick, onDeleteRowClick, onEditRowClick, onSaveRowClick, toolbar, children, ...restProps } = props;
 
     const [isEditing, setEditing] = useState(false);
     const [record, setRecord] = useState({});
@@ -87,9 +86,9 @@ export const FormGrid = Form.create()((props) => {
         if (toolbar) {
             return () => (
                 <Fragment>
-                    <AddButton onClick={onAddClick} locale={locale} />
-                    <EditButton onClick={onEditClick} locale={locale} />
-                    <DeleteButton onClick={onDeleteClick} locale={locale} />
+                    <AddButton onClick={onAddClick}/>
+                    <EditButton onClick={onEditClick}/>
+                    <DeleteButton onClick={onDeleteClick}/>
                 </Fragment>
             );
         }
@@ -110,7 +109,7 @@ export const FormGrid = Form.create()((props) => {
         })
         (props => {
 
-            const { getFieldsError } = props.form;
+                const { getFieldsError } = props.form;
 
                 const onBackButtonClick = () => {
                     setEditing(false)
@@ -132,10 +131,10 @@ export const FormGrid = Form.create()((props) => {
                 };
                 return (
                     <Fragment>
-                        <BackButton locale={locale} onClick={onBackButtonClick}/>
+                        <BackButton onClick={onBackButtonClick}/>
                         <Form onSubmit={handleSubmit}>
                             {renderForm(props, children)}
-                            <SaveButton locale={locale} disabled={hasErrors(getFieldsError())} htmlType="submit" />
+                            <SaveButton disabled={hasErrors(getFieldsError())} htmlType="submit"/>
                         </Form>
                     </Fragment>
                 );
@@ -168,7 +167,6 @@ FormGrid.defaultProps = {
     onDeleteRowClick: emptyFn,
     onSaveRowClick: emptyFn,
     toolbar: false,
-    locale: 'en-EN',
     dataSource: [],
 };
 
@@ -179,6 +177,5 @@ FormGrid.propTypes = {
     onDeleteRowClick: PropTypes.func,
     onSaveRowClick: PropTypes.func,
     dataSource: PropTypes.array,
-    toolbar: PropTypes.bool,
-    locale: PropTypes.string
+    toolbar: PropTypes.bool
 };
