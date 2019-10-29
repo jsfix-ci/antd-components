@@ -14,13 +14,14 @@ export const FormGridColumn = (props) => {
         children,
         maxLength,
         record,
+        fieldProps,
+        rules,
         ...restProps
     } = props;
 
-
     if (!dataIndex) {
         return (
-            <td>
+            <td {...restProps}>
                 {children}
             </td>
         );
@@ -34,11 +35,16 @@ export const FormGridColumn = (props) => {
 };
 
 FormGridColumn.defaultProps = {
-    type: 'text'
+    required: false,
+    fieldType: 'string',
+    rules: []
+
 };
 
 FormGridColumn.propTypes = {
     dataIndex: PropTypes.string,
+    required: PropTypes.bool,
     fieldType: PropTypes.oneOf(['string', 'number', 'object', 'boolean', 'image', 'html', 'list']),
+    rules: PropTypes.array
 };
 

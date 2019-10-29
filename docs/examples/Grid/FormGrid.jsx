@@ -89,8 +89,7 @@ const Example = () => {
 
     const imageConfig = {
         action: 'http://www.mocky.io/v2/5daf53d53200006d00d961e1',
-        type: { image: ['jpeg', 'png'] },
-        required: false
+        type: { image: ['jpeg', 'png'] }
     };
 
     return (
@@ -103,13 +102,13 @@ const Example = () => {
             onSaveRowClick={onSave}
             toolbar={true}
         >
-            <FormGridColumn title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30}
-                            config={{ required: true }}/>
-            <FormGridColumn title={'Content'} dataIndex={'html'} fieldType={'html'} config={{ required: true }}/>
-            <FormGridColumn title={'Image'} dataIndex={'image'} fieldType={'image'} config={imageConfig}/>
-            <FormGridColumn title={'Settings'} dataIndex={'settings'} fieldType={'object'} config={{ required: true }}/>
-            <FormGridColumn title={'List'} dataIndex={'list'} fieldType={'list'} config={{ required: false }}/>
-            <FormGridColumn title={'Active'} dataIndex={'active'} fieldType={'boolean'} config={{ required: true }}/>
+            <FormGridColumn title={'Title'} dataIndex={'text'} fieldType={'string'} rules={[{ max: 30 }]} required
+                            maxLength={30}/>
+            <FormGridColumn title={'Content'} dataIndex={'html'} fieldType={'html'} required/>
+            <FormGridColumn title={'Image'} dataIndex={'image'} fieldType={'image'} fieldProps={imageConfig}/>
+            <FormGridColumn title={'Settings'} dataIndex={'settings'} fieldType={'object'} required/>
+            <FormGridColumn title={'List'} dataIndex={'list'} fieldType={'list'} required/>
+            <FormGridColumn title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
         </FormGrid>
     )
 };
@@ -220,8 +219,7 @@ const code = `
 
         const imageConfig = {
             action: 'http://www.mocky.io/v2/5daf53d53200006d00d961e1',
-            type: { image: ['jpeg', 'png'] },
-            required: false
+            type: { image: ['jpeg', 'png'] }
         };
 
         return (
@@ -231,19 +229,15 @@ const code = `
                 onAddRowClick={onAdd}
                 onEditRowClick={onEdit}
                 onDeleteRowClick={onDelete}
-                selectedRowKeys={[]}
-                toolbar={true}
                 onSaveRowClick={onSave}
+                toolbar={true}
             >
-                <FormGridColumn title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30}
-                                config={{ required: true }}/>
-                <FormGridColumn title={'Content'} dataIndex={'html'} fieldType={'html'} config={{ required: true }}/>
-                <FormGridColumn title={'Image'} dataIndex={'image'} fieldType={'image'} config={imageConfig}/>
-                <FormGridColumn title={'Settings'} dataIndex={'settings'} fieldType={'object'}
-                                config={{ required: true }}/>
-                <FormGridColumn title={'List'} dataIndex={'list'} fieldType={'list'} config={{ required: false }}/>
-                <FormGridColumn title={'Active'} dataIndex={'active'} fieldType={'boolean'}
-                                config={{ required: true }}/>
+                <FormGridColumn title={'Title'} dataIndex={'text'} fieldType={'string'} required maxLength={30}/>
+                <FormGridColumn title={'Content'} dataIndex={'html'} fieldType={'html'} required/>
+                <FormGridColumn title={'Image'} dataIndex={'image'} fieldType={'image'} fieldProps={imageConfig}/>
+                <FormGridColumn title={'Settings'} dataIndex={'settings'} fieldType={'object'} required/>
+                <FormGridColumn title={'List'} dataIndex={'list'} fieldType={'list'} required/>
+                <FormGridColumn title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
             </FormGrid>
         );
     };

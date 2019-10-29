@@ -2,9 +2,8 @@ import React, { Fragment } from 'react';
 import Switch from 'antd/lib/switch';
 import Popover from 'antd/lib/popover';
 import Input from 'antd/lib/input';
-import Form from 'antd/lib/form';
 import styled from 'styled-components';
-import { Editor, CodeMirror, ListField, Upload, prettifyJson, truncateText } from '..';
+import { FormItem, Editor, CodeMirror, ListField, Upload, prettifyJson, truncateText } from '..';
 
 const Link = styled.span`
     cursor: pointer;
@@ -56,126 +55,58 @@ const renderImagePreview = (record) => {
     );
 };
 
-export const getDisplay = (fieldType, record, children, maxLength) => {
+export const getDisplay = (fieldType, value, children, maxLength) => {
     switch (fieldType) {
         case 'boolean':
-            return (<Switch disabled={true} checked={record}/>);
-
+            return (<Switch disabled={true} checked={value}/>);
         case 'object':
-            return (<CodeSnippet link={'object'}>{prettifyJson(record, 2)}</CodeSnippet>);
-
+            return (<CodeSnippet link={'object'}>{prettifyJson(value, 2)}</CodeSnippet>);
         case 'html':
-            return (<CodeSnippet link={'html'} html>{record}</CodeSnippet>);
-
+            return (<CodeSnippet link={'html'} html>{value}</CodeSnippet>);
         case 'list':
-            return (<CodeSnippet link={'list'}>{prettifyJson(record, 2)}</CodeSnippet>);
-
+            return (<CodeSnippet link={'list'}>{prettifyJson(value, 2)}</CodeSnippet>);
         case 'image':
-            return renderImagePreview(record);
-
+            return renderImagePreview(value);
         case 'string':
-            return truncateText(record, maxLength);
-
+            return truncateText(value, maxLength);
         case 'number':
-            return record;
-
+            return value;
         default:
             return children;
     }
 };
 
+export const getInput = (fieldType, dataIndex, title, form, required, rules, fieldProps = {}) => {
+
+    const formItemProps = {
+        title,
+        dataIndex,
+        form,
+        rules,
+        required
+    };
+
+    switch (fieldType) {
+        case 'boolean':
+            return (<FormItem {...formItemProps} valuePropName={'checked'}><Switch/></FormItem>);
+        case 'image':
+            return (<FormItem {...formItemProps} valuePropName={'fileList'}><Upload {...fieldProps} /></FormItem>);
+        case 'html':
+            return (<FormItem {...formItemProps}><Editor/></FormItem>);
+        case 'object':
+            return (<FormItem {...formItemProps}><CodeMirror/></FormItem>);
+        case 'list':
+            return (<FormItem {...formItemProps}><ListField/></FormItem>);
+        case 'string':
+        default:
+            return (<FormItem {...formItemProps} ><Input/></FormItem>);
+    }
+};
+
 export const renderForm = (props, columns) => {
-    const { getFieldDecorator } = props.form;
-
     return React.Children.map(columns, child => {
-        const { title, dataIndex, fieldType, config } = child.props;
+        const { title, dataIndex, fieldType, required, rules, fieldProps } = child.props;
 
-        switch (fieldType) {
-            case 'string':
-                return (
-                    <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex, {
-                            initialValue: '',
-                            rules: [{
-                                required: config.required,
-                                message: title + ' field is required'
-                            }]
-                        })(<Input/>)}
-                    </Form.Item>
-                );
-            case 'boolean':
-                return (
-                    <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex, {
-                            valuePropName: 'checked',
-                            initialValue: false,
-                            rules: [{
-                                required: config.required,
-                                message: title + ' field is required'
-                            }]
-                        })(<Switch/>)}
-                    </Form.Item>
-                );
-            case 'image':
-                return (
-                    <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex, {
-                            valuePropName: 'fileList',
-                            rules: [{
-                                required: config.required,
-                                message: title + ' field is required'
-                            }]
-                        })(<Upload {...config} />)}
-                    </Form.Item>
-                );
-            case 'html':
-                return (
-                    <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex, {
-                            initialValue: '',
-                            rules: [{
-                                required: config.required,
-                                message: title + ' field is required'
-                            }]
-                        })(<Editor/>)}
-                    </Form.Item>
-                );
-            case 'object':
-                return (
-                    <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex, {
-                            initialValue: '',
-                            rules: [{
-                                required: config.required,
-                                message: title + ' field is required'
-                            }]
-                        })(<CodeMirror/>)}
-                    </Form.Item>
-                );
-            case 'list':
-                return (
-                    <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex, {
-                            initialValue: [],
-                            rules: [{
-                                required: config.required,
-                                message: title + ' field is required'
-                            }]
-                        })(<ListField/>)}
-                    </Form.Item>
-                );
-            default:
-                return (
-                    <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex, {
-                            initialValue: '',
-                            rules: [{
-                                required: config.required,
-                                message: title + ' field is required'
-                            }]
-                        })(<Input/>)}
-                    </Form.Item>
-                );
-        }
+        return getInput(fieldType, dataIndex, title, props.form, required, rules, fieldProps);
     });
 };
