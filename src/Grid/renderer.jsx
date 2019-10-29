@@ -3,99 +3,92 @@ import Switch from 'antd/lib/switch';
 import Popover from 'antd/lib/popover';
 import Input from 'antd/lib/input';
 import Form from 'antd/lib/form';
-import { Editor, CodeMirror, ListField, Upload } from '..';
-import { truncateText } from '../helper';
+import styled from 'styled-components';
+import { Editor, CodeMirror, ListField, Upload, prettifyJson, truncateText } from '..';
 
-export const getDisplay = (fieldType, record, dataIndex, children, maxLength) => {
-    if (fieldType === 'boolean') {
-        return <Switch disabled={true} checked={record}/>
+const Link = styled.span`
+    cursor: pointer;
+    text-decoration: underline;
+`;
+
+const CodeSnippet = ({ html, link, children }) => {
+    const content = (
+        <pre className="language-bash">
+            {html ? <div dangerouslySetInnerHTML={{ __html: children }}/> : children}
+        </pre>
+    );
+
+    return (
+        <Popover content={content}>
+            <Link>{link}</Link>
+        </Popover>
+    );
+};
+
+const ImagePreview = ({ url, title }) => {
+    return (
+        <Popover content={<img height={150} src={url}/>} title={title}>
+            <span style={{ cursor: 'pointer' }}>
+                <img height={40} src={url}/>
+            </span>
+        </Popover>
+    );
+};
+
+const renderImagePreview = (record) => {
+    let url, title;
+    let MoreLink = null;
+
+    if (Array.isArray(record) && record.length > 0) {
+        url = record[0].url;
+        title = record[0].name;
+        MoreLink = <span style={{ paddingLeft: '5px' }}>({record.length - 1} more)</span>;
+    } else {
+        url = record.url;
+        title = record.name;
     }
 
-    if (fieldType === 'object') {
-        const content = (
-            <pre className="language-bash">
-                {JSON.stringify(record, null, 2)}
-            </pre>
-        );
+    return (
+        <Fragment>
+            <ImagePreview url={url} title={title}/>
+            {MoreLink}
+        </Fragment>
+    );
+};
 
-        return (
-            <Popover content={content} title={dataIndex}>
-                <span style={{ cursor: 'pointer', textDecoration: 'underline' }}>
-                    object
-                </span>
-            </Popover>
-        );
+export const getDisplay = (fieldType, record, children, maxLength) => {
+    switch (fieldType) {
+        case 'boolean':
+            return (<Switch disabled={true} checked={record}/>);
+
+        case 'object':
+            return (<CodeSnippet link={'object'}>{prettifyJson(record, 2)}</CodeSnippet>);
+
+        case 'html':
+            return (<CodeSnippet link={'html'} html>{record}</CodeSnippet>);
+
+        case 'list':
+            return (<CodeSnippet link={'list'}>{prettifyJson(record, 2)}</CodeSnippet>);
+
+        case 'image':
+            return renderImagePreview(record);
+
+        case 'string':
+            return truncateText(record, maxLength);
+
+        case 'number':
+            return record;
+
+        default:
+            return children;
     }
-
-    if (fieldType === 'html') {
-        const content = (
-            <pre className="language-bash">
-                <div dangerouslySetInnerHTML={{ __html: record }}/>
-            </pre>
-        );
-
-        return (
-            <Popover content={content} title={dataIndex}>
-                <span style={{ cursor: 'pointer', textDecoration: 'underline' }}>
-                    html
-                </span>
-            </Popover>);
-    }
-
-    if (fieldType === 'image') {
-        if (record.length > 0) {
-
-            return (
-                <Fragment>
-                    <Popover content={<img height={150} src={record[0].url}/>} title={record[0].name}>
-                        <span style={{ cursor: 'pointer', padding: 2 }}>
-                            <img height={40} src={record[0].url}/>
-                        </span>
-                    </Popover>
-
-                    ({record.length -1} more)
-
-                </Fragment>
-            );
-
-        }
-        return (
-            <Popover content={<img height={150} src={record.url}/>} title={record.name}>
-                <span style={{ cursor: 'pointer' }}>
-                    <img height={40} src={record.url}/>
-                </span>
-            </Popover>
-        );
-    }
-
-    if (fieldType === 'list') {
-        const content = (
-            <pre className="language-bash">
-                {JSON.stringify(record, null, 2)}
-            </pre>
-        );
-
-        return (
-            <Popover content={content} title={dataIndex}>
-                <span style={{ cursor: 'pointer', textDecoration: 'underline' }}>
-                    list
-                </span>
-            </Popover>
-        );
-    }
-
-    if (fieldType === 'string') {
-        return truncateText(record, maxLength);
-    }
-
-    return children;
 };
 
 export const renderForm = (props, columns) => {
     const { getFieldDecorator } = props.form;
 
     return React.Children.map(columns, child => {
-        const { title, dataIndex, fieldType, config} = child.props;
+        const { title, dataIndex, fieldType, config } = child.props;
 
         switch (fieldType) {
             case 'string':

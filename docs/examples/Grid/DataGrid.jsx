@@ -23,9 +23,9 @@ const Example = (props) => (
             return generateFakeData();
         }}
     >
-        <Column title={'Name'} dataIndex={'name'}/>
-        <Column title={'Age'} dataIndex={'age'} inputType={'number'}/>
-        <Column title={'Active'} dataIndex={'active'} inputType={'switch'}/>
+        <Column title={'Name'} dataIndex={'name'} fieldType={'string'}/>
+        <Column title={'Age'} dataIndex={'age'} fieldType={'number'}/>
+        <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
     </DataGrid>
 );
 
@@ -56,7 +56,7 @@ const code = `
                 dataSource={data}
                 pagination={false}
             >
-                <Column title={'Name'} dataIndex={'name'}/>
+                <Column title={'Name'} dataIndex={'name'} fieldType={'string'}/>
                 <Column title={'Age'} dataIndex={'age'} inputType={'number'}/>
                 <Column title={'Active'} dataIndex={'active'} inputType={'switch'}/>
             </DataGrid>

@@ -28,7 +28,7 @@ export const FormGridColumn = (props) => {
 
     return (
         <td {...restProps}>
-            {getDisplay(fieldType, record[dataIndex], dataIndex, children, maxLength)}
+            {getDisplay(fieldType, record[dataIndex], children, maxLength)}
         </td>
     );
 };
@@ -39,6 +39,6 @@ FormGridColumn.defaultProps = {
 
 FormGridColumn.propTypes = {
     dataIndex: PropTypes.string,
-    fieldType: PropTypes.oneOf(['string', 'object', 'boolean', 'image', 'html', 'list']),
+    fieldType: PropTypes.oneOf(['string', 'number', 'object', 'boolean', 'image', 'html', 'list']),
 };
 

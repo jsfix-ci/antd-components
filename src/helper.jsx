@@ -14,3 +14,7 @@ export const truncateText = (text, maxLength) => {
 
     return text;
 };
+
+export const prettifyJson = (json, space = 4) => (typeof json === 'object')
+    ? JSON.stringify(json, undefined, space)
+    : json;

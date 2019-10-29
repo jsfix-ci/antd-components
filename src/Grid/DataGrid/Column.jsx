@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import InputNumber from 'antd/lib/input-number';
 import Input from 'antd/lib/input';
 import Form from 'antd/lib/form';
-import { EditableContext } from './DataGrid';
 import Switch from 'antd/lib/switch';
+import { EditableContext } from './DataGrid';
+import { getDisplay } from '../renderer';
 
 /**
  * @return {React.Component}
@@ -19,19 +20,20 @@ export const Column = (props) => {
             editing,
             dataIndex,
             title,
-            inputType,
+            fieldType,
             record,
             index,
+            maxLength,
             children,
             ...restProps
         } = props;
 
         const getInput = () => {
-            if (inputType === 'switch') {
+            if (fieldType === 'boolean') {
                 return <Switch/>;
             }
 
-            if (inputType === 'number') {
+            if (fieldType === 'number') {
                 return <InputNumber/>;
             }
 
@@ -42,7 +44,7 @@ export const Column = (props) => {
 
             const options = {
                 initialValue: record[dataIndex],
-                valuePropName: inputType === 'switch' ? 'checked' : 'value',
+                valuePropName: fieldType === 'switch' ? 'checked' : 'value',
             };
 
             return (
@@ -54,17 +56,17 @@ export const Column = (props) => {
             );
         }
 
-        const getDisplay = () => {
-            if (inputType === 'switch') {
-                return <Switch disabled={true} checked={props.record[dataIndex]}/>
-            }
-
-            return children;
-        };
+        if (!dataIndex) {
+            return (
+                <td {...restProps}>
+                    {children}
+                </td>
+            );
+        }
 
         return (
             <td {...restProps}>
-                {getDisplay()}
+                {getDisplay(fieldType, record[dataIndex], children, maxLength)}
             </td>
         );
     };
@@ -76,12 +78,12 @@ export const Column = (props) => {
 
 Column.defaultProps = {
     editable: true,
-    inputType: 'text'
+    fieldType: 'string'
 };
 
 Column.propTypes = {
     title: PropTypes.string,
     dataIndex: PropTypes.string,
     editable: PropTypes.bool,
-    inputType: PropTypes.oneOf(['text', 'number', 'checkbox', 'selectbox', 'textarea', 'switch']),
+    fieldType: PropTypes.oneOf(['string', 'number', 'object', 'boolean', 'image', 'html', 'list']),
 };
