@@ -1,11 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import InputNumber from 'antd/lib/input-number';
-import Input from 'antd/lib/input';
-import Form from 'antd/lib/form';
-import Switch from 'antd/lib/switch';
 import { EditableContext } from './DataGrid';
-import { getDisplay } from '../renderer';
+import { getDisplay, getInput } from '../renderer';
 
 /**
  * @return {React.Component}
@@ -13,7 +9,7 @@ import { getDisplay } from '../renderer';
  * @constructor
  */
 export const Column = (props) => {
-    const renderCell = ({getFieldDecorator}) => {
+    const renderCell = (form) => {
 
         const {
             editable,
@@ -21,51 +17,43 @@ export const Column = (props) => {
             dataIndex,
             title,
             fieldType,
+            fieldProps,
             record,
             index,
+            required,
+            rules,
             maxLength,
             children,
             ...restProps
         } = props;
 
-        const getInput = () => {
-            if (fieldType === 'boolean') {
-                return <Switch/>;
-            }
-
-            if (fieldType === 'number') {
-                return <InputNumber/>;
-            }
-
-            return <Input/>;
-        };
-
         if (editable && editing) {
-
-            const options = {
-                initialValue: record[dataIndex],
-                valuePropName: fieldType === 'switch' ? 'checked' : 'value',
-            };
-
             return (
-                <td {...restProps}>
-                    <Form.Item style={{margin: 0}}>
-                        {getFieldDecorator(dataIndex, options)(getInput())}
-                    </Form.Item>
+                <td {...restProps} valign={'top'}>
+                    {getInput({
+                        fieldType,
+                        dataIndex,
+                        form,
+                        required,
+                        rules,
+                        fieldProps,
+                        initialValue: record[dataIndex],
+                        style: { margin: 0 }
+                    })}
                 </td>
             );
         }
 
         if (!dataIndex) {
             return (
-                <td {...restProps}>
+                <td {...restProps} valign={'top'}>
                     {children}
                 </td>
             );
         }
 
         return (
-            <td {...restProps}>
+            <td {...restProps} valign={'top'}>
                 {getDisplay(fieldType, record[dataIndex], children, maxLength)}
             </td>
         );
@@ -78,12 +66,15 @@ export const Column = (props) => {
 
 Column.defaultProps = {
     editable: true,
-    fieldType: 'string'
+    required: false,
+    fieldType: 'string',
+    rules: []
 };
 
 Column.propTypes = {
     title: PropTypes.string,
     dataIndex: PropTypes.string,
+    required: PropTypes.bool,
     editable: PropTypes.bool,
     fieldType: PropTypes.oneOf(['string', 'number', 'object', 'boolean', 'image', 'html', 'list']),
 };

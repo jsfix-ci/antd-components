@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
-import Switch from 'antd/lib/switch';
-import Popover from 'antd/lib/popover';
-import Input from 'antd/lib/input';
 import styled from 'styled-components';
+import { Popover, Switch, Input, InputNumber } from 'antd';
 import { FormItem, Editor, CodeMirror, ListField, Upload, prettifyJson, truncateText } from '..';
 
 const Link = styled.span`
@@ -76,30 +74,24 @@ export const getDisplay = (fieldType, value, children, maxLength) => {
     }
 };
 
-export const getInput = (fieldType, dataIndex, title, form, required, rules, fieldProps = {}) => {
-
-    const formItemProps = {
-        title,
-        dataIndex,
-        form,
-        rules,
-        required
-    };
+export const getInput = ({ fieldType, fieldProps = {}, ...restProps }) => {
 
     switch (fieldType) {
         case 'boolean':
-            return (<FormItem {...formItemProps} valuePropName={'checked'}><Switch/></FormItem>);
+            return (<FormItem {...restProps} valuePropName={'checked'}><Switch/></FormItem>);
         case 'image':
-            return (<FormItem {...formItemProps} valuePropName={'fileList'}><Upload {...fieldProps} /></FormItem>);
+            return (<FormItem {...restProps} valuePropName={'fileList'}><Upload {...fieldProps} /></FormItem>);
         case 'html':
-            return (<FormItem {...formItemProps}><Editor/></FormItem>);
+            return (<FormItem {...restProps}><Editor/></FormItem>);
         case 'object':
-            return (<FormItem {...formItemProps}><CodeMirror/></FormItem>);
+            return (<FormItem {...restProps}><CodeMirror/></FormItem>);
         case 'list':
-            return (<FormItem {...formItemProps}><ListField/></FormItem>);
+            return (<FormItem {...restProps}><ListField/></FormItem>);
+        case 'number':
+            return (<FormItem {...restProps}><InputNumber/></FormItem>);
         case 'string':
         default:
-            return (<FormItem {...formItemProps} ><Input/></FormItem>);
+            return (<FormItem {...restProps} ><Input/></FormItem>);
     }
 };
 
@@ -107,6 +99,6 @@ export const renderForm = (props, columns) => {
     return React.Children.map(columns, child => {
         const { title, dataIndex, fieldType, required, rules, fieldProps } = child.props;
 
-        return getInput(fieldType, dataIndex, title, props.form, required, rules, fieldProps);
+        return getInput({ fieldType, dataIndex, title, form: props.form, required, rules, fieldProps });
     });
 };

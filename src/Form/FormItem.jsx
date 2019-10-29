@@ -8,7 +8,7 @@ import { Form } from 'antd';
  * @constructor
  */
 export const FormItem = (props) => {
-    const { title, dataIndex, form, valuePropName, required, children } = props;
+    const { title, dataIndex, form, valuePropName, required, initialValue, children, ...restProps } = props;
     const { getFieldDecorator } = form;
 
     const rules = [
@@ -19,8 +19,9 @@ export const FormItem = (props) => {
     ];
 
     return (
-        <Form.Item label={title}>
+        <Form.Item label={title} {...restProps}>
             {getFieldDecorator(dataIndex, {
+                initialValue,
                 valuePropName,
                 rules
             })(children)}
@@ -37,6 +38,7 @@ FormItem.defaultProps = {
 FormItem.propTypes = {
     title: PropTypes.string,
     dataIndex: PropTypes.string,
+    initialValue: PropTypes.any,
     form: PropTypes.object,
     required: PropTypes.bool,
     rules: PropTypes.array

@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import Table from 'antd/lib/table';
 import { FormGridColumn } from './FormGridColumn';
-import { message, Form } from 'antd';
+import { Table, message, Form } from 'antd';
 import { AddButton, DeleteButton, EditButton, BackButton, SaveButton, emptyFn } from '../..';
 import { renderForm } from '../renderer';
 
@@ -64,7 +63,7 @@ export const FormGrid = Form.create()((props) => {
         if (selected.length === 1) {
             setEditing(true);
             setRecord(selected[0]);
-            onEditRowClick(selected[0])
+            onEditRowClick(selected[0]);
             setActionType('update');
         } else if (selected.length === 0) {
             message.error('You have to select one row at least');
@@ -134,7 +133,7 @@ export const FormGrid = Form.create()((props) => {
                         <BackButton onClick={onBackButtonClick}/>
                         <Form onSubmit={handleSubmit}>
                             {renderForm(props, children)}
-                            <SaveButton disabled={hasErrors(getFieldsError())} htmlType="submit"/>
+                            <SaveButton disabled={hasErrors(getFieldsError())} htmlType='submit'/>
                         </Form>
                     </Fragment>
                 );

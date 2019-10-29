@@ -107,7 +107,7 @@ const Example = () => {
             <FormGridColumn title={'Content'} dataIndex={'html'} fieldType={'html'} required/>
             <FormGridColumn title={'Image'} dataIndex={'image'} fieldType={'image'} fieldProps={imageConfig}/>
             <FormGridColumn title={'Settings'} dataIndex={'settings'} fieldType={'object'} required/>
-            <FormGridColumn title={'List'} dataIndex={'list'} fieldType={'list'} required/>
+            <FormGridColumn title={'List'} dataIndex={'list'} fieldType={'list'}/>
             <FormGridColumn title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
         </FormGrid>
     )

@@ -7,9 +7,9 @@ import Popconfirm from 'antd/lib/popconfirm';
 import Icon from 'antd/lib/icon';
 import Tooltip from 'antd/lib/tooltip';
 import { Column } from './Column';
-import Button from 'antd/lib/button';
 import { message } from 'antd';
 import nanoid from 'nanoid';
+import { AddButton, DeleteButton, EditButton } from '../..';
 
 export const EditableContext = React.createContext();
 
@@ -25,7 +25,7 @@ const ClickableIcon = styled(Icon)`
  * @constructor
  */
 export const DataGrid = Form.create()((props) => {
-    const {idProperty, dataSource, onSave, onDelete, onRecordCreate, form, children, ...restProps} = props;
+    const { idProperty, dataSource, onSave, onDelete, onRecordCreate, form, children, ...restProps } = props;
     const [editingKey, setEditingKey] = useState('');
     const [data, setData] = useState(dataSource);
 
@@ -67,7 +67,7 @@ export const DataGrid = Form.create()((props) => {
     };
 
     const onAddRowClick = () => {
-        const record = onRecordCreate({[idProperty]: nanoid(10)});
+        const record = onRecordCreate({ [idProperty]: nanoid(10) });
         const newData = [...data, record];
         saveData(newData);
     };
@@ -106,7 +106,7 @@ export const DataGrid = Form.create()((props) => {
 
         if (isEditing(record)) {
             return (
-                <span>
+                <div style={{height: '40px', lineHeight: '40px'}}>
                     <EditableContext.Consumer>
                         {form => (
                             <Tooltip title="Save">
@@ -117,7 +117,7 @@ export const DataGrid = Form.create()((props) => {
                     <Popconfirm title="Cancel edit?" onConfirm={() => onCancelClick(id)}>
                         <ClickableIcon type="stop"/>
                     </Popconfirm>
-                </span>
+                </div>
             );
         }
 
@@ -157,16 +157,20 @@ export const DataGrid = Form.create()((props) => {
         },
     };
 
+    const getToolbar = () => {
+        return () => (
+            <Fragment>
+                <AddButton onClick={onAddRowClick}/>
+            </Fragment>
+        );
+    };
+
     return (
         <Fragment>
             <EditableContext.Provider value={form}>
                 <Table
                     rowKey={idProperty}
-                    title={() => (
-                        <Tooltip title="Add new record">
-                            <Button onClick={onAddRowClick} type="primary" shape="circle" icon="plus"/>
-                        </Tooltip>
-                    )}
+                    title={getToolbar()}
                     {...restProps}
                     components={components}
                     dataSource={data}
