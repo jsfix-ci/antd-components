@@ -5,6 +5,10 @@ import { Form } from './pages/Form';
 import { FlyoutNavigationComponent, SideNavigationComponent } from './pages/Navigation';
 import { DataGridComponent, FormGridComponent } from './pages/Grid';
 import { Buttons } from './pages/Buttons';
+import {ListFieldComponent} from "./pages/ListField";
+import {EditorComponent} from "./pages/Editor";
+import {CodeMirrorComponent} from "./pages/CodeMirror";
+import {UploadComponent} from "./pages/Upload";
 
 export const routes = [
     {
@@ -30,7 +34,39 @@ export const routes = [
         key: 'form',
         label: 'Form',
         path: '/Form',
-        component: Form
+        component: Form,
+        submenu: [
+            {
+                key: 'forms',
+                label: 'Forms',
+                path: '/Forms',
+                component: Form
+            },
+            {
+                key: 'listField',
+                label: 'List Field',
+                path: '/ListField',
+                component: ListFieldComponent
+            },
+            {
+                key: 'editor',
+                label: 'Editor',
+                path: '/Editor',
+                component: EditorComponent
+            },
+            {
+                key: 'codeMirror',
+                label: 'Code Mirror',
+                path: '/CodeMirror',
+                component: CodeMirrorComponent
+            },
+            {
+                key: 'upload',
+                label: 'Upload',
+                path: '/Upload',
+                component: UploadComponent
+            }
+        ],
     },
     {
         key: 'grid',
