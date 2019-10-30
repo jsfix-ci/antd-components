@@ -36,6 +36,10 @@ const renderImagePreview = (record) => {
     let url, title;
     let MoreLink = null;
 
+    if (!record) {
+        return null;
+    }
+
     if (Array.isArray(record) && record.length > 0) {
         url = record[0].url;
         title = record[0].name;

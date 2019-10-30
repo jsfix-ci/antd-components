@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import faker from 'faker';
 import { message } from 'antd';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
-import { FormGrid, FormGridColumn } from '../../../src';
+import { FormGrid, Column } from '../../../src';
 
 const defaultData = [
     {
@@ -73,18 +74,29 @@ const Example = () => {
 
     const onAdd = () => {
         message.info('add button clicked!');
+        return {
+            text: faker.random.word()
+        };
     };
 
-    const onEdit = (row) => {
+    const onEdit = (id) => {
         message.info('edit button clicked!');
     };
 
     const onDelete = (rows) => {
-        setData(data.filter(rec => !rows.includes(rec)))
+        setData(data.filter(rec => !rows.includes(rec.id)))
     };
 
-    const onSave = (row, actionType) => {
-        console.log(row, actionType);
+    const onSave = (record) => {
+        const index = data.findIndex((r) => r.id === record.id);
+
+        if (index === -1) {
+            data.push(record);
+        } else {
+            data[index] = record;
+        }
+
+        setData(data);
     };
 
     const imageConfig = {
@@ -96,19 +108,18 @@ const Example = () => {
         <FormGrid
             dataSource={data}
             pagination={true}
-            onAddRowClick={onAdd}
-            onEditRowClick={onEdit}
-            onDeleteRowClick={onDelete}
-            onSaveRowClick={onSave}
-            toolbar={true}
+            onAdd={onAdd}
+            onEdit={onEdit}
+            onDelete={onDelete}
+            onSave={onSave}
         >
-            <FormGridColumn title={'Title'} dataIndex={'text'} fieldType={'string'} rules={[{ max: 30 }]} required
-                            maxLength={30}/>
-            <FormGridColumn title={'Content'} dataIndex={'html'} fieldType={'html'} required/>
-            <FormGridColumn title={'Image'} dataIndex={'image'} fieldType={'image'} fieldProps={imageConfig}/>
-            <FormGridColumn title={'Settings'} dataIndex={'settings'} fieldType={'object'} required/>
-            <FormGridColumn title={'List'} dataIndex={'list'} fieldType={'list'}/>
-            <FormGridColumn title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
+            <Column title={'Title'} dataIndex={'text'} fieldType={'string'} rules={[{ max: 30 }]} required
+                    maxLength={30}/>
+            <Column title={'Content'} dataIndex={'html'} fieldType={'html'} required/>
+            <Column title={'Image'} dataIndex={'image'} fieldType={'image'} fieldProps={imageConfig}/>
+            <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'} required/>
+            <Column title={'List'} dataIndex={'list'} fieldType={'list'}/>
+            <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
         </FormGrid>
     )
 };
@@ -117,7 +128,7 @@ const Example = () => {
 // language=JS
 const code = `
     import React from 'react';
-    import { FormGrid, FormGridColumn } from '@react-hangar/antd-components'
+    import { FormGrid, Column } from '@react-hangar/antd-components'
     import axios from 'axios';
 
     const defaultData = [
@@ -232,12 +243,12 @@ const code = `
                 onSaveRowClick={onSave}
                 toolbar={true}
             >
-                <FormGridColumn title={'Title'} dataIndex={'text'} fieldType={'string'} required maxLength={30}/>
-                <FormGridColumn title={'Content'} dataIndex={'html'} fieldType={'html'} required/>
-                <FormGridColumn title={'Image'} dataIndex={'image'} fieldType={'image'} fieldProps={imageConfig}/>
-                <FormGridColumn title={'Settings'} dataIndex={'settings'} fieldType={'object'} required/>
-                <FormGridColumn title={'List'} dataIndex={'list'} fieldType={'list'} required/>
-                <FormGridColumn title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
+                <Column title={'Title'} dataIndex={'text'} fieldType={'string'} required maxLength={30}/>
+                <Column title={'Content'} dataIndex={'html'} fieldType={'html'} required/>
+                <Column title={'Image'} dataIndex={'image'} fieldType={'image'} fieldProps={imageConfig}/>
+                <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'} required/>
+                <Column title={'List'} dataIndex={'list'} fieldType={'list'} required/>
+                <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
             </FormGrid>
         );
     };

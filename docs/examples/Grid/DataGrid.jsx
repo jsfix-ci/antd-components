@@ -1,33 +1,61 @@
-import React from 'react';
+import React, { useState } from 'react';
 import faker from 'faker';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
 import { DataGrid, Column } from '../../../src';
 import { generateFakeDataArray } from '../../components/utils';
 import nanoid from 'nanoid';
+import { message } from 'antd';
 
 const generateFakeData = () => ({
     id: nanoid(10),
     name: faker.name.findName(),
-    age: faker.random.number({min: 10, max: 99}),
+    age: faker.random.number({ min: 10, max: 99 }),
     active: faker.random.boolean()
 });
 
-const data = generateFakeDataArray(5, generateFakeData);
+const defaultData = generateFakeDataArray(5, generateFakeData);
 
 // Example implementation
-const Example = (props) => (
-    <DataGrid
-        dataSource={data}
-        pagination={false}
-        onRecordCreate={() => {
-            return generateFakeData();
-        }}
-    >
-        <Column title={'Name'} dataIndex={'name'} fieldType={'string'}/>
-        <Column title={'Age'} dataIndex={'age'} fieldType={'number'}/>
-        <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
-    </DataGrid>
-);
+const Example = () => {
+    const [data, setData] = useState(defaultData);
+
+    const onEdit = (id) => {
+        message.info('edit button clicked!');
+    };
+
+    const onDelete = (rows) => {
+        setData(data.filter(rec => !rows.includes(rec.id)))
+    };
+
+    const onSave = (record) => {
+        const index = data.findIndex((r) => r.id === record.id);
+
+        if (index === -1) {
+            data.push(record);
+        } else {
+            data[index] = record;
+        }
+
+        setData(data);
+    };
+
+    return (
+        <DataGrid
+            dataSource={data}
+            pagination={false}
+            onAdd={() => {
+                return generateFakeData();
+            }}
+            onEdit={onEdit}
+            onDelete={onDelete}
+            onSave={onSave}
+        >
+            <Column title={'Name'} dataIndex={'name'} fieldType={'string'}/>
+            <Column title={'Age'} dataIndex={'age'} fieldType={'number'}/>
+            <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
+        </DataGrid>
+    );
+};
 
 // Code example
 // language=JS
@@ -68,11 +96,11 @@ const code = `
 
 // Component props
 const properties = [
-    {property: 'idProperty', description: 'id field property of data source', type: 'string', default: 'id'},
-    {property: 'onRecordCreate', description: 'Hook function to manipulate new records', type: 'function'},
-    {property: 'onSave', description: 'Function is called on new record added or save', type: 'function'},
-    {property: 'onDelete', description: 'Function is called on record delete', type: 'function'},
-    {property: 'dataSource', description: 'data source', type: 'object[]'},
+    { property: 'idProperty', description: 'id field property of data source', type: 'string', default: 'id' },
+    { property: 'onRecordCreate', description: 'Hook function to manipulate new records', type: 'function' },
+    { property: 'onSave', description: 'Function is called on new record added or save', type: 'function' },
+    { property: 'onDelete', description: 'Function is called on record delete', type: 'function' },
+    { property: 'dataSource', description: 'data source', type: 'object[]' },
 ];
 
 export default () => (
