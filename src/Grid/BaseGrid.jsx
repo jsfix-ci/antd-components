@@ -40,7 +40,7 @@ export const BaseGrid = (props) => {
         if (!isEditing) {
             setData(dataSource);
         }
-    }, [dataSource, isEditing]);
+    }, [isEditing]);
 
     const getRecord = () => data.find(record => record[idProperty] === selectedRowKeys[0]);
 
