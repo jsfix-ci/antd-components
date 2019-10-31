@@ -1,7 +1,7 @@
 import { NotFound } from './pages/NotFound';
 import { Home } from './pages/Home';
 import { Typography } from './pages/Typography';
-import { Form } from './pages/Form';
+import { FormComponent } from './pages/Form';
 import { FlyoutNavigationComponent, SideNavigationComponent } from './pages/Navigation';
 import { DataGridComponent, FormGridComponent } from './pages/Grid';
 import { Buttons } from './pages/Buttons';
@@ -31,16 +31,15 @@ export const routes = [
         component: Typography
     },
     {
-        key: 'form',
-        label: 'Form',
-        path: '/Form',
-        component: Form,
+        key: 'data-entry',
+        label: 'Data Entry',
+        path: '/DataEntry',
         submenu: [
             {
-                key: 'forms',
-                label: 'Forms',
-                path: '/Forms',
-                component: Form
+                key: 'form',
+                label: 'Form',
+                path: '/Form',
+                component: FormComponent
             },
             {
                 key: 'listField',
@@ -81,7 +80,7 @@ export const routes = [
             },
             {
                 key: 'formGrid',
-                label: 'Form Grid',
+                label: 'DataEntry Grid',
                 path: '/FormGrid',
                 component: FormGridComponent
             }

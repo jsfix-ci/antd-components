@@ -1,7 +1,13 @@
-import React, { Fragment } from 'react';
-import { ComponentDisplay } from '../../components/ComponentDisplay';
-import { Upload } from '../../../src/index';
-import {Divider} from 'antd';
+import React, {forwardRef, Fragment, useState} from 'react';
+import {ComponentDisplay} from '../../components/ComponentDisplay';
+import {SaveButton, Upload} from '../../../src/index';
+//import AntdForm from "antd/lib/form/Form";
+import {message} from "antd";
+import Form from "../../../src/DataEntry/Form";
+
+const hasErrors = (fieldsError) => {
+    return Object.keys(fieldsError).some(field => fieldsError[field]);
+};
 
 const fileList = [
     {
@@ -16,39 +22,56 @@ const fileList = [
     },
 ];
 
-const onUploaded = (response) => {
-    console.log(response);
-};
-
-const action = 'http://www.mocky.io/v2/5daf53d53200006d00d961e1';
 
 // Example implementation
-const Example = () => (
-    <Fragment>
-        <label>Image Upload</label><br />
-        <Upload action={action} type='image' />
-        <Divider dashed />
-        <label>File Upload</label><br />
-        <Upload action={action} />
-        <Divider dashed />
-        <label>Upload Multiple Images</label><br />
-        <Upload type='image' action={action} multiple>Upload Images</Upload>
-        <Divider dashed />
-        <label>Whitelisted file types with default data</label><br />
-        <Upload
-            type={{image: ['jpeg', 'png']}}
-            fileList={fileList}
-            multiple
-            action={action}
-            onUploaded={onUploaded}
-            customRequestData={{
-                whatever: 'extra data you want to pass'
-            }}
-        >
-            Upload Images
-        </Upload>
-    </Fragment>
-);
+const Example = Form.create()((props) => {
+    const onUploaded = (response) => {
+        console.log(response);
+    };
+
+    const {getFieldsError, getFieldDecorator} = props.form;
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        props.form.validateFields((error, data) => {
+            if (error) {
+                return message.error('form validation failed');
+            }
+        });
+    };
+
+    const action = 'http://www.mocky.io/v2/5daf53d53200006d00d961e1';
+
+
+    return (
+        <Form onSubmit={handleSubmit}>
+
+            <Form.Item label={'Upload Form Item'}>
+                {getFieldDecorator('upload', {
+                    valuePropName: 'fileList',
+                    initialValue: fileList,
+                    rules: [{
+                        required: true,
+                        message: 'upload field is required',
+                    }]
+                })(
+                    <Upload
+                        type={{image: ['jpeg', 'png']}}
+                        action={action}
+                        onUploaded={onUploaded}
+                        multiple
+                        customRequestData={{
+                            whatever: 'extra data you want to pass'
+                        }}
+                    />
+                )}
+            </Form.Item>
+
+            <SaveButton disabled={hasErrors(getFieldsError())} htmlType="submit"/>
+        </Form>
+    );
+});
+
 
 // Code example
 // language=JS
@@ -78,23 +101,7 @@ const code = `
         const action = '/path/upload';
     
         return (
-           <Fragment>
-                <Upload type='image' action={action} />
-                <Upload type='file' action={action} />                        
-                <Upload type='image' action={action} multiple>Upload Images</Upload>
-                <Upload 
-                    type={{image: ['jpeg', 'png']}} 
-                    fileList={fileList}
-                    action={action}
-                    onUploaded={onUploaded}
-                    multiple
-                    customRequestData={{
-                        whatever: 'extra data you want to pass'
-                    }}               
-                >
-                    Upload Images
-                </Upload>
-           </Fragment>
+            <Form />
         );
     };
 
@@ -103,18 +110,17 @@ const code = `
 
 // Component props
 const properties = [
-    {property: 'type', description: "'file', 'image' | {image: ['jpeg', 'png']}, {file: ['txt', 'dll']}", type: 'string | array[object]'},
-    {property: 'fileList', description: 'sets default values', type: 'array'},
-    {property: 'customRequestData', description: '(optional) passes custom data to request', type: 'object'},
-    {property: 'action', description: 'api url e.g. /path/upload', type: 'string'},
-    {property: 'multiple', description: 'for uploading multiple files or images', type: 'string'},
-    {property: 'onUploaded', description: 'function that returns response after upload', type: 'function'},
-    {property: '(Inherited)', description: 'Ant design properties are inherited (see: https://ant.design/components/upload/)'},
+    {
+        property: 'type',
+        description: "'file', 'image' | {image: ['jpeg', 'png']}, {file: ['txt', 'dll']}",
+        type: 'string | array[object]'
+    },
+
 ];
 
 export default () => (
     <Fragment>
-        <ComponentDisplay title={'Files / Images'} code={code} properties={properties}>
+        <ComponentDisplay title={'Form'} code={code} properties={properties}>
             <Example/>
         </ComponentDisplay>
     </Fragment>
