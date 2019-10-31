@@ -60,7 +60,7 @@ const Example = () => {
             onDelete={onDelete}
             onSave={onSave}
         >
-            <Column title={'Name'} dataIndex={'name'} fieldType={'string'}/>
+            <Column title={'Name'} dataIndex={'name'} fieldType={'string'} required/>
             <Column title={'Age'} dataIndex={'age'} fieldType={'number'}/>
             <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
         </DataGrid>
@@ -124,7 +124,7 @@ const code = `
                 onDelete={onDelete}
                 onSave={onSave}
             >
-                <Column title={'Name'} dataIndex={'name'} fieldType={'string'}/>
+                <Column title={'Name'} dataIndex={'name'} fieldType={'string'} required/>
                 <Column title={'Age'} dataIndex={'age'} inputType={'number'}/>
                 <Column title={'Active'} dataIndex={'active'} inputType={'switch'}/>
             </DataGrid>

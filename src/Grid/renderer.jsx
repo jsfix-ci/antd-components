@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { Popover, Switch, Input, InputNumber } from 'antd';
-import { FormItem, Editor, CodeMirror, ListField, Upload, prettifyJson, truncateText } from '..';
+import { FormItem, Editor, CodeMirror, ListField, Upload, prettifyJson, truncateText, l10n } from '..';
 
 const Link = styled.span`
     cursor: pointer;
@@ -33,7 +33,7 @@ const ImagePreview = ({ data }) => {
     if (Array.isArray(data) && data.length > 0) {
         url = data[0].url;
         title = data[0].name;
-        MoreLink = <span style={{ paddingLeft: '5px' }}>({data.length - 1} more)</span>;
+        MoreLink = <span style={{ paddingLeft: '5px' }}>({data.length - 1} {l10n().Form.moreText})</span>;
     } else {
         url = data.url;
         title = data.name;

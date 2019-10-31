@@ -37,9 +37,7 @@ export const DataGrid = Form.create()((props) => {
     };
 
     const onAddClick = (rec) => {
-        const record = onAdd(rec);
-        setSelectedRowKeys([record[idProperty]]);
-        return record;
+        return onAdd(rec) || rec;
     };
 
     const onEditClick = (id) => {
@@ -69,7 +67,7 @@ export const DataGrid = Form.create()((props) => {
     const extraColumns = [
         {
             dataIndex: 'operation',
-            className: 'min-td',
+            className: 'hangar-min-td',
             render: actionRenderer
         }
     ];
