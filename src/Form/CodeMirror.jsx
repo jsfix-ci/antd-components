@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import 'codemirror/mode/javascript/javascript';
 import { Controlled } from 'react-codemirror2'
-import { prettifyJson } from '..';
+import { prettifyJson, emptyFn } from '..';
 
 const isJsonString = (value) => {
     try {
@@ -14,13 +14,16 @@ const isJsonString = (value) => {
 };
 
 export const CodeMirror = forwardRef((props, ref) => {
-    const { onChange, lineNumbers, indentUnit, lineSeparator, value} = props;
+    const { onChange, lineNumbers, indentUnit, lineSeparator, value } = props;
 
     return (
         <Controlled
             ref={ref}
             onBeforeChange={(editor, data, v) => {
                 onChange(v);
+            }}
+            editorDidMount={editor => {
+                setTimeout(() => editor.refresh(), 100);
             }}
             options={{
                 mode: { name: 'javascript', json: true },
@@ -36,7 +39,7 @@ export const CodeMirror = forwardRef((props, ref) => {
 });
 
 CodeMirror.defaultProps = {
-    onChange: () => {},
+    onChange: emptyFn,
     lineNumbers: true,
     indentUnit: 4,
     lineSeparator: '\n'
