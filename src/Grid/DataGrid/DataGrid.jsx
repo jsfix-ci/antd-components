@@ -25,6 +25,7 @@ export const DataGrid = Form.create()((props) => {
 
             onSave({ [idProperty]: selectedRowKeys[0], ...record })
                 .then(() => {
+                    setSelectedRowKeys([]);
                     setLoading(false);
                     setEditing(false);
                 })

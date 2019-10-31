@@ -47,6 +47,7 @@ export const FormGrid = Form.create()((props) => {
 
                 onSave(record)
                     .then(() => {
+                        setSelectedRowKeys([]);
                         setLoading(false);
                         setEditing(false);
                     })
