@@ -13,5 +13,8 @@ module.exports = {
         settingsButton: 'подешавања',
         basketButton: 'Додај у корпу',
         uploadButton: 'отпреми'
+    },
+    Form: {
+        moreText: 'више'
     }
 };

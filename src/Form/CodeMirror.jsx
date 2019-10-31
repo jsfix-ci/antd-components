@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import 'codemirror/mode/javascript/javascript';
 import { Controlled } from 'react-codemirror2'
-import { emptyFn } from '../helper';
+import { prettifyJson, emptyFn } from '..';
 
 const isJsonString = (value) => {
     try {
@@ -12,8 +12,6 @@ const isJsonString = (value) => {
         return false;
     }
 };
-
-const prettifyJson = (json) => (typeof json === 'object') ? JSON.stringify(json, undefined, 4) : json;
 
 export const CodeMirror = forwardRef((props, ref) => {
     const { onChange, lineNumbers, indentUnit, lineSeparator, value } = props;

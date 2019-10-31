@@ -20,7 +20,7 @@ export const App = () => {
         <Router>
             <LocaleProvider locale={locale} setLocale={setLocale}>
                 <Row>
-                    <Col><Display1 className={'text-center'}>Ant Design Components</Display1></Col>
+                    <Col><Display1 className={'hangar-text-center'}>Ant Design Components</Display1></Col>
                 </Row>
                 <Row>
                     <Col

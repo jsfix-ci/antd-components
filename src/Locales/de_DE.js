@@ -13,5 +13,8 @@ module.exports = {
         settingsButton: 'Einstellungen',
         basketButton: 'In Warenkorb',
         uploadButton: 'Hochladen'
+    },
+    Form: {
+        moreText: 'mehr'
     }
 };
