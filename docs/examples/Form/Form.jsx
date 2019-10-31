@@ -1,7 +1,6 @@
-import React, {forwardRef, Fragment, useState} from 'react';
+import React from 'react';
 import {ComponentDisplay} from '../../components/ComponentDisplay';
 import {SaveButton, Upload} from '../../../src/index';
-//import AntdForm from "antd/lib/form/Form";
 import {message} from "antd";
 import Form from "../../../src/DataEntry/Form";
 
@@ -119,9 +118,7 @@ const properties = [
 ];
 
 export default () => (
-    <Fragment>
-        <ComponentDisplay title={'Form'} code={code} properties={properties}>
-            <Example/>
-        </ComponentDisplay>
-    </Fragment>
+    <ComponentDisplay title={'Form'} code={code} properties={properties}>
+        <Example/>
+    </ComponentDisplay>
 );
