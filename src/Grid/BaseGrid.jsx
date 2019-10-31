@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Table } from 'antd';
+import { message, Spin, Table } from 'antd';
 import nanoid from 'nanoid';
 import { AddButton, BackButton, DeleteButton, EditButton, Column, emptyFn } from '..';
 
@@ -13,19 +13,19 @@ export const EditableContext = React.createContext();
  */
 export const BaseGrid = (props) => {
     const {
+        dataSource,
+        editForm,
+        extraColumns,
         idProperty,
         isEditing,
-        setEditing,
+        isLoading,
         selectedRowKeys,
+        setEditing,
+        setLoading,
         setSelectedRowKeys,
-        dataSource,
         onAdd,
         onDelete,
         onEdit,
-        onSave,
-        extraColumns,
-        editForm,
-        form,
         children,
         ...restProps
     } = props;
@@ -40,18 +40,18 @@ export const BaseGrid = (props) => {
         if (!isEditing) {
             setData(dataSource);
         }
-    }, [isEditing]);
+    }, [dataSource, isEditing]);
 
     const getRecord = () => data.find(record => record[idProperty] === selectedRowKeys[0]);
 
     const onBackClick = () => {
         setSelectedRowKeys([]);
-        setEditing(false)
+        setEditing(false);
     };
 
     const renderEditForm = () => {
         return (
-            <Fragment>
+            <Spin spinning={isLoading}>
                 <div style={{ padding: '16px 0' }}>
                     <BackButton onClick={onBackClick}/>
                 </div>
@@ -60,7 +60,7 @@ export const BaseGrid = (props) => {
                         ...getRecord()
                     })
                 }
-            </Fragment>
+            </Spin>
         );
     };
 
@@ -106,9 +106,18 @@ export const BaseGrid = (props) => {
     };
 
     const onDeleteClick = () => {
-        setSelectedRowKeys([]);
-        setEditing(false);
-        onDelete(selectedRowKeys);
+        setLoading(true);
+
+        onDelete(selectedRowKeys)
+            .then(() => {
+                setSelectedRowKeys([]);
+                setEditing(false);
+                setLoading(false);
+            })
+            .catch((err) => {
+                setLoading(false);
+                message.error(err.toString());
+            });
     };
 
     const getToolbar = () => {
@@ -136,6 +145,7 @@ export const BaseGrid = (props) => {
             title={getToolbar()}
             components={components}
             dataSource={data}
+            loading={isLoading}
             columns={columns}
             rowSelection={{
                 selectedRowKeys,
@@ -149,19 +159,25 @@ export const BaseGrid = (props) => {
 
 BaseGrid.defaultProps = {
     idProperty: 'id',
+    extraColumns: [],
     onAdd: (record) => (record),
-    onEdit: () => emptyFn,
-    onSave: () => Promise.resolve(),
-    onDelete: () => Promise.resolve(),
-    extraColumns: []
+    onEdit: emptyFn,
+    onDelete: () => Promise.resolve()
 };
 
 BaseGrid.propTypes = {
-    idProperty: PropTypes.string,
-    onRecordCreate: PropTypes.func,
-    onSave: PropTypes.func,
-    onDelete: PropTypes.func,
+    children: PropTypes.arrayOf(PropTypes.element),
     dataSource: PropTypes.array,
+    editForm: PropTypes.element,
     extraColumns: PropTypes.array,
-    editForm: PropTypes.element
+    idProperty: PropTypes.string,
+    isEditing: PropTypes.bool,
+    isLoading: PropTypes.bool,
+    selectedRowKeys: PropTypes.array,
+    setEditing: PropTypes.func,
+    setLoading: PropTypes.func,
+    setSelectedRowKeys: PropTypes.func,
+    onAdd: PropTypes.func,
+    onDelete: PropTypes.func,
+    onEdit: PropTypes.func
 };

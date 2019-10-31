@@ -11,18 +11,20 @@ import { EditableContext } from './BaseGrid';
 export const Column = (props) => {
 
     const {
+        children,
         dataIndex,
+        editable,
+        fieldProps,
         fieldType,
+        isEditing,
         maxLength,
         record,
-        fieldProps,
-        rules,
-        editable,
         required,
-        isEditing,
-        children,
+        rules,
         ...restProps
     } = props;
+
+    const form = useContext(EditableContext);
 
     if (!dataIndex) {
         return (
@@ -30,7 +32,6 @@ export const Column = (props) => {
         );
     }
 
-    const form = useContext(EditableContext);
     const value = record[dataIndex];
 
     if (isEditing && editable) {
@@ -38,13 +39,13 @@ export const Column = (props) => {
             <td {...restProps} valign={'top'}>
                 {
                     getInput({
-                        fieldType,
                         dataIndex,
+                        fieldProps,
+                        fieldType,
                         form,
+                        initialValue: value,
                         required,
                         rules,
-                        fieldProps,
-                        initialValue: value,
                         style: { margin: 0 }
                     })
                 }
@@ -54,24 +55,27 @@ export const Column = (props) => {
 
     return (
         <td {...restProps}>
-            {getDisplay(fieldType, value, children, maxLength)}
+            {getDisplay({ children, fieldType, maxLength, value })}
         </td>
     );
 };
 
 Column.defaultProps = {
-    required: false,
     editable: true,
     fieldType: 'string',
+    required: false,
     rules: []
 };
 
 Column.propTypes = {
     dataIndex: PropTypes.string,
-    required: PropTypes.bool,
-    isEditing: PropTypes.bool,
     editable: PropTypes.bool,
+    fieldProps: PropTypes.object,
     fieldType: PropTypes.oneOf(['string', 'number', 'object', 'boolean', 'image', 'html', 'list']),
+    isEditing: PropTypes.bool,
+    maxLength: PropTypes.number,
+    record: PropTypes.object,
+    required: PropTypes.bool,
     rules: PropTypes.array
 };
 

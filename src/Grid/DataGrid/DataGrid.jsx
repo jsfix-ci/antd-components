@@ -13,17 +13,25 @@ export const DataGrid = Form.create()((props) => {
     const { idProperty, onAdd, onEdit, onSave, form, children, ...restProps } = props;
     const [isEditing, setEditing] = useState(false);
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+    const [isLoading, setLoading] = useState(false);
 
     const onSaveClick = () => {
         form.validateFields((error, record) => {
             if (error) {
                 return message.error('form validation failed');
             }
-            setEditing(false);
-            onSave({
-                [idProperty]: selectedRowKeys[0],
-                ...record
-            });
+
+            setLoading(true);
+
+            onSave({ [idProperty]: selectedRowKeys[0], ...record })
+                .then(() => {
+                    setLoading(false);
+                    setEditing(false);
+                })
+                .catch(err => {
+                    setLoading(false);
+                    message.error(err.toString());
+                });
         });
     };
 
@@ -39,7 +47,7 @@ export const DataGrid = Form.create()((props) => {
 
     const onCancelClick = () => {
         setSelectedRowKeys([]);
-        setEditing(false)
+        setEditing(false);
     };
 
     const actionRenderer = (text, record) => {
@@ -76,6 +84,8 @@ export const DataGrid = Form.create()((props) => {
                 setEditing={setEditing}
                 selectedRowKeys={selectedRowKeys}
                 setSelectedRowKeys={setSelectedRowKeys}
+                isLoading={isLoading}
+                setLoading={setLoading}
                 {...restProps}
             >
                 {children}
@@ -87,16 +97,16 @@ export const DataGrid = Form.create()((props) => {
 DataGrid.defaultProps = {
     idProperty: 'id',
     onAdd: (record) => (record),
-    onSave: () => Promise.resolve(),
     onDelete: () => Promise.resolve(),
-    onEdit: emptyFn
+    onEdit: emptyFn,
+    onSave: () => Promise.resolve()
 };
 
 DataGrid.propTypes = {
+    dataSource: PropTypes.array,
     idProperty: PropTypes.string,
-    onRecordCreate: PropTypes.func,
-    onSave: PropTypes.func,
+    onAdd: PropTypes.func,
     onDelete: PropTypes.func,
     onEdit: PropTypes.func,
-    dataSource: PropTypes.array
+    onSave: PropTypes.func
 };

@@ -23,7 +23,10 @@
     "no-console": "off",
     "indent": [
       "error",
-      4
+      4,
+      {
+        "SwitchCase": 1
+      }
     ],
     "linebreak-style": [
       "error",
@@ -39,11 +42,14 @@
     ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "react/sort-prop-types": ["warn", {
-      "callbacksLast": true,
-      "requiredFirst": true,
-      "sortShapeProp": true
-    }]
+    "react/sort-prop-types": [
+      "warn",
+      {
+        "callbacksLast": true,
+        "requiredFirst": true,
+        "sortShapeProp": true
+      }
+    ]
   },
   "settings": {
     "react": {

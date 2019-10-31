@@ -20,15 +20,20 @@ const Example = () => {
     const [data, setData] = useState(defaultData);
 
     const onEdit = (id) => {
-        message.info('edit button clicked!');
+        message.info(`edit button on row "${id}" clicked!`);
     };
 
-    const onDelete = (rows) => {
-        setData(data.filter(rec => !rows.includes(rec.id)))
+    const onDelete = (ids) => {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                setData(data.filter(rec => !ids.includes(rec.id)));
+                resolve();
+            }, 2000);
+        });
     };
 
     const onSave = (record) => {
-        const index = data.findIndex((r) => r.id === record.id);
+        const index = data.findIndex(rec => rec.id === record.id);
 
         if (index === -1) {
             data.push(record);
@@ -36,7 +41,12 @@ const Example = () => {
             data[index] = record;
         }
 
-        setData(data);
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                setData(data);
+                resolve();
+            }, 2000);
+        });
     };
 
     return (
@@ -60,10 +70,10 @@ const Example = () => {
 // Code example
 // language=JS
 const code = `
-    import React from 'react';
-    import { DataGrid } from '@react-hangar/antd-components';
+    import React, { useState } from 'react';
+    import { DataGrid, Column } from '@react-hangar/antd-components';
 
-    const data = [
+    const defaultData = [
         {
             id: 1,
             name: 'Linda Collins',
@@ -78,11 +88,41 @@ const code = `
         }
     ];
 
+    const [data, setData] = useState(defaultData);
+
+    const onDelete = (ids) => {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                setData(data.filter(rec => !ids.includes(rec.id)));
+                resolve();
+            }, 2000);
+        });
+    };
+
+    const onSave = (record) => {
+        const index = data.findIndex(rec => rec.id === record.id);
+
+        if (index === -1) {
+            data.push(record);
+        } else {
+            data[index] = record;
+        }
+
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                setData(data);
+                resolve();
+            }, 2000);
+        });
+    };
+
     const Example = () => {
         return (
             <DataGrid
                 dataSource={data}
                 pagination={false}
+                onDelete={onDelete}
+                onSave={onSave}
             >
                 <Column title={'Name'} dataIndex={'name'} fieldType={'string'}/>
                 <Column title={'Age'} dataIndex={'age'} inputType={'number'}/>
@@ -96,11 +136,12 @@ const code = `
 
 // Component props
 const properties = [
-    { property: 'idProperty', description: 'id field property of data source', type: 'string', default: 'id' },
-    { property: 'onRecordCreate', description: 'Hook function to manipulate new records', type: 'function' },
-    { property: 'onSave', description: 'Function is called on new record added or save', type: 'function' },
-    { property: 'onDelete', description: 'Function is called on record delete', type: 'function' },
     { property: 'dataSource', description: 'data source', type: 'object[]' },
+    { property: 'idProperty', description: 'id field property of data source', type: 'string', default: 'id' },
+    { property: 'onAdd', description: 'Function is called on record add', type: 'function' },
+    { property: 'onDelete', description: 'Function is called on record delete', type: 'function' },
+    { property: 'onEdit', description: 'Function is called on record edit', type: 'function' },
+    { property: 'onSave', description: 'Function is called on record save', type: 'function' }
 ];
 
 export default () => (

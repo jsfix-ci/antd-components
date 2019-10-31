@@ -22,42 +22,36 @@ const CodeSnippet = ({ html, link, children }) => {
     );
 };
 
-const ImagePreview = ({ url, title }) => {
-    return (
-        <Popover content={<img height={150} src={url}/>} title={title}>
-            <span style={{ cursor: 'pointer' }}>
-                <img height={40} src={url}/>
-            </span>
-        </Popover>
-    );
-};
-
-const renderImagePreview = (record) => {
+const ImagePreview = ({ data }) => {
     let url, title;
     let MoreLink = null;
 
-    if (!record) {
+    if (!data) {
         return null;
     }
 
-    if (Array.isArray(record) && record.length > 0) {
-        url = record[0].url;
-        title = record[0].name;
-        MoreLink = <span style={{ paddingLeft: '5px' }}>({record.length - 1} more)</span>;
+    if (Array.isArray(data) && data.length > 0) {
+        url = data[0].url;
+        title = data[0].name;
+        MoreLink = <span style={{ paddingLeft: '5px' }}>({data.length - 1} more)</span>;
     } else {
-        url = record.url;
-        title = record.name;
+        url = data.url;
+        title = data.name;
     }
 
     return (
         <Fragment>
-            <ImagePreview url={url} title={title}/>
+            <Popover content={<img height={150} src={url}/>} title={title}>
+                <span style={{ cursor: 'pointer' }}>
+                    <img height={40} src={url}/>
+                </span>
+            </Popover>
             {MoreLink}
         </Fragment>
     );
 };
 
-export const getDisplay = (fieldType, value, children, maxLength) => {
+export const getDisplay = ({ children, fieldType, maxLength, value }) => {
     switch (fieldType) {
         case 'boolean':
             return (<Switch disabled={true} checked={value}/>);
@@ -68,7 +62,7 @@ export const getDisplay = (fieldType, value, children, maxLength) => {
         case 'list':
             return (<CodeSnippet link={'list'}>{prettifyJson(value, 2)}</CodeSnippet>);
         case 'image':
-            return renderImagePreview(value);
+            return (<ImagePreview data={value}/>);
         case 'string':
             return truncateText(value, maxLength);
         case 'number':
