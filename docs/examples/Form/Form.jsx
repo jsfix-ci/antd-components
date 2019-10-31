@@ -100,7 +100,31 @@ const code = `
         const action = '/path/upload';
     
         return (
-            <Form />
+            <Form onSubmit={handleSubmit}>
+
+            <Form.Item label={'Upload Form Item'}>
+                {getFieldDecorator('upload', {
+                    valuePropName: 'fileList',
+                    initialValue: fileList,
+                    rules: [{
+                        required: true,
+                        message: 'upload field is required',
+                    }]
+                })(
+                    <Upload
+                        type={{image: ['jpeg', 'png']}}
+                        action={action}
+                        onUploaded={onUploaded}
+                        multiple
+                        customRequestData={{
+                            whatever: 'extra data you want to pass'
+                        }}
+                    />
+                )}
+            </Form.Item>
+
+            <SaveButton disabled={hasErrors(getFieldsError())} htmlType="submit"/>
+        </Form>
         );
     };
 

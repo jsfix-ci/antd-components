@@ -1,7 +1,6 @@
 import React from 'react';
 import AntdForm from 'antd/lib/form/Form';
 
-
 /**
  * @return {React.Component}
  *
@@ -15,7 +14,6 @@ const Form = (props) => {
             {props.children}
         </div>
     )
-
 };
 Form.create = AntdForm.create;
 Form.Item = AntdForm.Item;
