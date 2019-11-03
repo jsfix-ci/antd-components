@@ -10,7 +10,7 @@ export const LocaleContext = React.createContext({
     setLocale: emptyFn
 });
 
-export const LocaleProvider = ({ locale, setLocale, children }) => {
+export const LocaleProvider = ({ locale = DEFAULT_LOCALE, setLocale = emptyFn, children }) => {
     let l10n;
 
     try {
