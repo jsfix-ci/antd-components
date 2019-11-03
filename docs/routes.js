@@ -80,7 +80,7 @@ export const routes = [
             },
             {
                 key: 'formGrid',
-                label: 'DataEntry Grid',
+                label: 'Form Grid',
                 path: '/FormGrid',
                 component: FormGridComponent
             }

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import faker from 'faker';
 import { message } from 'antd';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
-import { FormGrid, Column } from '../../../src';
+import { FormGrid } from '../../../src';
+import {Column} from "../../../src/Grid";
 
 const defaultData = [
     {
