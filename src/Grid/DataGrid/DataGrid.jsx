@@ -79,6 +79,7 @@ export const DataGrid = withForm((props) => {
                 extraColumns={extraColumns}
                 onAdd={onAddClick}
                 onEdit={onEditClick}
+                idProperty={idProperty}
                 isEditing={isEditing}
                 setEditing={setEditing}
                 selectedRowKeys={selectedRowKeys}

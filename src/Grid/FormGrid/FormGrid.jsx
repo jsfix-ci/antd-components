@@ -10,7 +10,7 @@ import { BaseGrid } from '../BaseGrid';
  *
  * @constructor
  */
-export const FormGrid = withForm(props => {
+export const FormGrid = (props) => {
     const { idProperty, onSave, children, ...restProps } = props;
     const [isEditing, setEditing] = useState(false);
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -58,6 +58,7 @@ export const FormGrid = withForm(props => {
         <BaseGrid
             rowKey={idProperty}
             editForm={<EditForm/>}
+            idProperty={idProperty}
             isEditing={isEditing}
             setEditing={setEditing}
             selectedRowKeys={selectedRowKeys}
@@ -69,7 +70,7 @@ export const FormGrid = withForm(props => {
             {children}
         </BaseGrid>
     );
-});
+};
 
 FormGrid.defaultProps = {
     dataSource: [],

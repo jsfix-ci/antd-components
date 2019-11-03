@@ -6,7 +6,7 @@ import { FormGrid, Column } from '../../../src';
 
 const defaultData = [
     {
-        id: 1,
+        _id: 1,
         text: 'You can adjust types',
         html: '<div style="background-color: #eee; color: #D20000">this is renderd html</div>',
         image: [
@@ -30,7 +30,7 @@ const defaultData = [
         active: true
     },
     {
-        id: 2,
+        _id: 2,
         text: 'for example string',
         html: '<div style="background-color: #000; color: #fff">this is renderd html</div>',
         image: {
@@ -49,7 +49,7 @@ const defaultData = [
         active: true
     },
     {
-        id: 3,
+        _id: 3,
         text: 'it will be shortened if its to long',
         html: '<div style="background-color: #fff; color: #000">this is renderd html</div>',
         image: {
@@ -92,7 +92,7 @@ const Example = () => {
     };
 
     const onSave = (record) => {
-        const index = data.findIndex(rec => rec.id === record.id);
+        const index = data.findIndex(rec => rec._id === record._id);
 
         if (index === -1) {
             data.push(record);
@@ -121,6 +121,7 @@ const Example = () => {
             onEdit={onEdit}
             onDelete={onDelete}
             onSave={onSave}
+            idProperty={'_id'}
         >
             <Column title={'Title'} dataIndex={'text'} fieldType={'string'} required maxLength={30}/>
             <Column title={'Content'} dataIndex={'html'} fieldType={'html'} required/>
@@ -140,7 +141,7 @@ const code = `
 
     const defaultData = [
         {
-            id: 1,
+            _id: 1,
             text: 'You can adjust types',
             html: '<div style="background-color: #eee; color: #D20000">this is renderd html</div>',
             image: [
@@ -164,7 +165,7 @@ const code = `
             active: true
         },
         {
-            id: 2,
+            _id: 2,
             text: 'for example string',
             html: '<div style="background-color: #000; color: #fff">this is renderd html</div>',
             image: {
@@ -183,7 +184,7 @@ const code = `
             active: true
         },
         {
-            id: 3,
+            _id: 3,
             text: 'it will be shortened if its to long',
             html: '<div style="background-color: #fff; color: #000">this is renderd html</div>',
             image: {
@@ -217,7 +218,7 @@ const code = `
         };
 
         const onSave = (record) => {
-            const index = data.findIndex(rec => rec.id === record.id);
+            const index = data.findIndex(rec => rec._id === record._id);
 
             if (index === -1) {
                 data.push(record);
@@ -244,6 +245,7 @@ const code = `
                 pagination={false}
                 onDelete={onDelete}
                 onSave={onSave}
+                idProperty={'_id'}
             >
                 <Column title={'Title'} dataIndex={'text'} fieldType={'string'} required maxLength={30}/>
                 <Column title={'Content'} dataIndex={'html'} fieldType={'html'} required/>
