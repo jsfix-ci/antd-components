@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
-import {FormGrid, FormGridColumn} from '../../../src';
-import {ComponentDisplay} from "../../components/ComponentDisplay";
-import {message} from "antd";
+import React, { useState } from 'react';
+import faker from 'faker';
+import { message } from 'antd';
+import { ComponentDisplay } from '../../components/ComponentDisplay';
+import { FormGrid, Column } from '../../../src';
 
 const defaultData = [
     {
@@ -72,58 +73,74 @@ const Example = () => {
     const [data, setData] = useState(defaultData);
 
     const onAdd = () => {
-        message.info('add button clicked!');
+        return {
+            text: faker.random.word()
+        };
     };
 
-    const onEdit = (row) => {
-        message.info('edit button clicked!');
+    const onEdit = (id) => {
+        message.info(`edit button on row "${id}" clicked!`);
     };
 
-    const onDelete = (rows) => {
-        setData(data.filter( rec => !rows.includes(rec)))
+    const onDelete = (ids) => {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                setData(data.filter(rec => !ids.includes(rec.id)));
+                resolve();
+            }, 2000);
+        });
     };
 
-    const onSave = (row, actionType) => {
-        console.log(row, actionType);
+    const onSave = (record) => {
+        const index = data.findIndex(rec => rec.id === record.id);
+
+        if (index === -1) {
+            data.push(record);
+        } else {
+            data[index] = record;
+        }
+
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                setData(data);
+                resolve();
+            }, 2000);
+        });
     };
 
     const imageConfig = {
         action: 'http://www.mocky.io/v2/5daf53d53200006d00d961e1',
-        type: {image: ['jpeg', 'png']},
-        required: false
+        type: { image: ['jpeg', 'png'] }
     };
 
     return (
         <FormGrid
             dataSource={data}
-            pagination={true}
-            onAddRowClick={onAdd}
-            onEditRowClick={onEdit}
-            onDeleteRowClick={onDelete}
-            onSaveRowClick={onSave}
-            toolbar={true}
-            locale={'en-EN'}
+            pagination={false}
+            onAdd={onAdd}
+            onEdit={onEdit}
+            onDelete={onDelete}
+            onSave={onSave}
         >
-            <FormGridColumn title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30} config={{required: true}}/>
-            <FormGridColumn title={'Content'} dataIndex={'html'} fieldType={'html'} config={{required: true}}/>
-            <FormGridColumn title={'Image'} dataIndex={'image'} fieldType={'image'} config={imageConfig}/>
-            <FormGridColumn title={'Settings'} dataIndex={'settings'} fieldType={'object'} config={{required: true}} />
-            <FormGridColumn title={'List'} dataIndex={'list'} fieldType={'list'} config={{required: false}} />
-            <FormGridColumn title={'Active'} dataIndex={'active'} fieldType={'boolean'} config={{required: true}} />
+            <Column title={'Title'} dataIndex={'text'} fieldType={'string'} required maxLength={30}/>
+            <Column title={'Content'} dataIndex={'html'} fieldType={'html'} required/>
+            <Column title={'Image'} dataIndex={'image'} fieldType={'image'} fieldProps={imageConfig}/>
+            <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'} required/>
+            <Column title={'List'} dataIndex={'list'} fieldType={'list'}/>
+            <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
         </FormGrid>
-    )
+    );
 };
 
 // Code example
 // language=JS
 const code = `
-    import React from 'react';
-    import {FormGrid, FormGridColumn} from '@react-hangar/antd-components'
-    import axios from 'axios';
-    
+    import React, { useState } from 'react';
+    import { FormGrid, Column } from '@react-hangar/antd-components'
+
     const defaultData = [
         {
-             id: 1,
+            id: 1,
             text: 'You can adjust types',
             html: '<div style="background-color: #eee; color: #D20000">this is renderd html</div>',
             image: [
@@ -185,63 +202,55 @@ const code = `
             active: false
         }
     ];
-   
+
     const Example = () => {
-    
+
         const [data, setData] = useState(defaultData);
-        
-        const onAdd = () => {
-            message.info('add button clicked!');
+
+        const onDelete = (ids) => {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    setData(data.filter(rec => !ids.includes(rec.id)));
+                    resolve();
+                }, 2000);
+            });
         };
-        
-        const onEdit = (row) => {
-            message.info('edit button clicked!');
-        };
-        
-        const onDelete = (rows) => {           
-            return axios({
-                method: 'post',
-                url: '/path/delete',
-                data: rows,
-            }).then(() => {     
-                setData(data.filter( rec => !rows.includes(rec)));                
-            })
-        };
-        
-        const onSave = (row, actionType) => {
-            if (actionType === 'create') {
-                // create action
-                console.log('create');
+
+        const onSave = (record) => {
+            const index = data.findIndex(rec => rec.id === record.id);
+
+            if (index === -1) {
+                data.push(record);
             } else {
-                // update action
-                console.log('update');
+                data[index] = record;
             }
+
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    setData(data);
+                    resolve();
+                }, 2000);
+            });
         };
-        
-       const imageConfig = {
+
+        const imageConfig = {
             action: 'http://www.mocky.io/v2/5daf53d53200006d00d961e1',
-            type: {image: ['jpeg', 'png']},
-            required: false
+            type: { image: ['jpeg', 'png'] }
         };
-        
+
         return (
-               <FormGrid
-                    dataSource={data}
-                    pagination={true}
-                    onAddRowClick={onAdd}
-                    onEditRowClick={onEdit}
-                    onDeleteRowClick={onDelete}
-                    selectedRowKeys={[]}
-                    toolbar={true}                    
-                    locale={'en-EN'}
-                    onSaveRowClick={onSave}
-                >
-                    <FormGridColumn title={'Title'} dataIndex={'text'} fieldType={'string'} maxLength={30} config={{required: true}}/>
-                    <FormGridColumn title={'Content'} dataIndex={'html'} fieldType={'html'} config={{required: true}}/>
-                    <FormGridColumn title={'Image'} dataIndex={'image'} fieldType={'image'} config={imageConfig}/>
-                    <FormGridColumn title={'Settings'} dataIndex={'settings'} fieldType={'object'} config={{required: true}} />
-                    <FormGridColumn title={'List'} dataIndex={'list'} fieldType={'list'} config={{required: false}} />
-                    <FormGridColumn title={'Active'} dataIndex={'active'} fieldType={'boolean'} config={{required: true}} />
+            <FormGrid
+                dataSource={data}
+                pagination={false}
+                onDelete={onDelete}
+                onSave={onSave}
+            >
+                <Column title={'Title'} dataIndex={'text'} fieldType={'string'} required maxLength={30}/>
+                <Column title={'Content'} dataIndex={'html'} fieldType={'html'} required/>
+                <Column title={'Image'} dataIndex={'image'} fieldType={'image'} fieldProps={imageConfig}/>
+                <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'} required/>
+                <Column title={'List'} dataIndex={'list'} fieldType={'list'}/>
+                <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
             </FormGrid>
         );
     };
@@ -251,12 +260,12 @@ const code = `
 
 // Component props
 const properties = [
-    {property: 'idProperty', description: 'id field property of data source', type: 'string', default: 'id'},
-    {property: 'onAddBtnClick', description: 'Function is called on add button click', type: 'function'},
-    {property: 'onEditBtnClick', description: 'Function is called on edit button click', type: 'function'},
-    {property: 'onDeleteBtnClick', description: 'Function is called on delete button click', type: 'function'},
-    {property: 'dataSource', description: 'data source', type: 'object[]'},
-    {property: 'locale', description: 'available locales: "en-EN", "de-DE", "sr-SP"', type: 'string', default: 'en-EN'}
+    { property: 'dataSource', description: 'data source', type: 'object[]' },
+    { property: 'idProperty', description: 'id field property of data source', type: 'string', default: 'id' },
+    { property: 'onAdd', description: 'Function is called on record add', type: 'function' },
+    { property: 'onDelete', description: 'Function is called on record delete', type: 'function' },
+    { property: 'onEdit', description: 'Function is called on record edit', type: 'function' },
+    { property: 'onSave', description: 'Function is called on record save', type: 'function' }
 ];
 
 export default () => (

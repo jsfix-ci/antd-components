@@ -1,188 +1,102 @@
 import React, { Fragment } from 'react';
-import Switch from 'antd/lib/switch';
-import Popover from 'antd/lib/popover';
-import Input from 'antd/lib/input';
-import Form from 'antd/lib/form';
-import { Editor, CodeMirror, ListField, Upload } from '..';
-import { truncateText } from '../helper';
+import styled from 'styled-components';
+import { Popover, Switch, Input, InputNumber } from 'antd';
+import { FormItem, Editor, CodeMirror, ListField, Upload, prettifyJson, truncateText, useL10n as l10n } from '..';
 
-export const getDisplay = (fieldType, record, dataIndex, children, maxLength) => {
-    if (fieldType === 'boolean') {
-        return <Switch disabled={true} checked={record}/>
+const Link = styled.span`
+    cursor: pointer;
+    text-decoration: underline;
+`;
+
+const CodeSnippet = ({ html, link, children }) => {
+    const content = (
+        <pre className="language-bash">
+            {html ? <div dangerouslySetInnerHTML={{ __html: children }}/> : children}
+        </pre>
+    );
+
+    return (
+        <Popover content={content}>
+            <Link>{link}</Link>
+        </Popover>
+    );
+};
+
+const ImagePreview = ({ data }) => {
+    let url, title;
+    let MoreLink = null;
+
+    if (!data) {
+        return null;
     }
 
-    if (fieldType === 'object') {
-        const content = (
-            <pre className="language-bash">
-                {JSON.stringify(record, null, 2)}
-            </pre>
-        );
-
-        return (
-            <Popover content={content} title={dataIndex}>
-                <span style={{ cursor: 'pointer', textDecoration: 'underline' }}>
-                    object
-                </span>
-            </Popover>
-        );
+    if (Array.isArray(data) && data.length > 0) {
+        url = data[0].url;
+        title = data[0].name;
+        MoreLink = <span style={{ paddingLeft: '5px' }}>({data.length - 1} {l10n().Form.moreText})</span>;
+    } else {
+        url = data.url;
+        title = data.name;
     }
 
-    if (fieldType === 'html') {
-        const content = (
-            <pre className="language-bash">
-                <div dangerouslySetInnerHTML={{ __html: record }}/>
-            </pre>
-        );
-
-        return (
-            <Popover content={content} title={dataIndex}>
-                <span style={{ cursor: 'pointer', textDecoration: 'underline' }}>
-                    html
-                </span>
-            </Popover>);
-    }
-
-    if (fieldType === 'image') {
-        if (record.length > 0) {
-
-            return (
-                <Fragment>
-                    <Popover content={<img height={150} src={record[0].url}/>} title={record[0].name}>
-                        <span style={{ cursor: 'pointer', padding: 2 }}>
-                            <img height={40} src={record[0].url}/>
-                        </span>
-                    </Popover>
-
-                    ({record.length -1} more)
-
-                </Fragment>
-            );
-
-        }
-        return (
-            <Popover content={<img height={150} src={record.url}/>} title={record.name}>
+    return (
+        <Fragment>
+            <Popover content={<img height={150} src={url}/>} title={title}>
                 <span style={{ cursor: 'pointer' }}>
-                    <img height={40} src={record.url}/>
+                    <img height={40} src={url}/>
                 </span>
             </Popover>
-        );
+            {MoreLink}
+        </Fragment>
+    );
+};
+
+export const getDisplay = ({ children, fieldType, maxLength, value }) => {
+    switch (fieldType) {
+        case 'boolean':
+            return (<Switch disabled={true} checked={value}/>);
+        case 'object':
+            return (<CodeSnippet link={'object'}>{prettifyJson(value, 2)}</CodeSnippet>);
+        case 'html':
+            return (<CodeSnippet link={'html'} html>{value}</CodeSnippet>);
+        case 'list':
+            return (<CodeSnippet link={'list'}>{prettifyJson(value, 2)}</CodeSnippet>);
+        case 'image':
+            return (<ImagePreview data={value}/>);
+        case 'string':
+            return truncateText(value, maxLength);
+        case 'number':
+            return value;
+        default:
+            return children;
     }
+};
 
-    if (fieldType === 'list') {
-        const content = (
-            <pre className="language-bash">
-                {JSON.stringify(record, null, 2)}
-            </pre>
-        );
+export const getInput = ({ fieldType, fieldProps = {}, ...restProps }) => {
 
-        return (
-            <Popover content={content} title={dataIndex}>
-                <span style={{ cursor: 'pointer', textDecoration: 'underline' }}>
-                    list
-                </span>
-            </Popover>
-        );
+    switch (fieldType) {
+        case 'boolean':
+            return (<FormItem {...restProps} valuePropName={'checked'}><Switch/></FormItem>);
+        case 'image':
+            return (<FormItem {...restProps} valuePropName={'fileList'}><Upload {...fieldProps} /></FormItem>);
+        case 'html':
+            return (<FormItem {...restProps}><Editor/></FormItem>);
+        case 'object':
+            return (<FormItem {...restProps}><CodeMirror/></FormItem>);
+        case 'list':
+            return (<FormItem {...restProps}><ListField/></FormItem>);
+        case 'number':
+            return (<FormItem {...restProps}><InputNumber/></FormItem>);
+        case 'string':
+        default:
+            return (<FormItem {...restProps} ><Input/></FormItem>);
     }
-
-    if (fieldType === 'string') {
-        return truncateText(record, maxLength);
-    }
-
-    return children;
 };
 
 export const renderForm = (props, columns) => {
-    const { getFieldDecorator } = props.form;
-
     return React.Children.map(columns, child => {
-        const { title, dataIndex, fieldType, config} = child.props;
+        const { title, dataIndex, fieldType, required, rules, fieldProps } = child.props;
 
-        switch (fieldType) {
-            case 'string':
-                return (
-                    <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex, {
-                            initialValue: '',
-                            rules: [{
-                                required: config.required,
-                                message: title + ' field is required'
-                            }]
-                        })(<Input/>)}
-                    </Form.Item>
-                );
-            case 'boolean':
-                return (
-                    <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex, {
-                            valuePropName: 'checked',
-                            initialValue: false,
-                            rules: [{
-                                required: config.required,
-                                message: title + ' field is required'
-                            }]
-                        })(<Switch/>)}
-                    </Form.Item>
-                );
-            case 'image':
-                return (
-                    <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex, {
-                            valuePropName: 'fileList',
-                            rules: [{
-                                required: config.required,
-                                message: title + ' field is required'
-                            }]
-                        })(<Upload {...config} />)}
-                    </Form.Item>
-                );
-            case 'html':
-                return (
-                    <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex, {
-                            initialValue: '',
-                            rules: [{
-                                required: config.required,
-                                message: title + ' field is required'
-                            }]
-                        })(<Editor/>)}
-                    </Form.Item>
-                );
-            case 'object':
-                return (
-                    <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex, {
-                            initialValue: '',
-                            rules: [{
-                                required: config.required,
-                                message: title + ' field is required'
-                            }]
-                        })(<CodeMirror/>)}
-                    </Form.Item>
-                );
-            case 'list':
-                return (
-                    <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex, {
-                            initialValue: [],
-                            rules: [{
-                                required: config.required,
-                                message: title + ' field is required'
-                            }]
-                        })(<ListField/>)}
-                    </Form.Item>
-                );
-            default:
-                return (
-                    <Form.Item label={title}>
-                        {getFieldDecorator(dataIndex, {
-                            initialValue: '',
-                            rules: [{
-                                required: config.required,
-                                message: title + ' field is required'
-                            }]
-                        })(<Input/>)}
-                    </Form.Item>
-                );
-        }
+        return getInput({ fieldType, dataIndex, title, form: props.form, required, rules, fieldProps });
     });
 };

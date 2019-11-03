@@ -1,7 +1,12 @@
-.text-monospace {
+.hangar-text-monospace {
     font-family: monospace,monospace;
 }
 
-.text-center {
+.hangar-text-center {
     text-align: center;
+}
+
+.hangar-min-td {
+    width: 1%;
+    white-space: nowrap;
 }

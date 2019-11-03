@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, { Fragment, useContext } from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
 import {
     Button,
@@ -15,12 +15,12 @@ import {
     SaveButton,
     UploadButton,
     BackButton,
-    IconButton
+    IconButton,
+    LocaleContext
 } from '../../../src';
-import {message, Row, Select} from 'antd';
+import { Divider, message, Row, Select } from 'antd';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Text from 'antd/es/typography/Text';
-import {Divider} from 'antd';
 
 const onCopy = (e) => {
     message.info(<span><Text code>{e}</Text> copied!</span>);
@@ -28,102 +28,101 @@ const onCopy = (e) => {
 
 // Example implementation
 const Example = () => {
-
-    const [locale, switchLocale] = useState('en-EN');
+    const { locale, setLocale } = useContext(LocaleContext);
 
     const onLocaleChange = (value) => {
-        switchLocale(value);
+        setLocale(value);
     };
 
     return (
         <Fragment>
 
-            <Row style={{margin: 3}}>
+            <Row style={{ margin: 3 }}>
                 <Select defaultValue={locale} style={{ width: 140 }} onChange={onLocaleChange}>
-                    <Select.Option value="en-EN">Locale: en-EN</Select.Option>
-                    <Select.Option value="de-DE">Locale: de-DE</Select.Option>
-                    <Select.Option value="sr-SP">Locale: sr-SP</Select.Option>
+                    <Select.Option value="en_US">Locale: en_US</Select.Option>
+                    <Select.Option value="de_DE">Locale: de_DE</Select.Option>
+                    <Select.Option value="sr_RS">Locale: sr_RS</Select.Option>
                 </Select>
             </Row>
 
-            <Divider />
+            <Divider/>
 
             <CopyToClipboard
-                text={`<AddButton locale='${locale}' onClick={onClick}/>`}
-                onCopy={() => onCopy(`<AddButton locale='${locale}' onClick={onClick}/>`)}>
-                <AddButton locale={locale}/>
+                text={`<AddButton onClick={onClick}/>`}
+                onCopy={() => onCopy(`<AddButton onClick={onClick}/>`)}>
+                <AddButton/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={`<DeleteButton locale='${locale}' onClick={onClick}/>`}
-                onCopy={() => onCopy(`<DeleteButton locale='${locale}' onClick={onClick}/>`)}>
-                <DeleteButton locale={locale}/>
+                text={`<DeleteButton onClick={onClick}/>`}
+                onCopy={() => onCopy(`<DeleteButton onClick={onClick}/>`)}>
+                <DeleteButton/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={`<EditButton locale='${locale}' onClick={onClick}/>`}
-                onCopy={() => onCopy(`<EditButton locale='${locale}' onClick={onClick}/>`)}>
-                <EditButton locale={locale}/>
+                text={`<EditButton onClick={onClick}/>`}
+                onCopy={() => onCopy(`<EditButton onClick={onClick}/>`)}>
+                <EditButton/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={`<ReloadButton locale='${locale}' onClick={onClick}/>`}
-                onCopy={() => onCopy(`<ReloadButton locale='${locale}' onClick={onClick}/>`)}>
-                <ReloadButton locale={locale}/>
+                text={`<ReloadButton onClick={onClick}/>`}
+                onCopy={() => onCopy(`<ReloadButton onClick={onClick}/>`)}>
+                <ReloadButton/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={`<BackButton locale='${locale}' onClick={onClick}/>`}
-                onCopy={() => onCopy(`<BackButton locale='${locale}' onClick={onClick}/>`)}>
-                <BackButton locale={locale}/>
+                text={`<BackButton onClick={onClick}/>`}
+                onCopy={() => onCopy(`<BackButton onClick={onClick}/>`)}>
+                <BackButton/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={`<SearchButton locale='${locale}' onClick={onClick}/>`}
-                onCopy={() => onCopy(`<SearchButton locale='${locale}' onClick={onClick}/>`)}>
-                <SearchButton locale={locale}/>
+                text={`<SearchButton onClick={onClick}/>`}
+                onCopy={() => onCopy(`<SearchButton onClick={onClick}/>`)}>
+                <SearchButton/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={`<SaveButton locale='${locale}' onClick={onClick}/>`}
-                onCopy={() => onCopy(`<SaveButton locale='${locale}' onClick={onClick}/>`)}>
-                <SaveButton locale={locale}/>
+                text={`<SaveButton onClick={onClick}/>`}
+                onCopy={() => onCopy(`<SaveButton onClick={onClick}/>`)}>
+                <SaveButton/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={`<AddButton locale='${locale}' onClick={onClick}/>`}
-                onCopy={() => onCopy(`<AddButton locale='${locale}' onClick={onClick}/>`)}>
-                <CancelButton locale={locale}/>
+                text={`<AddButton onClick={onClick}/>`}
+                onCopy={() => onCopy(`<AddButton onClick={onClick}/>`)}>
+                <CancelButton/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={`<CloseButton locale='${locale}' onClick={onClick}/>`}
-                onCopy={() => onCopy(`<CloseButton locale='${locale}' onClick={onClick}/>`)}>
-                <CloseButton locale={locale}/>
+                text={`<CloseButton onClick={onClick}/>`}
+                onCopy={() => onCopy(`<CloseButton onClick={onClick}/>`)}>
+                <CloseButton/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={`<UndoButton locale='${locale}' onClick={onClick}/>`}
-                onCopy={() => onCopy(`<UndoButton locale='${locale}' onClick={onClick}/>`)}>
-                <UndoButton locale={locale}/>
+                text={`<UndoButton onClick={onClick}/>`}
+                onCopy={() => onCopy(`<UndoButton onClick={onClick}/>`)}>
+                <UndoButton/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={`<SettingsButton locale='${locale}' onClick={onClick}/>`}
-                onCopy={() => onCopy(`<SettingsButton locale='${locale}' onClick={onClick}/>`)}>
-                <SettingsButton locale={locale}/>
+                text={`<SettingsButton onClick={onClick}/>`}
+                onCopy={() => onCopy(`<SettingsButton onClick={onClick}/>`)}>
+                <SettingsButton/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={`<BasketButton locale='${locale}' onClick={onClick}/>`}
-                onCopy={() => onCopy(`<BasketButton locale='${locale}' onClick={onClick}/>`)}>
-                <BasketButton  locale={locale}/>
+                text={`<BasketButton onClick={onClick}/>`}
+                onCopy={() => onCopy(`<BasketButton onClick={onClick}/>`)}>
+                <BasketButton/>
             </CopyToClipboard>
 
             <CopyToClipboard
-                text={`<UploadButton locale='${locale}' onClick={onClick}/>`}
-                onCopy={() => onCopy(`<UploadButton locale='${locale}' onClick={onClick}/>`)}>
-                <UploadButton locale={locale}/>
+                text={`<UploadButton onClick={onClick}/>`}
+                onCopy={() => onCopy(`<UploadButton onClick={onClick}/>`)}>
+                <UploadButton/>
             </CopyToClipboard>
 
             <CopyToClipboard
@@ -196,7 +195,6 @@ const code = `
 const properties = [
     { property: 'onClick', description: 'Function is called on button click', type: 'function' },
     { property: 'color', description: 'optional color of the button', type: 'string' },
-    {property: 'locale', description: 'available locales: "en-EN", "de-DE", "sr-SP"', type: 'string', default: 'en-EN'},
     {
         property: '(Inherited)',
         description: 'Ant design properties are inherited (see: https://ant.design/components/button/)'

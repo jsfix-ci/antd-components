@@ -10,22 +10,22 @@ const columns = [
     {
         title: 'Property',
         dataIndex: 'property',
-        className: 'text-monospace'
+        className: 'hangar-text-monospace'
     },
     {
         title: 'Description',
         dataIndex: 'description',
-        className: 'text-monospace'
+        className: 'hangar-text-monospace'
     },
     {
         title: 'Type',
         dataIndex: 'type',
-        className: 'text-monospace'
+        className: 'hangar-text-monospace'
     },
     {
         title: 'Default',
         dataIndex: 'default',
-        className: 'text-monospace'
+        className: 'hangar-text-monospace'
     }
 ];
 
@@ -34,7 +34,7 @@ export const PropertyTable = ({dataSource}) => (
         rowKey={'property'}
         dataSource={dataSource}
         columns={columns}
-        rowClassName={'text-monospace'}
+        rowClassName={'hangar-text-monospace'}
         pagination={false}
     />
 );
