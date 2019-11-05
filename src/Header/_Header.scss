@@ -1,0 +1,29 @@
+#hangar-header {
+
+    &.light {
+        background-color: #fff;
+        border-bottom: 1px solid #b3b3b3;
+    }
+
+    .offcanvas {
+        float:left;
+    }
+
+    .offcanvas-icon {
+        font-size: 24px;
+        line-height: 66px;
+    }
+
+    @media (min-width: 768px) {
+        .show-mobile-hide-desktop {
+            display: none;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .show-desktop-hide-mobile {
+            display: none;
+        }
+    }
+
+}
