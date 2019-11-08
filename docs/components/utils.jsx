@@ -71,3 +71,11 @@ export const generateFakeList = (min = 3, max = 10) => {
 
     return list;
 };
+
+export const generateImages = () => {
+    const len = faker.random.number({ min: 1, max: 5 });
+    return generateFakeDataArray(len, () => ({
+        name: faker.system.commonFileName(),
+        url: `http://picsum.photos/seed/${faker.lorem.word()}/225/150`
+    }));
+};

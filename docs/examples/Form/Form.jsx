@@ -1,82 +1,62 @@
 import React from 'react';
-import {ComponentDisplay} from '../../components/ComponentDisplay';
-import {SaveButton, Upload} from '../../../src/index';
-import {message} from "antd";
-import Form from "../../../src/DataEntry/Form";
+import { ComponentDisplay } from '../../components/ComponentDisplay';
+import { Form, SaveButton, FormItem } from '../../../src';
+import { Input } from 'antd';
+import faker from 'faker';
+import { generateImages } from '../../components/utils';
 
-const hasErrors = (fieldsError) => {
-    return Object.keys(fieldsError).some(field => fieldsError[field]);
-};
-
-const fileList = [
-    {
-        name: 'xxx.png',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-    {
-        name: 'yyy.png',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-];
+const generateFakeData = () => ({
+    company: faker.company.companyName(),
+    product: faker.commerce.productName(),
+    image: generateImages(),
+});
 
 
 // Example implementation
-const Example = Form.create()((props) => {
+const Example = (props) => {
+    const action = 'http://www.mocky.io/v2/5daf53d53200006d00d961e1';
+
     const onUploaded = (response) => {
         console.log(response);
     };
 
-    const {getFieldsError, getFieldDecorator} = props.form;
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        props.form.validateFields((error, data) => {
-            if (error) {
-                return message.error('form validation failed');
-            }
-        });
+    const handleSubmit = (data, form) => {
+        console.log(data);
     };
 
-    const action = 'http://www.mocky.io/v2/5daf53d53200006d00d961e1';
-
-
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} {...generateFakeData()}>
+            <FormItem label='Company Name' dataIndex={'company'} required>
+                <Input/>
+            </FormItem>
 
-            <Form.Item label={'Upload Form Item'}>
-                {getFieldDecorator('upload', {
-                    valuePropName: 'fileList',
-                    initialValue: fileList,
-                    rules: [{
-                        required: true,
-                        message: 'upload field is required',
-                    }]
-                })(
-                    <Upload
-                        type={{image: ['jpeg', 'png']}}
-                        action={action}
-                        onUploaded={onUploaded}
-                        multiple
-                        customRequestData={{
-                            whatever: 'extra data you want to pass'
-                        }}
-                    />
-                )}
-            </Form.Item>
+            <FormItem fieldType={'string'} label='Product Name' dataIndex={'product'} required />
 
-            <SaveButton disabled={hasErrors(getFieldsError())} htmlType="submit"/>
+            <FormItem fieldType={'string'} label='Text with Validator' dataIndex={'text'} rules={[
+                { max: 10 }
+            ]}/>
+
+            <FormItem fieldType={'image'} dataIndex={'image'} label={'Upload Form Item'} required fieldProps={{
+                type: { image: ['jpeg', 'png'] },
+                action: action,
+                onUploaded,
+                multiple: true,
+                customRequestData: {
+                    whatever: 'extra data you want to pass'
+                }
+            }} />
+
+            <SaveButton htmlType="submit"/>
         </Form>
     );
-});
+};
 
 
 // Code example
 // language=JS
 const code = `
-    import React, {Fragment} from 'react';
-    import { Upload } from '@react-hangar/antd-components';
+    import React, { Fragment } from 'react';
+    import { Form, FormItem, SaveButton } from '@react-hangar/antd-components';
 
     const fileList = [
         {
@@ -90,41 +70,43 @@ const code = `
             thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
         },
     ];
-    
+
     const onUploaded = (response) => {
         console.log(response);
     };
 
+    const handleSubmit = (data, form) => {
+        console.log(data);
+    };
+   
     const Example = () => {
-    
+
         const action = '/path/upload';
-    
+
         return (
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} company={'Lindgren - Yundt'} product={'Unbranded Soft Chips'} image={fileList}>
+                <FormItem label='Company Name' dataIndex={'company'} required>
+                    <Input/>
+                </FormItem>
 
-            <Form.Item label={'Upload Form Item'}>
-                {getFieldDecorator('upload', {
-                    valuePropName: 'fileList',
-                    initialValue: fileList,
-                    rules: [{
-                        required: true,
-                        message: 'upload field is required',
-                    }]
-                })(
-                    <Upload
-                        type={{image: ['jpeg', 'png']}}
-                        action={action}
-                        onUploaded={onUploaded}
-                        multiple
-                        customRequestData={{
-                            whatever: 'extra data you want to pass'
-                        }}
-                    />
-                )}
-            </Form.Item>
+                <FormItem fieldType={'string'} label='Product Name' dataIndex={'product'} required />
 
-            <SaveButton disabled={hasErrors(getFieldsError())} htmlType="submit"/>
-        </Form>
+                <FormItem fieldType={'string'} label='Text' dataIndex={'text'} rules={[
+                    { max: 10 }
+                ]}/>
+
+                <FormItem fieldType={'image'} dataIndex={'image'} label={'Upload Form Item'} required fieldProps={{
+                    type: { image: ['jpeg', 'png'] },
+                    action: action,
+                    onUploaded,
+                    multiple: true,
+                    customRequestData: {
+                        whatever: 'extra data you want to pass'
+                    }
+                }} />
+
+                <SaveButton htmlType="submit"/>
+            </Form>
         );
     };
 
@@ -135,7 +117,7 @@ const code = `
 const properties = [
     {
         property: 'type',
-        description: "'file', 'image' | {image: ['jpeg', 'png']}, {file: ['txt', 'dll']}",
+        description: '\'file\', \'image\' | {image: [\'jpeg\', \'png\']}, {file: [\'txt\', \'dll\']}',
         type: 'string | array[object]'
     },
 
