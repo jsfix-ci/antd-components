@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { message, Form } from 'antd';
-import { SaveButton, withForm, emptyFn } from '../..';
+import { SaveButton, withForm } from '../..';
 import { renderForm } from '../renderer';
 import { BaseGrid } from '../BaseGrid';
 
@@ -10,7 +10,7 @@ import { BaseGrid } from '../BaseGrid';
  *
  * @constructor
  */
-export const FormGrid = withForm(props => {
+export const FormGrid = (props) => {
     const { idProperty, onSave, children, ...restProps } = props;
     const [isEditing, setEditing] = useState(false);
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -58,6 +58,7 @@ export const FormGrid = withForm(props => {
         <BaseGrid
             rowKey={idProperty}
             editForm={<EditForm/>}
+            idProperty={idProperty}
             isEditing={isEditing}
             setEditing={setEditing}
             selectedRowKeys={selectedRowKeys}
@@ -69,18 +70,16 @@ export const FormGrid = withForm(props => {
             {children}
         </BaseGrid>
     );
-});
+};
 
 FormGrid.defaultProps = {
     dataSource: [],
     idProperty: 'id',
-    onAdd: emptyFn,
-    onDelete: emptyFn,
-    onEdit: emptyFn,
-    onSave: emptyFn
+    onSave: () => Promise.resolve()
 };
 
 FormGrid.propTypes = {
+    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element]),
     dataSource: PropTypes.array,
     idProperty: PropTypes.string,
     onAdd: PropTypes.func,

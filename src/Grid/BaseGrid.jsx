@@ -168,7 +168,7 @@ BaseGrid.defaultProps = {
 };
 
 BaseGrid.propTypes = {
-    children: PropTypes.arrayOf(PropTypes.element),
+    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element]),
     dataSource: PropTypes.array,
     editForm: PropTypes.element,
     extraColumns: PropTypes.array,
