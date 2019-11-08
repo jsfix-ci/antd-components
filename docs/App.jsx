@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { HashRouter as Router, Switch } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import { Row, Col } from 'antd';
-import { CustomCol, Wrapper } from './components/utils';
+import { Wrapper } from './components/utils';
 import { routes } from './routes';
 import { Menu } from './Menu';
-import {Display1, DEFAULT_LOCALE, LocaleProvider, Flyout} from '../src';
+import { DEFAULT_LOCALE, LocaleProvider, Flyout, getGridTemplate} from '../src';
 import { renderRoutes } from '../src/Navigation/routing';
 import {Header} from "../src/Header/Header";
 
@@ -17,7 +17,7 @@ import {Header} from "../src/Header/Header";
 export const App = () => {
     const [locale, setLocale] = useState(DEFAULT_LOCALE);
 
-    const routes = [
+    const headerRoutes = [
         {
             key: 'home',
             label: 'Home',
@@ -49,6 +49,14 @@ export const App = () => {
         </div>
     );
 
+    const template = {
+        left: true,
+        middle: true,
+        right: false
+    };
+
+    let grid = getGridTemplate(template);
+
     return (
         <Router>
             <LocaleProvider locale={locale} setLocale={setLocale}>
@@ -58,24 +66,22 @@ export const App = () => {
                             theme={'light'}
                             offcanvas={<div> offcanvas </div>}
                             logo={logo}
-                            navigation={<Flyout routes={routes} openSubmenus='selected'/>}
+                            navigation={<Flyout routes={headerRoutes} openSubmenus='selected'/>}
                             extra={<div> extra </div>}
                         />
                     </Col>
                 </Row>
                 <Row>
-                    <Col
-                        xs={24}
-                        md={4}>
+                    <Col {...grid.left}>
                         <Menu/>
                     </Col>
-                    <CustomCol>
+                    <Col {...grid.middle}>
                         <Wrapper className={'markdown-body'}>
                             <Switch>
                                 {renderRoutes(routes)}
                             </Switch>
                         </Wrapper>
-                    </CustomCol>
+                    </Col>
                 </Row>
             </LocaleProvider>
         </Router>

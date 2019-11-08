@@ -1,5 +1,12 @@
 #hangar-header {
 
+    padding: 0;
+
+    .logo-container {
+        min-width: 260px;
+        padding-left: 15px;
+    }
+
     &.light {
         background-color: #fff;
         border-bottom: 1px solid #b3b3b3;
@@ -12,6 +19,10 @@
     .offcanvas-icon {
         font-size: 24px;
         line-height: 66px;
+    }
+
+    .extra {
+        text-align: right;
     }
 
     @media (min-width: 768px) {

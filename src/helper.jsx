@@ -30,25 +30,26 @@ export const getGridTemplate = (modules) => {
 
     let sum = 0;
 
-    let sizes = {
-        1: [{lg: 3, xl: 3}, {lg: 13, xl: 13}, {lg: 3, xl: 3}],
-        2: [{lg: 3, xl: 3}, {lg: 13, xl: 13}, {lg: 3, xl: 3}],
-        3: [{lg: 3, xl: 3}, {lg: 13, xl: 13}, {lg: 3, xl: 3}],
-        4: [{lg: 3, xl: 3}, {lg: 13, xl: 13}, {lg: 3, xl: 3}],
-        5: [{lg: 3, xl: 3}, {lg: 13, xl: 13}, {lg: 3, xl: 3}],
-        6: [{lg: 3, xl: 3}, {lg: 13, xl: 13}, {lg: 3, xl: 3}],
-        7: [{lg: 3, xl: 3}, {lg: 13, xl: 13}, {lg: 3, xl: 3}]
-    };
+    let sizes = [
+        [{lg: 0, xl: 0}, {lg: 0, xl: 0}, {lg: 0, xl: 0}],
+        [{lg: 4, xl: 4}, {lg: 0, xl: 0}, {lg: 0, xl: 0}],
+        [{lg: 0, xl: 0}, {lg: 24, xl: 24}, {lg: 0, xl: 0}],
+        [{lg: 4, xl: 4}, {lg: 20, xl: 20}, {lg: 0, xl: 0}],
+        [{lg: 0, xl: 0}, {lg: 0, xl: 0}, {lg: 24, xl: 24}],
+        [{lg: 0, xl: 0}, {lg: 0, xl: 0}, {lg: 0, xl: 0}],
+        [{lg: 0, xl: 0}, {lg: 0, xl: 0}, {lg: 0, xl: 0}],
+        [{lg: 4, xl: 4}, {xs: 13, md: 14, lg: 15, xl: 16, xxl: 17}, {lg: 3, xl: 3}],
+    ];
 
-    if (modules.left > 0) {
+    if (modules.left) {
         sum += LEFT;
     }
 
-    if (modules.middle > 0) {
+    if (modules.middle) {
         sum += MIDDLE;
     }
 
-    if (modules.right > 0) {
+    if (modules.right) {
         sum += RIGHT;
     }
 
