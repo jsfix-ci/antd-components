@@ -17,7 +17,7 @@ const generateImages = () => {
 const generateFakeData = () => ({
     _id: nanoid(10),
     text: faker.commerce.productName(),
-    html: `<div style="color: ${faker.internet.color()}">${faker.lorem.words()}</div>`,
+    html: `<span style="color: ${faker.internet.color()}">${faker.lorem.words()}</span>`,
     image: generateImages(),
     settings: generateFakeObject(),
     list: generateFakeList(),

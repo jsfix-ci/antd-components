@@ -36,7 +36,7 @@ Editor.defaultProps = {
     menubar: false,
     plugins: ['autolink lists link code help'],
     toolbar:
-        'undo redo | formatselect | bold italic backcolor | \
+        'undo redo | formatselect | bold italic forecolor backcolor | \
         link alignleft aligncenter alignright alignjustify | \
         bullist numlist outdent indent | removeformat | code help',
     statusbar: false,
