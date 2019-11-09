@@ -42,3 +42,5 @@ Logo.propTypes = {
     image: PropTypes.string
 };
 
+Logo.displayName = 'Logo';
+

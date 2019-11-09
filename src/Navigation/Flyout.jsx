@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Navigation } from './Navigation';
+import {Logo} from "../Logo/Logo";
 
 export const Flyout = (props) => {
     const {...restProps} = props;
@@ -19,3 +20,5 @@ Flyout.propTypes = {
     routes: PropTypes.arrayOf(PropTypes.object),
     openSubmenus: PropTypes.oneOf(['selected', 'all'])
 };
+
+Flyout.displayName = 'Flyout';
