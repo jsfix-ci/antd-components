@@ -15,10 +15,9 @@ import {
     SaveButton,
     UploadButton,
     BackButton,
-    IconButton,
-    LocaleContext
+    IconButton
 } from '../../../src';
-import { Divider, message, Row, Select } from 'antd';
+import { message } from 'antd';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Text from 'antd/es/typography/Text';
 
@@ -28,24 +27,8 @@ const onCopy = (e) => {
 
 // Example implementation
 const Example = () => {
-    const { locale, setLocale } = useContext(LocaleContext);
-
-    const onLocaleChange = (value) => {
-        setLocale(value);
-    };
-
     return (
         <Fragment>
-
-            <Row style={{ margin: 3 }}>
-                <Select defaultValue={locale} style={{ width: 140 }} onChange={onLocaleChange}>
-                    <Select.Option value="en_US">Locale: en_US</Select.Option>
-                    <Select.Option value="de_DE">Locale: de_DE</Select.Option>
-                    <Select.Option value="sr_RS">Locale: sr_RS</Select.Option>
-                </Select>
-            </Row>
-
-            <Divider/>
 
             <CopyToClipboard
                 text={`<AddButton onClick={onClick}/>`}
