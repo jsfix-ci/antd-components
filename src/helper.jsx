@@ -38,7 +38,7 @@ export const getGridTemplate = (modules) => {
         [{lg: 0, xl: 0}, {lg: 0, xl: 0}, {lg: 24, xl: 24}],
         [{lg: 0, xl: 0}, {lg: 0, xl: 0}, {lg: 0, xl: 0}],
         [{lg: 0, xl: 0}, {lg: 0, xl: 0}, {lg: 0, xl: 0}],
-        [{lg: 4, xl: 4}, {xs: 13, md: 14, lg: 15, xl: 16, xxl: 17}, {lg: 3, xl: 3}],
+        [{lg: 4, xl: 4}, {xs: 12, md: 13, lg: 14, xl: 15, xxl: 16}, {lg: 4, xl: 4}],
     ];
 
     if (modules.left) {

@@ -9,7 +9,7 @@ import Normalizer from 'prismjs/plugins/normalize-whitespace/prism-normalize-whi
 export * from './PropertyTable';
 
 export const Wrapper = styled.div`
-    margin: 0 30px;
+    margin: 15px 30px;
 `;
 
 const StyledPrismCode = styled(PrismCode)`

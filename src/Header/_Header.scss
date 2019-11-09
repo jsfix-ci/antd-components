@@ -1,6 +1,8 @@
 #hangar-header {
 
     padding: 0;
+    -webkit-box-shadow: 0 2px 8px #f0f1f2;
+    box-shadow: 0 2px 8px #f0f1f2;
 
     .logo-container {
         min-width: 260px;
@@ -9,7 +11,7 @@
 
     &.light {
         background-color: #fff;
-        border-bottom: 1px solid #b3b3b3;
+        border-bottom: rgba(0,0,0,0.05) 1px solid;
     }
 
     .offcanvas {
