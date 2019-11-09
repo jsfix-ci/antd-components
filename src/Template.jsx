@@ -4,8 +4,6 @@ import {Col, Row} from "antd";
 export const Container = (props) => {
     const { children, type, ...restProps } = props;
 
-    console.log(type, ' type <------------------------------');
-
     switch (type) {
         case '4x16x4':
             return (
@@ -36,7 +34,6 @@ export const Container = (props) => {
                 </Row>
             );
         case '4x20':
-            console.log( {...restProps}, '  {...restProps} <------------------------------');
             return (
                 <Row test={'asdf'} {...restProps}>
                     <Col xl={4}>
