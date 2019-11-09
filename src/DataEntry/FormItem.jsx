@@ -6,7 +6,7 @@ import { Editor } from './Editor';
 import { CodeMirror } from './CodeMirror';
 import { ListField } from './ListField';
 
-const getInput = ({ fieldType, fieldProps = {} }) => {
+const getInput = (fieldType, fieldProps = {}) => {
     switch (fieldType) {
         case 'boolean':
             return (<Switch/>);
@@ -53,15 +53,22 @@ export const FormItem = (props) => {
     const validateStatus = isFieldTouched(dataIndex) && getFieldError(dataIndex);
 
     return (
-        <Form.Item label={title}  {...restProps} validateStatus={validateStatus ? 'error' : ''} help={validateStatus || ''}>
+        <Form.Item
+            label={title}
+            validateStatus={validateStatus ? 'error' : ''}
+            help={validateStatus || ''}
+            {...restProps}
+        >
             {
-                getFieldDecorator(dataIndex, {
-                    initialValue,
-                    valuePropName: valuePropName || getValuePropName(fieldType),
-                    rules
-                })
-                (
-                    children || getInput({ fieldType, fieldProps })
+                getFieldDecorator(
+                    dataIndex,
+                    {
+                        initialValue,
+                        valuePropName: valuePropName || getValuePropName(fieldType),
+                        rules
+                    }
+                )(
+                    children || getInput(fieldType, fieldProps)
                 )
             }
         </Form.Item>
@@ -69,21 +76,22 @@ export const FormItem = (props) => {
 };
 
 FormItem.defaultProps = {
-    fieldType: 'string',
     fieldProps: {},
+    fieldType: 'string',
     required: false,
     rules: []
 };
 
 FormItem.propTypes = {
-    fieldType: PropTypes.string,
-    fieldProps: PropTypes.object,
-    title: PropTypes.string,
     dataIndex: PropTypes.string.isRequired,
-    initialValue: PropTypes.any,
+    fieldProps: PropTypes.object,
+    fieldType: PropTypes.string,
     form: PropTypes.object,
+    initialValue: PropTypes.any,
     required: PropTypes.bool,
-    rules: PropTypes.array
+    rules: PropTypes.array,
+    title: PropTypes.string,
+    valuePropName: PropTypes.string
 };
 
 FormItem.displayName = 'FormItem';

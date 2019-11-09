@@ -4,8 +4,10 @@ import { Form, SaveButton, FormItem } from '../../../src';
 import { Input } from 'antd';
 import faker from 'faker';
 import { generateImages } from '../../components/utils';
+import nanoid from 'nanoid';
 
 const generateFakeData = () => ({
+    _id: nanoid(10),
     company: faker.company.companyName(),
     product: faker.commerce.productName(),
     image: generateImages(),
@@ -25,17 +27,12 @@ const Example = (props) => {
     };
 
     return (
-        <Form onSubmit={handleSubmit} {...generateFakeData()}>
+        <Form onSubmit={handleSubmit} record={generateFakeData()}>
             <FormItem label='Company Name' dataIndex={'company'} required>
                 <Input/>
             </FormItem>
-
-            <FormItem fieldType={'string'} label='Product Name' dataIndex={'product'} required />
-
-            <FormItem fieldType={'string'} label='Text with Validator' dataIndex={'text'} rules={[
-                { max: 10 }
-            ]}/>
-
+            <FormItem fieldType={'string'} label='Product Name' dataIndex={'product'} required/>
+            <FormItem fieldType={'string'} label='Text with Validator' dataIndex={'text'} rules={[{ max: 10 }]}/>
             <FormItem fieldType={'image'} dataIndex={'image'} label={'Upload Form Item'} required fieldProps={{
                 type: { image: ['jpeg', 'png'] },
                 action: action,
@@ -44,8 +41,7 @@ const Example = (props) => {
                 customRequestData: {
                     whatever: 'extra data you want to pass'
                 }
-            }} />
-
+            }}/>
             <SaveButton htmlType="submit"/>
         </Form>
     );
@@ -56,6 +52,7 @@ const Example = (props) => {
 // language=JS
 const code = `
     import React, { Fragment } from 'react';
+    import { Input } from 'antd';
     import { Form, FormItem, SaveButton } from '@react-hangar/antd-components';
 
     const fileList = [
@@ -78,33 +75,24 @@ const code = `
     const handleSubmit = (data, form) => {
         console.log(data);
     };
-   
+
     const Example = () => {
-
-        const action = '/path/upload';
-
         return (
             <Form onSubmit={handleSubmit} company={'Lindgren - Yundt'} product={'Unbranded Soft Chips'} image={fileList}>
                 <FormItem label='Company Name' dataIndex={'company'} required>
                     <Input/>
                 </FormItem>
-
-                <FormItem fieldType={'string'} label='Product Name' dataIndex={'product'} required />
-
-                <FormItem fieldType={'string'} label='Text' dataIndex={'text'} rules={[
-                    { max: 10 }
-                ]}/>
-
+                <FormItem fieldType={'string'} label='Product Name' dataIndex={'product'} required/>
+                <FormItem fieldType={'string'} label='Text with Validator' dataIndex={'text'} rules={[{ max: 10 }]}/>
                 <FormItem fieldType={'image'} dataIndex={'image'} label={'Upload Form Item'} required fieldProps={{
                     type: { image: ['jpeg', 'png'] },
-                    action: action,
+                    action: '/path/upload',
                     onUploaded,
                     multiple: true,
                     customRequestData: {
                         whatever: 'extra data you want to pass'
                     }
-                }} />
-
+                }}/>
                 <SaveButton htmlType="submit"/>
             </Form>
         );

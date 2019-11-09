@@ -34,7 +34,7 @@ const Example = () => {
     const onDelete = (ids) => {
         return new Promise((resolve) => {
             setTimeout(() => {
-                setData(data.filter(rec => !ids.includes(rec.id)));
+                setData(data.filter(rec => !ids.includes(rec._id)));
                 resolve();
             }, 2000);
         });

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import { Popover, Switch, Input, InputNumber, Icon } from 'antd';
-import { FormItem, Editor, CodeMirror, ListField, Upload, prettifyJson, truncateText, useL10n as l10n } from '..';
+import { Popover, Switch, Icon } from 'antd';
+import { FormItem, prettifyJson, truncateText, useL10n as l10n } from '..';
 
 const Link = styled.span`
     cursor: pointer;
@@ -27,7 +27,7 @@ const ImagePreview = ({ data }) => {
     let MoreLink = null;
 
     if (!data || Array.isArray(data) && data.length === 0) {
-        return <Icon type={'picture'} style={{fontSize: '40px'}} />;
+        return <Icon type={'picture'} style={{ fontSize: '40px' }}/>;
     }
 
     if (Array.isArray(data)) {
@@ -74,31 +74,8 @@ export const getDisplay = ({ children, fieldType, maxLength, value }) => {
     }
 };
 
-export const getInput = ({ fieldType, fieldProps = {}, ...restProps }) => {
-
-    switch (fieldType) {
-        case 'boolean':
-            return (<FormItem {...restProps} valuePropName={'checked'}><Switch/></FormItem>);
-        case 'image':
-            return (<FormItem {...restProps} valuePropName={'fileList'}><Upload {...fieldProps} /></FormItem>);
-        case 'html':
-            return (<FormItem {...restProps}><Editor/></FormItem>);
-        case 'object':
-            return (<FormItem {...restProps}><CodeMirror/></FormItem>);
-        case 'list':
-            return (<FormItem {...restProps}><ListField/></FormItem>);
-        case 'number':
-            return (<FormItem {...restProps}><InputNumber/></FormItem>);
-        case 'string':
-        default:
-            return (<FormItem {...restProps} ><Input/></FormItem>);
-    }
-};
-
 export const renderForm = (props, columns) => {
     return React.Children.map(columns, child => {
-        const { title, dataIndex, fieldType, required, rules, fieldProps } = child.props;
-
-        return getInput({ fieldType, dataIndex, title, form: props.form, required, rules, fieldProps });
+        return (<FormItem {...child.props} form={props.form}/>);
     });
 };

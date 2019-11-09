@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { withForm, FormItem, useL10n as l10n } from '..';
+import { withForm, FormItem, useL10n as l10n, emptyFn } from '..';
 import { Form as AntdForm, message } from 'antd';
 
 const hasErrors = (fieldsError) => {
@@ -13,7 +13,7 @@ const hasErrors = (fieldsError) => {
  * @constructor
  */
 export const Form = (props) => {
-    const {onSubmit, disableSaveButtonOnError, children, ...restProps} = props;
+    const {record, onSubmit, disableSaveButtonOnError, children, ...restProps} = props;
     const formValidationError = l10n().Validation.form;
 
     const AntdFormWrapper = withForm((props) => {
@@ -32,7 +32,10 @@ export const Form = (props) => {
                     return message.error(formValidationError);
                 }
 
-                onSubmit(data, form);
+                onSubmit({
+                    ...record,
+                    ...data
+                }, form);
             });
         };
 
@@ -56,17 +59,20 @@ export const Form = (props) => {
             <AntdForm onSubmit={onHandleSubmit}>
                 {formItems}
             </AntdForm>
-        )
+        );
     }, {mapProps: true });
 
-    return (<AntdFormWrapper {...restProps} />);
+    return (<AntdFormWrapper record={record} {...restProps} />);
 };
 
 Form.defaultProps = {
-    disableSaveButtonOnError: false
+    disableSaveButtonOnError: false,
+    record: {},
+    onSubmit: emptyFn
 };
 
 Form.propTypes = {
-    onSubmit: PropTypes.func,
-    disableSaveButtonOnError: PropTypes.bool
+    disableSaveButtonOnError: PropTypes.bool,
+    record: PropTypes.object,
+    onSubmit: PropTypes.func
 };

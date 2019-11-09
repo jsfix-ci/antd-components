@@ -58,7 +58,7 @@ export const BaseGrid = (props) => {
                 </div>
                 {
                     React.cloneElement(editForm, {
-                        ...getRecord()
+                        record: getRecord()
                     })
                 }
             </Spin>

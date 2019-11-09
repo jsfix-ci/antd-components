@@ -2,12 +2,12 @@ import React from 'react';
 import { Form as AntdForm } from 'antd';
 import { useL10n } from '../Locales';
 
-const mapPropsToFields = (props) => {
+const mapPropsToFields = ({record = {}}) => {
     const data = {};
 
-    Object.keys(props).forEach(field => {
+    Object.keys(record).forEach(field => {
         data[field] = AntdForm.createFormField({
-            value: props[field]
+            value: record[field]
         });
     });
 
