@@ -79,6 +79,7 @@ export const DataGrid = withForm((props) => {
                 extraColumns={extraColumns}
                 onAdd={onAddClick}
                 onEdit={onEditClick}
+                idProperty={idProperty}
                 isEditing={isEditing}
                 setEditing={setEditing}
                 selectedRowKeys={selectedRowKeys}
@@ -102,6 +103,7 @@ DataGrid.defaultProps = {
 };
 
 DataGrid.propTypes = {
+    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element]),
     dataSource: PropTypes.array,
     idProperty: PropTypes.string,
     onAdd: PropTypes.func,
