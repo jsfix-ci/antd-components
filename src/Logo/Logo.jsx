@@ -1,46 +1,41 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { useTheme as theme } from '..';
 
 export const Logo = (props) => {
-    const { image, text, textColor, textFontSize, ...restProps } = props;
+    const { image, text, ...restProps } = props;
+    let src = image || theme().Logo.src;
 
-    const isHexCode = (textColor) => (/^#([0-9A-F]{3}){1,2}$/i.test(textColor));
-
-    console.log(text, ' isHexCode <------------------------------');
-
-    const Text = styled('span')`               
-        cursor: pointer;
-        color: ${textColor};
-        font-size: ${textFontSize};
+    const StyledLogo = styled('span')`                      
+        background-color: ${theme().Logo.backgroundColor};
+        a {
+            color: ${theme().Logo.color};
+            font-size: ${theme().Logo.fontSize};
+            font-weight: ${theme().Logo.fontWeight};
+        }                
         padding-left: 5px;
-        font-weight: 500;
+        cursor: pointer;
     `;
 
     return (
-        <div className="logo">
-                <span>
-                    <a href="/" >
-                        <img src={image} />  <Text>{text}</Text>
-                    </a>
-                </span>
-        </div>
+        <StyledLogo {...restProps}>
+            <a href="/" >
+                <img src={src} />  {text}
+            </a>
+        </StyledLogo>
     );
     
 };
 
 Logo.defaultProps = {
-    text: 'HANGAR',
-    textFontSize: '20px',
-    textColor: '#000',
-    image: './logo.png',
+    text: 'Logo Text',
+    textColor: '#000'
 };
 
 Logo.propTypes = {
     text: PropTypes.string,
-    textColor: PropTypes.string,
     image: PropTypes.string
 };
 
 Logo.displayName = 'Logo';
-
