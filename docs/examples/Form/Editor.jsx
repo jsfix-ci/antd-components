@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
-import { Code } from '../../components/utils';
+import { CodeSnippet } from '../../components/utils';
 import { Editor } from '../../../src';
 
 // Example implementation
@@ -64,7 +64,7 @@ const description = (
         <br/>
         <br/>
         <div>Or add this to webpack.config:</div>
-        <Code>
+        <CodeSnippet>
             {`
                 const CopyPlugin = require('copy-webpack-plugin');
                 
@@ -78,7 +78,7 @@ const description = (
                     // ...
                 };
             `}
-        </Code>
+        </CodeSnippet>
     </Fragment>
 );
 

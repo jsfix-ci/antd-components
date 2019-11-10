@@ -85,7 +85,7 @@ FormItem.defaultProps = {
 FormItem.propTypes = {
     dataIndex: PropTypes.string.isRequired,
     fieldProps: PropTypes.object,
-    fieldType: PropTypes.string,
+    fieldType: PropTypes.oneOf(['boolean', 'image', 'html', 'object', 'list', 'number', 'string']),
     form: PropTypes.object,
     initialValue: PropTypes.any,
     required: PropTypes.bool,
