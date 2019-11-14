@@ -9,7 +9,7 @@ export const Flyout = (props) => {
 
     const StyledNavigation = styled(Navigation)`
             background-color: ${theme().Flyout.backgroundColor};
-            color: ${theme().Flyout.color};
+            color: ${theme().Flyout.color};            
             
              li.ant-menu-item-selected {           
                 border-bottom: ${theme().Flyout.borderBottom}!important;

@@ -1,0 +1,8 @@
+#dark .ant-layout-header {
+    height: 66px;
+    background-color: #000;
+    color: #000;
+    border-bottom: rgba(0,0,0,0.05) 1px solid;
+    padding: 0;
+    position: relative;
+}

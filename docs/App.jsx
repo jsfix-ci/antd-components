@@ -12,7 +12,7 @@ import {
     ThemeProvider,
     Flyout,
     Offcanvas,
-    useTheme
+    useTheme, MotionDrawer
 } from '../src';
 import { renderRoutes } from '../src/Navigation/routing';
 import { Header } from "../src/Header/Header";
@@ -40,7 +40,7 @@ export const App = () => {
         setCollapsed(true);
     };
 
-    const onOffcanvasChange = (e) => {
+    const onChange = (e) => {
         setCollapsed(e);
     };
 
@@ -84,61 +84,63 @@ export const App = () => {
     );
 
     return (
-        <Router>
-            <ThemeProvider theme={theme} setTheme={setTheme}>
-                <LocaleProvider locale={locale} setLocale={setLocale}>
+        <div id={theme}>
+            <Router>
+                <ThemeProvider theme={theme} setTheme={setTheme}>
+                    <LocaleProvider locale={locale} setLocale={setLocale}>
 
-                    <Offcanvas width={'80%'} collapsed={collapsed} onChange={onOffcanvasChange}>
-                        <Menu />
-                    </Offcanvas>
-
-                    <Row>
-                        <Header>
-                            <Row>
-                                <Col xs={2} md={0} xl={0} xxl={0}>
-                                    <Icon
-                                        className="show-mobile-hide-desktop"
-                                        type='menu'
-                                        style={{
-                                            color: useTheme().Offcanvas.color,
-                                            paddingLeft: 10,
-                                            fontSize: '24px',
-                                            lineHeight: '66px'
-                                        }}
-                                        onClick={onOffcanvasBtnClick}
-                                    />
-                                </Col>
-
-                                <Col xs={22} md={6} xl={5} xxl={4}>
-                                    <Logo text={'React Hangar'} textColor={'#1b1b1b'} textFontSize={'20px'}/>
-                                </Col>
-
-                                <Col xs={0} md={10} xl={14} xxl={15}>
-                                    <Flyout routes={headerRoutes} openSubmenus='selected'/>
-                                </Col>
-
-                                <Col xs={0} md={8} xl={5} xxl={5}>
-                                    {Extra}
-                                </Col>
-                            </Row>
-                        </Header>
-                    </Row>
-
-                    <Row>
-                        <Col xs={0} md={6} xl={5} xxl={4}>
+                        <MotionDrawer width={400} collapsed={collapsed} onChange={onChange}>
                             <Menu />
-                        </Col>
-                        <Col xs={24} md={18} xl={19} xxl={20}>
-                            <Wrapper className={'markdown-body'}>
-                                <Switch>
-                                    {renderRoutes(routes)}
-                                </Switch>
-                            </Wrapper>
-                        </Col>
-                    </Row>
+                        </MotionDrawer>
 
-                </LocaleProvider>
-            </ThemeProvider>
-        </Router>
+                        <Row>
+                            <Header>
+                                <Row>
+                                    <Col xs={2} md={0} xl={0} xxl={0}>
+                                        <Icon
+                                            className="show-mobile-hide-desktop"
+                                            type='menu'
+                                            style={{
+                                                color: useTheme().Offcanvas.color,
+                                                paddingLeft: 10,
+                                                fontSize: '24px',
+                                                lineHeight: '66px'
+                                            }}
+                                            onClick={onOffcanvasBtnClick}
+                                        />
+                                    </Col>
+
+                                    <Col xs={22} md={6} xl={5} xxl={4}>
+                                        <Logo text={'React Hangar'} textColor={'#1b1b1b'} textFontSize={'20px'}/>
+                                    </Col>
+
+                                    <Col xs={0} md={10} xl={14} xxl={15}>
+                                        <Flyout routes={headerRoutes} openSubmenus='selected'/>
+                                    </Col>
+
+                                    <Col xs={0} md={8} xl={5} xxl={5}>
+                                        {Extra}
+                                    </Col>
+                                </Row>
+                            </Header>
+                        </Row>
+
+                        <Row>
+                            <Col style={{height: '100vh'}} xs={0} md={6} xl={5} xxl={4}>
+                                <Menu />
+                            </Col>
+                            <Col xs={24} md={18} xl={19} xxl={20}>
+                                <Wrapper className={'markdown-body'}>
+                                    <Switch>
+                                        {renderRoutes(routes)}
+                                    </Switch>
+                                </Wrapper>
+                            </Col>
+                        </Row>
+
+                    </LocaleProvider>
+                </ThemeProvider>
+            </Router>
+        </div>
     );
 };

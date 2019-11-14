@@ -11,7 +11,7 @@ export const ThemeContext = React.createContext({
 
 export const ThemeProvider = ({ theme = DEFAULT_THEME, setTheme = emptyFn, children }) => {
     try {
-        require.resolve(`./${theme}.js`);
+        require(`./${theme}.css`);
     } catch (e) {
         console.error(`theme "${theme}" not exist. fallback to "${DEFAULT_THEME}"`);
     }

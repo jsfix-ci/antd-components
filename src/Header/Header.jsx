@@ -12,9 +12,12 @@ export const Header = (props) => {
             color: ${theme().Header.color};
             border-bottom: ${theme().Header.color};
             padding: 0;
-            -webkit-box-shadow: 0 2px 8px #f0f1f2;
-            box-shadow: 0 2px 8px #f0f1f2;
-        
+            -webkit-box-shadow: ${theme().Header.shadow};
+            box-shadow: ${theme().Header.shadow};
+            height: 67px;
+            position: relative;
+            z-index: 2;            
+            
             @media (min-width: 768px) {
                 .show-mobile-hide-desktop {
                     display: none;
@@ -29,7 +32,7 @@ export const Header = (props) => {
         `;
 
     return (
-        <StyledHeader id={'hangar-header'} {...restProps}>
+        <StyledHeader {...restProps}>
             {children}
         </StyledHeader>
     )

@@ -1,0 +1,12 @@
+#light .ant-layout-header {
+    height: 66px;
+    background-color: #fff;
+    color: #000;
+    border-bottom: rgba(0,0,0,0.05) 1px solid;
+    padding: 0;
+    -webkit-box-shadow: 0 2px 8px #f0f1f2;
+    box-shadow: 0 2px 8px #f0f1f2;
+    position: relative;
+}
+
+

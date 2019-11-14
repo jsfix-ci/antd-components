@@ -5,6 +5,7 @@ import { Form } from './pages/Form';
 import { FlyoutNavigationComponent, SideNavigationComponent } from './pages/Navigation';
 import { DataGridComponent, FormGridComponent } from './pages/Grid';
 import { Buttons } from './pages/Buttons';
+import {MotionDrawerComponent} from "./pages/MotionDrawer";
 
 export const routes = [
     {
@@ -69,6 +70,12 @@ export const routes = [
                 component: SideNavigationComponent
             }
         ],
+    },
+    {
+        key: 'drawer',
+        label: 'Motion Drawer',
+        path: '/MotionDrawer',
+        component: MotionDrawerComponent
     },
     {
         key: 'notfound',
