@@ -2,7 +2,7 @@ import React from 'react';
 import '../dist/prism';
 import '../dist/prism.css';
 import styled from 'styled-components';
-import { Col } from 'antd';
+import { Col, Typography } from 'antd';
 import { PrismCode } from 'react-prism';
 import Normalizer from 'prismjs/plugins/normalize-whitespace/prism-normalize-whitespace';
 import faker from 'faker';
@@ -34,11 +34,13 @@ export const normalizeWhitespace = new Normalizer({
     'right-trim': true
 });
 
-export const Code = ({ children, ...props }) => (
+export const CodeSnippet = ({ children, ...props }) => (
     <StyledPrismCode component="pre" className="language-jsx" {...props}>
         {normalizeWhitespace.normalize(children)}
     </StyledPrismCode>
 );
+
+export const Code = ({children}) => (<Typography.Text code>{children}</Typography.Text>);
 
 export const generateFakeDataArray = (count, func) => {
     const data = [];
@@ -70,4 +72,12 @@ export const generateFakeList = (min = 3, max = 10) => {
     }
 
     return list;
+};
+
+export const generateImages = () => {
+    const len = faker.random.number({ min: 1, max: 5 });
+    return generateFakeDataArray(len, () => ({
+        name: faker.system.commonFileName(),
+        url: `http://picsum.photos/seed/${faker.lorem.word()}/225/150`
+    }));
 };
