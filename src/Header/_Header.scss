@@ -1,0 +1,19 @@
+.hangar-header {
+    padding: 0;
+    position: relative;
+    height: 66px;
+    line-height: 63px;
+    z-index:3;
+
+    @media (min-width: 768px) {
+        .show-mobile-hide-desktop {
+            display: none;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .show-desktop-hide-mobile {
+            display: none;
+        }
+    }
+}

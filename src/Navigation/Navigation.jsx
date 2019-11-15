@@ -1,20 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { Menu } from 'antd';
 import { withRouter } from 'react-router';
 import { getActiveRoutes, getAllSubmenuRoutes } from './routing';
 import { renderMenu } from './menu';
-import { useTheme as theme } from '..';
 
 export const Navigation = withRouter((props) => {
-
-    const StyledMenu = styled(Menu)`
-        background: ${theme().Header.backgroundColor};
-        line-height: 64px !important;
-        border: 0;
-        display: inline-block;
-    `;
 
     const {routes, openSubmenus, location, staticContext, history, match, ...restProps} = props;
     const activeRoutes = getActiveRoutes(routes, location);
@@ -30,13 +21,13 @@ export const Navigation = withRouter((props) => {
     }
 
     return (
-        <StyledMenu
+        <Menu
             selectedKeys={activeRoutes}
             defaultOpenKeys={defaultOpenKeys}
             {...restProps}
         >
             {renderMenu(routes)}
-        </StyledMenu>
+        </Menu>
     );
 });
 
