@@ -7,62 +7,61 @@ const hasErrors = (fieldsError) => {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
 };
 
+const AntdFormWrapper = withForm((props) => {
+    const {record, onSubmit, disableSaveButtonOnError, children, form} = props;
+    const {getFieldsError} = form;
+
+    const formValidationError = l10n().Validation.form;
+
+    useEffect(() => {
+        form.validateFields();
+    }, []);
+
+    const onHandleSubmit = (e) => {
+        e.preventDefault();
+
+        form.validateFieldsAndScroll((error, data) => {
+            if (error) {
+                return message.error(formValidationError);
+            }
+
+            onSubmit({
+                ...record,
+                ...data
+            }, form);
+        });
+    };
+
+    const formItems = React.Children.map(children, child => {
+        if (disableSaveButtonOnError && 'submit' === child.props.htmlType) {
+            return React.cloneElement(child, {
+                disabled: hasErrors(getFieldsError())
+            });
+        }
+
+        if ('FormItem' === child.type.displayName) {
+            return (
+                <FormItem {...child.props} form={form}/>
+            );
+        } else {
+            return child;
+        }
+    });
+
+    return (
+        <AntdForm onSubmit={onHandleSubmit}>
+            {formItems}
+        </AntdForm>
+    );
+}, {mapProps: true });
+
 /**
  * @return {React.Component}
  *
  * @constructor
  */
 export const Form = (props) => {
-    const {record, onSubmit, disableSaveButtonOnError, children, ...restProps} = props;
-    const formValidationError = l10n().Validation.form;
-
-    const AntdFormWrapper = withForm((props) => {
-        const {form} = props;
-        const {getFieldsError} = form;
-
-        useEffect(() => {
-            form.validateFields();
-        }, []);
-
-        const onHandleSubmit = (e) => {
-            e.preventDefault();
-
-            form.validateFieldsAndScroll((error, data) => {
-                if (error) {
-                    return message.error(formValidationError);
-                }
-
-                onSubmit({
-                    ...record,
-                    ...data
-                }, form);
-            });
-        };
-
-        const formItems = React.Children.map(children, child => {
-            if (disableSaveButtonOnError && 'submit' === child.props.htmlType) {
-                return React.cloneElement(child, {
-                    disabled: hasErrors(getFieldsError())
-                });
-            }
-
-            if ('FormItem' === child.type.displayName) {
-                return (
-                    <FormItem {...child.props} form={form}/>
-                );
-            } else {
-                return child;
-            }
-        });
-
-        return (
-            <AntdForm onSubmit={onHandleSubmit}>
-                {formItems}
-            </AntdForm>
-        );
-    }, {mapProps: true });
-
-    return (<AntdFormWrapper record={record} {...restProps} />);
+    return (<AntdFormWrapper {...props} />);
 };
 
 Form.defaultProps = {
