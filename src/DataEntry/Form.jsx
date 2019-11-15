@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { withForm, FormItem, useL10n as l10n, emptyFn } from '..';
+import { FormItem, useL10n as l10n, emptyFn } from '..';
 import { Form as AntdForm, message } from 'antd';
+import { withForm } from '../hoc';
 
 const hasErrors = (fieldsError) => {
     return Object.keys(fieldsError).some(field => fieldsError[field]);

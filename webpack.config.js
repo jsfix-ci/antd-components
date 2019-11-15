@@ -13,7 +13,12 @@ module.exports = {
         extensions: ['.js', '.jsx']
     },
     output: {
-        path: __dirname + '/docs/dist',
+        path: __dirname + '/docs/dist'
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+        }
     },
     module: {
         rules: [
