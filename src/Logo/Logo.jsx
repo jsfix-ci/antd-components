@@ -1,41 +1,26 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { useTheme as theme } from '..';
 
 export const Logo = (props) => {
-    const { image, text, ...restProps } = props;
-    let src = image || theme().Logo.src;
-
-    const StyledLogo = styled('span')`                      
-        background-color: ${theme().Logo.backgroundColor};
-        a {
-            color: ${theme().Logo.color};
-            font-size: ${theme().Logo.fontSize};
-            font-weight: ${theme().Logo.fontWeight};
-        }                
-        padding-left: 5px;
-        cursor: pointer;
-    `;
+    const { text, ...restProps } = props;
 
     return (
-        <StyledLogo {...restProps}>
+        <div className={'logo'} {...restProps}>
             <a href="/" >
-                <img src={src} />  {text}
+                <span className={'image'}> </span>
+                <span className={'text'}>{text}</span>
             </a>
-        </StyledLogo>
+        </div>
     );
     
 };
 
 Logo.defaultProps = {
     text: 'Logo Text',
-    textColor: '#000'
 };
 
 Logo.propTypes = {
-    text: PropTypes.string,
-    image: PropTypes.string
+    text: PropTypes.string
 };
 
 Logo.displayName = 'Logo';

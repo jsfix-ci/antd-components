@@ -7,7 +7,7 @@ const SRC_DIR = path.resolve(__dirname, 'src');
 module.exports = {
     entry: [
         DOCS_DIR + '/index.jsx',
-        SRC_DIR + '/index.scss'
+        SRC_DIR + '/index.less'
     ],
     resolve: {
         extensions: ['.js', '.jsx']
@@ -23,14 +23,17 @@ module.exports = {
                 use: ['babel-loader']
             },
             {
-                test: /\.(scss|sass|css)$/,
-                use: ['style-loader', 'css-loader', 'sass-loader'],
+                test: /\.(scss|css|less)$/,
+                use: ['style-loader', 'css-loader', {
+                    loader: 'less-loader',
+                    options: {javascriptEnabled: true}
+                }],
             },
         ]
     },
     plugins: [
         new CopyPlugin([
-            { from: 'node_modules/tinymce/skins', to: 'skins' }
+            {from: 'node_modules/tinymce/skins', to: 'skins'}
         ])
     ],
     devServer: {

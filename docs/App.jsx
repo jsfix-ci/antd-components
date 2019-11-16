@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
 import { HashRouter as Router, Switch } from 'react-router-dom';
-import 'antd/dist/antd.css';
+import {
+    DEFAULT_LOCALE,
+    LocaleProvider,
+    Flyout,
+    MotionDrawer
+} from '../src';
 import { Row, Col, Icon, Select } from 'antd';
 import { Wrapper } from './components/utils';
 import { routes } from './routes';
 import { Menu } from './Menu';
-import {
-    DEFAULT_LOCALE,
-    LocaleProvider,
-    DEFAULT_THEME,
-    ThemeProvider,
-    Flyout,
-    Offcanvas,
-    useTheme, MotionDrawer
-} from '../src';
 import { renderRoutes } from '../src/Navigation/routing';
 import { Header } from "../src/Header/Header";
 import { Logo } from "../src/Logo/Logo";
+import * as ReactDOM from "react-dom";
 
 /**
  * @return {React.Component}
@@ -25,7 +22,7 @@ import { Logo } from "../src/Logo/Logo";
  */
 export const App = () => {
     const [locale, setLocale] = useState(DEFAULT_LOCALE);
-    const [theme, setTheme] = useState(DEFAULT_THEME);
+    const [theme, setTheme] = useState('default');
     const [collapsed, setCollapsed] = useState(false);
 
     const onLocaleChange = (value) => {
@@ -72,8 +69,10 @@ export const App = () => {
                 <Select.Option value="1.0.0">V.1.0.0</Select.Option>
             </Select>
             <Select style={{padding: 5}} size={'small'} defaultValue={theme} onChange={onThemeChange}>
-                <Select.Option value="light">Light</Select.Option>
-                <Select.Option value="dark">Dark</Select.Option>
+                <Select.Option value="default">Default</Select.Option>
+                <Select.Option value="pink">Pink</Select.Option>
+                <Select.Option value="red">Red</Select.Option>
+                <Select.Option value="mint">Mint</Select.Option>
             </Select>
             <Select size={'small'} defaultValue={locale} onChange={onLocaleChange}>
                 <Select.Option value="en_US">English</Select.Option>
@@ -83,10 +82,15 @@ export const App = () => {
         </div>
     );
 
+    let bla = ReactDOM.createPortal(
+        (<link rel="stylesheet" href={`/Themes/${theme}.css`} type="text/css"></link>),
+        document.head
+    );
+
     return (
         <div id={theme}>
+            {bla}
             <Router>
-                <ThemeProvider theme={theme} setTheme={setTheme}>
                     <LocaleProvider locale={locale} setLocale={setLocale}>
 
                         <MotionDrawer width={400} collapsed={collapsed} onChange={onChange}>
@@ -98,14 +102,8 @@ export const App = () => {
                                 <Row>
                                     <Col xs={2} md={0} xl={0} xxl={0}>
                                         <Icon
-                                            className="show-mobile-hide-desktop"
+                                            className="burger-icon show-mobile-hide-desktop"
                                             type='menu'
-                                            style={{
-                                                color: useTheme().Offcanvas.color,
-                                                paddingLeft: 10,
-                                                fontSize: '24px',
-                                                lineHeight: '66px'
-                                            }}
                                             onClick={onOffcanvasBtnClick}
                                         />
                                     </Col>
@@ -139,7 +137,6 @@ export const App = () => {
                         </Row>
 
                     </LocaleProvider>
-                </ThemeProvider>
             </Router>
         </div>
     );
