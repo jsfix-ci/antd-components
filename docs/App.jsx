@@ -74,17 +74,17 @@ export const App = () => {
             <Select size={'small'} defaultValue={'1.0.0'} >
                 <Select.Option value="1.0.0">V.1.0.0</Select.Option>
             </Select>
-            <Select style={{padding: 5}} size={'small'} defaultValue={theme} onChange={onThemeChange}>
+            <Select style={{padding: 5}} size={'small'} value={theme} onChange={onThemeChange}>
                 <Select.Option value="light">Light</Select.Option>
                 <Select.Option value="dark">Dark</Select.Option>
             </Select>
-            <Select style={{padding: 5}} size={'small'} defaultValue={color} onChange={onColorChange}>
+            <Select style={{padding: 5}} size={'small'} value={color} onChange={onColorChange}>
                 <Select.Option value="red">Red</Select.Option>
-                <Select.Option value="default">Blue</Select.Option>
+                <Select.Option value="blue">Blue</Select.Option>
                 <Select.Option value="pink">Pink</Select.Option>
                 <Select.Option value="mint">Mint</Select.Option>
             </Select>
-            <Select size={'small'} defaultValue={locale} onChange={onLocaleChange}>
+            <Select size={'small'} value={locale} onChange={onLocaleChange}>
                 <Select.Option value="en_US">English</Select.Option>
                 <Select.Option value="de_DE">Deutsch</Select.Option>
                 <Select.Option value="sr_RS">Srpski</Select.Option>
@@ -93,7 +93,7 @@ export const App = () => {
     );
 
     let ThemeSwitch = ReactDOM.createPortal(
-        (<link rel="stylesheet" href={`/Themes/${color}.css`} type="text/css"></link>),
+        (<link rel="stylesheet" href={`dist/themes/${color}.css`} type="text/css"></link>),
         document.head
     );
 

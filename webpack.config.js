@@ -43,9 +43,9 @@ module.exports = {
     ],
     devServer: {
         host: '0.0.0.0',
-        port: 9091,
+        port: 8080,
         hot: true,
         contentBase: DOCS_DIR,
-        publicPath: '/antd-components/dist/'
+        publicPath: '/dist/'
     }
 };
