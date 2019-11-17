@@ -22,6 +22,9 @@ const Example = () => {
             <MotionDrawer
                 onChange={onChange}
                 open={open}
+                position={'right'}
+                width={400}
+                drawerStyle={{backgroundColor: '#fbfbfb'}}
             >
                 Hangar Drawer
             </MotionDrawer>
@@ -52,6 +55,9 @@ const code = `
             <MotionDrawer
                 onChange={onChange}
                 open={open}
+                position={'right'}
+                width={350}
+                drawerStyle={{backgroundColor: '#fbfbfb'}}
             >
                 Hangar Drawer
             </MotionDrawer>
@@ -65,7 +71,16 @@ const code = `
 const properties = [
     { property: 'onChange', description: 'Function is called on drawer change', type: 'function' },
     { property: 'open', description: 'motion drawer open status', type: 'string' },
-    { property: 'width', description: 'width of the motion drawer', type: 'string' },
+    { property: 'width', description: 'width of the motion drawer', type: 'number || string' , default: 400},
+    { property: 'height', description: 'height of the motion drawer', type: 'number || string' , default: '100%'},
+    { property: 'position', description: 'position of the drawer. possible positions: right, left', type: 'string', default: 'left'},
+    { property: 'drawerStyle', description: 'drawer style', type: 'string'},
+    { property: 'overlayColor', description: 'overlay color of the drawer', type: 'string', default: 'rgba(0, 0, 0, 0.4)'},
+    { property: 'config', description: 'stiffness and damping config', type: 'object', default: '{ stiffness: 350, damping: 40 }'},
+    { property: 'peakingWidth', description: 'drawer peaking width', type: 'number', default: 50},
+
+
+
 ];
 
 export default () => (

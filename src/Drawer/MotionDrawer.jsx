@@ -5,7 +5,7 @@ import {emptyFn} from "../helper";
 
 export const MotionDrawer = (props) => {
 
-    const {open, onChange, width, children} = props;
+    const {drawerStyle, position, open, onChange, width, children} = props;
 
     return (
         <Drawer
@@ -13,6 +13,9 @@ export const MotionDrawer = (props) => {
             onChange={onChange}
             open={open}
             width={width}
+            right={(position === 'right')}
+            offset={20}
+            drawerStyle={drawerStyle}
         >
             {children}
         </Drawer>
@@ -20,13 +23,17 @@ export const MotionDrawer = (props) => {
 };
 
 MotionDrawer.defaultProps = {
-    width: '80%',
+    width: 400,
     onChange: emptyFn,
-    open: false
+    open: false,
+    position: 'left',
+    drawerStyle: {backgroundColor: '#fff'}
 };
 
 MotionDrawer.propTypes = {
     width: PropTypes.number,
     onChange: PropTypes.func,
-    open: PropTypes.bool
+    open: PropTypes.bool,
+    position: PropTypes.string,
+    drawerStyle: PropTypes.object
 };
