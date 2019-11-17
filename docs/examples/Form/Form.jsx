@@ -1,16 +1,31 @@
 import React, { Fragment } from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
 import { Form, SaveButton, FormItem } from '../../../src';
-import { Input, Typography } from 'antd';
+import { Input, message } from 'antd';
 import faker from 'faker';
 import { Code, generateImages } from '../../components/utils';
 import nanoid from 'nanoid';
+
+const generateOption = () => {
+    const v = faker.commerce.productMaterial();
+
+    return ({
+        label: v,
+        value: nanoid()
+    });
+};
+
+const options = [
+    generateOption(),
+    generateOption(),
+    generateOption()
+];
 
 const generateFakeData = () => ({
     _id: nanoid(10),
     company: faker.company.companyName(),
     product: faker.commerce.productName(),
-    image: generateImages(),
+    image: generateImages()
 });
 
 
@@ -23,6 +38,7 @@ const Example = () => {
     };
 
     const handleSubmit = (data, form) => {
+        message.success('valid form');
         console.log(data);
     };
 
@@ -33,9 +49,10 @@ const Example = () => {
             </FormItem>
             <FormItem fieldType={'string'} label='Product Name' dataIndex={'product'} required/>
             <FormItem fieldType={'string'} label='Text with Validator' dataIndex={'text'} rules={[{ max: 10 }]}/>
+            <FormItem fieldType={'select'} label='Material' dataIndex={'material'} fieldProps={{ options }} required/>
             <FormItem fieldType={'image'} dataIndex={'image'} label={'Upload Form Item'} required fieldProps={{
                 type: { image: ['jpeg', 'png'] },
-                action: action,
+                action,
                 onUploaded,
                 multiple: true,
                 customRequestData: {
@@ -51,11 +68,17 @@ const Example = () => {
 // Code example
 // language=JS
 const code = `
-    import React, { Fragment } from 'react';
-    import { Input } from 'antd';
+    import React from 'react';
+    import { Input, message } from 'antd';
     import { Form, FormItem, SaveButton } from '@react-hangar/antd-components';
 
     const Example = () => {
+
+        const options = [
+            {label: 'A', value: 'a'},
+            {label: 'B', value: 'b'},
+            {label: 'C', value: 'c'}
+        ];
 
         const fileList = [
             {
@@ -75,6 +98,7 @@ const code = `
         };
 
         const handleSubmit = (data, form) => {
+            message.success('valid form');
             console.log(data);
         };
 
@@ -86,6 +110,7 @@ const code = `
                 </FormItem>
                 <FormItem fieldType={'string'} label='Product Name' dataIndex={'product'} required/>
                 <FormItem fieldType={'string'} label='Text with Validator' dataIndex={'text'} rules={[{ max: 10 }]}/>
+                <FormItem fieldType={'select'} label='Material' dataIndex={'material'} fieldProps={{ options }} required/>
                 <FormItem fieldType={'image'} dataIndex={'image'} label={'Upload Form Item'} required fieldProps={{
                     type: { image: ['jpeg', 'png'] },
                     action: '/path/upload',
@@ -182,7 +207,8 @@ export default () => (
         <ComponentDisplay
             title={'withForm(Component, config)'}
             properties={withFormProperties}
-            description={<span>This is a better <Code>Form.create()</Code> with automatic validation localisation</span>}
+            description={
+                <span>This is a better <Code>Form.create()</Code> with automatic validation localisation</span>}
         />
     </Fragment>
 );

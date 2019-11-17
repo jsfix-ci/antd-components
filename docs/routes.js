@@ -10,6 +10,7 @@ import {EditorComponent} from "./pages/Editor";
 import {CodeMirrorComponent} from "./pages/CodeMirror";
 import {UploadComponent} from "./pages/Upload";
 import {MotionDrawerComponent} from "./pages/MotionDrawer";
+import { SelectComponent } from './pages/Select';
 
 export const routes = [
     {
@@ -65,6 +66,12 @@ export const routes = [
                 label: 'Upload',
                 path: '/Upload',
                 component: UploadComponent
+            },
+            {
+                key: 'select',
+                label: 'Select',
+                path: '/Select',
+                component: SelectComponent
             }
         ],
     },
