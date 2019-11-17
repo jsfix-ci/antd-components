@@ -36,7 +36,7 @@ const Example = () => {
 // Code example
 // language=JS
 const code = `
-    import React from 'react';
+    import React, {Fragment, useState} from 'react';
     import { MotionDrawer, Button } from '@react-hangar/antd-components';
     
     const [open, setOpen] = useState(false);
@@ -51,16 +51,18 @@ const code = `
     
     const Example = () => {
         return (
-            <Button onClick={onBtnClick} >Open</Button>
-            <MotionDrawer
-                onChange={onChange}
-                open={open}
-                position={'right'}
-                width={350}
-                drawerStyle={{backgroundColor: '#fbfbfb'}}
-            >
-                Hangar Drawer
-            </MotionDrawer>
+            <Fragment>
+                <Button onClick={onBtnClick} >Open</Button>
+                <MotionDrawer
+                    onChange={onChange}
+                    open={open}
+                    position={'right'}
+                    width={350}
+                    drawerStyle={{backgroundColor: '#fbfbfb'}}
+                >
+                    Hangar Drawer
+                </MotionDrawer>
+            </Fragment>
         );
     };
 
