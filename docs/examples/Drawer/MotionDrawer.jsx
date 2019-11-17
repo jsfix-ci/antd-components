@@ -34,15 +34,27 @@ const Example = () => {
 // language=JS
 const code = `
     import React from 'react';
-    import { Offcanvas } from '@react-hangar/antd-components';
+    import { MotionDrawer, Button } from '@react-hangar/antd-components';
+    
+    const [open, setOpen] = useState(false);
 
-    const onClick = () => {
-        console.log('do fancy stuff!');
+    const onBtnClick = () => {
+        setOpen(true);
     };
-
+    
+    const onChange = (e) => {
+        setOpen(e);
+    };
+    
     const Example = () => {
         return (
-              <MotionDrawer/>
+            <Button onClick={onBtnClick} >Open</Button>
+            <MotionDrawer
+                onChange={onChange}
+                open={open}
+            >
+                Hangar Drawer
+            </MotionDrawer>
         );
     };
 
@@ -51,10 +63,9 @@ const code = `
 
 // Component props
 const properties = [
-    {
-        property: '(Inherited)',
-        description: 'Ant design properties are inherited (see: https://ant.design/components/button/)'
-    },
+    { property: 'onChange', description: 'Function is called on drawer change', type: 'function' },
+    { property: 'open', description: 'motion drawer open status', type: 'string' },
+    { property: 'width', description: 'width of the motion drawer', type: 'string' },
 ];
 
 export default () => (

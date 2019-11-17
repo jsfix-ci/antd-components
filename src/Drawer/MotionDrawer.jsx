@@ -22,10 +22,10 @@ export const MotionDrawer = (props) => {
 MotionDrawer.defaultProps = {
     width: '80%',
     onChange: emptyFn,
-    collapsed: false
+    open: false
 };
 
 MotionDrawer.propTypes = {
     onChange: PropTypes.func,
-    collapsed: PropTypes.bool
+    open: PropTypes.bool
 };
