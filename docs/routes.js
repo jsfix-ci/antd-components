@@ -1,10 +1,14 @@
 import { NotFound } from './pages/NotFound';
 import { Home } from './pages/Home';
 import { Typography } from './pages/Typography';
-import { Form } from './pages/Form';
+import { FormComponent } from './pages/Form';
 import { FlyoutNavigationComponent, SideNavigationComponent } from './pages/Navigation';
 import { DataGridComponent, FormGridComponent } from './pages/Grid';
 import { Buttons } from './pages/Buttons';
+import {ListFieldComponent} from "./pages/ListField";
+import {EditorComponent} from "./pages/Editor";
+import {CodeMirrorComponent} from "./pages/CodeMirror";
+import {UploadComponent} from "./pages/Upload";
 import {MotionDrawerComponent} from "./pages/MotionDrawer";
 
 export const routes = [
@@ -28,10 +32,41 @@ export const routes = [
         component: Typography
     },
     {
-        key: 'form',
-        label: 'Form',
-        path: '/Form',
-        component: Form
+        key: 'data-entry',
+        label: 'Data Entry',
+        path: '/DataEntry',
+        submenu: [
+            {
+                key: 'form',
+                label: 'Form',
+                path: '/Form',
+                component: FormComponent
+            },
+            {
+                key: 'listField',
+                label: 'List Field',
+                path: '/ListField',
+                component: ListFieldComponent
+            },
+            {
+                key: 'editor',
+                label: 'Editor',
+                path: '/Editor',
+                component: EditorComponent
+            },
+            {
+                key: 'codeMirror',
+                label: 'Code Mirror',
+                path: '/CodeMirror',
+                component: CodeMirrorComponent
+            },
+            {
+                key: 'upload',
+                label: 'Upload',
+                path: '/Upload',
+                component: UploadComponent
+            }
+        ],
     },
     {
         key: 'grid',

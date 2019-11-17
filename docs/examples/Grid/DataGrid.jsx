@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import faker from 'faker';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
-import { DataGrid, Column } from '../../../src';
+import { DataGrid } from '../../../src';
 import { generateFakeDataArray } from '../../components/utils';
 import nanoid from 'nanoid';
 import { message } from 'antd';
+import {Column} from "../../../src/Grid";
 
 const generateFakeData = () => ({
     id: nanoid(10),

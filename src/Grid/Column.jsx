@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { getDisplay, getInput } from './renderer';
+import { getDisplay } from './renderer';
 import { EditableContext } from './BaseGrid';
+import { FormItem } from '../DataEntry';
 
 /**
  * @return {React.Component}
@@ -37,18 +38,16 @@ export const Column = (props) => {
     if (isEditing && editable) {
         return (
             <td {...restProps} valign={'top'}>
-                {
-                    getInput({
-                        dataIndex,
-                        fieldProps,
-                        fieldType,
-                        form,
-                        initialValue: value,
-                        required,
-                        rules,
-                        style: { margin: 0 }
-                    })
-                }
+                <FormItem
+                    dataIndex={dataIndex}
+                    fieldProps={fieldProps}
+                    fieldType={fieldType}
+                    form={form}
+                    initialValue={value}
+                    required={required}
+                    rules={rules}
+                    style={{ margin: 0 }}
+                />
             </td>
         );
     }

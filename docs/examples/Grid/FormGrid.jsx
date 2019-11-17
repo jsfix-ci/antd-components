@@ -4,15 +4,7 @@ import { message } from 'antd';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
 import { FormGrid, Column } from '../../../src';
 import nanoid from 'nanoid';
-import { generateFakeDataArray, generateFakeList, generateFakeObject } from '../../components/utils';
-
-const generateImages = () => {
-    const len = faker.random.number({ min: 1, max: 5 });
-    return generateFakeDataArray(len, () => ({
-        name: faker.system.commonFileName(),
-        url: `http://picsum.photos/seed/${faker.lorem.word()}/225/150`
-    }));
-};
+import { generateFakeDataArray, generateFakeList, generateFakeObject, generateImages } from '../../components/utils';
 
 const generateFakeData = () => ({
     _id: nanoid(10),
@@ -42,7 +34,7 @@ const Example = () => {
     const onDelete = (ids) => {
         return new Promise((resolve) => {
             setTimeout(() => {
-                setData(data.filter(rec => !ids.includes(rec.id)));
+                setData(data.filter(rec => !ids.includes(rec._id)));
                 resolve();
             }, 2000);
         });

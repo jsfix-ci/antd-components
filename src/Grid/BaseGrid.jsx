@@ -2,7 +2,8 @@ import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { message, Spin, Table } from 'antd';
 import nanoid from 'nanoid';
-import { AddButton, BackButton, DeleteButton, EditButton, Column, emptyFn } from '..';
+import { AddButton, BackButton, DeleteButton, EditButton, emptyFn } from '..';
+import {Column} from "./Column";
 
 export const EditableContext = React.createContext();
 
@@ -57,7 +58,7 @@ export const BaseGrid = (props) => {
                 </div>
                 {
                     React.cloneElement(editForm, {
-                        ...getRecord()
+                        record: getRecord()
                     })
                 }
             </Spin>
