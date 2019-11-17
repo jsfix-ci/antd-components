@@ -14,7 +14,6 @@ export const MotionDrawer = (props) => {
             open={open}
             width={width}
             right={(position === 'right')}
-            offset={20}
             drawerStyle={drawerStyle}
         >
             {children}
