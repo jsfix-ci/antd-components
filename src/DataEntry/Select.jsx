@@ -7,7 +7,13 @@ const { Option, OptGroup } = AntdSelect;
 
 const renderOptions = (options, render) => {
     return options.map(option => {
-        const { group, label, value, disabled } = option;
+        const { group, label, value, disabled, ...restOptions } = option;
+
+        const record = {
+            value,
+            disabled,
+            ...restOptions
+        };
 
         if (group) {
             return (
@@ -17,7 +23,7 @@ const renderOptions = (options, render) => {
             );
         }
 
-        return (<Option key={nanoid(10)} value={value} disabled={disabled}>{render(label, value)}</Option>);
+        return (<Option key={nanoid(10)} value={value} disabled={disabled}>{render(label, record)}</Option>);
     });
 };
 
