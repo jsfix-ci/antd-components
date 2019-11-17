@@ -36,9 +36,15 @@ export const Home = () => {
             <br /><br />
 
             <Row>
-                <Display3> Import in Browser </Display3>
-                Add script and link tags in your browser and use the global variable antd.
+                <Display3> Import Style Library in your Browser </Display3>
+                Add style library in your browser. Available variations: default.css, red.css, blue.css, pink.css, mint.css<br />
+                Important: You don´t need to import antd style library then anymore. <br />
+                <Text style={{fontSize: 18}} copyable code>
+                    {`<link rel="stylesheet" href="/Themes/default.css" type="text/css">`}
+                </Text>
             </Row>
+
+            <br /><br />
 
         </Fragment>
 
