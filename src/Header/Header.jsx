@@ -7,7 +7,10 @@ export const Header = (props) => {
     const {children, ...restProps } = props;
 
     return (
-        <AntdHeader style={{backgroundColor: useTheme().Header.background}} className={'hangar-header'} {...restProps}>
+        <AntdHeader
+            style={{backgroundColor: useTheme().Header.background}}
+            className={useTheme().Theme + '-header hangar-header'} {...restProps}
+        >
             {children}
         </AntdHeader>
     )
