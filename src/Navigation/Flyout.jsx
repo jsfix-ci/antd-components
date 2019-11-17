@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Navigation } from './Navigation';
+import {useTheme} from "../Themes";
 
 export const Flyout = (props) => {
-    const {...restProps} = props;
+    const {theme, ...restProps} = props;
+
     return (
         <Navigation
+            theme={ useTheme().Theme || theme}
             className={'hangar-flyout'}
             mode="horizontal"
             {...restProps}
