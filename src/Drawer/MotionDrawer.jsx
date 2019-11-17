@@ -26,6 +26,7 @@ MotionDrawer.defaultProps = {
 };
 
 MotionDrawer.propTypes = {
+    width: PropTypes.number,
     onChange: PropTypes.func,
     open: PropTypes.bool
 };

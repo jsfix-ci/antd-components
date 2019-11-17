@@ -120,7 +120,7 @@ export const App = () => {
                                     </Col>
 
                                     <Col xs={22} md={6} xl={5} xxl={4}>
-                                        <Logo text={'React Hangar'} textColor={'#1b1b1b'} textFontSize={'20px'}/>
+                                        <Logo text={'React Hangar'} />
                                     </Col>
 
                                     <Col xs={0} md={10} xl={14} xxl={15}>

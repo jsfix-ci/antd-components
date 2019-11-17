@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import {Display2, Display3} from '../../src';
+import {Display3} from '../../src';
 import styled from 'styled-components';
 import {Row, Typography} from 'antd';
 const { Text } = Typography;
@@ -36,11 +36,11 @@ export const Home = () => {
             <br /><br />
 
             <Row>
-                <Display3> Import Style Library in your Browser </Display3>
-                Add style library in your browser. Available variations: default.css, red.css, blue.css, pink.css, mint.css<br />
-                Important: You don´t need to import antd style library then anymore. <br />
+                <Display3> Import Style Library </Display3>
+                Add style library from "node_modules/docs/Themes" folder in your browser. Available variations: default.css, red.css, blue.css, pink.css, mint.css<br />
+                <b>Important: You don´t need to import antd style library anymore. </b><br />
                 <Text style={{fontSize: 18}} copyable code>
-                    {`<link rel="stylesheet" href="/Themes/default.css" type="text/css">`}
+                    {`<link rel="stylesheet" href="/default.css" type="text/css">`}
                 </Text>
             </Row>
 
