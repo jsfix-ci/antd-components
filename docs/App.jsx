@@ -80,7 +80,7 @@ export const App = () => {
             </Select>
             <Select style={{padding: 5}} size={'small'} value={color} onChange={onColorChange}>
                 <Select.Option value="red">Red</Select.Option>
-                <Select.Option value="blue">Blue</Select.Option>
+                <Select.Option value="default">Blue</Select.Option>
                 <Select.Option value="pink">Pink</Select.Option>
                 <Select.Option value="mint">Mint</Select.Option>
             </Select>
