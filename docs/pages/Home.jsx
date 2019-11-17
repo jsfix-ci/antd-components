@@ -22,7 +22,7 @@ export const Home = () => {
 
             <img height={150} src={'https://gw.alipayobjects.com/zos/rmsportal/tXlLQhLvkEelMstLyHiN.svg'} /> <Icon>+</Icon>
             <img height={150} src={'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg'} /> <Icon>=</Icon>
-            <img height={150} src={'../hangar-logo-big.png'} />
+            <img height={150} src={'../images/hangar-logo-big.png'} />
 
             <br /><br />
 
