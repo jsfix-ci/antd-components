@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout } from "antd";
-import {useTheme} from "../Themes";
+import {useTheme} from "..";
 const { Header: AntdHeader } = Layout;
 
 export const Header = (props) => {

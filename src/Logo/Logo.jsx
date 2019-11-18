@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {useTheme} from "../Themes";
+import {useTheme} from "..";
 
 export const Logo = (props) => {
     const { text, src, ...restProps } = props;
