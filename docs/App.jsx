@@ -123,11 +123,11 @@ export const App = () => {
                                         <Logo text={'React Hangar'} />
                                     </Col>
 
-                                    <Col xs={0} md={10} xl={14} xxl={15}>
+                                    <Col xs={0} md={10} xl={13} xxl={14}>
                                         <Flyout routes={headerRoutes} openSubmenus='selected'/>
                                     </Col>
 
-                                    <Col xs={0} md={8} xl={5} xxl={5}>
+                                    <Col xs={0} md={8} xl={6} xxl={6}>
                                         {Extra}
                                     </Col>
                                 </Row>
