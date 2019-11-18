@@ -1,7 +1,6 @@
 import React, {Fragment, useState} from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
-import {MotionDrawer} from "../../../src/Drawer";
-import { Button } from '../../../src';
+import { Button, MotionDrawer } from '../../../src';
 
 // Example implementation
 const Example = () => {

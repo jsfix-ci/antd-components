@@ -7,4 +7,4 @@ export * from './Buttons/Buttons';
 export * from './Navigation';
 export * from './DataEntry';
 export * from './Grid';
-export * from './Drawer';
+export * from './Drawer/MotionDrawer';
