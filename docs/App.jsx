@@ -11,10 +11,10 @@ import { Wrapper } from './components/utils';
 import { routes } from './routes';
 import { Menu } from './Menu';
 import { renderRoutes } from '../src/Navigation/routing';
-import { Header } from "../src/Header/Header";
-import { Logo } from "../src/Logo/Logo";
-import * as ReactDOM from "react-dom";
-import {DEFAULT_THEME, ThemeProvider} from "../src/Themes";
+import { Header } from '../src/Header/Header';
+import { Logo } from '../src/Logo/Logo';
+import * as ReactDOM from 'react-dom';
+import {DEFAULT_THEME, ThemeProvider} from '../src/Themes';
 
 /**
  * @return {React.Component}
@@ -120,7 +120,7 @@ export const App = () => {
                                     </Col>
 
                                     <Col xs={22} md={6} xl={5} xxl={4}>
-                                        <Logo text={'React Hangar'} />
+                                        <Logo image={`images/logo-${theme}.png`}>React Hangar</Logo>
                                     </Col>
 
                                     <Col xs={0} md={10} xl={13} xxl={14}>

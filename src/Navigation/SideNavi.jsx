@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import {Navigation} from './Navigation';
-import {useTheme} from "..";
+import { ThemeContext } from '..';
 
 export const SideNavi = (props) => {
-    const {theme, ...restProps} = props;
+    const {...restProps} = props;
+
+    const { theme } = useContext(ThemeContext);
+
     return (
         <Navigation
-            theme={ useTheme().Theme || theme}
+            theme={theme}
             className={'hangar-side-navi'}
             mode="inline"
             {...restProps}
@@ -18,7 +21,7 @@ export const SideNavi = (props) => {
 SideNavi.defaultProps = {};
 
 SideNavi.propTypes = {
-    routes: PropTypes.arrayOf(PropTypes.object),
-    openSubmenus: PropTypes.oneOf(['selected', 'all'])
+    openSubmenus: PropTypes.oneOf(['selected', 'all']),
+    routes: PropTypes.arrayOf(PropTypes.object)
 };
 

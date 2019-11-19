@@ -1,17 +1,20 @@
-import React from 'react';
-import { Layout } from "antd";
-import {useTheme} from "..";
+import React, { useContext } from 'react';
+import { Layout } from 'antd';
+import { ThemeContext } from '..';
+
 const { Header: AntdHeader } = Layout;
 
 export const Header = (props) => {
-    const {children, ...restProps } = props;
+    const { children, ...restProps } = props;
+
+    const { theme } = useContext(ThemeContext);
 
     return (
         <AntdHeader
-            style={{backgroundColor: useTheme().Header.background}}
-            className={useTheme().Theme + '-header hangar-header'} {...restProps}
+            className={`${theme}-header hangar-header`}
+            {...restProps}
         >
             {children}
         </AntdHeader>
-    )
+    );
 };
