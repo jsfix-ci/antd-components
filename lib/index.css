@@ -143,14 +143,13 @@
   font-weight: 500;
 }
 .logo .image {
-  display: block;
+  display: inline-block;
   height: 55px;
   width: 55px;
-  float: left;
 }
 .logo .text {
-  display: block;
-  margin-left: 65px;
+  display: inline-block;
+  margin-left: 5px;
 }
 .dark a {
   color: #fff;

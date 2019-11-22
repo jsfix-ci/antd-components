@@ -1,20 +1,17 @@
 import React from 'react';
-import Drawer from "react-motion-drawer";
-import PropTypes from "prop-types";
-import {emptyFn} from "../helper";
+import Drawer from 'react-motion-drawer';
+import PropTypes from 'prop-types';
+import {emptyFn} from '../helper';
 
 export const MotionDrawer = (props) => {
 
-    const {drawerStyle, position, open, onChange, width, children} = props;
+    const { position, children, ...restProps} = props;
 
     return (
         <Drawer
             className={'motion-drawer'}
-            onChange={onChange}
-            open={open}
-            width={width}
             right={(position === 'right')}
-            drawerStyle={drawerStyle}
+            {...restProps}
         >
             {children}
         </Drawer>

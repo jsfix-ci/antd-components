@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Display2 } from '../../src';
-import MotionDrawer from "../examples/Drawer/MotionDrawer";
+import MotionDrawer from '../examples/Drawer/MotionDrawer';
 
 /**
  * @return {React.Component}
