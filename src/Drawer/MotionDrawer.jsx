@@ -5,16 +5,13 @@ import {emptyFn} from "../helper";
 
 export const MotionDrawer = (props) => {
 
-    const {drawerStyle, position, open, onChange, width, children} = props;
+    const { position, children, ...restProps} = props;
 
     return (
         <Drawer
+            {...restProps}
             className={'motion-drawer'}
-            onChange={onChange}
-            open={open}
-            width={width}
             right={(position === 'right')}
-            drawerStyle={drawerStyle}
         >
             {children}
         </Drawer>
