@@ -163,6 +163,15 @@
   border: 0;
   display: inline-block;
 }
+.hangar-flyout i.ant-menu-submenu-arrow {
+  border: solid #6d6a6a;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  margin: 2px 5px;
+  padding: 2px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
 .hangar-side-navi {
   height: 100vh;
 }
