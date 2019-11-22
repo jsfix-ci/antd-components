@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, Divider } from 'antd';
 import { CodeSnippet, PropertyTable } from './utils';
 import { Display3 } from '../../src';
-import './ComponentDisplay.scss';
+import './ComponentDisplay.less';
 
 /**
  * @return {React.Component}

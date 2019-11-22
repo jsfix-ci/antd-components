@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Navigation } from './Navigation';
+import { ThemeContext } from '..';
 
 export const Flyout = (props) => {
-    const {...restProps} = props;
+    const { ...restProps } = props;
+
+    const { theme } = useContext(ThemeContext);
 
     return (
         <Navigation
+            theme={theme}
+            className={'hangar-flyout'}
             mode="horizontal"
             {...restProps}
         />
@@ -16,6 +21,8 @@ export const Flyout = (props) => {
 Flyout.defaultProps = {};
 
 Flyout.propTypes = {
-    routes: PropTypes.arrayOf(PropTypes.object),
-    openSubmenus: PropTypes.oneOf(['selected', 'all'])
+    openSubmenus: PropTypes.oneOf(['selected', 'all']),
+    routes: PropTypes.arrayOf(PropTypes.object)
 };
+
+Flyout.displayName = 'Flyout';

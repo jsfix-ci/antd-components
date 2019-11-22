@@ -1,6 +1,7 @@
 import React from 'react';
 
-export const emptyFn = () => {};
+export const emptyFn = () => {
+};
 
 export const truncateText = (text = '', maxLength) => {
     if (!maxLength) return text;
