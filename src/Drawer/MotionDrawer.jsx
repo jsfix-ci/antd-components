@@ -9,9 +9,9 @@ export const MotionDrawer = (props) => {
 
     return (
         <Drawer
-            {...restProps}
             className={'motion-drawer'}
             right={(position === 'right')}
+            {...restProps}
         >
             {children}
         </Drawer>
