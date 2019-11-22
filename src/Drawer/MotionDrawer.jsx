@@ -1,7 +1,7 @@
 import React from 'react';
-import Drawer from "react-motion-drawer";
-import PropTypes from "prop-types";
-import {emptyFn} from "../helper";
+import Drawer from 'react-motion-drawer';
+import PropTypes from 'prop-types';
+import {emptyFn} from '../helper';
 
 export const MotionDrawer = (props) => {
 
