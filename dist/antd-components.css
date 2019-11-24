@@ -112,20 +112,14 @@
   line-height: 63px;
   z-index: 3;
 }
-@media (min-width: 768px) {
-  .hangar-header .show-mobile-hide-desktop {
-    display: none;
-  }
-}
-@media (max-width: 768px) {
-  .hangar-header .show-desktop-hide-mobile {
-    display: none;
-  }
-}
 .hangar-header .burger-icon {
   padding-left: 10px;
   font-size: 24px;
   line-height: 66px;
+}
+.hangar-header .version {
+  float: right;
+  margin-right: 10px;
 }
 .light-header {
   background-color: #fff;
