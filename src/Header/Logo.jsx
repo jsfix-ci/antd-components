@@ -1,15 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { ThemeContext } from '..';
 import { Link } from 'react-router-dom';
 
 export const Logo = (props) => {
     const { children, image, ...restProps } = props;
 
-    const { theme } = useContext(ThemeContext);
-
     return (
-        <div className={`${theme} logo`} {...restProps}>
+        <div className={'logo'} {...restProps}>
             <Link to="/">
                 {
                     image ? <div className={'image'}><img src={image}/></div> : null

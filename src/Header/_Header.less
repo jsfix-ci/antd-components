@@ -5,6 +5,17 @@
     line-height: 63px;
     z-index:3;
 
+    &.light-header {
+        background-color: #fff;
+        -webkit-box-shadow: 0 2px 8px #f0f1f2;
+        box-shadow: 0 2px 8px #f0f1f2;
+        border-bottom: rgba(0,0,0,0.05) 1px solid;
+    }
+
+    &.dark-header .version {
+        color: #fff;
+    }
+
     .burger-icon {
         padding-left: 10px;
         font-size: 24px;
@@ -15,11 +26,4 @@
         float: right;
         margin-right: 10px;
     }
-}
-
-.light-header {
-    background-color: #fff;
-    -webkit-box-shadow: 0 2px 8px #f0f1f2;
-    box-shadow: 0 2px 8px #f0f1f2;
-    border-bottom: rgba(0,0,0,0.05) 1px solid;
 }
