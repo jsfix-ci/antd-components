@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import { HashRouter as Router, Switch } from 'react-router-dom';
 import {
     DEFAULT_LOCALE,
