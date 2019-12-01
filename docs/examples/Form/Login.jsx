@@ -20,7 +20,7 @@ const Example = () => {
 // language=JS
 const code = `
     import React from 'react';
-    import { Input, message } from 'antd';
+    import { message } from 'antd';
     import { Login } from '@react-hangar/antd-components';
 
     const Example = () => {
