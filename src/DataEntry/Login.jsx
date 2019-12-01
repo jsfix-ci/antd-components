@@ -34,8 +34,8 @@ export const Login = (props) => {
 
 Login.defaultProps = {
     onSubmit: emptyFn,
-    showRememberMe: true,
-    showForgotPassword: true,
+    showRememberMe: false,
+    showForgotPassword: false,
     forgotPasswordUrl: '/forgot-password'
 };
 

@@ -12,7 +12,11 @@ const Example = () => {
     };
 
     return (
-        <Login onSubmit={handleSubmit}/>
+        <Login
+            onSubmit={handleSubmit}
+            showRememberMe={true}
+            showForgotPassword={true}
+        />
     );
 };
 
@@ -31,7 +35,11 @@ const code = `
         };
     
         return (
-            <Login onSubmit={handleSubmit}/>
+            <Login 
+                onSubmit={handleSubmit}
+                showRememberMe={true}
+                showForgotPassword={true}
+            />
         );
     };
 
@@ -48,12 +56,12 @@ const properties = [
         property: 'showRememberMe',
         description: 'Show remember me checkbox',
         type: 'boolean',
-        default: 'true'
+        default: 'false'
     },{
         property: 'showForgotPassword',
         description: 'Show forgot password link',
         type: 'boolean',
-        default: 'true'
+        default: 'false'
     },{
         property: 'forgotPasswordUrl',
         description: 'Forgot password Url',
