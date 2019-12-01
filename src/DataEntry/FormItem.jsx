@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
-import { Form, Input, InputNumber, Switch } from 'antd';
+import {Checkbox, Form, Input, InputNumber, Switch} from 'antd';
 import { Upload, Editor, CodeMirror, ListField, Select } from '..';
+import Password from 'antd/lib/input/Password';
 
 const getInput = (fieldType, fieldProps = {}) => {
     switch (fieldType) {
@@ -17,8 +18,12 @@ const getInput = (fieldType, fieldProps = {}) => {
             return (<ListField/>);
         case 'number':
             return (<InputNumber/>);
+        case 'password':
+            return (<Password/>);
         case 'select':
             return (<Select style={{ width: '100%' }} {...fieldProps}/>);
+        case 'checkbox':
+            return (<Checkbox> {fieldProps.title} </Checkbox>);
         case 'string':
         default:
             return (<Input/>);
@@ -31,6 +36,8 @@ const getValuePropName = (fieldType) => {
             return 'checked';
         case 'image':
             return 'fileList';
+        case 'checkbox':
+            return 'checked';
         default:
             return 'value';
     }
@@ -52,10 +59,13 @@ export const FormItem = (props) => {
         required,
         initialValue,
         disableInitialError,
+        show,
         children,
         ...restProps
     } = props;
+
     const { getFieldDecorator, isFieldTouched, getFieldError } = form;
+
     const rules = [
         { required },
         ...props.rules
@@ -71,26 +81,31 @@ export const FormItem = (props) => {
         };
     }
 
-    return (
-        <Form.Item
-            label={title}
-            {...statusProps}
-            {...restProps}
-        >
-            {
-                getFieldDecorator(
-                    dataIndex,
-                    {
-                        initialValue,
-                        valuePropName: valuePropName || getValuePropName(fieldType),
-                        rules
-                    }
-                )(
-                    children || getInput(fieldType, fieldProps)
-                )
-            }
-        </Form.Item>
-    );
+    if (show) {
+        return (
+            <Form.Item
+                label={title}
+                {...statusProps}
+                {...restProps}
+            >
+                {
+                    getFieldDecorator(
+                        dataIndex,
+                        {
+                            initialValue,
+                            valuePropName: valuePropName || getValuePropName(fieldType),
+                            rules
+                        }
+                    )(
+                        children || getInput(fieldType, fieldProps)
+                    )
+                }
+            </Form.Item>
+        );
+    }
+
+    return <Fragment/>
+
 };
 
 FormItem.defaultProps = {
@@ -98,6 +113,7 @@ FormItem.defaultProps = {
     fieldProps: {},
     fieldType: 'string',
     required: false,
+    show: true,
     rules: []
 };
 
@@ -105,13 +121,14 @@ FormItem.propTypes = {
     dataIndex: PropTypes.string.isRequired,
     disableInitialError: PropTypes.bool,
     fieldProps: PropTypes.object,
-    fieldType: PropTypes.oneOf(['boolean', 'image', 'html', 'object', 'list', 'number', 'string', 'select']),
+    fieldType: PropTypes.oneOf(['boolean', 'image', 'html', 'object', 'list', 'number', 'string', 'select', 'checkbox', 'password']),
     form: PropTypes.object,
     initialValue: PropTypes.any,
     required: PropTypes.bool,
     rules: PropTypes.array,
     title: PropTypes.string,
-    valuePropName: PropTypes.string
+    valuePropName: PropTypes.string,
+    show: PropTypes.bool
 };
 
 FormItem.displayName = 'FormItem';

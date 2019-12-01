@@ -12,7 +12,15 @@ module.exports = {
         undoButton: 'Undo',
         settingsButton: 'Settings',
         basketButton: 'Basket',
+        loginButton: 'Login',
         uploadButton: 'Upload'
+    },
+    Login: {
+        username: 'Username',
+        password: 'Password',
+        rememberMe: 'Remember me',
+        forgotPassword: 'Forgot password',
+        loginText: 'Log in'
     },
     Form: {
         moreText: 'more',

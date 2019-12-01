@@ -5,3 +5,4 @@ export * from './Form';
 export * from './Upload';
 export * from './FormItem';
 export * from './Select';
+export * from './Login';
