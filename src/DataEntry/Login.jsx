@@ -16,12 +16,12 @@ export const Login = (props) => {
         <Form onSubmit={onSubmit}>
             <FormItem fieldType={'string'} label={l10n().Login.username} dataIndex={'username'} required/>
             <FormItem fieldType={'password'} label={l10n().Login.password} dataIndex={'password'} required/>
-            <FormItem
+
+            {(showRememberMe) ? <FormItem
                 fieldType={'checkbox'}
                 fieldProps={{title: l10n().Login.rememberMe}}
                 dataIndex={'rememberMe'}
-                show={showRememberMe}
-            />
+            /> : ''}
 
             {(showForgotPassword) ? <Link to={forgotPasswordUrl}>Forgot Password</Link> : ''}
 

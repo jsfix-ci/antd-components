@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {Checkbox, Form, Input, InputNumber, Switch} from 'antd';
 import { Upload, Editor, CodeMirror, ListField, Select } from '..';
@@ -59,7 +59,6 @@ export const FormItem = (props) => {
         required,
         initialValue,
         disableInitialError,
-        show,
         children,
         ...restProps
     } = props;
@@ -81,30 +80,26 @@ export const FormItem = (props) => {
         };
     }
 
-    if (show) {
-        return (
-            <Form.Item
-                label={title}
-                {...statusProps}
-                {...restProps}
-            >
-                {
-                    getFieldDecorator(
-                        dataIndex,
-                        {
-                            initialValue,
-                            valuePropName: valuePropName || getValuePropName(fieldType),
-                            rules
-                        }
-                    )(
-                        children || getInput(fieldType, fieldProps)
-                    )
-                }
-            </Form.Item>
-        );
-    }
-
-    return <Fragment/>
+    return (
+        <Form.Item
+            label={title}
+            {...statusProps}
+            {...restProps}
+        >
+            {
+                getFieldDecorator(
+                    dataIndex,
+                    {
+                        initialValue,
+                        valuePropName: valuePropName || getValuePropName(fieldType),
+                        rules
+                    }
+                )(
+                    children || getInput(fieldType, fieldProps)
+                )
+            }
+        </Form.Item>
+    );
 
 };
 
@@ -128,7 +123,6 @@ FormItem.propTypes = {
     rules: PropTypes.array,
     title: PropTypes.string,
     valuePropName: PropTypes.string,
-    show: PropTypes.bool
 };
 
 FormItem.displayName = 'FormItem';
