@@ -10,10 +10,10 @@ import { Link } from 'react-router-dom';
  * @constructor
  */
 export const Login = (props) => {
-    const { handleSubmit, rememberMe, forgotPassword, forgotPasswordUrl } = props;
+    const { onSubmit, rememberMe, forgotPassword, forgotPasswordUrl } = props;
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={onSubmit}>
             <FormItem fieldType={'string'} label={l10n().Login.username} dataIndex={'username'} required/>
             <FormItem fieldType={'password'} label={l10n().Login.password} dataIndex={'password'} required/>
             <FormItem
