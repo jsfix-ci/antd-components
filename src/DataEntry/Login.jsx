@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
  * @constructor
  */
 export const Login = (props) => {
-    const { onSubmit, rememberMe, forgotPassword, forgotPasswordUrl } = props;
+    const { onSubmit, showRememberMe, showForgotPassword, forgotPasswordUrl } = props;
 
     return (
         <Form onSubmit={onSubmit}>
@@ -20,10 +20,10 @@ export const Login = (props) => {
                 fieldType={'checkbox'}
                 fieldProps={{title: l10n().Login.rememberMe}}
                 dataIndex={'rememberMe'}
-                show={rememberMe}
+                show={showRememberMe}
             />
 
-            {(forgotPassword) ? <Link to={forgotPasswordUrl}>Forgot Password</Link> : ''}
+            {(showForgotPassword) ? <Link to={forgotPasswordUrl}>Forgot Password</Link> : ''}
 
             <div>
                 <Button style={{clear: 'both', marginTop: 15}} htmlType="submit">{l10n().Login.loginText}</Button>
@@ -35,14 +35,14 @@ export const Login = (props) => {
 
 Login.defaultProps = {
     onSubmit: emptyFn,
-    rememberMe: true,
-    forgotPassword: true,
+    showRememberMe: true,
+    showForgotPassword: true,
     forgotPasswordUrl: '/forgot-password'
 };
 
 Login.propTypes = {
     onSubmit: PropTypes.func,
-    rememberMe: PropTypes.bool,
-    forgotPassword: PropTypes.bool,
+    showRememberMe: PropTypes.bool,
+    showForgotPassword: PropTypes.bool,
     forgotPasswordUrl: PropTypes.string
 };

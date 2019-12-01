@@ -18,7 +18,7 @@ module.exports = {
     Login: {
         username: 'Username',
         password: 'Passwort',
-        rememberMe: 'Merken',
+        rememberMe: 'Angemeldet bleiben',
         forgotPassword: 'Passwort vergessen',
         loginText: 'Anmelden'
     },
