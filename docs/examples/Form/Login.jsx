@@ -45,12 +45,12 @@ const properties = [
         description: 'Callback function if form is submited and valid',
         type: 'function'
     },{
-        property: 'rememberMe',
+        property: 'showRememberMe',
         description: 'Show remember me checkbox',
         type: 'boolean',
         default: 'true'
     },{
-        property: 'forgotPassword',
+        property: 'showForgotPassword',
         description: 'Show forgot password link',
         type: 'boolean',
         default: 'true'
