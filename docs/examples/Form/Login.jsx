@@ -14,8 +14,8 @@ const Example = () => {
     return (
         <Login
             onSubmit={handleSubmit}
-            showRememberMe={true}
-            showForgotPassword={true}
+            showRememberMe
+            showForgotPassword
         />
     );
 };
@@ -37,8 +37,8 @@ const code = `
         return (
             <Login 
                 onSubmit={handleSubmit}
-                showRememberMe={true}
-                showForgotPassword={true}
+                showRememberMe
+                showForgotPassword
             />
         );
     };
