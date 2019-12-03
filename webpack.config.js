@@ -43,7 +43,7 @@ module.exports = {
     ],
     devServer: {
         host: '0.0.0.0',
-        port: 8080,
+        port: 9091,
         hot: true,
         contentBase: DOCS_DIR,
         publicPath: '/dist/'
