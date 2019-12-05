@@ -61,6 +61,9 @@ export const IconButton = styled(AntIcon)`
     margin-left: 8px;
 `;
 
+export const LoginButton = ({ icon = 'user', children, ...restProps }) =>
+    <Button icon={icon} {...restProps}>{children || l10n().Buttons.loginButton}</Button>;
+
 export const AddButton = ({ icon = 'plus', children, ...restProps }) =>
     <Button icon={icon} {...restProps}>{children || l10n().Buttons.addButton}</Button>;
 

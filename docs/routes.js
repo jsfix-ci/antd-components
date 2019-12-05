@@ -12,6 +12,7 @@ import { UploadComponent } from './pages/Upload';
 import { MotionDrawerComponent } from './pages/MotionDrawer';
 import { SelectComponent } from './pages/Select';
 import { LayoutHeader } from './pages/Layout';
+import {LoginComponent} from './pages/Login';
 
 export const routes = [
     {
@@ -43,6 +44,12 @@ export const routes = [
                 label: 'Form',
                 path: '/Form',
                 component: FormComponent
+            },
+            {
+                key: 'login',
+                label: 'Login',
+                path: '/Login',
+                component: LoginComponent
             },
             {
                 key: 'listField',

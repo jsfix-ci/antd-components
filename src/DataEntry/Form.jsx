@@ -36,6 +36,10 @@ const AntdFormWrapper = withForm((props) => {
     };
 
     const formItems = React.Children.map(children, child => {
+        if (!child) {
+            return null;
+        }
+
         if (disableSaveButtonOnError && 'submit' === child.props.htmlType) {
             return React.cloneElement(child, {
                 disabled: hasErrors(getFieldsError())

@@ -15,7 +15,7 @@ import {
     SaveButton,
     UploadButton,
     BackButton,
-    IconButton
+    IconButton, LoginButton
 } from '../../../src';
 import { message } from 'antd';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -70,6 +70,12 @@ const Example = () => {
                 text={`<SaveButton onClick={onClick}/>`}
                 onCopy={() => onCopy(`<SaveButton onClick={onClick}/>`)}>
                 <SaveButton/>
+            </CopyToClipboard>
+
+            <CopyToClipboard
+                text={`<LoginButton onClick={onClick}/>`}
+                onCopy={() => onCopy(`<LoginButton onClick={onClick}/>`)}>
+                <LoginButton/>
             </CopyToClipboard>
 
             <CopyToClipboard
