@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import {Navigation} from './Navigation';
-import { ThemeContext } from '..';
+import {Navigation} from 'Navigation/Navigation';
+import { ThemeContext } from 'Themes';
 
 export const SideNavi = (props) => {
     const {...restProps} = props;

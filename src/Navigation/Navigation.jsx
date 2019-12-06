@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Menu } from 'antd';
 import { withRouter } from 'react-router';
-import { getActiveRoutes, getAllSubmenuRoutes } from './routing';
-import { renderMenu } from './menu';
+import { getActiveRoutes, getAllSubmenuRoutes } from 'Navigation/routing';
+import { renderMenu } from 'Navigation/menu';
 
 export const Navigation = withRouter((props) => {
 

@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Checkbox, Form, Input, InputNumber, Switch} from 'antd';
-import { Upload, Editor, CodeMirror, ListField, Select } from '..';
-import Password from 'antd/lib/input/Password';
+import { Upload, Editor, CodeMirror, ListField, Select } from 'DataEntry';
 
 const getInput = (fieldType, fieldProps = {}) => {
     switch (fieldType) {
@@ -19,7 +18,7 @@ const getInput = (fieldType, fieldProps = {}) => {
         case 'number':
             return (<InputNumber/>);
         case 'password':
-            return (<Password/>);
+            return (<Input.Password/>);
         case 'select':
             return (<Select style={{ width: '100%' }} {...fieldProps}/>);
         case 'checkbox':

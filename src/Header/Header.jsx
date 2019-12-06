@@ -1,8 +1,10 @@
 import React, { Fragment, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Col, Icon, Layout, Row } from 'antd';
-import { Flyout, MotionDrawer, SideNavi, ThemeContext } from '..';
-import { sumBreakPoints } from '.';
+import { Flyout, SideNavi } from 'Navigation';
+import { sumBreakPoints } from 'Header';
+import { ThemeContext } from 'Themes';
+import { MotionDrawer } from '@root';
 
 const { Header: AntdHeader } = Layout;
 

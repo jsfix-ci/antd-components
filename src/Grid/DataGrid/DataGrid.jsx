@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { message } from 'antd';
-import { BaseGrid, EditableContext } from '../BaseGrid';
-import { IconButton, emptyFn } from '../..';
-import { withForm } from '../../hoc';
+import { BaseGrid, EditableContext } from 'Grid/BaseGrid';
+import { IconButton } from 'Buttons';
+import { emptyFn } from 'helper';
+import { withForm } from 'hoc';
 
 /**
  * @return {React.Component}

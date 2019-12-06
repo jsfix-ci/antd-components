@@ -2,7 +2,9 @@ import React, { forwardRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input } from 'antd';
 import nanoid from 'nanoid';
-import { emptyFn, IconButton, AddButton, useL10n as l10n } from '..';
+import { IconButton, AddButton } from 'Buttons';
+import { useL10n as l10n } from 'Locales';
+import { emptyFn } from 'helper';
 
 export const ListField = forwardRef((props, ref) => {
     const { addText = l10n().Form.addNewField, label, onChange, value = [] } = props;
