@@ -1,8 +1,10 @@
 import React from 'react';
-import { Button, Form, FormItem, useL10n as l10n } from '..';
 import PropTypes from 'prop-types';
-import { emptyFn } from '../helper';
 import { Link } from 'react-router-dom';
+import { Form, FormItem } from 'DataEntry';
+import { useL10n as l10n } from 'Locales';
+import { emptyFn } from 'helper';
+import { Button } from 'Buttons';
 
 /**
  * @return {React.Component}

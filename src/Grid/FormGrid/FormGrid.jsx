@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { message } from 'antd';
-import { Form, SaveButton } from '../..';
-import { renderForm } from '../renderer';
-import { BaseGrid } from '../BaseGrid';
+import { Form } from 'DataEntry';
+import { SaveButton } from 'Buttons';
+import { renderForm } from 'Grid/renderer';
+import { BaseGrid } from 'Grid/BaseGrid';
 
 /**
  * @return {React.Component}

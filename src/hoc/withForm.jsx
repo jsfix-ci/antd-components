@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form as AntdForm } from 'antd';
-import { useL10n } from '..';
+import { useL10n as l10n } from 'Locales';
 
 const mapPropsToFields = ({record = {}}) => {
     const data = {};
@@ -19,7 +19,7 @@ export const withForm = (Component, config = {}) => {
 
     return props => {
         let options = {
-            validateMessages: useL10n().Validation,
+            validateMessages: l10n().Validation,
         };
 
         if (mapProps) {

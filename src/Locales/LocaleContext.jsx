@@ -1,7 +1,7 @@
 /* global require */
 import React from 'react';
 import { ConfigProvider } from 'antd';
-import { emptyFn } from '..';
+import { emptyFn } from 'helper';
 
 export const DEFAULT_LOCALE = 'en_US';
 

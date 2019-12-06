@@ -1,3 +1,4 @@
+/* global require, __dirname, module */
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 

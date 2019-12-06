@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { Popover, Switch, Icon } from 'antd';
-import { FormItem, prettifyJson, truncateText, useL10n as l10n } from '..';
+import { FormItem } from 'DataEntry';
+import { useL10n as l10n } from 'Locales';
+import { prettifyJson, truncateText } from 'helper';
 
 const Link = styled.span`
     cursor: pointer;
