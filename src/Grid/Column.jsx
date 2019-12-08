@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { getDisplay } from 'Grid/renderer';
-import { EditableContext } from 'Grid/BaseGrid';
-import { FormItem } from 'DataEntry';
+import { getDisplay } from '@root/Grid/renderer';
+import { EditableContext } from '@root/Grid/BaseGrid';
+import { FormItem } from '@root/DataEntry';
 
 /**
  * @return {React.Component}

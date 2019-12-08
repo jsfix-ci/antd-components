@@ -11,7 +11,10 @@ module.exports = {
         SRC_DIR + '/antd-components.less'
     ],
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx'],
+        alias: {
+            '@root': SRC_DIR
+        }
     },
     output: {
         path: __dirname + '/docs/dist'

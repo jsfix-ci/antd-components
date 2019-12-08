@@ -4,7 +4,7 @@ import AntIcon from 'antd/lib/icon';
 import invert from 'invert-color';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { useL10n as l10n } from 'Locales';
+import { useL10n as l10n } from '@root/Locales';
 
 const isHexCode = (color) => (/^#([0-9A-F]{3}){1,2}$/i.test(color));
 

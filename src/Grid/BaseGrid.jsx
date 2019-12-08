@@ -2,9 +2,9 @@ import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { message, Spin, Table } from 'antd';
 import nanoid from 'nanoid';
-import { AddButton, BackButton, DeleteButton, EditButton } from 'Buttons';
-import { Column } from 'Grid';
-import { emptyFn } from 'helper';
+import { AddButton, BackButton, DeleteButton, EditButton } from '@root/Buttons';
+import { Column } from '@root/Grid';
+import { emptyFn } from '@root/helper';
 
 export const EditableContext = React.createContext();
 

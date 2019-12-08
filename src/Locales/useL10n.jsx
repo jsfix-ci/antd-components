@@ -1,6 +1,6 @@
 /* global require */
 import React, { useContext } from 'react';
-import { DEFAULT_LOCALE, LocaleContext } from './LocaleContext';
+import { DEFAULT_LOCALE, LocaleContext } from '@root/Locales';
 
 export const useL10n = () => {
     let { locale } = useContext(LocaleContext);

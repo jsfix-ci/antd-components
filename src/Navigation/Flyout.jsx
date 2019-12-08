@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Navigation } from 'Navigation/Navigation';
-import { ThemeContext } from 'Themes';
+import { Navigation } from '@root/Navigation/Navigation';
+import { ThemeContext } from '@root/Themes';
 
 export const Flyout = (props) => {
     const { ...restProps } = props;
