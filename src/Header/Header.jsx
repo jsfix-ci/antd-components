@@ -113,5 +113,5 @@ Header.propTypes = {
     menuRoutes: PropTypes.array,
     siderProps: PropTypes.object,
     siderRoutes: PropTypes.array,
-    version: PropTypes.string
+    version: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 };
