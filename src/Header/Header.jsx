@@ -76,7 +76,7 @@ export const Header = (props) => {
     return (
         <Fragment>
             <MotionDrawer width={300} open={open} onChange={v => setOpen(v)}>
-                <SideNavi routes={siderRoutes || menuRoutes} {...sideNaviProps}/>
+                <SideNavi routes={siderRoutes || menuRoutes} extra={extra} {...sideNaviProps}/>
             </MotionDrawer>
 
             <AntdHeader
@@ -104,7 +104,7 @@ Header.defaultProps = {
 };
 
 Header.propTypes = {
-    extra: PropTypes.element,
+    extra: PropTypes.arrayOf(PropTypes.element),
     extraBreakpoints: PropTypes.object,
     logo: PropTypes.element,
     menuBreakpoints: PropTypes.object,

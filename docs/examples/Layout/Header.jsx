@@ -29,12 +29,10 @@ const Example = () => {
         }
     ];
 
-    const extras = (
-        <Fragment>
-            <Button>Extra 1</Button>
-            <Button>Extra 2</Button>
-        </Fragment>
-    );
+    const extras = [
+        <Button key={'extra-1'}>Extra 1</Button>,
+        <Button key={'extra-2'}>Extra 2</Button>
+    ];
 
     return (
         <Fragment>
@@ -218,15 +216,46 @@ const code = `
 // Component props
 const properties = [
     { property: 'extra', description: 'Extra component to show in header', type: 'React.Component', default: '' },
-    { property: 'extraBreakpoints', description: 'Extra component breakpoints', type: 'object', default: '{ xs: 0, md: 0, xl: 6, xxl: 6 }' },
+    {
+        property: 'extraBreakpoints',
+        description: 'Extra component breakpoints',
+        type: 'object',
+        default: '{ xs: 0, md: 0, xl: 6, xxl: 6 }'
+    },
     { property: 'logo', description: 'Logo component', type: 'Logo', default: '' },
     { property: 'menu', description: 'Menu Component', type: 'Flyout', default: '' },
-    { property: 'menuBreakpoints', description: 'Menu Component breakpoints', type: 'object', default: '{ xs: 0, md: 13, xl: 12, xxl: 13 }' },
-    { property: 'menuPosition', description: <Fragment><Code>right</Code> or <Code>left</Code></Fragment>, type: 'string', default: 'left' },
-    { property: 'menuProps', description: 'This props will be forwarded to Menu component', type: 'object', default: '{}' },
+    {
+        property: 'menuBreakpoints',
+        description: 'Menu Component breakpoints',
+        type: 'object',
+        default: '{ xs: 0, md: 13, xl: 12, xxl: 13 }'
+    },
+    {
+        property: 'menuPosition',
+        description: <Fragment><Code>right</Code> or <Code>left</Code></Fragment>,
+        type: 'string',
+        default: 'left'
+    },
+    {
+        property: 'menuProps',
+        description: 'This props will be forwarded to Menu component',
+        type: 'object',
+        default: '{}'
+    },
     { property: 'menuRoutes', description: 'Routes config', type: 'object[]', default: '' },
-    { property: 'siderProps', description: <Fragment>This props will be forwarded to Sider component. If not set <Code>menuProps</Code> will be used</Fragment>, type: 'object', default: '' },
-    { property: 'siderRoutes', description: <Fragment>Routes config. If not set <Code>menuRoutes</Code> will be used</Fragment>, type: 'object[]', default: '' },
+    {
+        property: 'siderProps',
+        description: <Fragment>This props will be forwarded to Sider component. If not set <Code>menuProps</Code> will
+            be used</Fragment>,
+        type: 'object',
+        default: ''
+    },
+    {
+        property: 'siderRoutes',
+        description: <Fragment>Routes config. If not set <Code>menuRoutes</Code> will be used</Fragment>,
+        type: 'object[]',
+        default: ''
+    },
     { property: 'version', description: 'Version', type: 'string', default: '' }
 ];
 

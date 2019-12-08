@@ -11,6 +11,7 @@ export const MotionDrawer = (props) => {
         <Drawer
             className={'motion-drawer'}
             right={(position === 'right')}
+            zIndex={10}
             {...restProps}
         >
             {children}
@@ -27,9 +28,9 @@ MotionDrawer.defaultProps = {
 };
 
 MotionDrawer.propTypes = {
-    width: PropTypes.number,
-    onChange: PropTypes.func,
+    drawerStyle: PropTypes.object,
     open: PropTypes.bool,
     position: PropTypes.string,
-    drawerStyle: PropTypes.object
+    width: PropTypes.number,
+    onChange: PropTypes.func
 };
