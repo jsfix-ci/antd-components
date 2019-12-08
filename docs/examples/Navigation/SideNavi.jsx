@@ -193,10 +193,11 @@ const code = `
 
 // Component props
 const properties = [
-    { property: 'routes', description: 'routes config', type: 'object[]', default: '[]' },
+    { property: 'children', description: 'Additional elements to render in SideNavi', type: 'Component[]', default: '' },
+    { property: 'routes', description: 'Routes config', type: 'object[]', default: '[]' },
     {
         property: 'openSubmenus',
-        description: 'open submenu items; "all" and "selected" are supported',
+        description: 'Open submenu items; "all" and "selected" are supported',
         type: 'string'
     }
 ];

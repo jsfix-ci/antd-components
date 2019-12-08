@@ -38,7 +38,7 @@ export const App = () => {
         setColor(value);
     };
 
-    const Extra = [
+    const extra = [
         <Select
             key={'theme'}
             style={{ padding: 5 }}
@@ -76,6 +76,11 @@ export const App = () => {
         />
     ];
 
+    const sider = [
+        <Logo key={'logo'} image={`images/logo-${theme}.png`}>React Hangar</Logo>,
+        ...extra
+    ];
+
     const ColorSwitch = ReactDOM.createPortal(
         (<link rel="stylesheet" href={`dist/${color}.css`} type="text/css"></link>),
         document.head
@@ -90,7 +95,8 @@ export const App = () => {
                         <Row>
                             <Header
                                 logo={<Logo image={`images/logo-${theme}.png`}>React Hangar</Logo>}
-                                extra={Extra}
+                                extra={extra}
+                                sider={sider}
                                 siderRoutes={routes}
                                 siderProps={{ openSubmenus: 'all' }}
                                 version={'v1.0.0'}

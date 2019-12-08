@@ -6,7 +6,7 @@ import { getActiveRoutes, getAllSubmenuRoutes } from '@root/Navigation/routing';
 import { renderMenu } from '@root/Navigation/menu';
 
 export const Navigation = withRouter((props) => {
-    const { routes, openSubmenus, extra, location, staticContext, history, match, ...restProps } = props;
+    const { children, routes, openSubmenus, extra, location, staticContext, history, match, ...restProps } = props;
     const activeRoutes = getActiveRoutes(routes, location);
     let defaultOpenKeys = [];
 
@@ -20,9 +20,9 @@ export const Navigation = withRouter((props) => {
     }
 
     const renderExtra = () => {
-        if (!extra) return null;
+        if (!children) return null;
 
-        return React.Children.map(extra, child => {
+        return React.Children.map(children, child => {
             return (
                 <Menu.Item key={child.key}>
                     {React.cloneElement(child, { style: { width: '90%' } })}
@@ -48,7 +48,7 @@ Navigation.defaultProps = {
 };
 
 Navigation.propTypes = {
-    extra: PropTypes.arrayOf(PropTypes.element),
+    children: PropTypes.arrayOf(PropTypes.element),
     openSubmenus: PropTypes.oneOf(['selected', 'all']),
     routes: PropTypes.arrayOf(PropTypes.object)
 };

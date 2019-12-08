@@ -243,6 +243,7 @@ const properties = [
         default: '{}'
     },
     { property: 'menuRoutes', description: 'Routes config', type: 'object[]', default: '' },
+    { property: 'sider', description: 'Additional sider elements', type: 'Component[]', default: '' },
     {
         property: 'siderProps',
         description: <Fragment>This props will be forwarded to Sider component. If not set <Code>menuProps</Code> will
