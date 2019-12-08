@@ -25,7 +25,7 @@ const getInput = (fieldType, fieldProps = {}) => {
             return (<Checkbox> {fieldProps.title} </Checkbox>);
         case 'string':
         default:
-            return (<Input/>);
+            return (<Input {...fieldProps}/>);
     }
 };
 
