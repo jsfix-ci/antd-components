@@ -1,5 +1,5 @@
 import React from 'react';
-import { emptyFn } from 'helper';
+import { emptyFn } from '@root/helper';
 
 export const DEFAULT_THEME = 'light';
 

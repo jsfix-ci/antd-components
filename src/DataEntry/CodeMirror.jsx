@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import 'codemirror/mode/javascript/javascript';
 import { Controlled } from 'react-codemirror2';
-import { prettifyJson, emptyFn } from 'helper';
+import { prettifyJson, emptyFn } from '@root/helper';
 
 const isJsonString = (value) => {
     try {

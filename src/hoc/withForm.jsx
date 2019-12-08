@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form as AntdForm } from 'antd';
-import { useL10n as l10n } from 'Locales';
+import { useL10n as l10n } from '@root/Locales';
 
 const mapPropsToFields = ({record = {}}) => {
     const data = {};

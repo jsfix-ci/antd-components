@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { message } from 'antd';
-import { BaseGrid, EditableContext } from 'Grid/BaseGrid';
-import { IconButton } from 'Buttons';
-import { emptyFn } from 'helper';
-import { withForm } from 'hoc';
+import { BaseGrid, EditableContext } from '@root/Grid/BaseGrid';
+import { IconButton } from '@root/Buttons';
+import { emptyFn } from '@root/helper';
+import { withForm } from '@root/hoc';
 
 /**
  * @return {React.Component}

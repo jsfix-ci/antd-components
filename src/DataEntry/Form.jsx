@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Form as AntdForm, message } from 'antd';
-import { FormItem } from 'DataEntry';
-import { useL10n as l10n } from 'Locales';
-import { withForm } from 'hoc';
-import { emptyFn } from 'helper';
+import { FormItem } from '@root/DataEntry';
+import { useL10n as l10n } from '@root/Locales';
+import { withForm } from '@root/hoc';
+import { emptyFn } from '@root/helper';
 
 const hasErrors = (fieldsError) => {
     return Object.keys(fieldsError).some(field => fieldsError[field]);

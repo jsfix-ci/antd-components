@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Checkbox, Form, Input, InputNumber, Switch} from 'antd';
-import { Upload, Editor, CodeMirror, ListField, Select } from 'DataEntry';
+import { Upload, Editor, CodeMirror, ListField, Select } from '@root/DataEntry';
 
 const getInput = (fieldType, fieldProps = {}) => {
     switch (fieldType) {

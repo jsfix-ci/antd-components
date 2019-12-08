@@ -1,9 +1,9 @@
 import React, { Fragment, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Col, Icon, Layout, Row } from 'antd';
-import { Flyout, SideNavi } from 'Navigation';
-import { sumBreakPoints } from 'Header';
-import { ThemeContext } from 'Themes';
+import { Flyout, SideNavi } from '@root/Navigation';
+import { sumBreakPoints } from '@root/Header';
+import { ThemeContext } from '@root/Themes';
 import { MotionDrawer } from '@root';
 
 const { Header: AntdHeader } = Layout;
