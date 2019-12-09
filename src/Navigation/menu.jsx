@@ -28,7 +28,7 @@ export const renderMenu = (routes, parentPath = '') => (
                 <Menu.ItemGroup key={key} title={label}>
                     {renderMenu(group, parentPath)}
                 </Menu.ItemGroup>
-            )
+            );
         }
 
         if (submenu) {
@@ -36,7 +36,7 @@ export const renderMenu = (routes, parentPath = '') => (
                 <Menu.SubMenu key={key} title={renderLabel(label, icon)}>
                     {renderMenu(submenu, currentPath)}
                 </Menu.SubMenu>
-            )
+            );
         }
 
         return renderMenuItem({ key, label, path: currentPath, icon });

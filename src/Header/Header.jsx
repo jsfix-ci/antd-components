@@ -23,6 +23,7 @@ export const Header = (props) => {
         menuPosition,
         menuProps,
         menuRoutes,
+        sider,
         siderRoutes,
         siderProps,
         version,
@@ -75,8 +76,8 @@ export const Header = (props) => {
 
     return (
         <Fragment>
-            <MotionDrawer width={300} open={open} onChange={v => setOpen(v)}>
-                <SideNavi routes={siderRoutes || menuRoutes} {...sideNaviProps}/>
+            <MotionDrawer className={`${theme}-sider`} width={300} open={open} onChange={v => setOpen(v)}>
+                <SideNavi routes={siderRoutes || menuRoutes} {...sideNaviProps}>{sider || extra}</SideNavi>
             </MotionDrawer>
 
             <AntdHeader
@@ -104,13 +105,14 @@ Header.defaultProps = {
 };
 
 Header.propTypes = {
-    extra: PropTypes.element,
+    extra: PropTypes.arrayOf(PropTypes.element),
     extraBreakpoints: PropTypes.object,
     logo: PropTypes.element,
     menuBreakpoints: PropTypes.object,
     menuPosition: PropTypes.oneOf(['right', 'left']),
     menuProps: PropTypes.object,
     menuRoutes: PropTypes.array,
+    sider: PropTypes.arrayOf(PropTypes.element),
     siderProps: PropTypes.object,
     siderRoutes: PropTypes.array,
     version: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),

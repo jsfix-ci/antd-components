@@ -38,42 +38,48 @@ export const App = () => {
         setColor(value);
     };
 
-    const Extra = (
-        <div style={{ textAlign: 'right' }}>
-            <Select
-                style={{ padding: 5 }}
-                size={'small'}
-                value={theme}
-                onChange={onThemeChange}
-                options={[
-                    { label: 'Light', value: 'light' },
-                    { label: 'Dark', value: 'dark' },
-                ]}
-            />
-            <Select
-                style={{ padding: 5 }}
-                size={'small'}
-                value={color}
-                onChange={onColorChange}
-                options={[
-                    { label: 'Red', value: 'antd-red' },
-                    { label: 'Blue', value: 'antd' },
-                    { label: 'Pink', value: 'antd-pink' },
-                    { label: 'Mint', value: 'antd-mint' },
-                ]}
-            />
-            <Select
-                size={'small'}
-                value={locale}
-                onChange={onLocaleChange}
-                options={[
-                    { label: 'English', value: 'en_US' },
-                    { label: 'Deutsch', value: 'de_DE' },
-                    { label: 'Srpski', value: 'sr_RS' },
-                ]}
-            />
-        </div>
-    );
+    const extra = [
+        <Select
+            key={'theme'}
+            style={{ padding: 5 }}
+            size={'small'}
+            value={theme}
+            onChange={onThemeChange}
+            options={[
+                { label: 'Light', value: 'light' },
+                { label: 'Dark', value: 'dark' },
+            ]}
+        />,
+        <Select
+            key={'color'}
+            style={{ padding: 5 }}
+            size={'small'}
+            value={color}
+            onChange={onColorChange}
+            options={[
+                { label: 'Red', value: 'antd-red' },
+                { label: 'Blue', value: 'antd' },
+                { label: 'Pink', value: 'antd-pink' },
+                { label: 'Mint', value: 'antd-mint' },
+            ]}
+        />,
+        <Select
+            key={'locale'}
+            size={'small'}
+            value={locale}
+            onChange={onLocaleChange}
+            options={[
+                { label: 'English', value: 'en_US' },
+                { label: 'Deutsch', value: 'de_DE' },
+                { label: 'Srpski', value: 'sr_RS' },
+            ]}
+        />
+    ];
+
+    const sider = [
+        <Logo key={'logo'} image={`images/logo-${theme}.png`}>React Hangar</Logo>,
+        ...extra
+    ];
 
     const ColorSwitch = ReactDOM.createPortal(
         (<link rel="stylesheet" href={`dist/${color}.css`} type="text/css"></link>),
@@ -89,7 +95,8 @@ export const App = () => {
                         <Row>
                             <Header
                                 logo={<Logo image={`images/logo-${theme}.png`}>React Hangar</Logo>}
-                                extra={Extra}
+                                extra={extra}
+                                sider={sider}
                                 siderRoutes={routes}
                                 siderProps={{ openSubmenus: 'all' }}
                                 version={'v1.0.0'}

@@ -21,6 +21,7 @@ export const SideNavi = (props) => {
 SideNavi.defaultProps = {};
 
 SideNavi.propTypes = {
+    children: PropTypes.arrayOf(PropTypes.element),
     openSubmenus: PropTypes.oneOf(['selected', 'all']),
     routes: PropTypes.arrayOf(PropTypes.object)
 };
