@@ -147,10 +147,12 @@
   display: inline-block;
   margin-left: 5px;
 }
-.light-header .logo a {
+.light-header .logo a,
+.light-sider .logo a {
   color: #000;
 }
-.dark-header .logo a {
+.dark-header .logo a,
+.dark-sider .logo a {
   color: #fff;
 }
 .hangar-flyout {
