@@ -23,6 +23,10 @@ export const prettifyJson = (json, space = 4) => (typeof json === 'object')
     : json;
 
 export const recursiveMap = (children, fn) => {
+    if (React.Children.count(children) <= 1) {
+        return children;
+    }
+
     return React.Children.map(children, child => {
         if (!React.isValidElement(child)) {
             return child;
