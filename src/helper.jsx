@@ -21,3 +21,19 @@ export const truncateText = (text = '', maxLength) => {
 export const prettifyJson = (json, space = 4) => (typeof json === 'object')
     ? JSON.stringify(json, undefined, space)
     : json;
+
+export const recursiveMap = (children, fn) => {
+    return React.Children.map(children, child => {
+        if (!React.isValidElement(child)) {
+            return child;
+        }
+
+        if (child.props.children) {
+            child = React.cloneElement(child, {
+                children: recursiveMap(child.props.children, fn)
+            });
+        }
+
+        return fn(child);
+    });
+};

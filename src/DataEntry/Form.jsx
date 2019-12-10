@@ -4,7 +4,7 @@ import { Form as AntdForm, message } from 'antd';
 import { FormItem } from '@root/DataEntry';
 import { useL10n as l10n } from '@root/Locales';
 import { withForm } from '@root/hoc';
-import { emptyFn } from '@root/helper';
+import { emptyFn, recursiveMap } from '@root/helper';
 
 const hasErrors = (fieldsError) => {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -37,7 +37,7 @@ const AntdFormWrapper = withForm((props) => {
         });
     };
 
-    const formItems = React.Children.map(children, child => {
+    const formItems = recursiveMap(children, child => {
         if (!child) {
             return null;
         }
