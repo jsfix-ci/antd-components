@@ -218,37 +218,40 @@ const code = `
     const onChange = (routes) => {
         console.log(routes);
     };
+    
+    const Example = () => {
 
-    return (
-        <Fragment>
-            <Tree
-                routes={routes}
-                onChange={onChange}
-                draggable
-                defaultExpandAll
-             />
-
-            <Divider />
-
-            <Tree
-                routes={routes}
-                onChange={onChange}
-                checkable
-                draggable
-            />
-
-            <Divider />
-
-            <Tree
-                routes={routes}
-                onChange={onChange}
-                checkable
-                draggable
-                searchable
-                defaultExpandAll
-            />
-        </Fragment>
-    );
+        return (
+            <Fragment>
+                <Tree
+                    routes={routes}
+                    onChange={onChange}
+                    draggable
+                    defaultExpandAll
+                 />
+    
+                <Divider />
+    
+                <Tree
+                    routes={routes}
+                    onChange={onChange}
+                    checkable
+                    draggable
+                />
+    
+                <Divider />
+    
+                <Tree
+                    routes={routes}
+                    onChange={onChange}
+                    checkable
+                    draggable
+                    searchable
+                    defaultExpandAll
+                />
+            </Fragment>
+        );
+    }
     
     export default Example;
 
