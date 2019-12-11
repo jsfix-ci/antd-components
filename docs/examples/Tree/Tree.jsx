@@ -95,24 +95,25 @@ const Example = () => {
 
     return (
         <Fragment>
+
+            <Divider orientation="left">Draggable Tree</Divider>
+
             <Tree
                 routes={routes}
                 onChange={onChange}
                 draggable
-                defaultExpandAll
             />
 
-            <Divider />
+            <Divider orientation="left">Checkable Tree</Divider>
 
             <Tree
                 routes={routes}
                 onChange={onChange}
                 checkable
                 draggable
-                defaultExpandAll
             />
 
-            <Divider />
+            <Divider orientation="left">Searchable Tree</Divider>
 
             <Tree
                 routes={routes}
@@ -120,7 +121,6 @@ const Example = () => {
                 checkable
                 draggable
                 searchable
-                defaultExpandAll
             />
         </Fragment>
     );
@@ -223,14 +223,16 @@ const code = `
 
         return (
             <Fragment>
+            
+                <Divider orientation="left">Draggable Tree</Divider>
+            
                 <Tree
                     routes={routes}
                     onChange={onChange}
                     draggable
-                    defaultExpandAll
                  />
     
-                <Divider />
+                <Divider orientation="left">Checkable Tree</Divider>
     
                 <Tree
                     routes={routes}
@@ -239,7 +241,7 @@ const code = `
                     draggable
                 />
     
-                <Divider />
+                <Divider orientation="left">Searchable Tree</Divider>
     
                 <Tree
                     routes={routes}
@@ -247,7 +249,6 @@ const code = `
                     checkable
                     draggable
                     searchable
-                    defaultExpandAll
                 />
             </Fragment>
         );
