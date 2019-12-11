@@ -98,14 +98,8 @@ export const Tree = (props) => {
             }
         }
     };
+
     generateList(gData);
-
-
-
-
-
-
-
 
     const onSearchChange = e => {
         const { value } = e.target;

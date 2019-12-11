@@ -122,7 +122,6 @@ const Example = () => {
                 searchable
                 defaultExpandAll
             />
-
         </Fragment>
     );
 };
@@ -221,12 +220,34 @@ const code = `
     };
 
     return (
-        <Tree
-            routes={routes}
-            onChange={onChange}
-            draggable
-            defaultExpandAll
-        />
+        <Fragment>
+            <Tree
+                routes={routes}
+                onChange={onChange}
+                draggable
+                defaultExpandAll
+             />
+
+            <Divider />
+
+            <Tree
+                routes={routes}
+                onChange={onChange}
+                checkable
+                draggable
+            />
+
+            <Divider />
+
+            <Tree
+                routes={routes}
+                onChange={onChange}
+                checkable
+                draggable
+                searchable
+                defaultExpandAll
+            />
+        </Fragment>
     );
     
     export default Example;
