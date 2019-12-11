@@ -9,3 +9,4 @@ export * from './DataEntry';
 export * from './Header';
 export * from './Grid';
 export * from './MotionDrawer';
+export * from './Tree';

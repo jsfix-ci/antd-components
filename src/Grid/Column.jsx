@@ -52,7 +52,6 @@ export const Column = (props) => {
             </td>
         );
     }
-
     return (
         <td {...restProps}>
             {getDisplay({ children, fieldType, maxLength, value, fieldProps })}

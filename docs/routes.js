@@ -13,6 +13,7 @@ import { MotionDrawerComponent } from './pages/MotionDrawer';
 import { SelectComponent } from './pages/Select';
 import { LayoutHeader } from './pages/Layout';
 import {LoginComponent} from './pages/Login';
+import {TreeComponent} from "./pages/Tree";
 
 export const routes = [
     {
@@ -82,6 +83,12 @@ export const routes = [
                 component: SelectComponent
             }
         ],
+    },
+    {
+        key: 'Tree',
+        label: 'Tree',
+        path: '/Tree',
+        component: TreeComponent
     },
     {
         key: 'grid',
