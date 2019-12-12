@@ -7,9 +7,9 @@ const TreeNode = AntdTree.TreeNode;
 const Search = Input.Search;
 
 export const Tree = (props) => {
-    const {draggable, showLine, onDrop, onChange, searchable, defaultExpandAll, ...restProps} = props;
+    const {draggable, showLine, onDrop, onChange, searchable, ...restProps} = props;
 
-    const [gData, setGData] = useState(props.routes);
+    const [tree, setTree] = useState(props.routes);
     const [searchValue, setSearchValue] = useState('');
     const [expandedKeys, setExpandedKeys] = useState(props.expandedKeys);
     const [autoExpandParent, setAutoExpandParent] = useState(props.autoExpandParent);
@@ -31,7 +31,7 @@ export const Tree = (props) => {
                 }
             });
         };
-        const data = [...gData];
+        const data = [...tree];
 
         let dragObj;
         loop(data, dragKey, (item, index, arr) => {
@@ -67,7 +67,7 @@ export const Tree = (props) => {
             }
         }
 
-        setGData(data);
+        setTree(data);
         onDrop(event, node, dragNode, dragNodesKeys);
         onChange(data);
     };
@@ -99,13 +99,13 @@ export const Tree = (props) => {
         }
     };
 
-    generateList(gData);
+    generateList(tree);
 
     const onSearchChange = e => {
         const { value } = e.target;
         const expanded = dataList.map(item => {
                 if (item.label.indexOf(value) > -1) {
-                    return getParentKey(item.key, gData);
+                    return getParentKey(item.key, tree);
                 }
                 return null;
             }).filter((item, i, self) => item && self.indexOf(item) === i);
@@ -120,33 +120,35 @@ export const Tree = (props) => {
         setAutoExpandParent(false);
     };
 
-    const loop = data =>
-        data.map(item => {
+    const getLabel = (item) => {
+        const index = item.label.indexOf(searchValue);
+        const beforeStr = item.label.substr(0, index);
+        const afterStr = item.label.substr(index + searchValue.length);
 
-            const index = item.label.indexOf(searchValue);
-            const beforeStr = item.label.substr(0, index);
-            const afterStr = item.label.substr(index + searchValue.length);
-            const label = index > -1 ? (
-                <span>{beforeStr}
-
-                <span style={{ color: '#f50' }}>
-                        {searchValue}
-                    </span>
-
-                    {afterStr}
+        return index > -1 ? (
+            <span>{beforeStr}
+                <span style={{ color: '#f50' }}>{searchValue}</span>
+                {afterStr}
                 </span>
-                ) : (
-                    <span>{item.label}</span>
-                );
+        ) : (
+            <span>{item.label}</span>
+        );
+    };
+
+    const getNodes = (data) => {
+        return data.map(item => {
+            let label = getLabel(item);
             if (item.submenu) {
                 return (
                     <TreeNode key={item.key} title={label}>
-                        {loop(item.submenu)}
+                        {getNodes(item.submenu)}
                     </TreeNode>
                 );
             }
+
             return <TreeNode key={item.key} title={label} />;
         });
+    };
 
     return (
         <Fragment>
@@ -160,7 +162,7 @@ export const Tree = (props) => {
                 autoExpandParent={autoExpandParent}
                 {...restProps}
             >
-                {loop(gData)}
+                {getNodes(tree)}
             </AntdTree>
         </Fragment>
     );
@@ -183,3 +185,4 @@ Tree.propTypes = {
     onChange: PropTypes.func,
     routes: PropTypes.arrayOf(PropTypes.object),
 };
+
