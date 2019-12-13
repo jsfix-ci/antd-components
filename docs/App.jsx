@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter as Router, Switch } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
+import { hot } from 'react-hot-loader/root';
 import {
     DEFAULT_LOCALE,
     DEFAULT_THEME,
@@ -21,7 +22,7 @@ import { Menu } from './Menu';
  *
  * @constructor
  */
-export const App = () => {
+const App = () => {
     const [locale, setLocale] = useState(DEFAULT_LOCALE);
     const [theme, setTheme] = useState(DEFAULT_THEME);
     const [color, setColor] = useState('antd-red');
@@ -117,3 +118,5 @@ export const App = () => {
         </div>
     );
 };
+
+export default hot(App);
