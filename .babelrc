@@ -13,7 +13,8 @@
         "alias": {
           "@root": "./src"
         }
-      }
+      },
+      "react-hot-loader/babel"
     ]
   ]
 }

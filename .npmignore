@@ -1,10 +1,12 @@
 .idea/
+.github/
 __tests__/
 coverage/
 docs/
 .babelrc
 .editorconfig
+.eslintrc
 .gitignore
 jest-setup.js
 jest.config.js
-webpack.config.js
+webpack.config*.js

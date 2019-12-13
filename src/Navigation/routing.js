@@ -1,18 +1,44 @@
-import { matchPath, Route } from 'react-router';
 import React from 'react';
+import { matchPath, Route } from 'react-router';
+import { Switch } from 'react-router-dom';
+import { NotFound } from '@root/Navigation/NotFound';
 
-export const renderRoutes = (routes, parentPath = '') => (
+const buildRoutes = (routes, parentPath = '') => (
     routes.map(route => {
-        const {submenu, path} = route;
+        const { key, submenu, path } = route;
         const currentPath = parentPath + path;
 
         if (submenu) {
-            return renderRoutes(submenu, currentPath);
+            return buildRoutes(submenu, currentPath);
         }
 
-        return <Route {...route} path={currentPath} />;
+        return <Route key={key} {...route} path={currentPath}/>;
     })
 );
+
+export const renderRoutes = (routes, config) => {
+
+    const defaults = {
+        notFound: true,
+        ...config
+    };
+
+    if (defaults.notFound) {
+        routes.push({
+            key: 'notfound',
+            path: '*',
+            exact: true,
+            component: NotFound,
+            hideInMenu: true
+        });
+    }
+
+    return (
+        <Switch>
+            {buildRoutes(routes)}
+        </Switch>
+    );
+};
 
 export const getActiveRoutes = (routes, location, parentPath = '') => {
     let activeRoutes = [];

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter as Router, Switch } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
+import { hot } from 'react-hot-loader/root';
 import {
     DEFAULT_LOCALE,
     DEFAULT_THEME,
@@ -21,7 +22,7 @@ import { Menu } from './Menu';
  *
  * @constructor
  */
-export const App = () => {
+const App = () => {
     const [locale, setLocale] = useState(DEFAULT_LOCALE);
     const [theme, setTheme] = useState(DEFAULT_THEME);
     const [color, setColor] = useState('antd-red');
@@ -94,12 +95,11 @@ export const App = () => {
                     <LocaleProvider locale={locale} setLocale={setLocale}>
                         <Row>
                             <Header
-                                logo={<Logo image={`images/logo-${theme}.png`}>React Hangar</Logo>}
+                                logo={<Logo image={`images/logo-${theme}.png`} version={'v1.0.0'}>Antd Components</Logo>}
                                 extra={extra}
                                 sider={sider}
                                 siderRoutes={routes}
                                 siderProps={{ openSubmenus: 'all' }}
-                                version={'v1.0.0'}
                             />
                         </Row>
                         <Row>
@@ -108,9 +108,7 @@ export const App = () => {
                             </Col>
                             <Col xs={24} md={16} xl={19} xxl={20}>
                                 <Wrapper className={'markdown-body'}>
-                                    <Switch>
-                                        {renderRoutes(routes)}
-                                    </Switch>
+                                    {renderRoutes(routes)}
                                 </Wrapper>
                             </Col>
                         </Row>
@@ -120,3 +118,5 @@ export const App = () => {
         </div>
     );
 };
+
+export default hot(App);
