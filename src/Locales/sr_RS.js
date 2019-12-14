@@ -24,7 +24,8 @@ module.exports = {
     },
     Form: {
         moreText: 'више',
-        addNewField: 'Додај поље'
+        addNewField: 'Додај поље',
+        searchText: 'претрага'
     },
     Validation: {
         form: 'провјера форме није успјела',

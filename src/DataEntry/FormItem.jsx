@@ -107,7 +107,6 @@ FormItem.defaultProps = {
     fieldProps: {},
     fieldType: 'string',
     required: false,
-    show: true,
     rules: []
 };
 
