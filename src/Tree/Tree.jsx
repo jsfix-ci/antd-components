@@ -7,12 +7,12 @@ const TreeNode = AntdTree.TreeNode;
 const Search = Input.Search;
 
 export const Tree = (props) => {
-    const {draggable, showLine, onDrop, onChange, searchable, ...restProps} = props;
+    const {tree, expandedKeys, autoExpandParent, onDrop, onChange, searchable, defaultExpandAll, ...restProps} = props;
 
-    const [tree, setTree] = useState(props.routes);
+    const [treeData, setTreeData] = useState(tree);
     const [searchValue, setSearchValue] = useState('');
-    const [expandedKeys, setExpandedKeys] = useState(props.expandedKeys);
-    const [autoExpandParent, setAutoExpandParent] = useState(props.autoExpandParent);
+    const [expandedKeysData, setExpandedKeysData] = useState(expandedKeys);
+    const [isAutoExpandParent, setIsAutoExpandParent] = useState(autoExpandParent);
 
     const onDropEvent = (event, node, dragNode, dragNodesKeys) => {
 
@@ -31,7 +31,8 @@ export const Tree = (props) => {
                 }
             });
         };
-        const data = [...tree];
+
+        const data = [...treeData];
 
         let dragObj;
         loop(data, dragKey, (item, index, arr) => {
@@ -67,7 +68,7 @@ export const Tree = (props) => {
             }
         }
 
-        setTree(data);
+        setTreeData(data);
         onDrop(event, node, dragNode, dragNodesKeys);
         onChange(data);
     };
@@ -99,25 +100,25 @@ export const Tree = (props) => {
         }
     };
 
-    generateList(tree);
+    generateList(treeData);
 
     const onSearchChange = e => {
         const { value } = e.target;
         const expanded = dataList.map(item => {
                 if (item.label.indexOf(value) > -1) {
-                    return getParentKey(item.key, tree);
+                    return getParentKey(item.key, treeData);
                 }
                 return null;
             }).filter((item, i, self) => item && self.indexOf(item) === i);
 
-        setExpandedKeys(expanded);
+        setExpandedKeysData(expanded);
         setSearchValue(value);
-        setAutoExpandParent(true);
+        setIsAutoExpandParent(true);
     };
 
     const onExpand = expandedKeys => {
-        setExpandedKeys(expandedKeys);
-        setAutoExpandParent(false);
+        setExpandedKeysData(expandedKeys);
+        setIsAutoExpandParent(false);
     };
 
     const getLabel = (item) => {
@@ -150,39 +151,44 @@ export const Tree = (props) => {
         });
     };
 
+    let expandConfig = {
+        expandedKeys: expandedKeysData,
+        autoExpandParent: isAutoExpandParent
+    };
+
+    if (defaultExpandAll) {
+        expandConfig = {
+            defaultExpandAll: defaultExpandAll
+        }
+    }
+
     return (
         <Fragment>
             {(searchable) ? <Search style={{ marginBottom: 8 }} placeholder="Search" onChange={onSearchChange}/> : null}
             <AntdTree
                 onExpand={onExpand}
-                draggable={draggable}
-                showLine={showLine}
                 onDrop={onDropEvent}
-                expandedKeys={expandedKeys}
-                autoExpandParent={autoExpandParent}
+                {...expandConfig}
                 {...restProps}
             >
-                {getNodes(tree)}
+                {getNodes(treeData)}
             </AntdTree>
         </Fragment>
     );
 };
 
 Tree.defaultProps = {
-    showLine: false,
-    draggable: false,
     searchable: false,
+    defaultExpandAll: false,
     onDrop: emptyFn,
     onChange: emptyFn,
-    routes: []
+    tree: [],
+    autoExpandParent: false,
+    expandedKeys: []
 };
 
 Tree.propTypes = {
-    showLine: PropTypes.bool,
-    draggable: PropTypes.bool,
     searchable: PropTypes.bool,
-    onDrop: PropTypes.func,
     onChange: PropTypes.func,
-    routes: PropTypes.arrayOf(PropTypes.object),
+    tree: PropTypes.arrayOf(PropTypes.object),
 };
-

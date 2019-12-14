@@ -6,7 +6,7 @@ import {Divider, Tree as AntdTree} from "antd";
 // Example implementation
 const Example = () => {
 
-    const routes = [
+    const tree = [
         {
             key: 'side-home',
             label: 'Home',
@@ -99,24 +99,25 @@ const Example = () => {
             <Divider orientation="left">Draggable Tree</Divider>
 
             <Tree
-                routes={routes}
+                tree={tree}
                 onChange={onChange}
                 draggable
+                defaultExpandAll
             />
 
             <Divider orientation="left">Checkable Tree</Divider>
 
             <Tree
-                routes={routes}
+                tree={tree}
                 onChange={onChange}
                 checkable
-                draggable
+                defaultExpandAll
             />
 
             <Divider orientation="left">Searchable Tree</Divider>
 
             <Tree
-                routes={routes}
+                tree={tree}
                 onChange={onChange}
                 checkable
                 draggable
@@ -132,7 +133,7 @@ const code = `
     import React from 'react';
     import { DragableTree } from '@react-hangar/antd-components';
 
-    const routes = [
+    const tree = [
         {
             key: 'side-home',
             label: 'Home',
@@ -227,24 +228,25 @@ const code = `
                 <Divider orientation="left">Draggable Tree</Divider>
             
                 <Tree
-                    routes={routes}
+                    tree={tree}
                     onChange={onChange}
                     draggable
+                    defaultExpandAll
                  />
     
                 <Divider orientation="left">Checkable Tree</Divider>
     
                 <Tree
-                    routes={routes}
+                    tree={tree}
                     onChange={onChange}
                     checkable
-                    draggable
+                    defaultExpandAll
                 />
     
                 <Divider orientation="left">Searchable Tree</Divider>
     
                 <Tree
-                    routes={routes}
+                    tree={tree}
                     onChange={onChange}
                     checkable
                     draggable
