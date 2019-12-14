@@ -35,6 +35,12 @@ export const routes = [
         component: Typography
     },
     {
+        key: 'Tree',
+        label: 'Tree',
+        path: '/Tree',
+        component: TreeComponent
+    },
+    {
         key: 'data-entry',
         label: 'Data Entry',
         path: '/DataEntry',
@@ -82,12 +88,6 @@ export const routes = [
                 component: SelectComponent
             }
         ],
-    },
-    {
-        key: 'Tree',
-        label: 'Tree',
-        path: '/Tree',
-        component: TreeComponent
     },
     {
         key: 'grid',
