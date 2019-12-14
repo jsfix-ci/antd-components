@@ -24,7 +24,8 @@ module.exports = {
     },
     Form: {
         moreText: 'more',
-        addNewField: 'Add field'
+        addNewField: 'Add field',
+        searchText: 'Search'
     },
     Validation: {
         form: 'form validation failed',

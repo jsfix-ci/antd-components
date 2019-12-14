@@ -1,7 +1,7 @@
 import React from 'react';
 import { Display2 } from '../../src';
 import Tree from '../examples/Tree/Tree';
-import { Col, Row } from "antd";
+import { Col, Row } from 'antd';
 
 /**
  * @return {React.Component}

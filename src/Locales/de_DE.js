@@ -24,7 +24,8 @@ module.exports = {
     },
     Form: {
         moreText: 'mehr',
-        addNewField: 'Feld hinzufügen'
+        addNewField: 'Feld hinzufügen',
+        searchText: 'Suche'
     },
     Validation: {
         form: 'Formularfelder enthalten Fehler',

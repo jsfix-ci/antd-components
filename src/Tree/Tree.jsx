@@ -1,7 +1,8 @@
 import React, {Fragment, useState} from 'react';
 import PropTypes from 'prop-types';
 import {Input, Tree as AntdTree} from 'antd';
-import {emptyFn} from "@root/helper";
+import {emptyFn} from '@root/helper';
+import {useL10n as l10n} from '@root/Locales';
 
 const TreeNode = AntdTree.TreeNode;
 const Search = Input.Search;
@@ -92,8 +93,8 @@ export const Tree = (props) => {
     const generateList = data => {
         for (let i = 0; i < data.length; i++) {
             const node = data[i];
-            const { key, label } = node;
-            dataList.push({ key, label: label });
+            const {key, label} = node;
+            dataList.push({key, label: label});
             if (node.submenu) {
                 generateList(node.submenu);
             }
@@ -103,13 +104,13 @@ export const Tree = (props) => {
     generateList(treeData);
 
     const onSearchChange = e => {
-        const { value } = e.target;
+        const {value} = e.target;
         const expanded = dataList.map(item => {
-                if (item.label.indexOf(value) > -1) {
-                    return getParentKey(item.key, treeData);
-                }
-                return null;
-            }).filter((item, i, self) => item && self.indexOf(item) === i);
+            if (item.label.indexOf(value) > -1) {
+                return getParentKey(item.key, treeData);
+            }
+            return null;
+        }).filter((item, i, self) => item && self.indexOf(item) === i);
 
         setExpandedKeysData(expanded);
         setSearchValue(value);
@@ -128,7 +129,7 @@ export const Tree = (props) => {
 
         return index > -1 ? (
             <span>{beforeStr}
-                <span style={{ color: '#f50' }}>{searchValue}</span>
+                <span style={{color: '#f50'}}>{searchValue}</span>
                 {afterStr}
                 </span>
         ) : (
@@ -147,7 +148,7 @@ export const Tree = (props) => {
                 );
             }
 
-            return <TreeNode key={item.key} title={label} />;
+            return <TreeNode key={item.key} title={label}/>;
         });
     };
 
@@ -164,7 +165,8 @@ export const Tree = (props) => {
 
     return (
         <Fragment>
-            {(searchable) ? <Search style={{ marginBottom: 8 }} placeholder="Search" onChange={onSearchChange}/> : null}
+            {(searchable) ? <Search style={{marginBottom: 8}} placeholder={l10n().Form.searchText}
+                                    onChange={onSearchChange}/> : null}
             <AntdTree
                 onExpand={onExpand}
                 onDrop={onDropEvent}

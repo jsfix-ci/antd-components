@@ -11,8 +11,8 @@ import { UploadComponent } from './pages/Upload';
 import { MotionDrawerComponent } from './pages/MotionDrawer';
 import { SelectComponent } from './pages/Select';
 import { LayoutHeader } from './pages/Layout';
-import {LoginComponent} from './pages/Login';
-import {TreeComponent} from "./pages/Tree";
+import { LoginComponent } from './pages/Login';
+import { TreeComponent } from './pages/Tree';
 
 export const routes = [
     {

@@ -1,7 +1,7 @@
-import React, {Fragment} from 'react';
-import {ComponentDisplay} from '../../components/ComponentDisplay';
-import {Tree} from '../../../src';
-import {Divider, Tree as AntdTree} from "antd";
+import React, { Fragment } from 'react';
+import { ComponentDisplay } from '../../components/ComponentDisplay';
+import { Tree } from '../../../src';
+import { Divider } from 'antd';
 
 // Example implementation
 const Example = () => {
@@ -131,7 +131,8 @@ const Example = () => {
 // language=JS
 const code = `
     import React from 'react';
-    import { DragableTree } from '@react-hangar/antd-components';
+    import { Divider } from 'antd';
+    import { Tree } from '@react-hangar/antd-components';
 
     const tree = [
         {
@@ -263,9 +264,19 @@ const code = `
 // Component props
 const properties = [
     {
+        property: 'tree',
+        description: 'tree object',
+        type: 'object'
+    },
+    {
         property: 'onChange',
         description: 'Returns routes after tree changes',
         type: 'function'
+    },
+    {
+        property: 'searchable',
+        description: 'show search bar above the tree',
+        type: 'boolean'
     },{
         property: '(Inherited)',
         description: 'Ant design properties are inherited (see: https://ant.design/components/tree/)'
