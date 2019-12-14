@@ -4,7 +4,7 @@ import { ListField } from '../../../src';
 import { generateFakeDataArray } from '../../components/utils';
 import faker from 'faker';
 
-const getFakeData = () => generateFakeDataArray(5, () => faker.name.findName());
+const getFakeData = () => generateFakeDataArray(3, () => faker.name.findName());
 
 // Example implementation
 const Example = () => {
