@@ -276,7 +276,8 @@ const properties = [
     {
         property: 'searchable',
         description: 'show search bar above the tree',
-        type: 'boolean'
+        type: 'boolean',
+        default: 'false'
     },{
         property: '(Inherited)',
         description: 'Ant design properties are inherited (see: https://ant.design/components/tree/)'
