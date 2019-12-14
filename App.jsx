@@ -95,7 +95,7 @@ const App = () => {
                     <LocaleProvider locale={locale} setLocale={setLocale}>
                         <Row>
                             <Header
-                                logo={<Logo image={`images/logo-${theme}.png`} version={'v1.0.0'}>Antd Components</Logo>}
+                                logo={<Logo image={`images/logo-${theme}.png`} version={`v${PACKAGE_VERSION}`}>Antd Components</Logo>}
                                 extra={extra}
                                 sider={sider}
                                 siderRoutes={routes}
