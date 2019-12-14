@@ -1,6 +1,8 @@
 /* global require, __dirname, module */
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
+const { DefinePlugin } = require('webpack');
+const { version } = require('./package');
 
 const DOCS_DIR = path.resolve(__dirname, 'docs');
 const SRC_DIR = path.resolve(__dirname, 'src');
@@ -44,6 +46,9 @@ module.exports = {
     plugins: [
         new CopyPlugin([
             { from: 'node_modules/tinymce/skins', to: 'skins' }
-        ])
+        ]),
+        new DefinePlugin({
+            PACKAGE_VERSION: JSON.stringify(version)
+        })
     ]
 };
