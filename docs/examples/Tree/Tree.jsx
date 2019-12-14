@@ -268,7 +268,7 @@ const properties = [
         type: 'function'
     },{
         property: '(Inherited)',
-        description: 'Ant design properties are inherited (see: https://ant.design/components/select/#Select-props)'
+        description: 'Ant design properties are inherited (see: https://ant.design/components/tree/)'
     }
 ];
 
