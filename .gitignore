@@ -1,5 +1,7 @@
 .idea/
 coverage/
+docs/dist/main.js
+docs/dist/vendors~main.js
 lib/
 node_modules/
 npm-debug.log
