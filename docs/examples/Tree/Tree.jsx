@@ -112,7 +112,7 @@ const Example = () => {
                 onChange={onChange}
                 draggable
                 editable
-                formItems={[<FormItem fieldType={'string'} label='Component' dataIndex={'component'} required/>]}
+                formItems={[<FormItem key={3} fieldType={'string'} label='Component' dataIndex={'component'} required/>]}
                 defaultExpandAll
             />
 

@@ -21,8 +21,8 @@ export const TreeFormModal = (props) => {
             cancelButtonProps={{ hidden: true }}
         >
             <Form record={selectedNode} onSubmit={handleSubmit} >
-                <FormItem fieldType={'string'} label='Label' dataIndex={'label'} required/>
-                <FormItem fieldType={'string'} label='Path' dataIndex={'path'} required/>
+                <FormItem key={1} fieldType={'string'} label='Label' dataIndex={'label'} required/>
+                <FormItem key={2} fieldType={'string'} label='Path' dataIndex={'path'} required/>
                 {formItems}
                 <SaveButton htmlType="submit"/>
             </Form>
