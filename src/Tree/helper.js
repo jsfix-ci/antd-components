@@ -20,28 +20,6 @@ export const addNode = (tree, node, targetNode) => {
     return tree;
 };
 
-export const editNode = (tree, node, targetNode) => {
-    tree.forEach((rec, idx) => {
-        if (rec.key === node.key) {
-            tree[idx] = targetNode
-        } else if (rec.submenu) {
-            return editNode(rec.submenu, node, targetNode);
-        }
-    });
-    return tree;
-};
-
-export const removeNode = function (tree, targetNode) {
-    tree.forEach((node, idx) => {
-        if (node.key === targetNode.key) {
-            tree.splice(idx, 1);
-            return tree;
-        }
-        else if (node.submenu) return removeNode(node.submenu, targetNode)
-    });
-    return tree;
-};
-
 export const findNode = (tree, targetNode) => {
     let result = [];
     tree.forEach((node) => {

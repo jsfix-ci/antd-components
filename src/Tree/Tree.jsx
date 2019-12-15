@@ -1,12 +1,13 @@
-import React, {Fragment, useState} from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Input, Tree as AntdTree } from 'antd';
 import { emptyFn } from '@root/helper';
 import { useL10n as l10n } from '@root/Locales';
 import { AddButton, DeleteButton, EditButton } from '@root/Buttons';
-import { addNode, editNode, removeNode, findNode, getTreeAfterDrop, getSearchDataList, getParentKey } from './helper';
+import { addNode, findNode, getTreeAfterDrop, getSearchDataList, getParentKey } from './helper';
 import * as nanoid from 'nanoid';
 import { TreeFormModal } from '@root/Tree/Form';
+import { PureArray } from '@root/array';
 
 const TreeNode = AntdTree.TreeNode;
 const Search = Input.Search;
@@ -43,7 +44,7 @@ export const Tree = (props) => {
     };
 
     const onSearchChange = e => {
-        const {value} = e.target;
+        const { value } = e.target;
         const expanded = getSearchDataList(treeData).map(item => {
             if (item.label.indexOf(value) > -1) {
                 return getParentKey(item.key, treeData);
@@ -68,7 +69,7 @@ export const Tree = (props) => {
 
         return index > -1 ? (
             <span>{beforeStr}
-                <span style={{color: '#f50'}}>{searchValue}</span>
+                <span style={{ color: '#f50' }}>{searchValue}</span>
                 {afterStr}
                 </span>
         ) : (
@@ -99,7 +100,7 @@ export const Tree = (props) => {
     if (defaultExpandAll) {
         expandConfig = {
             defaultExpandAll: defaultExpandAll
-        }
+        };
     }
 
     const onAddBtnClick = () => {
@@ -113,8 +114,9 @@ export const Tree = (props) => {
     };
 
     const onDeleteBtnClick = () => {
-        let treeData = removeNode(tree, selectedNode);
-        setTreeData(treeData);
+        setTreeData(
+            PureArray.removeRecursice(treeData, ['key', selectedNode.key], 'submenu')
+        );
         setSelected(false);
     };
 
@@ -138,7 +140,9 @@ export const Tree = (props) => {
             setTreeData(addNode(tree, selectedNode, newNode));
             setSelectedNode(newNode);
         } else {
-            setTreeData(editNode(tree, selectedNode, data));
+            setTreeData(
+                PureArray.updateRecursive(treeData, ['key', selectedNode.key], data, 'submenu')
+            );
             onChange(treeData);
         }
         hideModal();
@@ -146,7 +150,7 @@ export const Tree = (props) => {
 
     return (
         <Fragment>
-            {(searchable) ? <Search style={{marginBottom: 8}} placeholder={l10n().Form.searchText}
+            {(searchable) ? <Search style={{ marginBottom: 8 }} placeholder={l10n().Form.searchText}
                                     onChange={onSearchChange}/> : null}
 
             {(editable) ?
