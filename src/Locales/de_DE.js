@@ -25,7 +25,11 @@ module.exports = {
     Form: {
         moreText: 'mehr',
         addNewField: 'Feld hinzufügen',
-        searchText: 'Suche'
+        searchText: 'Suche',
+    },
+    Tree: {
+      newNode: 'Neuer Knoten',
+      editNode: 'Knoten Bearbeiten'
     },
     Validation: {
         form: 'Formularfelder enthalten Fehler',

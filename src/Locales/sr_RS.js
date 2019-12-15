@@ -27,6 +27,10 @@ module.exports = {
         addNewField: 'Додај поље',
         searchText: 'претрага'
     },
+    Tree: {
+        newNode: 'Нови чвор',
+        editNode: 'уреди чвор'
+    },
     Validation: {
         form: 'провјера форме није успјела',
         default: 'Грешка, провери ваљаности на пољу %s',

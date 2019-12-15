@@ -167,6 +167,7 @@ export const Tree = (props) => {
             </AntdTree>
 
             <TreeFormModal
+                editing={editing}
                 formItems={formItems}
                 visible={visible}
                 hideModal={hideModal}

@@ -2,10 +2,11 @@ import { Modal } from "antd";
 import React from "react";
 import { Form, FormItem } from '@root/DataEntry';
 import { SaveButton } from '@root/Buttons';
+import { useL10n as l10n } from '@root/Locales';
 
 export const TreeFormModal = (props) => {
 
-    const {visible, hideModal, selectedNode, formItems, onSubmit} = props;
+    const {visible, hideModal, selectedNode, formItems, editing, onSubmit} = props;
 
     const handleSubmit = (data) => {
         onSubmit(data);
@@ -13,7 +14,7 @@ export const TreeFormModal = (props) => {
 
     return (
         <Modal
-            title="New Node"
+            title={(!editing) ? l10n().Tree.newNode : l10n().Tree.editNode}
             visible={visible}
             onOk={hideModal}
             onCancel={hideModal}
