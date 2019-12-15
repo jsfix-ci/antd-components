@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
-import { Tree } from '../../../src';
+import {FormItem, Tree} from '../../../src';
 import { Divider } from 'antd';
 
 // Example implementation
@@ -105,12 +105,15 @@ const Example = () => {
                 defaultExpandAll
             />
 
-            <Divider orientation="left">Checkable Tree</Divider>
+
+            <Divider orientation="left">Editable Tree</Divider>
 
             <Tree
                 tree={tree}
                 onChange={onChange}
-                checkable
+                draggable
+                editable
+                formItems={[<FormItem fieldType={'string'} label='Component' dataIndex={'component'} required/>]}
                 defaultExpandAll
             />
 

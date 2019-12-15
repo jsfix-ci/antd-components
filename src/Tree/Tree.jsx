@@ -1,16 +1,24 @@
-import React, {Fragment, useState} from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import {Input, Tree as AntdTree} from 'antd';
-import {emptyFn} from '@root/helper';
-import {useL10n as l10n} from '@root/Locales';
+import { emptyFn } from '@root/helper';
+import { useL10n as l10n } from '@root/Locales';
+import {AddButton, DeleteButton, EditButton} from "@root/Buttons";
+import { add, edit, remove, findNodeInState } from './helper';
+import * as nanoid from 'nanoid';
+import { TreeForm } from '@root/Tree/Form';
 
 const TreeNode = AntdTree.TreeNode;
 const Search = Input.Search;
 
 export const Tree = (props) => {
-    const {tree, expandedKeys, autoExpandParent, onDrop, onChange, searchable, defaultExpandAll, ...restProps} = props;
+    const {tree, expandedKeys, autoExpandParent, onDrop, onChange, onSelect, searchable, editable, formItems, defaultExpandAll, ...restProps} = props;
 
+    const [visible, setVisible] = useState(false);
     const [treeData, setTreeData] = useState(tree);
+    const [editing, setEditing] = useState(false);
+    const [selected, setSelected] = useState(false);
+    const [selectedNode, setSelectedNode] = useState({});
     const [searchValue, setSearchValue] = useState('');
     const [expandedKeysData, setExpandedKeysData] = useState(expandedKeys);
     const [isAutoExpandParent, setIsAutoExpandParent] = useState(autoExpandParent);
@@ -163,27 +171,89 @@ export const Tree = (props) => {
         }
     }
 
+    const onAddBtnClick = (e) => {
+        setVisible(true);
+        setEditing(false);
+    };
+
+    const onEditBtnClick = (e) => {
+        setVisible(true);
+        setEditing(true);
+    };
+
+    const onDeleteBtnClick = (e) => {
+        let treeData = remove(tree, selectedNode);
+        setTreeData(treeData);
+        setSelected(false);
+    };
+
+    const onSelectNode = (key, e) => {
+        let node = findNodeInState(tree, e.node.props);
+        setSelectedNode(node);
+        setSelected(e.selected);
+        onSelect(node, key, e);
+    };
+
+    const hideModal = () => {
+      setVisible(false);
+    };
+
+    const onSaveNode = (data) => {
+        if (!editing) {
+            let newNode = {
+                key: nanoid(),
+                ...data
+            };
+            setTreeData(add(tree, selectedNode, newNode));
+            setSelectedNode(newNode);
+        } else {
+            setTreeData(edit(tree, selectedNode, data));
+            onChange(treeData);
+        }
+        hideModal();
+    };
+
     return (
         <Fragment>
             {(searchable) ? <Search style={{marginBottom: 8}} placeholder={l10n().Form.searchText}
                                     onChange={onSearchChange}/> : null}
+
+            {(editable) ?
+                <Fragment>
+                    <AddButton onClick={onAddBtnClick} size={'small'}/>
+                    <EditButton onClick={onEditBtnClick} disabled={!selected} size={'small'}/>
+                    <DeleteButton onClick={onDeleteBtnClick} disabled={!selected} size={'small'}/>
+                </Fragment> : null}
+
             <AntdTree
                 onExpand={onExpand}
                 onDrop={onDropEvent}
+                onSelect={onSelectNode}
                 {...expandConfig}
                 {...restProps}
             >
                 {getNodes(treeData)}
             </AntdTree>
+
+            <TreeForm
+                formItems={formItems}
+                visible={visible}
+                hideModal={hideModal}
+                onSubmit={onSaveNode}
+                selectedNode={(editing) ? selectedNode : {}}
+            />
+
         </Fragment>
     );
 };
 
 Tree.defaultProps = {
     searchable: false,
+    editable: false,
     defaultExpandAll: false,
     onDrop: emptyFn,
     onChange: emptyFn,
+    onSelect: emptyFn,
     tree: [],
     autoExpandParent: false,
     expandedKeys: []
