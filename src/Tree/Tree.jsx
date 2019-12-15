@@ -4,7 +4,7 @@ import {Input, Tree as AntdTree} from 'antd';
 import { emptyFn } from '@root/helper';
 import { useL10n as l10n } from '@root/Locales';
 import {AddButton, DeleteButton, EditButton} from "@root/Buttons";
-import { add, edit, remove, findNodeInState } from './helper';
+import { addNode, editNode, removeNode, findNode } from './helper';
 import * as nanoid from 'nanoid';
 import { TreeForm } from '@root/Tree/Form';
 
@@ -182,13 +182,13 @@ export const Tree = (props) => {
     };
 
     const onDeleteBtnClick = (e) => {
-        let treeData = remove(tree, selectedNode);
+        let treeData = removeNode(tree, selectedNode);
         setTreeData(treeData);
         setSelected(false);
     };
 
     const onSelectNode = (key, e) => {
-        let node = findNodeInState(tree, e.node.props);
+        let node = findNode(tree, e.node.props);
         setSelectedNode(node);
         setSelected(e.selected);
         onSelect(node, key, e);
@@ -204,10 +204,10 @@ export const Tree = (props) => {
                 key: nanoid(),
                 ...data
             };
-            setTreeData(add(tree, selectedNode, newNode));
+            setTreeData(addNode(tree, selectedNode, newNode));
             setSelectedNode(newNode);
         } else {
-            setTreeData(edit(tree, selectedNode, data));
+            setTreeData(editNode(tree, selectedNode, data));
             onChange(treeData);
         }
         hideModal();
