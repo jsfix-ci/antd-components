@@ -105,7 +105,6 @@ const Example = () => {
                 defaultExpandAll
             />
 
-
             <Divider orientation="left">Editable Tree</Divider>
 
             <Tree
@@ -135,7 +134,7 @@ const Example = () => {
 const code = `
     import React from 'react';
     import { Divider } from 'antd';
-    import { Tree } from '@react-hangar/antd-components';
+    import { Tree, FormItem } from '@react-hangar/antd-components';
 
     const tree = [
         {
@@ -238,12 +237,14 @@ const code = `
                     defaultExpandAll
                  />
     
-                <Divider orientation="left">Checkable Tree</Divider>
-    
+                <Divider orientation="left">Editable Tree</Divider>
+
                 <Tree
                     tree={tree}
                     onChange={onChange}
-                    checkable
+                    draggable
+                    editable
+                    formItems={[<FormItem fieldType={'string'} label='Component' dataIndex={'component'} required/>]}
                     defaultExpandAll
                 />
     
@@ -281,7 +282,13 @@ const properties = [
         description: 'show search bar above the tree',
         type: 'boolean',
         default: 'false'
-    },{
+    },
+    {
+        property: 'formItems',
+        description: 'you can pass formItems if you want to edit an attribute additionally',
+        type: 'Array[FormItems]',
+    },
+    {
         property: '(Inherited)',
         description: 'Ant design properties are inherited (see: https://ant.design/components/tree/)'
     }

@@ -1,13 +1,13 @@
 import { Modal } from "antd";
 import React from "react";
-import {Form, FormItem} from "@root/DataEntry";
-import {SaveButton} from "@root/Buttons";
+import { Form, FormItem } from '@root/DataEntry';
+import { SaveButton } from '@root/Buttons';
 
-export const TreeForm = (props) => {
+export const TreeFormModal = (props) => {
 
     const {visible, hideModal, selectedNode, formItems, onSubmit} = props;
 
-    const handleSubmit = (data, form) => {
+    const handleSubmit = (data) => {
         onSubmit(data);
     };
 

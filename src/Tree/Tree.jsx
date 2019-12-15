@@ -1,18 +1,30 @@
-import React, { Fragment, useState } from 'react';
+import React, {Fragment, useState} from 'react';
 import PropTypes from 'prop-types';
-import {Input, Tree as AntdTree} from 'antd';
+import { Input, Tree as AntdTree } from 'antd';
 import { emptyFn } from '@root/helper';
 import { useL10n as l10n } from '@root/Locales';
-import {AddButton, DeleteButton, EditButton} from "@root/Buttons";
-import { addNode, editNode, removeNode, findNode } from './helper';
+import { AddButton, DeleteButton, EditButton } from '@root/Buttons';
+import { addNode, editNode, removeNode, findNode, getTreeAfterDrop, getSearchDataList, getParentKey } from './helper';
 import * as nanoid from 'nanoid';
-import { TreeForm } from '@root/Tree/Form';
+import { TreeFormModal } from '@root/Tree/Form';
 
 const TreeNode = AntdTree.TreeNode;
 const Search = Input.Search;
 
 export const Tree = (props) => {
-    const {tree, expandedKeys, autoExpandParent, onDrop, onChange, onSelect, searchable, editable, formItems, defaultExpandAll, ...restProps} = props;
+    const {
+        tree,
+        expandedKeys,
+        autoExpandParent,
+        onDrop,
+        onChange,
+        onSelect,
+        searchable,
+        editable,
+        formItems,
+        defaultExpandAll,
+        ...restProps
+    } = props;
 
     const [visible, setVisible] = useState(false);
     const [treeData, setTreeData] = useState(tree);
@@ -24,96 +36,15 @@ export const Tree = (props) => {
     const [isAutoExpandParent, setIsAutoExpandParent] = useState(autoExpandParent);
 
     const onDropEvent = (event, node, dragNode, dragNodesKeys) => {
-
-        const dropKey = event.node.props.eventKey;
-        const dragKey = event.dragNode.props.eventKey;
-        const dropPos = event.node.props.pos.split('-');
-        const dropPosition = event.dropPosition - Number(dropPos[dropPos.length - 1]);
-
-        const loop = (data, key, callback) => {
-            data.forEach((item, index, arr) => {
-                if (item.key === key) {
-                    return callback(item, index, arr);
-                }
-                if (item.submenu) {
-                    return loop(item.submenu, key, callback);
-                }
-            });
-        };
-
-        const data = [...treeData];
-
-        let dragObj;
-        loop(data, dragKey, (item, index, arr) => {
-            arr.splice(index, 1);
-            dragObj = item;
-        });
-
-        if (!event.dropToGap) {
-            loop(data, dropKey, item => {
-                item.submenu = item.submenu || [];
-                item.submenu.push(dragObj);
-            });
-        } else if (
-            (event.node.props.submenu || []).length > 0 &&
-            event.node.props.expanded &&
-            dropPosition === 1
-        ) {
-            loop(data, dropKey, item => {
-                item.submenu = item.submenu || [];
-                item.submenu.unshift(dragObj);
-            });
-        } else {
-            let ar;
-            let i;
-            loop(data, dropKey, (item, index, arr) => {
-                ar = arr;
-                i = index;
-            });
-            if (dropPosition === -1) {
-                ar.splice(i, 0, dragObj);
-            } else {
-                ar.splice(i + 1, 0, dragObj);
-            }
-        }
-
-        setTreeData(data);
+        let tree = getTreeAfterDrop(treeData, event);
+        setTreeData(tree);
         onDrop(event, node, dragNode, dragNodesKeys);
-        onChange(data);
+        onChange(tree);
     };
-
-    const getParentKey = (key, tree) => {
-        let parentKey;
-        for (let i = 0; i < tree.length; i++) {
-            const node = tree[i];
-            if (node.submenu) {
-                if (node.submenu.some(item => item.key === key)) {
-                    parentKey = node.key;
-                } else if (getParentKey(key, node.submenu)) {
-                    parentKey = getParentKey(key, node.submenu);
-                }
-            }
-        }
-        return parentKey;
-    };
-
-    const dataList = [];
-    const generateList = data => {
-        for (let i = 0; i < data.length; i++) {
-            const node = data[i];
-            const {key, label} = node;
-            dataList.push({key, label: label});
-            if (node.submenu) {
-                generateList(node.submenu);
-            }
-        }
-    };
-
-    generateList(treeData);
 
     const onSearchChange = e => {
         const {value} = e.target;
-        const expanded = dataList.map(item => {
+        const expanded = getSearchDataList(treeData).map(item => {
             if (item.label.indexOf(value) > -1) {
                 return getParentKey(item.key, treeData);
             }
@@ -171,17 +102,17 @@ export const Tree = (props) => {
         }
     }
 
-    const onAddBtnClick = (e) => {
+    const onAddBtnClick = () => {
         setVisible(true);
         setEditing(false);
     };
 
-    const onEditBtnClick = (e) => {
+    const onEditBtnClick = () => {
         setVisible(true);
         setEditing(true);
     };
 
-    const onDeleteBtnClick = (e) => {
+    const onDeleteBtnClick = () => {
         let treeData = removeNode(tree, selectedNode);
         setTreeData(treeData);
         setSelected(false);
@@ -195,7 +126,7 @@ export const Tree = (props) => {
     };
 
     const hideModal = () => {
-      setVisible(false);
+        setVisible(false);
     };
 
     const onSaveNode = (data) => {
@@ -235,7 +166,7 @@ export const Tree = (props) => {
                 {getNodes(treeData)}
             </AntdTree>
 
-            <TreeForm
+            <TreeFormModal
                 formItems={formItems}
                 visible={visible}
                 hideModal={hideModal}
