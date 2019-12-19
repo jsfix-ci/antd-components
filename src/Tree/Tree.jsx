@@ -4,7 +4,7 @@ import { Input, Tree as AntdTree } from 'antd';
 import { emptyFn } from '@root/helper';
 import { useL10n as l10n } from '@root/Locales';
 import { AddButton, DeleteButton, EditButton } from '@root/Buttons';
-import { addNode, findNode, getTreeAfterDrop, getSearchDataList, getParentKey } from './helper';
+import { findNode, getTreeAfterDrop, getSearchDataList, getParentKey } from './helper';
 import * as nanoid from 'nanoid';
 import { TreeFormModal } from '@root/Tree/Form';
 import { PureArray } from '@root/array';
@@ -115,7 +115,7 @@ export const Tree = (props) => {
 
     const onDeleteBtnClick = () => {
         setTreeData(
-            PureArray.removeRecursice(treeData, ['key', selectedNode.key], 'submenu')
+            PureArray.removeInTree(treeData, ['key', selectedNode.key])
         );
         setSelected(false);
     };
@@ -132,19 +132,24 @@ export const Tree = (props) => {
     };
 
     const onSaveNode = (data) => {
-        if (!editing) {
-            let newNode = {
-                key: nanoid(),
-                ...data
-            };
-            setTreeData(addNode(tree, selectedNode, newNode));
-            setSelectedNode(newNode);
-        } else {
+        if (data.key) {
             setTreeData(
-                PureArray.updateRecursive(treeData, ['key', selectedNode.key], data, 'submenu')
+                PureArray.updateInTree(treeData, ['key', selectedNode.key], data)
             );
             onChange(treeData);
+        } else {
+            let newNode = {
+                key: nanoid(),
+                submenu: [],
+                ...data
+            };
+
+            setTreeData(
+                PureArray.insertInTree(treeData, ['key', selectedNode.key], newNode)
+            );
+            setSelectedNode(newNode);
         }
+
         hideModal();
     };
 

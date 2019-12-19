@@ -28,6 +28,7 @@ const Example = () => {
                                     key: '1111',
                                     label: 'Sub-Sub-Submenu',
                                     path: '/1',
+                                    submenu: []
                                 }
                             ]
                         }
@@ -38,20 +39,23 @@ const Example = () => {
                     label: 'Highlights',
                     icon: 'highlight',
                     path: '/Highlights',
+                    submenu: []
                 },
                 {
                     key: '13',
                     label: 'Products',
-                    group: [
+                    submenu: [
                         {
                             key: '131',
                             label: 'Product 1',
                             path: '/Product1',
+                            submenu: []
                         },
                         {
                             key: '132',
                             label: 'Product 2',
                             path: '/Product2',
+                            submenu: []
                         }
                     ]
                 }
@@ -67,12 +71,14 @@ const Example = () => {
                     key: '21',
                     label: 'Person 1',
                     path: '/Person1',
+                    submenu: []
 
                 },
                 {
                     key: '22',
                     label: 'Person 2',
                     path: '/Person2',
+                    submenu: []
                 }
             ]
         },
@@ -80,12 +86,13 @@ const Example = () => {
             key: 'side-about',
             label: 'About Us',
             path: '/Navigation/Side/About-Us',
+            submenu: []
         },
         {
             key: 'side-hidden',
             label: 'I am hidden',
             path: '/Navigation/Side/Hidden',
-            hideInMenu: true
+            submenu: []
         }
     ];
 
@@ -222,21 +229,21 @@ const code = `
     const onChange = (routes) => {
         console.log(routes);
     };
-    
+
     const Example = () => {
 
         return (
             <Fragment>
-            
+
                 <Divider orientation="left">Draggable Tree</Divider>
-            
+
                 <Tree
                     tree={tree}
                     onChange={onChange}
                     draggable
                     defaultExpandAll
                  />
-    
+
                 <Divider orientation="left">Editable Tree</Divider>
 
                 <Tree
@@ -247,9 +254,9 @@ const code = `
                     formItems={[<FormItem key={3} fieldType={'string'} label='Component' dataIndex={'component'} required/>]}
                     defaultExpandAll
                 />
-    
+
                 <Divider orientation="left">Searchable Tree</Divider>
-    
+
                 <Tree
                     tree={tree}
                     onChange={onChange}
@@ -260,7 +267,7 @@ const code = `
             </Fragment>
         );
     }
-    
+
     export default Example;
 
 `;

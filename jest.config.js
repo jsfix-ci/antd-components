@@ -1,17 +1,16 @@
-// For a detailed explanation regarding each configuration property, visit:
-// https://jestjs.io/docs/en/configuration.html
+/* global module */
 
 module.exports = {
     clearMocks: true,
     collectCoverage: true,
-    coverageDirectory: "coverage",
+    coverageDirectory: 'coverage',
     collectCoverageFrom: [
-        "src/**/*.{js,jsx}"
+        'src/**/*.{js,jsx}'
     ],
     moduleNameMapper: {
-        "\\.(css|less)$": "identity-obj-proxy"
+        '\\.(css|less)$': 'identity-obj-proxy'
     },
     setupFiles: [
-        "<rootDir>/jest-setup.js"
+        '<rootDir>/jest-setup.js'
     ]
 };
