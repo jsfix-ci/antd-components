@@ -1,25 +1,3 @@
-export const addNode = (tree, node, targetNode) => {
-
-    if (!node.label) {
-        tree.push(targetNode);
-        return tree;
-    }
-
-    tree.forEach((rec) => {
-        if (rec.label === node.label) {
-            if (rec.submenu) {
-                rec.submenu.push(targetNode);
-            } else {
-                rec.submenu = [targetNode];
-            }
-
-        } else if (rec.submenu) {
-            return addNode(rec.submenu, node, targetNode);
-        }
-    });
-    return tree;
-};
-
 export const findNode = (tree, targetNode) => {
     let result = [];
     tree.forEach((node) => {
