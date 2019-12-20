@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, {Fragment, useState} from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
 import {FormItem, Tree} from '../../../src';
 import { Divider } from 'antd';
@@ -96,8 +96,10 @@ const Example = () => {
         }
     ];
 
+    const [treeData, setTreeData] = useState(tree);
+
     const onChange = (routes) => {
-        console.log(routes);
+        setTreeData(routes);
     };
 
     return (
@@ -106,7 +108,7 @@ const Example = () => {
             <Divider orientation="left">Draggable Tree</Divider>
 
             <Tree
-                tree={tree}
+                tree={treeData}
                 onChange={onChange}
                 draggable
                 defaultExpandAll
@@ -115,7 +117,7 @@ const Example = () => {
             <Divider orientation="left">Editable Tree</Divider>
 
             <Tree
-                tree={tree}
+                tree={treeData}
                 onChange={onChange}
                 draggable
                 editable
@@ -126,7 +128,7 @@ const Example = () => {
             <Divider orientation="left">Searchable Tree</Divider>
 
             <Tree
-                tree={tree}
+                tree={treeData}
                 onChange={onChange}
                 checkable
                 draggable

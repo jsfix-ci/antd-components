@@ -1,13 +1,13 @@
-import React, { Fragment, useState } from 'react';
+import React, {Fragment, useState} from 'react';
 import PropTypes from 'prop-types';
-import { Input, Tree as AntdTree } from 'antd';
-import { emptyFn } from '@root/helper';
-import { useL10n as l10n } from '@root/Locales';
-import { AddButton, DeleteButton, EditButton } from '@root/Buttons';
-import { findNode, getTreeAfterDrop, getSearchDataList, getParentKey } from './helper';
+import {Input, Tree as AntdTree} from 'antd';
+import {emptyFn} from '@root/helper';
+import {useL10n as l10n} from '@root/Locales';
+import {AddButton, DeleteButton, EditButton} from '@root/Buttons';
+import {findNode, getParentKey, getSearchDataList, getTreeAfterDrop} from './helper';
 import * as nanoid from 'nanoid';
-import { TreeFormModal } from '@root/Tree/Form';
-import { PureArray } from '@root/array';
+import {TreeFormModal} from '@root/Tree/Form';
+import {PureArray} from '@root/array';
 
 const TreeNode = AntdTree.TreeNode;
 const Search = Input.Search;
@@ -27,26 +27,23 @@ export const Tree = (props) => {
         ...restProps
     } = props;
 
-    const [visible, setVisible] = useState(false);
-    const [treeData, setTreeData] = useState(tree);
-    const [editing, setEditing] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
     const [selectedNode, setSelectedNode] = useState(null);
     const [searchValue, setSearchValue] = useState('');
     const [expandedKeysData, setExpandedKeysData] = useState(expandedKeys);
     const [isAutoExpandParent, setIsAutoExpandParent] = useState(autoExpandParent);
 
     const onDropEvent = (event, node, dragNode, dragNodesKeys) => {
-        let tree = getTreeAfterDrop(treeData, event);
-        setTreeData(tree);
+        let data = getTreeAfterDrop(tree, event);
+        onChange(data);
         onDrop(event, node, dragNode, dragNodesKeys);
-        onChange(tree);
     };
 
     const onSearchChange = e => {
-        const { value } = e.target;
-        const expanded = getSearchDataList(treeData).map(item => {
+        const {value} = e.target;
+        const expanded = getSearchDataList(tree).map(item => {
             if (item.label.indexOf(value) > -1) {
-                return getParentKey(item.key, treeData);
+                return getParentKey(item.key, tree);
             }
             return null;
         }).filter((item, i, self) => item && self.indexOf(item) === i);
@@ -68,7 +65,7 @@ export const Tree = (props) => {
 
         return index > -1 ? (
             <span>{beforeStr}
-                <span style={{ color: '#f50' }}>{searchValue}</span>
+                <span style={{color: '#f50'}}>{searchValue}</span>
                 {afterStr}
                 </span>
         ) : (
@@ -104,55 +101,40 @@ export const Tree = (props) => {
 
     const onAddBtnClick = () => {
         let newNode = {
-            key: nanoid(),
             submenu: [],
-
         };
-
-        setVisible(true);
-        setEditing(false);
+        setSelectedNode(newNode);
+        setModalVisible(true);
     };
 
     const onEditBtnClick = () => {
-        setVisible(true);
-        setEditing(true);
+        setModalVisible(true);
     };
 
     const onDeleteBtnClick = () => {
-        setTreeData(
-            PureArray.removeInTree(treeData, ['key', selectedNode.key])
+        onChange(
+            PureArray.removeInTree(tree, ['key', selectedNode.key])
         );
 
         setSelectedNode(null);
     };
 
     const onSelectNode = (key, e) => {
-        let node = findNode(treeData, e.node.props);
+        let node = findNode(tree, e.node.props);
         (key.length > 0) ? setSelectedNode(node) : setSelectedNode(null);
         onSelect(node, key, e);
     };
 
     const hideModal = () => {
-        setVisible(false);
+        setModalVisible(false);
     };
 
-    const onSaveNode = (data) => {
-        if (data.key) {
-            setTreeData(
-                PureArray.updateInTree(treeData, ['key', selectedNode.key], data)
-            );
-            onChange(treeData);
+    const onSaveNode = (node) => {
+        if (node.key) {
+            setSelectedNode(node);
+            onChange(PureArray.updateInTree(tree, ['key', selectedNode.key], node));
         } else {
-            let newNode = {
-                key: nanoid(),
-                submenu: [],
-                ...data
-            };
-
-            setTreeData(
-                PureArray.insertInTree(treeData, ['key', selectedNode.key], newNode)
-            );
-            setSelectedNode(newNode);
+            onChange(PureArray.insertInTree(tree, ['key', selectedNode.key], node));
         }
 
         hideModal();
@@ -160,7 +142,7 @@ export const Tree = (props) => {
 
     return (
         <Fragment>
-            {(searchable) ? <Search style={{ marginBottom: 8 }} placeholder={l10n().Form.searchText}
+            {(searchable) ? <Search style={{marginBottom: 8}} placeholder={l10n().Form.searchText}
                                     onChange={onSearchChange}/> : null}
 
             {(editable) ?
@@ -168,7 +150,8 @@ export const Tree = (props) => {
                     <AddButton onClick={onAddBtnClick} size={'small'}/>
                     <EditButton onClick={onEditBtnClick} disabled={!selectedNode} size={'small'}/>
                     <DeleteButton onClick={onDeleteBtnClick} disabled={!selectedNode} size={'small'}/>
-                </Fragment> : null}
+                </Fragment>
+                : null}
 
             <AntdTree
                 onExpand={onExpand}
@@ -177,16 +160,15 @@ export const Tree = (props) => {
                 {...expandConfig}
                 {...restProps}
             >
-                {getNodes(treeData)}
+                {getNodes(tree)}
             </AntdTree>
 
             <TreeFormModal
-                editing={editing}
                 formItems={formItems}
-                visible={visible}
+                modalVisible={modalVisible}
                 hideModal={hideModal}
                 onSubmit={onSaveNode}
-                selectedNode={(editing) ? selectedNode : {}}
+                record={(selectedNode) ? selectedNode : {}}
             />
 
         </Fragment>
