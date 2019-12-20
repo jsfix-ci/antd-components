@@ -72,7 +72,7 @@ export const getDisplay = ({ children, fieldType, maxLength, value, fieldProps =
         case 'number':
             return value;
         case 'select':
-            return fieldProps.options.find(o => o.value === value).label; // get label for value
+            return value ? fieldProps.options.find(o => o.value === value).label : ''; // get label for value
         default:
             return children;
     }
