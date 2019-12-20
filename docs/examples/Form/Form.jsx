@@ -25,6 +25,11 @@ const generateFakeData = () => ({
     _id: nanoid(10),
     company: faker.company.companyName(),
     product: faker.commerce.productName(),
+    list: [
+        faker.name.findName(),
+        faker.name.findName(),
+        faker.name.findName()
+    ],
     image: generateImages()
 });
 
@@ -50,6 +55,7 @@ const Example = () => {
             <FormItem fieldType={'string'} label='Product Name' dataIndex={'product'} required/>
             <FormItem fieldType={'string'} label='Text with Validator' dataIndex={'text'} rules={[{ max: 10 }]}/>
             <FormItem fieldType={'select'} label='Material' dataIndex={'material'} fieldProps={{ options }} required/>
+            <FormItem fieldType={'list'} label='List' dataIndex={'list'}/>
             <FormItem fieldType={'image'} dataIndex={'image'} label={'Upload Form Item'} required fieldProps={{
                 type: { image: ['jpeg', 'png'] },
                 action,
