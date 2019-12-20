@@ -30,8 +30,7 @@ export const Tree = (props) => {
     const [visible, setVisible] = useState(false);
     const [treeData, setTreeData] = useState(tree);
     const [editing, setEditing] = useState(false);
-    const [selected, setSelected] = useState(false);
-    const [selectedNode, setSelectedNode] = useState({});
+    const [selectedNode, setSelectedNode] = useState(null);
     const [searchValue, setSearchValue] = useState('');
     const [expandedKeysData, setExpandedKeysData] = useState(expandedKeys);
     const [isAutoExpandParent, setIsAutoExpandParent] = useState(autoExpandParent);
@@ -104,6 +103,12 @@ export const Tree = (props) => {
     }
 
     const onAddBtnClick = () => {
+        let newNode = {
+            key: nanoid(),
+            submenu: [],
+
+        };
+
         setVisible(true);
         setEditing(false);
     };
@@ -117,13 +122,13 @@ export const Tree = (props) => {
         setTreeData(
             PureArray.removeInTree(treeData, ['key', selectedNode.key])
         );
-        setSelected(false);
+
+        setSelectedNode(null);
     };
 
     const onSelectNode = (key, e) => {
-        let node = findNode(tree, e.node.props);
-        setSelectedNode(node);
-        setSelected(e.selected);
+        let node = findNode(treeData, e.node.props);
+        (key.length > 0) ? setSelectedNode(node) : setSelectedNode(null);
         onSelect(node, key, e);
     };
 
@@ -161,8 +166,8 @@ export const Tree = (props) => {
             {(editable) ?
                 <Fragment>
                     <AddButton onClick={onAddBtnClick} size={'small'}/>
-                    <EditButton onClick={onEditBtnClick} disabled={!selected} size={'small'}/>
-                    <DeleteButton onClick={onDeleteBtnClick} disabled={!selected} size={'small'}/>
+                    <EditButton onClick={onEditBtnClick} disabled={!selectedNode} size={'small'}/>
+                    <DeleteButton onClick={onDeleteBtnClick} disabled={!selectedNode} size={'small'}/>
                 </Fragment> : null}
 
             <AntdTree
