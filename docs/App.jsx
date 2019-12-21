@@ -16,6 +16,7 @@ import { Row, Col } from 'antd';
 import { Wrapper } from './components/utils';
 import { routes } from './routes';
 import { Menu } from './Menu';
+import {Home} from './pages/Home';
 
 /**
  * @return {React.Component}
@@ -40,6 +41,14 @@ const App = () => {
     };
 
     const menuRoutes = [
+        {
+            key: 'home',
+            icon: 'home',
+            label: 'Home',
+            exact: true,
+            path: '/',
+            component: Home
+        },
         {
             key: 'github',
             label: 'GitHub',

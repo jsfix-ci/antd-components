@@ -10,21 +10,25 @@
         display: inline-block;
         height: 55px;
         width: 55px;
+        float:left;
     }
 
     .text {
         cursor: pointer;
-        display: inline-block;
+        display: block;
         margin-left: 5px;
+        width: 274px;
     }
 
-    .version-badge {
-        margin-left: 10px;
-
-        .ant-badge-count {
-            font-weight: bold;
-            box-shadow: 0 0 0 2px #d9d9d9 inset;
-        }
+    .version {
+        margin-left: 54px;
+        margin-top: -13px;
+        font-size: 10px;
+        font-weight: bold;
+        height: 0;
+        display: inline-block;
+        float: left;
+        line-height: 0;
     }
 }
 
@@ -33,7 +37,7 @@
         color: #000
     }
 
-    .version-badge .ant-badge-count {
+    .version {
         background-color: #FFF;
         color: #000;
     }
@@ -44,7 +48,7 @@
         color: #fff
     }
 
-    .version-badge .ant-badge-count {
+    .version {
         background-color: #001529;
         color: #FFF;
     }

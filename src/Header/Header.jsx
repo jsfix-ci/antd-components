@@ -9,7 +9,7 @@ import { MotionDrawer } from '@root';
 const { Header: AntdHeader } = Layout;
 
 const BURGER_BREAKPOINTS = { xs: 3, md: 0, xl: 0, xxl: 0 };
-const LOGO_BREAKPOINTS = { xs: 21, md: 11, xl: 6, xxl: 5 };
+const LOGO_BREAKPOINTS = { xs: 21, md: 8, xl: 5, xxl: 4 };
 const MENU_BREAKPOINTS = { xs: 0, md: 13, xl: 12, xxl: 13 };
 const EXTRA_BREAKPOINTS = { xs: 0, md: 0, xl: 6, xxl: 6 };
 
