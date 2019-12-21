@@ -15,6 +15,6 @@ export const ExternLink = (props) => {
 };
 
 ExternLink.propTypes = {
-    children: PropTypes.string,
+    children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     to: PropTypes.string
 };
