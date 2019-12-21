@@ -41,15 +41,7 @@ const App = () => {
     };
 
     const menuRoutes = [
-        {
-            key: 'home',
-            icon: 'home',
-            label: 'Home',
-            exact: true,
-            path: '/',
-            component: Home
-        },
-        {
+       {
             key: 'github',
             label: 'GitHub',
             icon: 'github',

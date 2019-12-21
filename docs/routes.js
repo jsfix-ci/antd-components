@@ -1,3 +1,4 @@
+import { Home } from './pages/Home';
 import { Typography } from './pages/Typography';
 import { FormComponent } from './pages/Form';
 import { FlyoutNavigationComponent, SideNavigationComponent } from './pages/Navigation';
@@ -14,6 +15,13 @@ import { LoginComponent } from './pages/Login';
 import { TreeComponent } from './pages/Tree';
 
 export const routes = [
+    {
+        key: 'home',
+        label: 'Home',
+        exact: true,
+        path: '/',
+        component: Home
+    },
     {
         key: 'buttons',
         label: 'Buttons',
