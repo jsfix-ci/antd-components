@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Badge } from 'antd';
 
 export const Logo = (props) => {
     const { children, to, image, version, ...restProps } = props;
+
+    let lineHeight = (version) ? '50px' : '64px';
 
     return (
         <div className={'logo'} {...restProps}>
@@ -12,10 +13,12 @@ export const Logo = (props) => {
                 {
                     image ? <div className={'image'}><img src={image}/></div> : null
                 }
-                <div className={'text'}>
+                <span className={'text'} style={{lineHeight: lineHeight}}>
                     {children}
-                    {version ? <Badge className={'version-badge'} count={version}/> : null}
-                </div>
+                </span>
+
+                {version ? <span className={'version'}> {version} </span> : null}
+
             </Link>
         </div>
     );

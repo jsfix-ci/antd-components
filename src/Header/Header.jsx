@@ -9,8 +9,8 @@ import { MotionDrawer } from '@root';
 const { Header: AntdHeader } = Layout;
 
 const BURGER_BREAKPOINTS = { xs: 3, md: 0, xl: 0, xxl: 0 };
-const LOGO_BREAKPOINTS = { xs: 21, md: 11, xl: 6, xxl: 5 };
-const MENU_BREAKPOINTS = { xs: 0, md: 13, xl: 12, xxl: 13 };
+const LOGO_BREAKPOINTS = { xs: 21, md: 8, xl: 5, xxl: 4 };
+const MENU_BREAKPOINTS = { xs: 0, md: 14, xl: 13, xxl: 14 };
 const EXTRA_BREAKPOINTS = { xs: 0, md: 0, xl: 6, xxl: 6 };
 
 export const Header = (props) => {
@@ -62,7 +62,7 @@ export const Header = (props) => {
     );
 
     const renderExtra = () => (
-        extra ? <Col {...extraBP} style={{ textAlign: 'right' }}>{extra}</Col> : null
+        extra ? <Col {...extraBP} className={'extra'}>{extra}</Col> : null
     );
 
     const sideNaviProps = siderProps || menuProps;
