@@ -12,10 +12,10 @@ export const Logo = (props) => {
                 {
                     image ? <div className={'image'}><img src={image}/></div> : null
                 }
-                <span className={'text'}>
+                <div className={'text'}>
                     {children}
-                </span>
-                {version ? <span className={'version'}> {version} </span> : null}
+                    {version ? <Badge className={'version-badge'} count={version}/> : null}
+                </div>
             </Link>
         </div>
     );
