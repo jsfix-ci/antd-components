@@ -18,7 +18,6 @@ export const Tree = (props) => {
     const {
         tree,
         expandedKeys,
-        autoExpandParent,
         onAdd,
         onDelete,
         onDrop,
@@ -186,7 +185,6 @@ export const Tree = (props) => {
                 onExpand={onExpand}
                 onDrop={onDropEvent}
                 onSelect={onSelectNode}
-                autoExpandParent
                 {...expandConfig}
                 {...restProps}
             >
