@@ -40,7 +40,7 @@ const update = (array, predicate, item) => {
 
 const updateInTree = (tree, predicate, item, childrenKey = 'submenu') => {
     const path = findPath(Immutable.fromJS(tree), node => node.get(predicate[0]) === predicate[1], childrenKey);
-    return Immutable.updateIn(tree, path, v => ({...v, ...item}));
+    return Immutable.updateIn(tree, path, v => ({ ...v, ...item }));
 };
 
 const findPath = (tree, predicate, childrenKey = 'submenu') => {

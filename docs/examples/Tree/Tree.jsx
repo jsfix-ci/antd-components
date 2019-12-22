@@ -1,6 +1,6 @@
-import React, {Fragment, useState} from 'react';
+import React, { Fragment, useState } from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
-import {FormItem, Tree} from '../../../src';
+import { FormItem, Tree } from '../../../src';
 import { Divider } from 'antd';
 
 // Example implementation
@@ -98,8 +98,28 @@ const Example = () => {
 
     const [treeData, setTreeData] = useState(tree);
 
-    const onChange = (routes) => {
-        setTreeData(routes);
+    const onDelete = (id, tree) => {
+        return new Promise((resolve) => {
+            // delete node
+            setTreeData(tree);
+            resolve();
+        });
+    };
+
+    const onSave = (node, tree) => {
+        return new Promise((resolve) => {
+            // save node
+            setTreeData(tree);
+            resolve();
+        });
+    };
+
+    const onDrop = (sourceKey, targetKey, tree) => {
+        return new Promise((resolve) => {
+            // save node
+            setTreeData(tree);
+            resolve();
+        });
     };
 
     return (
@@ -109,7 +129,7 @@ const Example = () => {
 
             <Tree
                 tree={treeData}
-                onChange={onChange}
+                onDrop={onDrop}
                 draggable
                 defaultExpandAll
             />
@@ -118,10 +138,14 @@ const Example = () => {
 
             <Tree
                 tree={treeData}
-                onChange={onChange}
+                onDelete={onDelete}
+                onSave={onSave}
+                onDrop={onDrop}
                 draggable
                 editable
-                formItems={[<FormItem key={3} fieldType={'string'} label='Component' dataIndex={'component'} required/>]}
+                formItems={[
+                    <FormItem key={3} fieldType={'string'} label='Component' dataIndex={'component'} required/>
+                ]}
                 defaultExpandAll
             />
 
@@ -129,7 +153,7 @@ const Example = () => {
 
             <Tree
                 tree={treeData}
-                onChange={onChange}
+                onDrop={onDrop}
                 checkable
                 draggable
                 searchable
@@ -244,7 +268,7 @@ const code = `
                     onChange={onChange}
                     draggable
                     defaultExpandAll
-                 />
+                />
 
                 <Divider orientation="left">Editable Tree</Divider>
 
@@ -253,7 +277,8 @@ const code = `
                     onChange={onChange}
                     draggable
                     editable
-                    formItems={[<FormItem key={3} fieldType={'string'} label='Component' dataIndex={'component'} required/>]}
+                    formItems={[<FormItem key={3} fieldType={'string'} label='Component' dataIndex={'component'}
+                                          required/>]}
                     defaultExpandAll
                 />
 

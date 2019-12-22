@@ -6,7 +6,7 @@ import { useL10n as l10n } from '@root/Locales';
 
 export const TreeFormModal = (props) => {
 
-    const {modalVisible, hideModal, record, formItems, onSubmit} = props;
+    const {visible, record, formItems, onCancel, onSubmit} = props;
 
     const handleSubmit = (data) => {
         onSubmit(data, record);
@@ -14,9 +14,9 @@ export const TreeFormModal = (props) => {
 
     return (
         <Modal
-            title={(!record) ? l10n().Tree.newNode : l10n().Tree.editNode}
-            visible={modalVisible}
-            onCancel={hideModal}
+            title={(!record.label) ? l10n().Tree.newNode : l10n().Tree.editNode}
+            visible={visible}
+            onCancel={onCancel}
             cancelButtonProps={{ hidden: true }}
         >
             <Form record={record} onSubmit={handleSubmit} >
