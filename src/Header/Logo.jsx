@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export const Logo = (props) => {
     const { children, to, image, version, ...restProps } = props;
 
-    let lineHeight = (version) ? '50px' : '64px';
+    const lineHeight = (version) ? '50px' : '64px';
 
     return (
         <div className={'logo'} {...restProps}>
@@ -13,7 +13,7 @@ export const Logo = (props) => {
                 {
                     image ? <div className={'image'}><img src={image}/></div> : null
                 }
-                <span className={'text'} style={{lineHeight: lineHeight}}>
+                <span className={'text'} style={{lineHeight}}>
                     {children}
                 </span>
 
