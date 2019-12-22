@@ -1,4 +1,7 @@
 .logo {
+
+    padding-left: 5px;
+
     a {
         cursor: pointer;
         font-size: 20px;
@@ -10,21 +13,23 @@
         display: inline-block;
         height: 55px;
         width: 55px;
+        float:left;
+        line-height: 55px;
     }
 
     .text {
         cursor: pointer;
-        display: inline-block;
-        margin-left: 5px;
+        display: block;
+        position: relative;
+        width: 274px;
     }
 
-    .version-badge {
-        margin-left: 10px;
-
-        .ant-badge-count {
-            font-weight: bold;
-            box-shadow: 0 0 0 2px #d9d9d9 inset;
-        }
+    .version {
+        font-size: 10px;
+        font-weight: bold;
+        position: absolute;
+        top: 40px;
+        background: transparent;
     }
 }
 
@@ -33,7 +38,7 @@
         color: #000
     }
 
-    .version-badge .ant-badge-count {
+    .version {
         background-color: #FFF;
         color: #000;
     }
@@ -44,7 +49,7 @@
         color: #fff
     }
 
-    .version-badge .ant-badge-count {
+    .version {
         background-color: #001529;
         color: #FFF;
     }
