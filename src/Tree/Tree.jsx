@@ -22,7 +22,6 @@ export const Tree = (props) => {
         onAdd,
         onDelete,
         onDrop,
-        onChange,
         onSave,
         onSelect,
         searchable,
@@ -37,7 +36,6 @@ export const Tree = (props) => {
     const [selectedNode, setSelectedNode] = useState({});
     const [searchValue, setSearchValue] = useState('');
     const [expandedKeysData, setExpandedKeysData] = useState(expandedKeys);
-    const [isAutoExpandParent, setIsAutoExpandParent] = useState(autoExpandParent);
 
     useEffect(() => {
         setData(tree);
@@ -69,17 +67,14 @@ export const Tree = (props) => {
 
         setExpandedKeysData(expanded);
         setSearchValue(value);
-        setIsAutoExpandParent(true);
     };
 
     const onExpand = expandedKeys => {
         setExpandedKeysData(expandedKeys);
-        setIsAutoExpandParent(false);
     };
 
     let expandConfig = {
-        expandedKeys: expandedKeysData,
-        autoExpandParent: isAutoExpandParent
+        expandedKeys: expandedKeysData
     };
 
     if (defaultExpandAll) {
@@ -191,6 +186,7 @@ export const Tree = (props) => {
                 onExpand={onExpand}
                 onDrop={onDropEvent}
                 onSelect={onSelectNode}
+                autoExpandParent
                 {...expandConfig}
                 {...restProps}
             >
