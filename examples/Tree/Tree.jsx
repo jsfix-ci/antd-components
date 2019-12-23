@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
-import { Tree } from '../../../src';
+import { FormItem, Tree } from '../../../src';
 import { Divider } from 'antd';
 
 // Example implementation
@@ -28,6 +28,7 @@ const Example = () => {
                                     key: '1111',
                                     label: 'Sub-Sub-Submenu',
                                     path: '/1',
+                                    submenu: []
                                 }
                             ]
                         }
@@ -38,20 +39,23 @@ const Example = () => {
                     label: 'Highlights',
                     icon: 'highlight',
                     path: '/Highlights',
+                    submenu: []
                 },
                 {
                     key: '13',
                     label: 'Products',
-                    group: [
+                    submenu: [
                         {
                             key: '131',
                             label: 'Product 1',
                             path: '/Product1',
+                            submenu: []
                         },
                         {
                             key: '132',
                             label: 'Product 2',
                             path: '/Product2',
+                            submenu: []
                         }
                     ]
                 }
@@ -67,12 +71,14 @@ const Example = () => {
                     key: '21',
                     label: 'Person 1',
                     path: '/Person1',
+                    submenu: []
 
                 },
                 {
                     key: '22',
                     label: 'Person 2',
                     path: '/Person2',
+                    submenu: []
                 }
             ]
         },
@@ -80,17 +86,40 @@ const Example = () => {
             key: 'side-about',
             label: 'About Us',
             path: '/Navigation/Side/About-Us',
+            submenu: []
         },
         {
             key: 'side-hidden',
             label: 'I am hidden',
             path: '/Navigation/Side/Hidden',
-            hideInMenu: true
+            submenu: []
         }
     ];
 
-    const onChange = (routes) => {
-        console.log(routes);
+    const [treeData, setTreeData] = useState(tree);
+
+    const onDelete = (id, tree) => {
+        return new Promise((resolve) => {
+            // delete node
+            setTreeData(tree);
+            resolve();
+        });
+    };
+
+    const onSave = (node, tree) => {
+        return new Promise((resolve) => {
+            // save node
+            setTreeData(tree);
+            resolve();
+        });
+    };
+
+    const onDrop = (sourceKey, targetKey, tree) => {
+        return new Promise((resolve) => {
+            // save node
+            setTreeData(tree);
+            resolve();
+        });
     };
 
     return (
@@ -99,26 +128,32 @@ const Example = () => {
             <Divider orientation="left">Draggable Tree</Divider>
 
             <Tree
-                tree={tree}
-                onChange={onChange}
+                tree={treeData}
+                onDrop={onDrop}
                 draggable
                 defaultExpandAll
             />
 
-            <Divider orientation="left">Checkable Tree</Divider>
+            <Divider orientation="left">Editable Tree</Divider>
 
             <Tree
-                tree={tree}
-                onChange={onChange}
-                checkable
+                tree={treeData}
+                onDelete={onDelete}
+                onSave={onSave}
+                onDrop={onDrop}
+                draggable
+                editable
+                formItems={[
+                    <FormItem key={3} fieldType={'string'} label='Component' dataIndex={'component'} required/>
+                ]}
                 defaultExpandAll
             />
 
             <Divider orientation="left">Searchable Tree</Divider>
 
             <Tree
-                tree={tree}
-                onChange={onChange}
+                tree={treeData}
+                onDrop={onDrop}
                 checkable
                 draggable
                 searchable
@@ -132,7 +167,7 @@ const Example = () => {
 const code = `
     import React from 'react';
     import { Divider } from 'antd';
-    import { Tree } from '@react-hangar/antd-components';
+    import { Tree, FormItem } from '@react-hangar/antd-components';
 
     const tree = [
         {
@@ -216,47 +251,75 @@ const code = `
             hideInMenu: true
         }
     ];
-
-    const onChange = (routes) => {
-        console.log(routes);
-    };
     
-    const Example = () => {
+   const Example = () => {
+   
+        const [treeData, setTreeData] = useState(tree);
+        
+        const onDelete = (id, tree) => {
+            return new Promise((resolve) => {
+                // delete node
+                setTreeData(tree);
+                resolve();
+            });
+        };
 
+        const onSave = (node, tree) => {
+            return new Promise((resolve) => {
+                // save node
+                setTreeData(tree);
+                resolve();
+            });
+        };
+
+        const onDrop = (sourceKey, targetKey, tree) => {
+            return new Promise((resolve) => {
+                // save node
+                setTreeData(tree);
+                resolve();
+            });
+        };
+        
         return (
             <Fragment>
-            
+    
                 <Divider orientation="left">Draggable Tree</Divider>
-            
+    
                 <Tree
-                    tree={tree}
-                    onChange={onChange}
+                    tree={treeData}
+                    onDrop={onDrop}
                     draggable
                     defaultExpandAll
-                 />
+                />
     
-                <Divider orientation="left">Checkable Tree</Divider>
+                <Divider orientation="left">Editable Tree</Divider>
     
                 <Tree
-                    tree={tree}
-                    onChange={onChange}
-                    checkable
+                    tree={treeData}
+                    onDelete={onDelete}
+                    onSave={onSave}
+                    onDrop={onDrop}
+                    draggable
+                    editable
+                    formItems={[
+                        <FormItem key={3} fieldType={'string'} label='Component' dataIndex={'component'} required/>
+                    ]}
                     defaultExpandAll
                 />
     
                 <Divider orientation="left">Searchable Tree</Divider>
     
                 <Tree
-                    tree={tree}
-                    onChange={onChange}
+                    tree={treeData}
+                    onDrop={onDrop}
                     checkable
                     draggable
                     searchable
                 />
             </Fragment>
-        );
+         );
     }
-    
+
     export default Example;
 
 `;
@@ -278,7 +341,13 @@ const properties = [
         description: 'show search bar above the tree',
         type: 'boolean',
         default: 'false'
-    },{
+    },
+    {
+        property: 'formItems',
+        description: 'you can pass formItems if you want to edit an attribute additionally',
+        type: 'Array[FormItems]',
+    },
+    {
         property: '(Inherited)',
         description: 'Ant design properties are inherited (see: https://ant.design/components/tree/)'
     }
