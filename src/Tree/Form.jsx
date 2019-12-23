@@ -17,7 +17,7 @@ export const TreeFormModal = (props) => {
             title={(!record.label) ? l10n().Tree.newNode : l10n().Tree.editNode}
             visible={visible}
             onCancel={onCancel}
-            cancelButtonProps={{ hidden: true }}
+            footer={null}
         >
             <Form record={record} onSubmit={handleSubmit} >
                 <FormItem key={1} fieldType={'string'} label='Label' dataIndex={'label'} required/>

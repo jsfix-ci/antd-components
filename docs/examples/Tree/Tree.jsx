@@ -251,48 +251,73 @@ const code = `
             hideInMenu: true
         }
     ];
+    
+   const Example = () => {
+   
+        const [treeData, setTreeData] = useState(tree);
+        
+        const onDelete = (id, tree) => {
+            return new Promise((resolve) => {
+                // delete node
+                setTreeData(tree);
+                resolve();
+            });
+        };
 
-    const onChange = (routes) => {
-        console.log(routes);
-    };
+        const onSave = (node, tree) => {
+            return new Promise((resolve) => {
+                // save node
+                setTreeData(tree);
+                resolve();
+            });
+        };
 
-    const Example = () => {
-
+        const onDrop = (sourceKey, targetKey, tree) => {
+            return new Promise((resolve) => {
+                // save node
+                setTreeData(tree);
+                resolve();
+            });
+        };
+        
         return (
             <Fragment>
-
+    
                 <Divider orientation="left">Draggable Tree</Divider>
-
+    
                 <Tree
-                    tree={tree}
-                    onChange={onChange}
+                    tree={treeData}
+                    onDrop={onDrop}
                     draggable
                     defaultExpandAll
                 />
-
+    
                 <Divider orientation="left">Editable Tree</Divider>
-
+    
                 <Tree
-                    tree={tree}
-                    onChange={onChange}
+                    tree={treeData}
+                    onDelete={onDelete}
+                    onSave={onSave}
+                    onDrop={onDrop}
                     draggable
                     editable
-                    formItems={[<FormItem key={3} fieldType={'string'} label='Component' dataIndex={'component'}
-                                          required/>]}
+                    formItems={[
+                        <FormItem key={3} fieldType={'string'} label='Component' dataIndex={'component'} required/>
+                    ]}
                     defaultExpandAll
                 />
-
+    
                 <Divider orientation="left">Searchable Tree</Divider>
-
+    
                 <Tree
-                    tree={tree}
-                    onChange={onChange}
+                    tree={treeData}
+                    onDrop={onDrop}
                     checkable
                     draggable
                     searchable
                 />
             </Fragment>
-        );
+         );
     }
 
     export default Example;
