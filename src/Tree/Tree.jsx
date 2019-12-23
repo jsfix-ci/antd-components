@@ -1,196 +1,228 @@
-import React, {Fragment, useState} from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {Input, Tree as AntdTree} from 'antd';
-import {emptyFn} from '@root/helper';
-import {useL10n as l10n} from '@root/Locales';
+import { Input, Tree as AntdTree } from 'antd';
+import nanoid from 'nanoid';
+import { emptyFn } from '@root/helper';
+import { useL10n as l10n } from '@root/Locales';
+import { AddButton, DeleteButton, EditButton } from '@root/Buttons';
+import { getParentKey, getSearchDataList } from './helper';
+import { TreeFormModal } from '@root/Tree/Form';
+import { PureArray } from '@root/array';
+import { isEmpty } from '@root/object';
+import { Label } from '@root/Tree/Label';
 
 const TreeNode = AntdTree.TreeNode;
 const Search = Input.Search;
 
 export const Tree = (props) => {
-    const {tree, expandedKeys, autoExpandParent, onDrop, onChange, searchable, defaultExpandAll, ...restProps} = props;
+    const {
+        tree,
+        expandedKeys,
+        onAdd,
+        onDelete,
+        onDrop,
+        onSave,
+        onSelect,
+        searchable,
+        editable,
+        formItems,
+        defaultExpandAll,
+        ...restProps
+    } = props;
 
-    const [treeData, setTreeData] = useState(tree);
+    const [data, setData] = useState(tree);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [selectedNode, setSelectedNode] = useState({});
     const [searchValue, setSearchValue] = useState('');
     const [expandedKeysData, setExpandedKeysData] = useState(expandedKeys);
-    const [isAutoExpandParent, setIsAutoExpandParent] = useState(autoExpandParent);
 
-    const onDropEvent = (event, node, dragNode, dragNodesKeys) => {
+    useEffect(() => {
+        setData(tree);
+    }, [tree]);
 
-        const dropKey = event.node.props.eventKey;
-        const dragKey = event.dragNode.props.eventKey;
-        const dropPos = event.node.props.pos.split('-');
-        const dropPosition = event.dropPosition - Number(dropPos[dropPos.length - 1]);
+    const onDropEvent = (event) => {
+        const { eventKey: sourceKey, data: record } = event.dragNode.props;
+        const { eventKey: targetKey } = event.node.props;
 
-        const loop = (data, key, callback) => {
-            data.forEach((item, index, arr) => {
-                if (item.key === key) {
-                    return callback(item, index, arr);
-                }
-                if (item.submenu) {
-                    return loop(item.submenu, key, callback);
-                }
+        let updatedTree = PureArray.removeInTree(data, ['key', sourceKey]);
+        updatedTree = PureArray.insertInTree(updatedTree, ['key', targetKey], record);
+
+        onDrop(sourceKey, targetKey, updatedTree)
+            .then(() => {
+            })
+            .catch(() => {
+                setData(tree);
             });
-        };
-
-        const data = [...treeData];
-
-        let dragObj;
-        loop(data, dragKey, (item, index, arr) => {
-            arr.splice(index, 1);
-            dragObj = item;
-        });
-
-        if (!event.dropToGap) {
-            loop(data, dropKey, item => {
-                item.submenu = item.submenu || [];
-                item.submenu.push(dragObj);
-            });
-        } else if (
-            (event.node.props.submenu || []).length > 0 &&
-            event.node.props.expanded &&
-            dropPosition === 1
-        ) {
-            loop(data, dropKey, item => {
-                item.submenu = item.submenu || [];
-                item.submenu.unshift(dragObj);
-            });
-        } else {
-            let ar;
-            let i;
-            loop(data, dropKey, (item, index, arr) => {
-                ar = arr;
-                i = index;
-            });
-            if (dropPosition === -1) {
-                ar.splice(i, 0, dragObj);
-            } else {
-                ar.splice(i + 1, 0, dragObj);
-            }
-        }
-
-        setTreeData(data);
-        onDrop(event, node, dragNode, dragNodesKeys);
-        onChange(data);
     };
-
-    const getParentKey = (key, tree) => {
-        let parentKey;
-        for (let i = 0; i < tree.length; i++) {
-            const node = tree[i];
-            if (node.submenu) {
-                if (node.submenu.some(item => item.key === key)) {
-                    parentKey = node.key;
-                } else if (getParentKey(key, node.submenu)) {
-                    parentKey = getParentKey(key, node.submenu);
-                }
-            }
-        }
-        return parentKey;
-    };
-
-    const dataList = [];
-    const generateList = data => {
-        for (let i = 0; i < data.length; i++) {
-            const node = data[i];
-            const {key, label} = node;
-            dataList.push({key, label: label});
-            if (node.submenu) {
-                generateList(node.submenu);
-            }
-        }
-    };
-
-    generateList(treeData);
 
     const onSearchChange = e => {
-        const {value} = e.target;
-        const expanded = dataList.map(item => {
+        const { value } = e.target;
+        const expanded = getSearchDataList(tree).map(item => {
             if (item.label.indexOf(value) > -1) {
-                return getParentKey(item.key, treeData);
+                return getParentKey(item.key, tree);
             }
             return null;
         }).filter((item, i, self) => item && self.indexOf(item) === i);
 
         setExpandedKeysData(expanded);
         setSearchValue(value);
-        setIsAutoExpandParent(true);
     };
 
     const onExpand = expandedKeys => {
         setExpandedKeysData(expandedKeys);
-        setIsAutoExpandParent(false);
-    };
-
-    const getLabel = (item) => {
-        const index = item.label.indexOf(searchValue);
-        const beforeStr = item.label.substr(0, index);
-        const afterStr = item.label.substr(index + searchValue.length);
-
-        return index > -1 ? (
-            <span>{beforeStr}
-                <span style={{color: '#f50'}}>{searchValue}</span>
-                {afterStr}
-                </span>
-        ) : (
-            <span>{item.label}</span>
-        );
-    };
-
-    const getNodes = (data) => {
-        return data.map(item => {
-            let label = getLabel(item);
-            if (item.submenu) {
-                return (
-                    <TreeNode key={item.key} title={label}>
-                        {getNodes(item.submenu)}
-                    </TreeNode>
-                );
-            }
-
-            return <TreeNode key={item.key} title={label}/>;
-        });
     };
 
     let expandConfig = {
-        expandedKeys: expandedKeysData,
-        autoExpandParent: isAutoExpandParent
+        expandedKeys: expandedKeysData
     };
 
     if (defaultExpandAll) {
         expandConfig = {
             defaultExpandAll: defaultExpandAll
-        }
+        };
     }
+
+    const onAddBtnClick = () => {
+        const defaults = {
+            key: nanoid(10),
+            label: '',
+            submenu: []
+        };
+
+        const paraentId = selectedNode.key;
+        const record = { ...defaults, ...onAdd(defaults) };
+
+        setData(
+            PureArray.insertInTree(data, ['key', paraentId], record)
+        );
+
+        setSelectedNode(record);
+        setModalVisible(true);
+    };
+
+    const onEditBtnClick = () => {
+        setModalVisible(true);
+    };
+
+    const onDeleteBtnClick = () => {
+        const nodeId = selectedNode.key;
+        const updatedTree = PureArray.removeInTree(data, ['key', nodeId]);
+
+        onDelete(nodeId, updatedTree)
+            .then(() => {
+                setSelectedNode({});
+            })
+            .catch(() => {
+            });
+    };
+
+    const onSelectNode = (key, e) => {
+        let node = key.length > 0 ? e.node.props.data : {};
+
+        setSelectedNode(node);
+        onSelect(node, key, e);
+    };
+
+    const hideModal = () => {
+        setModalVisible(false);
+    };
+
+    const onCancel = () => {
+        setData(tree);
+        hideModal();
+    };
+
+    const onSaveNode = (node) => {
+        const nodeId = node.key;
+        const updatedTree = PureArray.updateInTree(data, ['key', nodeId], node);
+
+        onSave(node, updatedTree)
+            .then(() => {
+                setSelectedNode(node);
+                hideModal();
+            })
+            .catch(() => {
+            });
+    };
+
+    const renderNodes = (data) => {
+        return data.map(item => {
+            const title = <Label highlightedText={searchValue}>{item.label}</Label>;
+            if (item.submenu) {
+                return (
+                    <TreeNode key={item.key} title={title} data={item}>
+                        {renderNodes(item.submenu)}
+                    </TreeNode>
+                );
+            }
+
+            return <TreeNode key={item.key} title={title}/>;
+        });
+    };
 
     return (
         <Fragment>
-            {(searchable) ? <Search style={{marginBottom: 8}} placeholder={l10n().Form.searchText}
-                                    onChange={onSearchChange}/> : null}
+            {
+                (searchable)
+                    ? <Search
+                        style={{ marginBottom: 8 }}
+                        placeholder={l10n().Form.searchText}
+                        onChange={onSearchChange}
+                    /> : null
+            }
+
+            {
+                (editable)
+                    ? <Fragment>
+                        <AddButton onClick={onAddBtnClick} size={'small'}/>
+                        <EditButton onClick={onEditBtnClick} disabled={isEmpty(selectedNode)} size={'small'}/>
+                        <DeleteButton onClick={onDeleteBtnClick} disabled={isEmpty(selectedNode)} size={'small'}/>
+                    </Fragment>
+                    : null
+            }
+
             <AntdTree
                 onExpand={onExpand}
                 onDrop={onDropEvent}
+                onSelect={onSelectNode}
                 {...expandConfig}
                 {...restProps}
             >
-                {getNodes(treeData)}
+                {renderNodes(data)}
             </AntdTree>
+
+            <TreeFormModal
+                formItems={formItems}
+                visible={modalVisible}
+                onCancel={onCancel}
+                hideModal={hideModal}
+                onSubmit={onSaveNode}
+                record={selectedNode}
+            />
+
         </Fragment>
     );
 };
 
 Tree.defaultProps = {
-    searchable: false,
-    defaultExpandAll: false,
-    onDrop: emptyFn,
-    onChange: emptyFn,
-    tree: [],
     autoExpandParent: false,
-    expandedKeys: []
+    defaultExpandAll: false,
+    editable: false,
+    expandedKeys: [],
+    searchable: false,
+    tree: [],
+    onAdd: emptyFn,
+    onDelete: () => Promise.resolve(),
+    onDrop: () => Promise.resolve(),
+    onSave: () => Promise.resolve(),
+    onSelect: emptyFn
 };
 
 Tree.propTypes = {
     searchable: PropTypes.bool,
-    onChange: PropTypes.func,
     tree: PropTypes.arrayOf(PropTypes.object),
+    onAdd: PropTypes.func,
+    onDelete: PropTypes.func,
+    onDrop: PropTypes.func,
+    onSave: PropTypes.func,
 };

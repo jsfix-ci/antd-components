@@ -27,6 +27,10 @@ module.exports = {
         addNewField: 'Add field',
         searchText: 'Search'
     },
+    Tree: {
+        newNode: 'New Node',
+        editNode: 'Edit Node'
+    },
     Validation: {
         form: 'form validation failed',
         default: 'Validation error on field %s',
