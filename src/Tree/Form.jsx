@@ -4,11 +4,13 @@ import { Form, FormItem } from '@root/DataEntry';
 import { SaveButton } from '@root/Buttons';
 import { useL10n as l10n } from '@root/Locales';
 
-export const TreeFormModal = (props) => {
+export const TreeFormModal = props => {
 
-    const {visible, record, formItems, onCancel, onSubmit} = props;
+    const { visible, record, formItems, onCancel, onSubmit } = props;
 
-    const handleSubmit = (data) => {
+    const handleSubmit = (e, data) => {
+        e.preventDefault();
+        e.stopPropagation();
         onSubmit(data, record);
     };
 

@@ -195,7 +195,6 @@ export const Tree = (props) => {
                 formItems={formItems}
                 visible={modalVisible}
                 onCancel={onCancel}
-                hideModal={hideModal}
                 onSubmit={onSaveNode}
                 record={selectedNode}
             />

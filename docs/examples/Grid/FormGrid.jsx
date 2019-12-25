@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import faker from 'faker';
 import { message } from 'antd';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
-import { FormGrid, Column } from '../../../src';
+import {FormGrid, Column, FormItem} from '../../../src';
 import nanoid from 'nanoid';
 import {
     Code,
@@ -12,6 +12,48 @@ import {
     generateImages
 } from '../../components/utils';
 
+const tree = [
+    {
+        key: 'side-home',
+        label: 'Home',
+        icon: 'home',
+        path: '/Navigation/Side/Home',
+        submenu: [
+            {
+                key: '12',
+                label: 'Highlights',
+                icon: 'highlight',
+                path: '/Highlights',
+                submenu: []
+            },
+            {
+                key: '13',
+                label: 'Products',
+                submenu: [
+                    {
+                        key: '131',
+                        label: 'Product 1',
+                        path: '/Product1',
+                        submenu: []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        key: 'side-about',
+        label: 'About Us',
+        path: '/Navigation/Side/About-Us',
+        submenu: []
+    },
+    {
+        key: 'side-hidden',
+        label: 'I am hidden',
+        path: '/Navigation/Side/Hidden',
+        submenu: []
+    }
+];
+
 const generateFakeData = () => ({
     _id: nanoid(10),
     salutation: faker.helpers.randomize(['mr', 'mrs']),
@@ -20,7 +62,7 @@ const generateFakeData = () => ({
     image: generateImages(),
     settings: generateFakeObject(),
     list: generateFakeList(),
-    active: faker.random.boolean()
+    active: faker.random.boolean(),
 });
 
 const options = [
@@ -32,6 +74,7 @@ const defaultData = generateFakeDataArray(5, generateFakeData);
 
 const Example = () => {
     const [data, setData] = useState(defaultData);
+    const [treeData, setTreeData] = useState(tree);
 
     const onAdd = () => {
         return {
@@ -69,9 +112,44 @@ const Example = () => {
         });
     };
 
+    const onDeleteTree = (id, tree) => {
+        return new Promise((resolve) => {
+            // delete node
+            setTreeData(tree);
+            resolve();
+        });
+    };
+
+    const onSaveTree = (node, tree) => {
+        return new Promise((resolve) => {
+            // save node
+            setTreeData(tree);
+            resolve();
+        });
+    };
+
+    const onDropTree = (sourceKey, targetKey, tree) => {
+        return new Promise((resolve) => {
+            // save node
+            setTreeData(tree);
+            resolve();
+        });
+    };
+
     const imageConfig = {
         action: 'http://www.mocky.io/v2/5daf53d53200006d00d961e1',
         type: { image: ['jpeg', 'png'] }
+    };
+
+    const treeConfig = {
+        tree: treeData,
+        draggable: true,
+        editable: true,
+        formItems: [<FormItem key={3} fieldType={'string'} label='Component' dataIndex={'component'} required/>],
+        defaultExpandAll: true,
+        onDelete:onDeleteTree,
+        onSave: onSaveTree,
+        onDrop: onDropTree
     };
 
     return (
@@ -90,6 +168,7 @@ const Example = () => {
             <Column title={'Image'} dataIndex={'image'} fieldType={'image'} fieldProps={imageConfig}/>
             <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'} required/>
             <Column title={'List'} dataIndex={'list'} fieldType={'list'}/>
+            <Column title={'Tree'} dataIndex={'tree'} fieldType={'tree'} fieldProps={treeConfig}/>
             <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
         </FormGrid>
     );
@@ -99,7 +178,49 @@ const Example = () => {
 // language=JS
 const code = `
     import React, { useState } from 'react';
-    import { FormGrid, Column } from '@react-hangar/antd-components'
+    import { FormGrid, Column, FormItem } from '@react-hangar/antd-components'
+
+    const tree = [
+        {
+            key: 'side-home',
+            label: 'Home',
+            icon: 'home',
+            path: '/Navigation/Side/Home',
+            submenu: [
+                {
+                    key: '12',
+                    label: 'Highlights',
+                    icon: 'highlight',
+                    path: '/Highlights',
+                    submenu: []
+                },
+                {
+                    key: '13',
+                    label: 'Products',
+                    submenu: [
+                        {
+                            key: '131',
+                            label: 'Product 1',
+                            path: '/Product1',
+                            submenu: []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            key: 'side-about',
+            label: 'About Us',
+            path: '/Navigation/Side/About-Us',
+            submenu: []
+        },
+        {
+            key: 'side-hidden',
+            label: 'I am hidden',
+            path: '/Navigation/Side/Hidden',
+            submenu: []
+        }
+    ];
 
     const options = [
         { label: 'Mr', value: 'mr' },
@@ -200,10 +321,45 @@ const code = `
                 }, 2000);
             });
         };
+        
+        const onDeleteTree = (id, tree) => {
+            return new Promise((resolve) => {
+                // delete node
+                setTreeData(tree);
+                resolve();
+            });
+        };
+    
+        const onSaveTree = (node, tree) => {
+            return new Promise((resolve) => {
+                // save node
+                setTreeData(tree);
+                resolve();
+            });
+        };
+
+        const onDropTree = (sourceKey, targetKey, tree) => {
+            return new Promise((resolve) => {
+                // save node
+                setTreeData(tree);
+                resolve();
+            });
+        };
 
         const imageConfig = {
             action: 'http://www.mocky.io/v2/5daf53d53200006d00d961e1',
             type: { image: ['jpeg', 'png'] }
+        };
+        
+        const treeConfig = {
+            tree: treeData,
+            draggable: true,
+            editable: true,
+            formItems: [<FormItem key={3} fieldType={'string'} label='Component' dataIndex={'component'} required/>],
+            defaultExpandAll: true,
+            onDelete:onDeleteTree,
+            onSave: onSaveTree,
+            onDrop: onDropTree
         };
 
         return (
@@ -221,6 +377,7 @@ const code = `
                 <Column title={'Image'} dataIndex={'image'} fieldType={'image'} fieldProps={imageConfig}/>
                 <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'} required/>
                 <Column title={'List'} dataIndex={'list'} fieldType={'list'}/>
+                <Column title={'Tree'} dataIndex={'tree'} fieldType={'tree'} fieldProps={treeConfig}/>
                 <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
             </FormGrid>
         );
