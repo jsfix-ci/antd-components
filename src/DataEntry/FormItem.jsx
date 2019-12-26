@@ -40,6 +40,8 @@ const getValuePropName = (fieldType) => {
             return 'fileList';
         case 'checkbox':
             return 'checked';
+        case 'tree':
+            return 'tree';
         default:
             return 'value';
     }

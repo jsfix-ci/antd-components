@@ -73,7 +73,7 @@ export const getDisplay = ({ children, fieldType, maxLength, value, fieldProps =
         case 'number':
             return value;
         case 'tree':
-            return (<CodeSnippet link={'tree'}><Tree {...fieldProps} editable={false} /></CodeSnippet>);
+            return (<CodeSnippet link={'tree'}><Tree tree={value} {...fieldProps} editable={false} /></CodeSnippet>);
         case 'select':
             return value ? fieldProps.options.find(o => o.value === value).label : ''; // get label for value
         default:

@@ -1,7 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import React, {Fragment, useState} from 'react';
 import faker from 'faker';
-import { message } from 'antd';
-import { ComponentDisplay } from '../../components/ComponentDisplay';
+import {message} from 'antd';
+import {ComponentDisplay} from '../../components/ComponentDisplay';
 import {FormGrid, Column, FormItem} from '../../../src';
 import nanoid from 'nanoid';
 import {
@@ -12,48 +12,6 @@ import {
     generateImages
 } from '../../components/utils';
 
-const tree = [
-    {
-        key: 'side-home',
-        label: 'Home',
-        icon: 'home',
-        path: '/Navigation/Side/Home',
-        submenu: [
-            {
-                key: '12',
-                label: 'Highlights',
-                icon: 'highlight',
-                path: '/Highlights',
-                submenu: []
-            },
-            {
-                key: '13',
-                label: 'Products',
-                submenu: [
-                    {
-                        key: '131',
-                        label: 'Product 1',
-                        path: '/Product1',
-                        submenu: []
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        key: 'side-about',
-        label: 'About Us',
-        path: '/Navigation/Side/About-Us',
-        submenu: []
-    },
-    {
-        key: 'side-hidden',
-        label: 'I am hidden',
-        path: '/Navigation/Side/Hidden',
-        submenu: []
-    }
-];
-
 const generateFakeData = () => ({
     _id: nanoid(10),
     salutation: faker.helpers.randomize(['mr', 'mrs']),
@@ -63,18 +21,41 @@ const generateFakeData = () => ({
     settings: generateFakeObject(),
     list: generateFakeList(),
     active: faker.random.boolean(),
+    tree: [
+        {
+            key: 'side-contact',
+            label: 'Contact',
+            icon: 'contacts',
+            path: '/Navigation/Side/Contact',
+            submenu: [
+                {
+                    key: '21',
+                    label: 'Person 1',
+                    path: '/Person1',
+                    submenu: []
+
+                },
+                {
+                    key: '22',
+                    label: 'Person 2',
+                    path: '/Person2',
+                    submenu: []
+                }
+            ]
+        }
+    ]
 });
 
 const options = [
-    { label: 'Mr', value: 'mr' },
-    { label: 'Mrs', value: 'mrs' }
+    {label: 'Mr', value: 'mr'},
+    {label: 'Mrs', value: 'mrs'}
 ];
 
 const defaultData = generateFakeDataArray(5, generateFakeData);
 
 const Example = () => {
     const [data, setData] = useState(defaultData);
-    const [treeData, setTreeData] = useState(tree);
+    const [recordId, setRecordId] = useState();
 
     const onAdd = () => {
         return {
@@ -83,6 +64,7 @@ const Example = () => {
     };
 
     const onEdit = (id) => {
+        setRecordId(id);
         message.info(`edit button on row "${id}" clicked!`);
     };
 
@@ -113,41 +95,52 @@ const Example = () => {
     };
 
     const onDeleteTree = (id, tree) => {
-        return new Promise((resolve) => {
-            // delete node
-            setTreeData(tree);
-            resolve();
+        let records = data.map((record) => {
+            if (record._id === recordId) {
+                record.tree = tree;
+                return record;
+            }
+            return record;
         });
+
+        setData(records);
     };
 
     const onSaveTree = (node, tree) => {
-        return new Promise((resolve) => {
-            // save node
-            setTreeData(tree);
-            resolve();
+        let records = data.map((record) => {
+            if (record._id === recordId) {
+                record.tree = tree;
+                return record;
+            }
+            return record;
         });
+
+        setData(records);
     };
 
     const onDropTree = (sourceKey, targetKey, tree) => {
-        return new Promise((resolve) => {
-            // save node
-            setTreeData(tree);
-            resolve();
+        let records = data.map((record) => {
+            if (record._id === recordId) {
+                record.tree = tree;
+                return record;
+            }
+            return record;
         });
+
+        setData(records);
     };
 
     const imageConfig = {
         action: 'http://www.mocky.io/v2/5daf53d53200006d00d961e1',
-        type: { image: ['jpeg', 'png'] }
+        type: {image: ['jpeg', 'png']}
     };
 
     const treeConfig = {
-        tree: treeData,
         draggable: true,
         editable: true,
         formItems: [<FormItem key={3} fieldType={'string'} label='Component' dataIndex={'component'} required/>],
         defaultExpandAll: true,
-        onDelete:onDeleteTree,
+        onDelete: onDeleteTree,
         onSave: onSaveTree,
         onDrop: onDropTree
     };
@@ -162,7 +155,7 @@ const Example = () => {
             onSave={onSave}
             idProperty={'_id'}
         >
-            <Column title={'Salutation'} dataIndex={'salutation'} fieldType={'select'} fieldProps={{ options }} required/>
+            <Column title={'Salutation'} dataIndex={'salutation'} fieldType={'select'} fieldProps={{options}} required/>
             <Column title={'Title'} dataIndex={'text'} fieldType={'string'} required maxLength={30}/>
             <Column title={'Content'} dataIndex={'html'} fieldType={'html'} required/>
             <Column title={'Image'} dataIndex={'image'} fieldType={'image'} fieldProps={imageConfig}/>
@@ -179,49 +172,7 @@ const Example = () => {
 const code = `
     import React, { useState } from 'react';
     import { FormGrid, Column, FormItem } from '@react-hangar/antd-components'
-
-    const tree = [
-        {
-            key: 'side-home',
-            label: 'Home',
-            icon: 'home',
-            path: '/Navigation/Side/Home',
-            submenu: [
-                {
-                    key: '12',
-                    label: 'Highlights',
-                    icon: 'highlight',
-                    path: '/Highlights',
-                    submenu: []
-                },
-                {
-                    key: '13',
-                    label: 'Products',
-                    submenu: [
-                        {
-                            key: '131',
-                            label: 'Product 1',
-                            path: '/Product1',
-                            submenu: []
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            key: 'side-about',
-            label: 'About Us',
-            path: '/Navigation/Side/About-Us',
-            submenu: []
-        },
-        {
-            key: 'side-hidden',
-            label: 'I am hidden',
-            path: '/Navigation/Side/Hidden',
-            submenu: []
-        }
-    ];
-
+   
     const options = [
         { label: 'Mr', value: 'mr' },
         { label: 'Mrs', value: 'mrs' }
@@ -250,6 +201,29 @@ const code = `
                 'bar',
                 'test'
             ],
+            tree: [
+            {
+                key: 'side-contact',
+                label: 'Contact',
+                icon: 'contacts',
+                path: '/Navigation/Side/Contact',
+                submenu: [
+                    {
+                        key: '21',
+                        label: 'Person 1',
+                        path: '/Person1',
+                        submenu: []
+    
+                    },
+                    {
+                        key: '22',
+                        label: 'Person 2',
+                        path: '/Person2',
+                        submenu: []
+                    }
+                ]
+            }
+        ],
             active: true
         },
         {
@@ -269,6 +243,29 @@ const code = `
                 'bar 2',
                 'test 2'
             ],
+            tree: [
+            {
+                key: 'side-contact',
+                label: 'Contact',
+                icon: 'contacts',
+                path: '/Navigation/Side/Contact',
+                submenu: [
+                    {
+                        key: '21',
+                        label: 'Person 1',
+                        path: '/Person1',
+                        submenu: []
+    
+                    },
+                    {
+                        key: '22',
+                        label: 'Person 2',
+                        path: '/Person2',
+                        submenu: []
+                    }
+                ]
+            }
+        ],
             active: true
         },
         {
@@ -288,6 +285,29 @@ const code = `
                 'bar 3',
                 'test 3'
             ],
+            tree: [
+            {
+                key: 'side-contact',
+                label: 'Contact',
+                icon: 'contacts',
+                path: '/Navigation/Side/Contact',
+                submenu: [
+                    {
+                        key: '21',
+                        label: 'Person 1',
+                        path: '/Person1',
+                        submenu: []
+    
+                    },
+                    {
+                        key: '22',
+                        label: 'Person 2',
+                        path: '/Person2',
+                        submenu: []
+                    }
+                ]
+            }
+        ],
             active: false
         }
     ];
@@ -295,7 +315,18 @@ const code = `
     const Example = () => {
 
         const [data, setData] = useState(defaultData);
+        const [recordId, setRecordId] = useState();
+        
+        const onAdd = () => {
+            return {
+                text: faker.random.word()
+            };
+        };
 
+        const onEdit = (id) => {
+            setRecordId(id);
+        };
+        
         const onDelete = (ids) => {
             return new Promise((resolve) => {
                 setTimeout(() => {
@@ -323,27 +354,39 @@ const code = `
         };
         
         const onDeleteTree = (id, tree) => {
-            return new Promise((resolve) => {
-                // delete node
-                setTreeData(tree);
-                resolve();
+            let records = data.map((record) => {
+                if (record._id === recordId) {
+                    record.tree = tree;
+                    return record;
+                }
+                return record;
             });
-        };
     
-        const onSaveTree = (node, tree) => {
-            return new Promise((resolve) => {
-                // save node
-                setTreeData(tree);
-                resolve();
-            });
+            setData(records);
         };
 
-        const onDropTree = (sourceKey, targetKey, tree) => {
-            return new Promise((resolve) => {
-                // save node
-                setTreeData(tree);
-                resolve();
+        const onSaveTree = (node, tree) => {
+            let records = data.map((record) => {
+                if (record._id === recordId) {
+                    record.tree = tree;
+                    return record;
+                }
+                return record;
             });
+    
+            setData(records);
+        };
+    
+        const onDropTree = (sourceKey, targetKey, tree) => {
+            let records = data.map((record) => {
+                if (record._id === recordId) {
+                    record.tree = tree;
+                    return record;
+                }
+                return record;
+            });
+    
+            setData(records);
         };
 
         const imageConfig = {
@@ -388,22 +431,47 @@ const code = `
 
 const columnProperties = [
     {property: 'dataIndex', description: 'Name of record property', type: 'string'},
-    {property: 'fieldProps', description: 'This props will be forwarded to input component', type: 'object', default: '{}'},
-    {property: 'fieldType', description: <span>Can be one of <Code>boolean</Code><Code>image</Code><Code>html</Code><Code>object</Code><Code>list</Code><Code>number</Code><Code>string</Code></span>, type: '', default: 'string'},
-    {property: 'hideInGrid', description: 'Hide column in grid but show it in editing form', type: 'bool', default: 'false'},
-    {property: 'maxLength', description: 'text is cut off after given number of chars (only for string field)', type: 'number'},
+    {
+        property: 'fieldProps',
+        description: 'This props will be forwarded to input component',
+        type: 'object',
+        default: '{}'
+    },
+    {
+        property: 'fieldType',
+        description:
+            <span>Can be one of <Code>boolean</Code><Code>image</Code><Code>html</Code><Code>object</Code><Code>list</Code><Code>number</Code><Code>string</Code></span>,
+        type: '',
+        default: 'string'
+    },
+    {
+        property: 'hideInGrid',
+        description: 'Hide column in grid but show it in editing form',
+        type: 'bool',
+        default: 'false'
+    },
+    {
+        property: 'maxLength',
+        description: 'text is cut off after given number of chars (only for string field)',
+        type: 'number'
+    },
     {property: 'required', description: 'set field as required', type: 'bool', default: 'false'},
-    {property: 'rules', description: 'Add validation rules (see: https://ant.design/components/form/#Validation-Rules)', type: 'array', default: '[]'},
+    {
+        property: 'rules',
+        description: 'Add validation rules (see: https://ant.design/components/form/#Validation-Rules)',
+        type: 'array',
+        default: '[]'
+    },
 ];
 
 // Component props
 const properties = [
-    { property: 'dataSource', description: 'data source', type: 'object[]' },
-    { property: 'idProperty', description: 'id field property of data source', type: 'string', default: 'id' },
-    { property: 'onAdd', description: 'Function is called on record add', type: 'function' },
-    { property: 'onDelete', description: 'Function is called on record delete', type: 'function' },
-    { property: 'onEdit', description: 'Function is called on record edit', type: 'function' },
-    { property: 'onSave', description: 'Function is called on record save', type: 'function' }
+    {property: 'dataSource', description: 'data source', type: 'object[]'},
+    {property: 'idProperty', description: 'id field property of data source', type: 'string', default: 'id'},
+    {property: 'onAdd', description: 'Function is called on record add', type: 'function'},
+    {property: 'onDelete', description: 'Function is called on record delete', type: 'function'},
+    {property: 'onEdit', description: 'Function is called on record edit', type: 'function'},
+    {property: 'onSave', description: 'Function is called on record save', type: 'function'}
 ];
 
 export default () => (
