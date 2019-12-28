@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, {forwardRef, Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import { Input, Tree as AntdTree } from 'antd';
+import {Input, Tree as AntdTree} from 'antd';
 import nanoid from 'nanoid';
 import { emptyFn } from '@root/helper';
 import { useL10n as l10n } from '@root/Locales';
@@ -14,7 +14,7 @@ import { Label } from '@root/Tree/Label';
 const TreeNode = AntdTree.TreeNode;
 const Search = Input.Search;
 
-export const Tree = (props) => {
+export const Tree = forwardRef((props, ref) => {
     const {
         tree,
         expandedKeys,
@@ -180,6 +180,7 @@ export const Tree = (props) => {
             }
 
             <AntdTree
+                ref={ref}
                 onExpand={onExpand}
                 onDrop={onDropEvent}
                 onSelect={onSelectNode}
@@ -199,7 +200,7 @@ export const Tree = (props) => {
 
         </Fragment>
     );
-};
+});
 
 Tree.defaultProps = {
     autoExpandParent: false,
@@ -207,7 +208,6 @@ Tree.defaultProps = {
     editable: false,
     expandedKeys: [],
     searchable: false,
-    tree: [],
     onAdd: emptyFn,
     onDelete: () => Promise.resolve(),
     onDrop: () => Promise.resolve(),
