@@ -32,14 +32,12 @@ const generateFakeData = () => ({
                     key: '21',
                     label: 'Person 1',
                     path: '/Person1',
-                    submenu: []
 
                 },
                 {
                     key: '22',
                     label: 'Person 2',
                     path: '/Person2',
-                    submenu: []
                 }
             ]
         }

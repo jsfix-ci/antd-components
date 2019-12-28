@@ -53,7 +53,11 @@ const findPath = (tree, predicate, childrenKey = 'submenu') => {
         return path;
     }
     if (predicate(tree)) return [];
-    path = findPath(tree.get(childrenKey), predicate, childrenKey);
+
+    if(tree.get(childrenKey)) {
+        path = findPath(tree.get(childrenKey), predicate, childrenKey);
+    }
+
     if (path) return [childrenKey].concat(path);
 };
 

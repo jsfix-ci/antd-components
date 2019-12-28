@@ -118,7 +118,6 @@ export const Tree = (props) => {
 
     const onSelectNode = (key, e) => {
         let node = key.length > 0 ? e.node.props.data : {};
-
         setSelectedNode(node);
         onSelect(node, key, e);
     };
@@ -155,8 +154,7 @@ export const Tree = (props) => {
                     </TreeNode>
                 );
             }
-
-            return <TreeNode key={item.key} title={title}/>;
+            return <TreeNode key={item.key} title={title} data={item}/>;
         });
     };
 
