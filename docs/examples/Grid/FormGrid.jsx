@@ -93,15 +93,20 @@ const Example = () => {
     };
 
     const onDeleteTree = (id, tree) => {
-        let records = data.map((record) => {
-            if (record._id === recordId) {
-                record.tree = tree;
+        return new Promise((resolve) => {
+            // delete node
+            let records = data.map((record) => {
+                if (record._id === recordId) {
+                    record.tree = tree;
+                    return record;
+                }
                 return record;
-            }
-            return record;
+            });
+
+            setData(records);
+            resolve();
         });
 
-        setData(records);
     };
 
     const onSaveTree = (node, tree) => {
