@@ -11,6 +11,7 @@ import {
     generateFakeObject,
     generateImages
 } from '../../components/utils';
+import { PureArray } from '@root/array';
 
 const generateFakeData = () => ({
     _id: nanoid(10),
@@ -53,7 +54,6 @@ const defaultData = generateFakeDataArray(5, generateFakeData);
 
 const Example = () => {
     const [data, setData] = useState(defaultData);
-    const [recordId, setRecordId] = useState();
 
     const onAdd = () => {
         return {
@@ -62,7 +62,6 @@ const Example = () => {
     };
 
     const onEdit = (id) => {
-        setRecordId(id);
         message.info(`edit button on row "${id}" clicked!`);
     };
 
@@ -77,60 +76,20 @@ const Example = () => {
 
     const onSave = (record) => {
         const index = data.findIndex(rec => rec._id === record._id);
+        let newData;
 
         if (index === -1) {
-            data.push(record);
+            newData = PureArray.insert(data, record, index);
         } else {
-            data[index] = record;
+            newData = PureArray.update(data, ['_id', record._id], record);
         }
 
         return new Promise((resolve) => {
             setTimeout(() => {
-                setData(data);
+                setData(newData);
                 resolve();
             }, 2000);
         });
-    };
-
-    const onDeleteTree = (id, tree) => {
-        return new Promise((resolve) => {
-            // delete node
-            let records = data.map((record) => {
-                if (record._id === recordId) {
-                    record.tree = tree;
-                    return record;
-                }
-                return record;
-            });
-
-            setData(records);
-            resolve();
-        });
-
-    };
-
-    const onSaveTree = (node, tree) => {
-        let records = data.map((record) => {
-            if (record._id === recordId) {
-                record.tree = tree;
-                return record;
-            }
-            return record;
-        });
-
-        setData(records);
-    };
-
-    const onDropTree = (sourceKey, targetKey, tree) => {
-        let records = data.map((record) => {
-            if (record._id === recordId) {
-                record.tree = tree;
-                return record;
-            }
-            return record;
-        });
-
-        setData(records);
     };
 
     const imageConfig = {
@@ -142,10 +101,7 @@ const Example = () => {
         draggable: true,
         editable: true,
         formItems: [<FormItem key={3} fieldType={'string'} label='Component' dataIndex={'component'} required/>],
-        defaultExpandAll: true,
-        onDelete: onDeleteTree,
-        onSave: onSaveTree,
-        onDrop: onDropTree
+        defaultExpandAll: true
     };
 
     return (
@@ -175,7 +131,7 @@ const Example = () => {
 const code = `
     import React, { useState } from 'react';
     import { FormGrid, Column, FormItem } from '@react-hangar/antd-components'
-   
+
     const options = [
         { label: 'Mr', value: 'mr' },
         { label: 'Mrs', value: 'mrs' }
@@ -216,7 +172,7 @@ const code = `
                         label: 'Person 1',
                         path: '/Person1',
                         submenu: []
-    
+
                     },
                     {
                         key: '22',
@@ -258,7 +214,7 @@ const code = `
                         label: 'Person 1',
                         path: '/Person1',
                         submenu: []
-    
+
                     },
                     {
                         key: '22',
@@ -300,7 +256,7 @@ const code = `
                         label: 'Person 1',
                         path: '/Person1',
                         submenu: []
-    
+
                     },
                     {
                         key: '22',
@@ -319,7 +275,7 @@ const code = `
 
         const [data, setData] = useState(defaultData);
         const [recordId, setRecordId] = useState();
-        
+
         const onAdd = () => {
             return {
                 text: faker.random.word()
@@ -329,7 +285,7 @@ const code = `
         const onEdit = (id) => {
             setRecordId(id);
         };
-        
+
         const onDelete = (ids) => {
             return new Promise((resolve) => {
                 setTimeout(() => {
@@ -355,7 +311,7 @@ const code = `
                 }, 2000);
             });
         };
-        
+
         const onDeleteTree = (id, tree) => {
             let records = data.map((record) => {
                 if (record._id === recordId) {
@@ -364,7 +320,7 @@ const code = `
                 }
                 return record;
             });
-    
+
             setData(records);
         };
 
@@ -376,10 +332,10 @@ const code = `
                 }
                 return record;
             });
-    
+
             setData(records);
         };
-    
+
         const onDropTree = (sourceKey, targetKey, tree) => {
             let records = data.map((record) => {
                 if (record._id === recordId) {
@@ -388,7 +344,7 @@ const code = `
                 }
                 return record;
             });
-    
+
             setData(records);
         };
 
@@ -396,7 +352,7 @@ const code = `
             action: 'http://www.mocky.io/v2/5daf53d53200006d00d961e1',
             type: { image: ['jpeg', 'png'] }
         };
-        
+
         const treeConfig = {
             tree: treeData,
             draggable: true,

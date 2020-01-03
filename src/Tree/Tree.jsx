@@ -1,6 +1,6 @@
-import React, {forwardRef, Fragment, useEffect, useState} from 'react';
+import React, { forwardRef, Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {Input, Tree as AntdTree} from 'antd';
+import { Input, Tree as AntdTree } from 'antd';
 import nanoid from 'nanoid';
 import { emptyFn } from '@root/helper';
 import { useL10n as l10n } from '@root/Locales';
@@ -16,13 +16,14 @@ const Search = Input.Search;
 
 export const Tree = forwardRef((props, ref) => {
     const {
-        tree,
+        tree = [],
         expandedKeys,
         onAdd,
         onDelete,
         onDrop,
         onSave,
         onSelect,
+        onChange,
         searchable,
         editable,
         formItems,
@@ -31,6 +32,7 @@ export const Tree = forwardRef((props, ref) => {
     } = props;
 
     const [data, setData] = useState(tree);
+    const [snapshot, setSnapshot] = useState();
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedNode, setSelectedNode] = useState({});
     const [searchValue, setSearchValue] = useState('');
@@ -40,6 +42,10 @@ export const Tree = forwardRef((props, ref) => {
         setData(tree);
     }, [tree]);
 
+    useEffect(() => {
+        onChange(data);
+    }, [data]);
+
     const onDropEvent = (event) => {
         const { eventKey: sourceKey, data: record } = event.dragNode.props;
         const { eventKey: targetKey } = event.node.props;
@@ -47,12 +53,16 @@ export const Tree = forwardRef((props, ref) => {
         let updatedTree = PureArray.removeInTree(data, ['key', sourceKey]);
         updatedTree = PureArray.insertInTree(updatedTree, ['key', targetKey], record);
 
-        onDrop(sourceKey, targetKey, updatedTree)
-            .then(() => {
-            })
-            .catch(() => {
-                setData(tree);
-            });
+        if (onDrop) {
+            onDrop(sourceKey, targetKey, updatedTree)
+                .then(() => {
+                })
+                .catch(() => {
+                    setData(tree);
+                });
+        } else {
+            setData(tree);
+        }
     };
 
     const onSearchChange = e => {
@@ -85,12 +95,13 @@ export const Tree = forwardRef((props, ref) => {
     const onAddBtnClick = () => {
         const defaults = {
             key: nanoid(10),
-            label: '',
-            submenu: []
+            label: ''
         };
 
         const paraentId = selectedNode.key;
         const record = { ...defaults, ...onAdd(defaults) };
+
+        setSnapshot(data);
 
         setData(
             PureArray.insertInTree(data, ['key', paraentId], record)
@@ -108,12 +119,17 @@ export const Tree = forwardRef((props, ref) => {
         const nodeId = selectedNode.key;
         const updatedTree = PureArray.removeInTree(data, ['key', nodeId]);
 
-        onDelete(nodeId, updatedTree)
-            .then(() => {
-                setSelectedNode({});
-            })
-            .catch(() => {
-            });
+        if (onDelete) {
+            onDelete(nodeId, updatedTree)
+                .then(() => {
+                    setSelectedNode({});
+                })
+                .catch(() => {
+                });
+        } else {
+            setData(updatedTree);
+            setSelectedNode({});
+        }
     };
 
     const onSelectNode = (key, e) => {
@@ -127,7 +143,7 @@ export const Tree = forwardRef((props, ref) => {
     };
 
     const onCancel = () => {
-        setData(tree);
+        setData(snapshot);
         hideModal();
     };
 
@@ -135,13 +151,19 @@ export const Tree = forwardRef((props, ref) => {
         const nodeId = node.key;
         const updatedTree = PureArray.updateInTree(data, ['key', nodeId], node);
 
-        onSave(node, updatedTree)
-            .then(() => {
-                setSelectedNode(node);
-                hideModal();
-            })
-            .catch(() => {
-            });
+        if (onSave) {
+            onSave(node, updatedTree)
+                .then(() => {
+                    setSelectedNode(node);
+                    hideModal();
+                })
+                .catch(() => {
+                });
+        } else {
+            setData(updatedTree);
+            setSelectedNode(node);
+            hideModal();
+        }
     };
 
     const renderNodes = (data) => {
@@ -209,9 +231,7 @@ Tree.defaultProps = {
     expandedKeys: [],
     searchable: false,
     onAdd: emptyFn,
-    onDelete: () => Promise.resolve(),
-    onDrop: () => Promise.resolve(),
-    onSave: () => Promise.resolve(),
+    onChange: emptyFn,
     onSelect: emptyFn
 };
 
@@ -219,6 +239,7 @@ Tree.propTypes = {
     searchable: PropTypes.bool,
     tree: PropTypes.arrayOf(PropTypes.object),
     onAdd: PropTypes.func,
+    onChange: PropTypes.func,
     onDelete: PropTypes.func,
     onDrop: PropTypes.func,
     onSave: PropTypes.func,
