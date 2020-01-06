@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {useL10n as l10n} from "@root/Locales";
-import {Input} from "antd";
-import {getParentKey, getSearchDataList} from "@root/Tree/helper";
-import {emptyFn} from "@root/helper";
+import {useL10n as l10n} from '@root/Locales';
+import {Input} from 'antd';
+import {getParentKey, getSearchDataList} from '@root/Tree/helper';
+import {emptyFn} from '@root/helper';
 
 const AntdSearch = Input.Search;
 
@@ -13,10 +13,10 @@ const AntdSearch = Input.Search;
  * @constructor
  */
 export const Search = (props) => {
-    const { onChange, tree } = props;
+    const {onChange, tree} = props;
 
     const onSearchChange = e => {
-        const { value } = e.target;
+        const {value} = e.target;
 
         const expanded = getSearchDataList(tree).map(item => {
             if (item.label.indexOf(value) > -1) {
@@ -28,13 +28,13 @@ export const Search = (props) => {
         onChange(expanded, value);
     };
 
-        return (
-            <AntdSearch
-                style={{ marginBottom: 8 }}
-                placeholder={l10n().Form.searchText}
-                onChange={onSearchChange}
-            />
-        );
+    return (
+        <AntdSearch
+            style={{ marginBottom: 8 }}
+            placeholder={ l10n().Form.searchText }
+            onChange={ onSearchChange }
+        />
+    );
 };
 
 Search.defaultProps = {

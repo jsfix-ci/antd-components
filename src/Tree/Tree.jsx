@@ -7,8 +7,8 @@ import { AddButton, DeleteButton, EditButton } from '@root/Buttons';
 import { TreeFormModal } from '@root/Tree/Form';
 import { PureArray } from '@root/array';
 import { isEmpty } from '@root/object';
-import {Search} from "@root/Tree/Search";
-import {renderNodes} from "@root/Tree/helper";
+import {Search} from '@root/Tree/Search';
+import {renderNodes} from '@root/Tree/helper';
 
 export const Tree = forwardRef((props, ref) => {
     const {
@@ -154,10 +154,6 @@ export const Tree = forwardRef((props, ref) => {
             hideModal();
         }
     };
-
-
-    console.log(data, ' data <------------------------------');
-    console.log(snapshot, ' snapshot <------------------------------');
 
     return (
         <Fragment>
