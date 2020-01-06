@@ -100,6 +100,7 @@ export const Tree = forwardRef((props, ref) => {
     };
 
     const onEditBtnClick = () => {
+        setSnapshot(data);
         setModalVisible(true);
     };
 
@@ -153,6 +154,10 @@ export const Tree = forwardRef((props, ref) => {
             hideModal();
         }
     };
+
+
+    console.log(data, ' data <------------------------------');
+    console.log(snapshot, ' snapshot <------------------------------');
 
     return (
         <Fragment>
