@@ -4,7 +4,6 @@ import { Tree as AntdTree } from 'antd';
 import nanoid from 'nanoid';
 import { emptyFn } from '@root/helper';
 import { AddButton, DeleteButton, EditButton } from '@root/Buttons';
-import { getParentKey, getSearchDataList } from './helper';
 import { TreeFormModal } from '@root/Tree/Form';
 import { PureArray } from '@root/array';
 import { isEmpty } from '@root/object';
