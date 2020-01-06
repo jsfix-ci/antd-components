@@ -7,10 +7,8 @@ import { AddButton, DeleteButton, EditButton } from '@root/Buttons';
 import { TreeFormModal } from '@root/Tree/Form';
 import { PureArray } from '@root/array';
 import { isEmpty } from '@root/object';
-import { Label } from '@root/Tree/Label';
 import {Search} from "@root/Tree/Search";
-
-const TreeNode = AntdTree.TreeNode;
+import {renderNodes} from "@root/Tree/helper";
 
 export const Tree = forwardRef((props, ref) => {
     const {
@@ -156,20 +154,6 @@ export const Tree = forwardRef((props, ref) => {
         }
     };
 
-    const renderNodes = (data) => {
-        return data.map(item => {
-            const title = <Label highlightedText={searchValue}>{item.label}</Label>;
-            if (item.submenu) {
-                return (
-                    <TreeNode key={item.key} title={title} data={item}>
-                        {renderNodes(item.submenu)}
-                    </TreeNode>
-                );
-            }
-            return <TreeNode key={item.key} title={title} data={item}/>;
-        });
-    };
-
     return (
         <Fragment>
             {(searchable) ? <Search tree={tree} onChange={onSearchChange}/> : null}
@@ -192,7 +176,7 @@ export const Tree = forwardRef((props, ref) => {
                 {...expandConfig}
                 {...restProps}
             >
-                {renderNodes(data)}
+                {renderNodes(data, searchValue)}
             </AntdTree>
 
             <TreeFormModal
