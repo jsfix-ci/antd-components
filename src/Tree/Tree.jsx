@@ -31,6 +31,7 @@ export const Tree = forwardRef((props, ref) => {
     const [snapshot, setSnapshot] = useState();
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedNode, setSelectedNode] = useState({});
+    const [selectedKeys, setSelectedKeys] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const [expandedKeysData, setExpandedKeysData] = useState(expandedKeys);
 
@@ -96,6 +97,7 @@ export const Tree = forwardRef((props, ref) => {
         );
 
         setSelectedNode(record);
+        setSelectedKeys([record.key]);
         setModalVisible(true);
     };
 
@@ -124,6 +126,7 @@ export const Tree = forwardRef((props, ref) => {
     const onSelectNode = (key, e) => {
         let node = key.length > 0 ? e.node.props.data : {};
         setSelectedNode(node);
+        setSelectedKeys([node.key]);
         onSelect(node, key, e);
     };
 
@@ -174,6 +177,7 @@ export const Tree = forwardRef((props, ref) => {
                 onExpand={onExpand}
                 onDrop={onDropEvent}
                 onSelect={onSelectNode}
+                selectedKeys={selectedKeys}
                 {...expandConfig}
                 {...restProps}
             >
