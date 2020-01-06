@@ -1,18 +1,17 @@
 import React, { forwardRef, Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Input, Tree as AntdTree } from 'antd';
+import { Tree as AntdTree } from 'antd';
 import nanoid from 'nanoid';
 import { emptyFn } from '@root/helper';
-import { useL10n as l10n } from '@root/Locales';
 import { AddButton, DeleteButton, EditButton } from '@root/Buttons';
 import { getParentKey, getSearchDataList } from './helper';
 import { TreeFormModal } from '@root/Tree/Form';
 import { PureArray } from '@root/array';
 import { isEmpty } from '@root/object';
 import { Label } from '@root/Tree/Label';
+import {Search} from "@root/Tree/Search";
 
 const TreeNode = AntdTree.TreeNode;
-const Search = Input.Search;
 
 export const Tree = forwardRef((props, ref) => {
     const {
@@ -65,15 +64,7 @@ export const Tree = forwardRef((props, ref) => {
         }
     };
 
-    const onSearchChange = e => {
-        const { value } = e.target;
-        const expanded = getSearchDataList(tree).map(item => {
-            if (item.label.indexOf(value) > -1) {
-                return getParentKey(item.key, tree);
-            }
-            return null;
-        }).filter((item, i, self) => item && self.indexOf(item) === i);
-
+    const onSearchChange = (expanded, value) => {
         setExpandedKeysData(expanded);
         setSearchValue(value);
     };
@@ -182,14 +173,7 @@ export const Tree = forwardRef((props, ref) => {
 
     return (
         <Fragment>
-            {
-                (searchable)
-                    ? <Search
-                        style={{ marginBottom: 8 }}
-                        placeholder={l10n().Form.searchText}
-                        onChange={onSearchChange}
-                    /> : null
-            }
+            {(searchable) ? <Search tree={tree} onChange={onSearchChange}/> : null}
 
             {
                 (editable)
