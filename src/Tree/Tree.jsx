@@ -57,7 +57,7 @@ export const Tree = forwardRef((props, ref) => {
                     setData(tree);
                 });
         } else {
-            setData(tree);
+            setData(updatedTree);
         }
     };
 
