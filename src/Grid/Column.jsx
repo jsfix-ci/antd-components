@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { getDisplay } from '@root/Grid/renderer';
 import { EditableContext } from '@root/Grid/BaseGrid';
 import { FormItem } from '@root/DataEntry';
+import {emptyFn} from "@root/helper";
 
 /**
  * @return {React.Component}
@@ -23,6 +24,7 @@ export const Column = (props) => {
         record,
         required,
         rules,
+        renderer,
         ...restProps
     } = props;
 
@@ -54,7 +56,7 @@ export const Column = (props) => {
     }
     return (
         <td {...restProps}>
-            {getDisplay({ children, fieldType, maxLength, value, fieldProps })}
+            {(renderer) ? renderer({ children, value }) : getDisplay({ children, fieldType, maxLength, value, fieldProps })}
         </td>
     );
 };
@@ -78,6 +80,7 @@ Column.propTypes = {
     maxLength: PropTypes.number,
     record: PropTypes.object,
     required: PropTypes.bool,
-    rules: PropTypes.array
+    rules: PropTypes.array,
+    renderer: PropTypes.func
 };
 

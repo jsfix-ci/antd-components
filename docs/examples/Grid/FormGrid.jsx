@@ -85,7 +85,7 @@ const Example = () => {
             idProperty={'_id'}
         >
             <Column title={'Salutation'} dataIndex={'salutation'} fieldType={'select'} fieldProps={{ options }} required/>
-            <Column title={'Title'} dataIndex={'text'} fieldType={'string'} required maxLength={30}/>
+            <Column title={'Title'} dataIndex={'text'} renderer={({ record, value })=>(value)} required maxLength={30}/>
             <Column title={'Content'} dataIndex={'html'} fieldType={'html'} required/>
             <Column title={'Image'} dataIndex={'image'} fieldType={'image'} fieldProps={imageConfig}/>
             <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'} required/>
@@ -216,7 +216,7 @@ const code = `
             >
                 <Column title={'Salutation'} dataIndex={'salutation'} fieldType={'select'} fieldProps={{ options }}
                         required/>
-                <Column title={'Title'} dataIndex={'text'} fieldType={'string'} required maxLength={30}/>
+                <Column title={'Title'} dataIndex={'text'} renderer={({ record, value })=>(value)} required maxLength={30}/>
                 <Column title={'Content'} dataIndex={'html'} fieldType={'html'} required/>
                 <Column title={'Image'} dataIndex={'image'} fieldType={'image'} fieldProps={imageConfig}/>
                 <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'} required/>
@@ -233,6 +233,7 @@ const columnProperties = [
     {property: 'dataIndex', description: 'Name of record property', type: 'string'},
     {property: 'fieldProps', description: 'This props will be forwarded to input component', type: 'object', default: '{}'},
     {property: 'fieldType', description: <span>Can be one of <Code>boolean</Code><Code>image</Code><Code>html</Code><Code>object</Code><Code>list</Code><Code>number</Code><Code>string</Code></span>, type: '', default: 'string'},
+    {property: 'renderer', description: <span>Renders custom display field. Callback options: <Code>record</Code><Code>value</Code></span>, type: 'Callback Function', default: ''},
     {property: 'hideInGrid', description: 'Hide column in grid but show it in editing form', type: 'bool', default: 'false'},
     {property: 'maxLength', description: 'text is cut off after given number of chars (only for string field)', type: 'number'},
     {property: 'required', description: 'set field as required', type: 'bool', default: 'false'},
