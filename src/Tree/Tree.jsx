@@ -44,13 +44,13 @@ export const Tree = forwardRef((props, ref) => {
     }, [data]);
 
     const onDropEvent = (event) => {
-        const { eventKey: sourceKey, data: record } = event.dragNode.props;
+        const { eventKey: sourceKey } = event.dragNode.props;
         const { eventKey: targetKey, pos } = event.node.props;
 
         const dropPos = pos.split('-');
         const dropPosition = event.dropPosition - Number(dropPos[dropPos.length - 1]);
 
-        const updatedTree = PureArray.moveInTree(data, sourceKey, targetKey, dropPosition, record);
+        const updatedTree = PureArray.moveInTree(data, sourceKey, targetKey, dropPosition);
 
         if (onDrop) {
             onDrop(sourceKey, targetKey, updatedTree)
@@ -95,7 +95,7 @@ export const Tree = forwardRef((props, ref) => {
         setSnapshot(data);
 
         setData(
-            PureArray.insertInTree(data, ['key', paraentId], record)
+            PureArray.insertInTree(data, paraentId, record)
         );
 
         setSelectedNode(record);
@@ -110,7 +110,7 @@ export const Tree = forwardRef((props, ref) => {
 
     const onDeleteBtnClick = () => {
         const nodeId = selectedNode.key;
-        const updatedTree = PureArray.removeInTree(data, ['key', nodeId]);
+        const updatedTree = PureArray.removeInTree(data, nodeId);
 
         if (onDelete) {
             onDelete(nodeId, updatedTree)
@@ -143,7 +143,7 @@ export const Tree = forwardRef((props, ref) => {
 
     const onSaveNode = (node) => {
         const nodeId = node.key;
-        const updatedTree = PureArray.updateInTree(data, ['key', nodeId], node);
+        const updatedTree = PureArray.updateInTree(data, nodeId, node);
 
         if (onSave) {
             onSave(node, updatedTree)

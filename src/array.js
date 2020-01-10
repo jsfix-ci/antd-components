@@ -6,6 +6,16 @@ export const Position = {
     AFTER: 1
 };
 
+const defaults = {
+    childrenKey: 'submenu',
+    key: 'key'
+};
+
+const getConfig = config => ({
+    ...defaults,
+    ...config
+});
+
 const insert = (array, item, index) => {
     const list = Immutable.fromJS(array);
 
@@ -18,48 +28,35 @@ const insert = (array, item, index) => {
     }
 };
 
-const insertInTree = (tree, predicate, item, pos, childrenKey = 'submenu') => {
+const insertInTree = (tree, nodeId, item, pos = Position.IN, config) => {
+    const { key, childrenKey } = getConfig(config);
+
     const list = Immutable.fromJS(tree);
-    const path = findPath(list, node => node.get(predicate[0]) === predicate[1], childrenKey);
+    const path = findPath(list, node => node.get(key) === nodeId, childrenKey);
 
     if (path) {
         const snapshotPath = [...path];
+        let index;
 
         if (Position.BEFORE === pos) {
-            path.pop();
-            path.pop();
-
-            if (path.length === 0) {
-                return Immutable.updateIn(tree, path, v => {
-                    return (
-                        insert(v, item, snapshotPath.pop() - 1)
-                    );
-                });
-            }
-
-            return Immutable.updateIn(tree, path, v => {
-                return ({
-                    ...v,
-                    [childrenKey]: insert(v[childrenKey], item, snapshotPath.pop() - 1)
-                });
-            });
+            index = snapshotPath.pop() - 1;
         } else if (Position.AFTER === pos) {
-            path.pop();
-            path.pop();
+            index = snapshotPath.pop();
+        }
 
-            if (path.length === 0) {
-                return Immutable.updateIn(tree, path, v => {
-                    return (
-                        insert(v, item, snapshotPath.pop())
-                    );
-                });
-            }
+        if (index !== undefined) {
+            path.pop();
+            path.pop();
 
             return Immutable.updateIn(tree, path, v => {
-                return ({
+                if (path.length === 0) {
+                    return insert(v, item, index);
+                }
+
+                return {
                     ...v,
-                    [childrenKey]: insert(v[childrenKey], item, snapshotPath.pop())
-                });
+                    [childrenKey]: insert(v[childrenKey], item, index)
+                };
             });
         }
 
@@ -77,8 +74,9 @@ const remove = (array, predicate) => {
     return Immutable.remove(array, index);
 };
 
-const removeInTree = (tree, predicate, childrenKey = 'submenu') => {
-    const path = findPath(Immutable.fromJS(tree), node => node.get(predicate[0]) === predicate[1], childrenKey);
+const removeInTree = (tree, nodeId, config) => {
+    const { key, childrenKey } = getConfig(config);
+    const path = findPath(Immutable.fromJS(tree), node => node.get(key) === nodeId, childrenKey);
     return Immutable.removeIn(tree, path);
 };
 
@@ -87,17 +85,22 @@ const update = (array, predicate, item) => {
     return Immutable.update(array, index, () => item);
 };
 
-const updateInTree = (tree, predicate, item, childrenKey = 'submenu') => {
-    const path = findPath(Immutable.fromJS(tree), node => node.get(predicate[0]) === predicate[1], childrenKey);
+const updateInTree = (tree, nodeId, item, config) => {
+    const { key, childrenKey } = getConfig(config);
+    const path = findPath(Immutable.fromJS(tree), node => node.get(key) === nodeId, childrenKey);
     return Immutable.updateIn(tree, path, v => ({ ...v, ...item }));
 };
 
-const moveInTree = (tree, sourceKey, targetKey, pos, record) => {
-    let updatedTree = removeInTree(tree, ['key', sourceKey]);
-    return insertInTree(updatedTree, ['key', targetKey], record, pos);
+const moveInTree = (tree, sourceNode, targetNode, pos, config) => {
+    const { key, childrenKey } = getConfig(config);
+    const list = Immutable.fromJS(tree);
+    const path = findPath(list, node => node.get(key) === sourceNode, childrenKey);
+    const record = Immutable.getIn(tree, path);
+    const updatedTree = removeInTree(tree, sourceNode, config);
+    return insertInTree(updatedTree, targetNode, record, pos, config);
 };
 
-const findPath = (tree, predicate, childrenKey = 'submenu') => {
+const findPath = (tree, predicate, childrenKey) => {
     let path = null;
     if (Immutable.List.isList(tree)) {
         tree.some((child, i) => {
