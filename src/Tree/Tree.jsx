@@ -45,10 +45,12 @@ export const Tree = forwardRef((props, ref) => {
 
     const onDropEvent = (event) => {
         const { eventKey: sourceKey, data: record } = event.dragNode.props;
-        const { eventKey: targetKey } = event.node.props;
+        const { eventKey: targetKey, pos } = event.node.props;
 
-        let updatedTree = PureArray.removeInTree(data, ['key', sourceKey]);
-        updatedTree = PureArray.insertInTree(updatedTree, ['key', targetKey], record);
+        const dropPos = pos.split('-');
+        const dropPosition = event.dropPosition - Number(dropPos[dropPos.length - 1]);
+
+        const updatedTree = PureArray.moveInTree(data, sourceKey, targetKey, dropPosition, record);
 
         if (onDrop) {
             onDrop(sourceKey, targetKey, updatedTree)
