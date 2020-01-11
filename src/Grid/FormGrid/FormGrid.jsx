@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import { message } from 'antd';
-import { Form } from '@root/DataEntry';
-import { SaveButton } from '@root/Buttons';
-import { renderForm } from '@root/Grid/renderer';
-import { BaseGrid } from '@root/Grid/BaseGrid';
+import {message} from 'antd';
+import {Form} from '@root/DataEntry';
+import {SaveButton} from '@root/Buttons';
+import {renderForm} from '@root/Grid/renderer';
+import {BaseGrid} from '@root/Grid/BaseGrid';
 
 /**
  * @return {React.Component}
@@ -13,12 +13,12 @@ import { BaseGrid } from '@root/Grid/BaseGrid';
  */
 export const FormGrid = (props) => {
     const { idProperty, onSave, children, ...restProps } = props;
-    const [isEditing, setEditing] = useState(false);
-    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-    const [isLoading, setLoading] = useState(false);
+    const [ isEditing, setEditing ] = useState(false);
+    const [ selectedRowKeys, setSelectedRowKeys ] = useState([]);
+    const [ isLoading, setLoading ] = useState(false);
 
     const EditForm = (props) => {
-        const handleSubmit = (data) => {
+        const handleSubmit = (e, data) => {
             setLoading(true);
 
             onSave(data)

@@ -13,7 +13,6 @@ const hasErrors = (fieldsError) => {
 const AntdFormWrapper = withForm((props) => {
     const { record, onSubmit, disableSaveButtonOnError, children, form } = props;
     const { getFieldsError } = form;
-
     const formValidationError = l10n().Validation.form;
 
     useEffect(() => {
@@ -30,7 +29,7 @@ const AntdFormWrapper = withForm((props) => {
                 return message.error(formValidationError);
             }
 
-            onSubmit({
+            onSubmit(e,{
                 ...record,
                 ...data
             }, form);

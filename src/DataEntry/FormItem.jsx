@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Checkbox, Form, Input, InputNumber, Switch} from 'antd';
 import { Upload, Editor, CodeMirror, ListField, Select } from '@root/DataEntry';
+import {Tree} from '@root/Tree';
 
 const getInput = (fieldType, fieldProps = {}) => {
     switch (fieldType) {
@@ -23,6 +24,8 @@ const getInput = (fieldType, fieldProps = {}) => {
             return (<Select style={{ width: '100%' }} {...fieldProps}/>);
         case 'checkbox':
             return (<Checkbox> {fieldProps.title} </Checkbox>);
+        case 'tree':
+            return (<Tree {...fieldProps} />);
         case 'string':
         default:
             return (<Input {...fieldProps}/>);
@@ -37,6 +40,8 @@ const getValuePropName = (fieldType) => {
             return 'fileList';
         case 'checkbox':
             return 'checked';
+        case 'tree':
+            return 'tree';
         default:
             return 'value';
     }
@@ -59,6 +64,8 @@ export const FormItem = (props) => {
         initialValue,
         disableInitialError,
         children,
+        editable,
+        hideInGrid,
         ...restProps
     } = props;
 
@@ -114,7 +121,7 @@ FormItem.propTypes = {
     dataIndex: PropTypes.string.isRequired,
     disableInitialError: PropTypes.bool,
     fieldProps: PropTypes.object,
-    fieldType: PropTypes.oneOf(['boolean', 'image', 'html', 'object', 'list', 'number', 'string', 'select', 'checkbox', 'password']),
+    fieldType: PropTypes.oneOf(['boolean', 'image', 'html', 'object', 'list', 'number', 'string', 'select', 'checkbox', 'password', 'tree']),
     form: PropTypes.object,
     initialValue: PropTypes.any,
     required: PropTypes.bool,
@@ -124,4 +131,3 @@ FormItem.propTypes = {
 };
 
 FormItem.displayName = 'FormItem';
-

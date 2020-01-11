@@ -1,3 +1,9 @@
+import {Label} from '@root/Tree/Label';
+import React from 'react';
+import { Tree } from 'antd';
+
+const TreeNode = Tree.TreeNode;
+
 export const getSearchDataList = (treeData) => {
     const dataList = [];
     const generateList = data => {
@@ -28,4 +34,18 @@ export const getParentKey = (key, tree) => {
         }
     }
     return parentKey;
+};
+
+export const renderNodes = (data, searchValue = '') => {
+    return data.map(item => {
+        const title = <Label highlightedText={searchValue}>{item.label}</Label>;
+        if (item.submenu) {
+            return (
+                <TreeNode key={item.key} title={title} data={item}>
+                    {renderNodes(item.submenu, searchValue)}
+                </TreeNode>
+            );
+        }
+        return <TreeNode key={item.key} title={title} data={item}/>;
+    });
 };

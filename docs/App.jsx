@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as Router } from 'react-router-dom';
-import { hot } from 'react-hot-loader/root';
+//import { hot } from 'react-hot-loader/root';
 import {
     DEFAULT_LOCALE,
     DEFAULT_THEME,
@@ -135,4 +135,4 @@ const App = () => {
     );
 };
 
-export default hot(App);
+export default App;

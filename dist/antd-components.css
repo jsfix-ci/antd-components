@@ -109,8 +109,13 @@
   padding: 0 5px;
   position: relative;
   height: 66px;
-  line-height: 63px;
+  line-height: 0;
   z-index: 3;
+}
+.hangar-header .extra {
+  text-align: right;
+  padding-right: 15px;
+  line-height: 64px;
 }
 .hangar-header.light-header {
   background-color: #fff;
@@ -130,6 +135,9 @@
   float: right;
   margin-right: 10px;
 }
+.logo {
+  padding-left: 5px;
+}
 .logo a {
   cursor: pointer;
   font-size: 20px;
@@ -140,25 +148,28 @@
   display: inline-block;
   height: 55px;
   width: 55px;
+  float: left;
+  line-height: 55px;
 }
 .logo .text {
   cursor: pointer;
-  display: inline-block;
-  margin-left: 5px;
+  display: block;
+  position: relative;
+  width: 274px;
 }
-.logo .version-badge {
-  margin-left: 10px;
-}
-.logo .version-badge .ant-badge-count {
+.logo .version {
+  font-size: 10px;
   font-weight: bold;
-  box-shadow: 0 0 0 2px #d9d9d9 inset;
+  position: absolute;
+  top: 40px;
+  background: transparent;
 }
 .light-header .logo a,
 .light-sider .logo a {
   color: #000;
 }
-.light-header .version-badge .ant-badge-count,
-.light-sider .version-badge .ant-badge-count {
+.light-header .version,
+.light-sider .version {
   background-color: #FFF;
   color: #000;
 }
@@ -166,8 +177,8 @@
 .dark-sider .logo a {
   color: #fff;
 }
-.dark-header .version-badge .ant-badge-count,
-.dark-sider .version-badge .ant-badge-count {
+.dark-header .version,
+.dark-sider .version {
   background-color: #001529;
   color: #FFF;
 }
@@ -185,7 +196,4 @@
   padding: 2px;
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
-}
-.hangar-side-navi {
-  height: 100vh;
 }

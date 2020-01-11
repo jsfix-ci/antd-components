@@ -4,6 +4,7 @@ import { Popover, Switch, Icon } from 'antd';
 import { FormItem } from '@root/DataEntry';
 import { useL10n as l10n } from '@root/Locales';
 import { prettifyJson, truncateText } from '@root/helper';
+import {Tree} from '@root/Tree';
 
 const Link = styled.span`
     cursor: pointer;
@@ -71,6 +72,8 @@ export const getDisplay = ({ children, fieldType, maxLength, value, fieldProps =
             return truncateText(value, maxLength);
         case 'number':
             return value;
+        case 'tree':
+            return (<CodeSnippet link={'tree'}><Tree tree={value} {...fieldProps} editable={false} /></CodeSnippet>);
         case 'select':
             return value ? fieldProps.options.find(o => o.value === value).label : ''; // get label for value
         default:
