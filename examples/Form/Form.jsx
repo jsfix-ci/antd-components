@@ -21,6 +21,12 @@ const options = [
     generateOption()
 ];
 
+const treeConfig = {
+    draggable: true,
+    editable: true,
+    defaultExpandAll: true
+};
+
 const generateFakeData = () => ({
     _id: nanoid(10),
     company: faker.company.companyName(),
@@ -30,7 +36,28 @@ const generateFakeData = () => ({
         faker.name.findName(),
         faker.name.findName()
     ],
-    image: generateImages()
+    image: generateImages(),
+    tree: [
+        {
+            key: 'side-contact',
+            label: 'Contact',
+            icon: 'contacts',
+            path: '/Navigation/Side/Contact',
+            submenu: [
+                {
+                    key: '21',
+                    label: 'Person 1',
+                    path: '/Person1',
+
+                },
+                {
+                    key: '22',
+                    label: 'Person 2',
+                    path: '/Person2',
+                }
+            ]
+        }
+    ]
 });
 
 
@@ -42,7 +69,7 @@ const Example = () => {
         console.log(response);
     };
 
-    const handleSubmit = (data, form) => {
+    const handleSubmit = (e, data) => {
         message.success('valid form');
         console.log(data);
     };
@@ -65,6 +92,7 @@ const Example = () => {
                     whatever: 'extra data you want to pass'
                 }
             }}/>
+            <FormItem fieldType={'tree'} label='Tree' dataIndex={'tree'} fieldProps={treeConfig}/>
             <SaveButton htmlType="submit"/>
         </Form>
     );
@@ -99,6 +127,12 @@ const code = `
             },
         ];
 
+        const treeConfig = {
+            draggable: true,
+            editable: true,
+            defaultExpandAll: true
+        };
+
         const onUploaded = (response) => {
             console.log(response);
         };
@@ -126,6 +160,7 @@ const code = `
                         whatever: 'extra data you want to pass'
                     }
                 }}/>
+                <FormItem fieldType={'tree'} label='Tree' dataIndex={'tree'} fieldProps={treeConfig}/>
                 <SaveButton htmlType="submit"/>
             </Form>
         );
