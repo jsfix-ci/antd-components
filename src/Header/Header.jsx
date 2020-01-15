@@ -12,12 +12,14 @@ const BURGER_BREAKPOINTS = { xs: 3, md: 0, xl: 0, xxl: 0 };
 const LOGO_BREAKPOINTS = { xs: 21, md: 8, xl: 5, xxl: 4 };
 const MENU_BREAKPOINTS = { xs: 0, md: 16, xl: 13, xxl: 14 };
 const EXTRA_BREAKPOINTS = { xs: 0, md: 0, xl: 6, xxl: 6 };
+const HEADER_BREAKPOINTS = { xs: 24, md: 24, xl: 24, xxl: 24 };
 
 export const Header = (props) => {
     const {
         extra,
         extraBreakpoints,
         logo,
+        headerBreakpoints,
         menuBreakpoints,
         menuPosition,
         menuProps,
@@ -78,11 +80,13 @@ export const Header = (props) => {
                 {...restProps}
             >
                 <Row>
-                    {renderBurgerIcon()}
-                    {renderLogo()}
-                    {renderMenu()}
-                    {renderExtra()}
-                    {children}
+                    <Col {...headerBreakpoints}>
+                        {renderBurgerIcon()}
+                        {renderLogo()}
+                        {renderMenu()}
+                        {renderExtra()}
+                        {children}
+                    </Col>
                 </Row>
             </AntdHeader>
         </Fragment>
@@ -90,6 +94,7 @@ export const Header = (props) => {
 };
 
 Header.defaultProps = {
+    headerBreakpoints: HEADER_BREAKPOINTS,
     extraBreakpoints: EXTRA_BREAKPOINTS,
     menuBreakpoints: MENU_BREAKPOINTS,
     menuPosition: 'left',
@@ -100,6 +105,7 @@ Header.propTypes = {
     extra: PropTypes.arrayOf(PropTypes.element),
     extraBreakpoints: PropTypes.object,
     logo: PropTypes.element,
+    headerBreakpoints: PropTypes.object,
     menuBreakpoints: PropTypes.object,
     menuPosition: PropTypes.oneOf(['right', 'left']),
     menuProps: PropTypes.object,
