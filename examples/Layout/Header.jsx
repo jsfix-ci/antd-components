@@ -34,6 +34,11 @@ const Example = () => {
         <Button key={'extra-2'}>Extra 2</Button>
     ];
 
+    const extra2 = [
+        <Button color={'#fff'}>Extra 1</Button>,
+        <Button color={'#fff'}>Extra 2</Button>,
+    ];
+
     return (
         <Fragment>
             <ThemeProvider theme={'light'}>
@@ -90,6 +95,19 @@ const Example = () => {
                 <Header
                     logo={<Logo to={'/Layout/Header'} image={'images/logo-white-blue.png'} version={'v1.0.0'}>Dark</Logo>}
                     menuRoutes={routes}
+                />
+            </ThemeProvider>
+            <br/>
+            <br/>
+            <ThemeProvider theme={'dark'}>
+                <Header
+                    headerBreakpoints={{xs:{span: 24, offset: 0}, xl:{ span: 18, offset: 3}}}
+                    logoBreakpoints={{xs: 0, md: 0, xl:9, xxl:4}}
+                    menuBreakpoints={{xs: 0, md: 0, xl:15, xxl:15}}
+                    extraBreakpoints={{xs: 0, md: 0, xl:0, xxl:5}}
+                    logo={<Logo to={'/Layout/Header'} image={'images/logo-white-blue.png'} version={'v1.0.0'}>Breakpoints</Logo>}
+                    menuRoutes={routes}
+                    extra={extra2}
                 />
             </ThemeProvider>
         </Fragment>
@@ -191,6 +209,19 @@ const code = `
                         menuRoutes={routes}
                     />
                 </ThemeProvider>
+                <br/>
+                <br/>
+                <ThemeProvider theme={'dark'}>
+                    <Header
+                        headerBreakpoints={{xs:{span: 24, offset: 0}, xl:{ span: 18, offset: 3}}}
+                        logoBreakpoints={{xs: 0, md: 0, xl:9, xxl:4}}
+                        menuBreakpoints={{xs: 0, md: 0, xl:15, xxl:15}}
+                        extraBreakpoints={{xs: 0, md: 0, xl:0, xxl:5}}
+                        logo={<Logo to={'/Layout/Header'} image={'images/logo-black-blue.png'} version={'v1.0.0'}>Breakpoints</Logo>}
+                        menuRoutes={routes}
+                        extra={extras}
+                    />
+                </ThemeProvider>
             </Fragment>
         );
     };
@@ -210,6 +241,12 @@ const properties = [
     },
     { property: 'logo', description: 'Logo component', type: 'Logo', default: '' },
     { property: 'menu', description: 'Menu Component', type: 'Flyout', default: '' },
+    {
+        property: 'headerBreakpoints',
+        description: 'Header breakpoints',
+        type: 'object',
+        default: '{ xs: 24, md: 24, xl: 24, xxl: 24 }'
+    },
     {
         property: 'menuBreakpoints',
         description: 'Menu Component breakpoints',
