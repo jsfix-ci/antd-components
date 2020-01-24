@@ -1,23 +1,22 @@
-# Ant Design Components
+# Antd Components
 
-Collection of Components build with Ant Design.
+We developed a library of modified Antd and React Components.
 
-## Install
+![logo](http://localhost:9091/images/fusion.png)
+
+## Installation
 
     npm install @react-hangar/antd-components
 
-## Library bauen
+## Import Styles
 
-Mit folgendem Befehl wird die Library in CommonJS transpiliert.
+    import '@react-hangar/antd-components/dist/antd.css';
+    import '@react-hangar/antd-components/dist/antd-components.css';
 
-    npm run build
+**Important: You don´t need to import antd styles anymore.**
 
-## Development
+Available variations: `antd.css` `antd-red.css` `antd-blue.css` `antd-pink.css` `antd-mint.css`
 
-Im `src` Verzeichnis liegt der Code der Library. Im `example` Verzeichnis befindet sich eine Testumgebung in welcher die Komponenten eingebunden werden können.
+## Docs
 
-Zum starten der Testumgebung folgenden Befehl ausführen:
-
-    npm start
-
-Die Testumgebung kann in einem Browser über die Adresse [http://localhost:8080](http://localhost:8080) erreicht werden.
+[https://anh4n.github.io/antd-components/](https://anh4n.github.io/antd-components/)
