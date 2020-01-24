@@ -2,7 +2,7 @@
 
 We developed a library of modified Antd and React Components.
 
-![logo](http://localhost:9091/images/fusion.png)
+![logo](https://anh4n.github.io/antd-components/images/fusion.png)
 
 ## Installation
 
