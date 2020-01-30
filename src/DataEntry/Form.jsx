@@ -10,7 +10,12 @@ const hasErrors = (fieldsError) => {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
 };
 
-const AntdFormWrapper = withForm((props) => {
+/**
+ * @return {React.Component}
+ *
+ * @constructor
+ */
+export const Form = withForm((props) => {
     const { record, onSubmit, disableSaveButtonOnError, children, form } = props;
     const { getFieldsError } = form;
     const formValidationError = l10n().Validation.form;
@@ -62,15 +67,6 @@ const AntdFormWrapper = withForm((props) => {
         </AntdForm>
     );
 }, { mapProps: true });
-
-/**
- * @return {React.Component}
- *
- * @constructor
- */
-export const Form = (props) => {
-    return (<AntdFormWrapper {...props} />);
-};
 
 Form.defaultProps = {
     disableSaveButtonOnError: false,

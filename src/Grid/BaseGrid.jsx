@@ -26,6 +26,7 @@ export const BaseGrid = (props) => {
         setLoading,
         setSelectedRowKeys,
         onAdd,
+        onChange,
         onDelete,
         onEdit,
         children,
@@ -41,6 +42,7 @@ export const BaseGrid = (props) => {
     useEffect(() => {
         if (!isEditing) {
             setData(dataSource);
+            onChange(data);
         }
     }, [isEditing]);
 
@@ -94,12 +96,14 @@ export const BaseGrid = (props) => {
 
     const onAddClick = () => {
         const defaults = {
-            [idProperty]: nanoid(10)
+            [idProperty]: nanoid(10),
+            phantom: true
         };
 
         const record = { ...defaults, ...onAdd(defaults) };
         const newData = [...data, record];
         setData(newData);
+        onChange(data);
         setSelectedRowKeys([record[idProperty]]);
         setEditing(true);
     };
@@ -166,6 +170,7 @@ BaseGrid.defaultProps = {
     idProperty: 'id',
     extraColumns: [],
     onAdd: (record) => (record),
+    onChange: emptyFn,
     onEdit: emptyFn,
     onDelete: () => Promise.resolve()
 };
@@ -183,6 +188,7 @@ BaseGrid.propTypes = {
     setLoading: PropTypes.func,
     setSelectedRowKeys: PropTypes.func,
     onAdd: PropTypes.func,
+    onChange: PropTypes.func,
     onDelete: PropTypes.func,
     onEdit: PropTypes.func
 };

@@ -1,8 +1,8 @@
-import React, {Fragment, useState} from 'react';
+import React, { Fragment, useState } from 'react';
 import faker from 'faker';
-import {message} from 'antd';
-import {ComponentDisplay} from '../../components/ComponentDisplay';
-import {FormGrid, Column, FormItem} from '../../../src';
+import { message } from 'antd';
+import { ComponentDisplay } from '../../components/ComponentDisplay';
+import { FormGrid, Column, FormItem } from '../../../src';
 import nanoid from 'nanoid';
 import {
     Code,
@@ -11,7 +11,7 @@ import {
     generateFakeObject,
     generateImages
 } from '../../components/utils';
-import { PureArray } from '@root/array';
+import { Position, PureArray } from '@root/array';
 
 const generateFakeData = () => ({
     _id: nanoid(10),
@@ -46,8 +46,8 @@ const generateFakeData = () => ({
 });
 
 const options = [
-    {label: 'Mr', value: 'mr'},
-    {label: 'Mrs', value: 'mrs'}
+    { label: 'Mr', value: 'mr' },
+    { label: 'Mrs', value: 'mrs' }
 ];
 
 const defaultData = generateFakeDataArray(5, generateFakeData);
@@ -57,7 +57,10 @@ const Example = () => {
 
     const onAdd = () => {
         return {
-            text: faker.random.word()
+            salutation: faker.helpers.randomize(['mr', 'mrs']),
+            text: faker.commerce.productName(),
+            html: faker.lorem.sentences(),
+            settings: generateFakeObject(),
         };
     };
 
@@ -75,13 +78,12 @@ const Example = () => {
     };
 
     const onSave = (record) => {
-        const index = data.findIndex(rec => rec._id === record._id);
         let newData;
 
-        if (index === -1) {
-            newData = PureArray.insert(data, record, index);
-        } else {
+        if (record._id) {
             newData = PureArray.update(data, ['_id', record._id], record);
+        } else {
+            newData = PureArray.insert(data, { _id: nanoid(10), ...record }, Position.BEFORE);
         }
 
         return new Promise((resolve) => {
@@ -94,7 +96,7 @@ const Example = () => {
 
     const imageConfig = {
         action: 'http://www.mocky.io/v2/5daf53d53200006d00d961e1',
-        type: {image: ['jpeg', 'png']}
+        type: { image: ['jpeg', 'png'] }
     };
 
     const treeConfig = {
@@ -114,7 +116,8 @@ const Example = () => {
             onSave={onSave}
             idProperty={'_id'}
         >
-            <Column title={'Salutation'} dataIndex={'salutation'} fieldType={'select'} fieldProps={{options}} required/>
+            <Column title={'Salutation'} dataIndex={'salutation'} fieldType={'select'} fieldProps={{ options }}
+                    required/>
             <Column title={'Title'} dataIndex={'text'} fieldType={'string'} required maxLength={30}/>
             <Column title={'Content'} dataIndex={'html'} fieldType={'html'} required/>
             <Column title={'Image'} dataIndex={'image'} fieldType={'image'} fieldProps={imageConfig}/>
@@ -359,7 +362,7 @@ const code = `
             editable: true,
             formItems: [<FormItem key={3} fieldType={'string'} label='Component' dataIndex={'component'} required/>],
             defaultExpandAll: true,
-            onDelete:onDeleteTree,
+            onDelete: onDeleteTree,
             onSave: onSaveTree,
             onDrop: onDropTree
         };
@@ -389,7 +392,7 @@ const code = `
 `;
 
 const columnProperties = [
-    {property: 'dataIndex', description: 'Name of record property', type: 'string'},
+    { property: 'dataIndex', description: 'Name of record property', type: 'string' },
     {
         property: 'fieldProps',
         description: 'This props will be forwarded to input component',
@@ -414,7 +417,7 @@ const columnProperties = [
         description: 'text is cut off after given number of chars (only for string field)',
         type: 'number'
     },
-    {property: 'required', description: 'set field as required', type: 'bool', default: 'false'},
+    { property: 'required', description: 'set field as required', type: 'bool', default: 'false' },
     {
         property: 'rules',
         description: 'Add validation rules (see: https://ant.design/components/form/#Validation-Rules)',
@@ -425,12 +428,12 @@ const columnProperties = [
 
 // Component props
 const properties = [
-    {property: 'dataSource', description: 'data source', type: 'object[]'},
-    {property: 'idProperty', description: 'id field property of data source', type: 'string', default: 'id'},
-    {property: 'onAdd', description: 'Function is called on record add', type: 'function'},
-    {property: 'onDelete', description: 'Function is called on record delete', type: 'function'},
-    {property: 'onEdit', description: 'Function is called on record edit', type: 'function'},
-    {property: 'onSave', description: 'Function is called on record save', type: 'function'}
+    { property: 'dataSource', description: 'data source', type: 'object[]' },
+    { property: 'idProperty', description: 'id field property of data source', type: 'string', default: 'id' },
+    { property: 'onAdd', description: 'Function is called on record add', type: 'function' },
+    { property: 'onDelete', description: 'Function is called on record delete', type: 'function' },
+    { property: 'onEdit', description: 'Function is called on record edit', type: 'function' },
+    { property: 'onSave', description: 'Function is called on record save', type: 'function' }
 ];
 
 export default () => (

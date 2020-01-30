@@ -12,20 +12,37 @@ import { withForm } from '@root/hoc';
  * @constructor
  */
 export const DataGrid = withForm((props) => {
-    const { idProperty, onAdd, onEdit, onSave, form, children, ...restProps } = props;
+    const { idProperty, onEdit, onSave, form, children, ...restProps } = props;
     const [isEditing, setEditing] = useState(false);
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [isLoading, setLoading] = useState(false);
+    const [data, setData] = useState(props.dataSource);
+
+    const onChange = (data) => {
+        setData(data);
+    };
+
+    const getRecord = () => data.find(record => record[idProperty] === selectedRowKeys[0]);
 
     const onSaveClick = () => {
-        form.validateFields((error, record) => {
+        form.validateFields((error, formData) => {
             if (error) {
                 return message.error('form validation failed');
             }
 
+            let record = {
+                ...getRecord(),
+                ...formData
+            };
+
+            if (record.phantom) {
+                delete record.phantom;
+                delete record[idProperty];
+            }
+
             setLoading(true);
 
-            onSave({ [idProperty]: selectedRowKeys[0], ...record })
+            onSave(record)
                 .then(() => {
                     setSelectedRowKeys([]);
                     setLoading(false);
@@ -36,10 +53,6 @@ export const DataGrid = withForm((props) => {
                     message.error(err.toString());
                 });
         });
-    };
-
-    const onAddClick = (rec) => {
-        return onAdd(rec) || rec;
     };
 
     const onEditClick = (id) => {
@@ -79,7 +92,7 @@ export const DataGrid = withForm((props) => {
             <BaseGrid
                 rowKey={idProperty}
                 extraColumns={extraColumns}
-                onAdd={onAddClick}
+                onChange={onChange}
                 onEdit={onEditClick}
                 idProperty={idProperty}
                 isEditing={isEditing}

@@ -20,8 +20,14 @@ export const FormGrid = (props) => {
     const EditForm = (props) => {
         const handleSubmit = (e, data) => {
             setLoading(true);
+            let record = {...data};
 
-            onSave(data)
+            if (record.phantom) {
+                delete record.phantom;
+                delete record[idProperty];
+            }
+
+            onSave(record)
                 .then(() => {
                     setSelectedRowKeys([]);
                     setLoading(false);
