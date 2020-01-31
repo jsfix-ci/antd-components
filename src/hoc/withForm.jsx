@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form as AntdForm } from 'antd';
 import { useL10n as l10n } from '@root/Locales';
+import { emptyFn } from '@root/helper';
 
 const mapPropsToFields = ({record = {}}) => {
     const data = {};
@@ -20,6 +21,7 @@ export const withForm = (Component, config = {}) => {
     return props => {
         let options = {
             validateMessages: l10n().Validation,
+            onValuesChange: props.onChange || emptyFn
         };
 
         if (mapProps) {

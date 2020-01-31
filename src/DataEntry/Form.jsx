@@ -75,11 +75,13 @@ export const Form = (props) => {
 Form.defaultProps = {
     disableSaveButtonOnError: false,
     record: {},
+    onChange: emptyFn,
     onSubmit: emptyFn
 };
 
 Form.propTypes = {
     disableSaveButtonOnError: PropTypes.bool,
     record: PropTypes.object,
+    onChange: PropTypes.func,
     onSubmit: PropTypes.func
 };

@@ -179,6 +179,10 @@ const properties = [
         property: 'record',
         description: 'Data record',
         type: 'object'
+    },  {
+        property: 'onChange',
+        description: 'Callback function if form values have changed',
+        type: 'function'
     }, {
         property: 'onSubmit',
         description: 'Callback function if form is submited and valid',
