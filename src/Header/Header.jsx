@@ -5,6 +5,7 @@ import { Flyout, SideNavi } from '@root/Navigation';
 import { sumBreakPoints } from '@root/Header';
 import { ThemeContext } from '@root/Themes';
 import { MotionDrawer } from '@root';
+import { isEmpty } from '@root/object';
 
 const { Header: AntdHeader } = Layout;
 
@@ -41,6 +42,8 @@ export const Header = (props) => {
     if (!menuRoutes) extraBP = sumBreakPoints(extraBP, menuBP);
     if (!extra) menuBP = sumBreakPoints(menuBP, extraBP);
 
+    const sideNaviProps = siderProps || menuProps;
+
     const burgerStyle = {
         color: theme === 'light' ? '#000' : '#FFF'
     };
@@ -67,14 +70,19 @@ export const Header = (props) => {
         extra ? <Col {...extraBP} className={'extra'}>{extra}</Col> : null
     );
 
-    const sideNaviProps = siderProps || menuProps;
+    const renderSideNavi = () => {
+        if (isEmpty(sideNaviProps)) return null;
 
-    return (
-        <Fragment>
+        return (
             <MotionDrawer className={`${theme}-sider`} width={300} open={open} onChange={v => setOpen(v)}>
                 <SideNavi routes={siderRoutes || menuRoutes} {...sideNaviProps}>{sider || extra}</SideNavi>
             </MotionDrawer>
+        );
+    };
 
+    return (
+        <Fragment>
+            {renderSideNavi()}
             <AntdHeader
                 className={`${theme}-header hangar-header`}
                 {...restProps}
