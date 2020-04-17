@@ -52,5 +52,6 @@ Login.propTypes = {
     onSubmit: PropTypes.func,
     showRememberMe: PropTypes.bool,
     registerUrl: PropTypes.string,
-    forgotPasswordUrl: PropTypes.string
+    forgotPasswordUrl: PropTypes.string,
+    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element]),
 };

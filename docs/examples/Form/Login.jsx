@@ -62,15 +62,13 @@ const properties = [
         type: 'boolean',
         default: 'false'
     },{
-        property: 'showForgotPassword',
-        description: 'Show forgot password link',
-        type: 'boolean',
-        default: 'false'
+        property: 'registerUrl',
+        description: 'shows registration link if url provided',
+        type: 'string'
     },{
         property: 'forgotPasswordUrl',
-        description: 'Forgot password Url',
-        type: 'string',
-        default: '/forgot-password'
+        description: 'shows forgot password link if url provided',
+        type: 'string'
     },
 ];
 
