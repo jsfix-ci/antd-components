@@ -21,6 +21,7 @@ const generateFakeData = () => ({
     image: generateImages(),
     settings: generateFakeObject(),
     list: generateFakeList(),
+    radio: faker.helpers.randomize(['opt1', 'opt2', 'opt3']),
     active: faker.random.boolean(),
     tree: [
         {
@@ -48,6 +49,12 @@ const generateFakeData = () => ({
 const options = [
     {label: 'Mr', value: 'mr'},
     {label: 'Mrs', value: 'mrs'}
+];
+
+const radioOptions = [
+    {label: 'Option 1', value: 'opt1'},
+    {label: 'Option 2', value: 'opt2'},
+    {label: 'Option 3', value: 'opt3'}
 ];
 
 const defaultData = generateFakeDataArray(5, generateFakeData);
@@ -121,6 +128,7 @@ const Example = () => {
             <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'} required/>
             <Column title={'List'} dataIndex={'list'} fieldType={'list'}/>
             <Column title={'Tree'} dataIndex={'tree'} fieldType={'tree'} fieldProps={treeConfig}/>
+            <Column title={'Radio'} dataIndex={'radio'} fieldType={'radio'} fieldProps={{options: radioOptions}}/>
             <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
         </FormGrid>
     );

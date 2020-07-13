@@ -74,7 +74,7 @@ Column.propTypes = {
     dataIndex: PropTypes.string,
     editable: PropTypes.bool,
     fieldProps: PropTypes.object,
-    fieldType: PropTypes.oneOf(['boolean', 'image', 'html', 'object', 'list', 'number', 'string', 'select', 'tree']),
+    fieldType: PropTypes.oneOf(['boolean', 'image', 'html', 'object', 'list', 'number', 'string', 'select', 'tree', 'radio']),
     hideInGrid: PropTypes.bool,
     isEditing: PropTypes.bool,
     maxLength: PropTypes.number,
