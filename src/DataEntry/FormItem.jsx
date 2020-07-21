@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Checkbox, Form, Input, InputNumber, Switch} from 'antd';
+import {Checkbox, Form, Input, InputNumber, Switch, Radio} from 'antd';
 import { Upload, Editor, CodeMirror, ListField, Select } from '@root/DataEntry';
 import {Tree} from '@root/Tree';
 
@@ -22,6 +22,8 @@ const getInput = (fieldType, fieldProps = {}) => {
             return (<Input.Password/>);
         case 'select':
             return (<Select style={{ width: '100%' }} {...fieldProps}/>);
+        case 'radio':
+            return (<Radio.Group {...fieldProps} />);
         case 'checkbox':
             return (<Checkbox> {fieldProps.title} </Checkbox>);
         case 'tree':
@@ -121,7 +123,7 @@ FormItem.propTypes = {
     dataIndex: PropTypes.string.isRequired,
     disableInitialError: PropTypes.bool,
     fieldProps: PropTypes.object,
-    fieldType: PropTypes.oneOf(['boolean', 'image', 'html', 'object', 'list', 'number', 'string', 'select', 'checkbox', 'password', 'tree']),
+    fieldType: PropTypes.oneOf(['boolean', 'image', 'html', 'object', 'list', 'number', 'string', 'select', 'checkbox', 'password', 'tree', 'radio']),
     form: PropTypes.object,
     initialValue: PropTypes.any,
     required: PropTypes.bool,
