@@ -144,12 +144,10 @@ const code = `
             }
         ];
 
-        const extras = (
-            <Fragment>
-                <Button>Extra 1</Button>
-                <Button>Extra 2</Button>
-            </Fragment>
-        );
+        const extras = [
+            <Button>Extra 1</Button>,
+            <Button>Extra 2</Button>
+        ];
 
         return (
             <Fragment>
