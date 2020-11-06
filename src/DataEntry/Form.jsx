@@ -11,7 +11,7 @@ const hasErrors = (fieldsError) => {
 };
 
 const AntdFormWrapper = withForm((props) => {
-    const { record, onSubmit, disableSaveButtonOnError, children, form } = props;
+    const { record, onSubmit, disableSaveButtonOnError, children, form, ...restProps } = props;
     const { getFieldsError } = form;
     const formValidationError = l10n().Validation.form;
 
@@ -57,7 +57,7 @@ const AntdFormWrapper = withForm((props) => {
     });
 
     return (
-        <AntdForm onSubmit={onHandleSubmit}>
+        <AntdForm onSubmit={onHandleSubmit} {...restProps}>
             {formItems}
         </AntdForm>
     );

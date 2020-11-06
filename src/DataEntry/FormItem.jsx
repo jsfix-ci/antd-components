@@ -28,6 +28,8 @@ const getInput = (fieldType, fieldProps = {}) => {
             return (<Checkbox> {fieldProps.title} </Checkbox>);
         case 'tree':
             return (<Tree {...fieldProps} />);
+        case 'text':
+            return (<Input.TextArea {...fieldProps} />);
         case 'string':
         default:
             return (<Input {...fieldProps}/>);
@@ -123,7 +125,7 @@ FormItem.propTypes = {
     dataIndex: PropTypes.string.isRequired,
     disableInitialError: PropTypes.bool,
     fieldProps: PropTypes.object,
-    fieldType: PropTypes.oneOf(['boolean', 'image', 'html', 'object', 'list', 'number', 'string', 'select', 'checkbox', 'password', 'tree', 'radio']),
+    fieldType: PropTypes.oneOf(['boolean', 'image', 'html', 'object', 'list', 'number', 'string', 'select', 'checkbox', 'password', 'text', 'tree', 'radio']),
     form: PropTypes.object,
     initialValue: PropTypes.any,
     required: PropTypes.bool,
