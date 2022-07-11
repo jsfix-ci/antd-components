@@ -20,7 +20,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@tinymce/tinymce-react": "^3.3.2",
+    "@tinymce/tinymce-react": "^4.1.0",
     "codemirror": "^5.50.2",
     "immutable": "^4.0.0-rc.12",
     "invert-color": "^2.0.0",
